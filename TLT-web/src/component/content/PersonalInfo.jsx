@@ -72,7 +72,7 @@ const PersonalInfo = () => {
   return (
     <div className="flex row w-full h-full sm:pl-[120px] mb-10">
       <div className="w-full sm:w-[60%] p-4 pl-[0px]">
-        <h1 className="mt-10 text-3xl font-[800] mb-5 text-primary-marineBlue">
+        <h1 className="mt-6 text-3xl font-[800] mb-5 text-primary-marineBlue">
           Personal info
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col">
@@ -171,7 +171,7 @@ const PersonalInfo = () => {
                 </span>
               </div>
             </div>
-            <div className="flex flex-wrap mt-5">
+            <div className="flex flex-wrap mt-1">
               <div className="flex flex-col w-[100%] sm:w-[50%]">
                 <label className="text-primary-marineBlue font-[500] mb-0 sm:mb-2">
                   Category
@@ -222,7 +222,7 @@ const PersonalInfo = () => {
             </div>
             <div className="flex">
               <div className="flex flex-col w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
+                <label className="text-primary-marineBlue font-[500] mb-2 mt-2">
                   Email Address
                 </label>
                 <input
@@ -246,7 +246,7 @@ const PersonalInfo = () => {
                 </span>
               </div>
               <div className="flex flex-col w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
+                <label className="text-primary-marineBlue font-[500] mb-2 mt-2">
                   Phone Number
                 </label>
                 <input
@@ -271,7 +271,7 @@ const PersonalInfo = () => {
               </div>
             </div>
             <div className="flex flex-col">
-              <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
+              <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
                 Address
               </label>
               <input
@@ -296,7 +296,7 @@ const PersonalInfo = () => {
             </div>
             <div className="flex flex-wrap sm:flex-nowrap">
               <div className="flex flex-col w-[100%] sm:w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
+                <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
                   State
                 </label>
                 <input
@@ -320,7 +320,7 @@ const PersonalInfo = () => {
                 </span>
               </div>
               <div className="flex flex-col w-[100%] sm:w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-5">
+                <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
                   City
                 </label>
                 <input
@@ -347,7 +347,7 @@ const PersonalInfo = () => {
           </div>
           <button
             type="submit"
-            className="mt-5 w-[25%] bg-primary text-white rounded-[4px] p-3"
+            className="mt-3 w-[25%] bg-primary text-white rounded-[4px] p-3"
           >
             Next Step
           </button>
