@@ -56,5 +56,13 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "get",
   },
+  EducationalDetails: {
+    url: `${backendDomain}/api/EducationalDetails`,
+    method: "post",
+  },
+  EducationalDetails: {
+    url: `${backendDomain}/api/EducationalDetails`,
+    method: "get",
+  },
 };
 export default SummaryApi;

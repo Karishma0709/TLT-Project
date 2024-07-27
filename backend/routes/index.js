@@ -22,6 +22,9 @@ router.post('/saveGuardianDetails', saveGuardianDetails);
 router.get('/saveGuardianDetails', saveGuardianDetails);
 router.post('/constactDocumentDetails', saveContactDocumentDetails);
 router.get('/constactDocumentDetails', findContactDocumentDetails);
+router.post('/EducationalDetails', saveEducationalDetails);
+router.post('/EducationalDetails', findEducationalDetails);
+
 
 
 
