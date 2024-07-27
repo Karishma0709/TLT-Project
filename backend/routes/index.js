@@ -6,10 +6,16 @@ const router = express.Router();
 
 router.post('/fastTrackForm', createRegistrationForm);
 
+
 router.post('/personal-info', createPersonalInfo);
 router.get('/personal-info', getPersonalInfo);
 
 router.post('/pyPaper-info', createPyPapersDetails);
 router.get('/pyPaper-info', getAllPyPapersDetails);
+
+
+router.post('/pyPaper-info', createPyPapersDetails);
+router.get('/pyPaper-info', getAllPyPapersDetails);
+
 
 module.exports = router;

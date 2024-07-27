@@ -18,7 +18,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api', router);
 
-const PORT = process.env.PORT || 8080; // or any other available port
+const PORT = process.env.PORT || 5050; // or any other available port
 
 
 connectDB()
