@@ -15,7 +15,7 @@ const SubjectTestCard = () => {
             <div>{items.mock_icon}</div>
             <div>{items.mock_name}</div>
           </div>
-          <ul>
+          <ul className="mb-8">
             <li className="flex">
               <FaGlobe className="mt-2 mr-5" />
               {items.language}
@@ -38,7 +38,7 @@ const SubjectTestCard = () => {
             </li>
           </ul>
           <NavLink
-            className="bg-primary rounded-lg py-2 px-10 mt-3"
+            className="bg-primary rounded-lg mt-8 py-2 px-6 text-white font-bold"
             to="/Testinstruction"
           >
             {items.btn_content}
