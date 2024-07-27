@@ -18,4 +18,13 @@ const saveTpmFormDetails = async (req, res) => {
   }
 };
 
-module.exports = { saveTpmFormDetails };
+const findTpmFormDetails = async (req, res) => {
+  try {
+    const tpmFormDetails = await TpmFormDetails.find();
+    res.status(200).send(tpmFormDetails);
+  } catch (error) {
+    res.status(400).send({ message: 'Error retrieving TPM form details', error });
+  }
+};
+
+module.exports = { saveTpmFormDetails, findTpmFormDetails };

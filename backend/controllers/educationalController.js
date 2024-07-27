@@ -25,4 +25,13 @@ const saveEducationalDetails = async (req, res) => {
   }
 };
 
-module.exports = { saveEducationalDetails };
+const findEducationalDetails = async (req, res) => {
+  try {
+    const educationalDetails = await EducationalDetails.find();
+    res.status(200).send(educationalDetails);
+  } catch (error) {
+    res.status(400).send({ message: 'Error retrieving educational details', error });
+  }
+};
+
+module.exports = { saveEducationalDetails, findEducationalDetails };

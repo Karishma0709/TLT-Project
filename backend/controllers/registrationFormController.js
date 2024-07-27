@@ -11,6 +11,13 @@ const createRegistrationForm = async (req, res) => {
   }
 };
 
-module.exports = {
-  createRegistrationForm
+const getRegistrationForms = async (req, res) => {
+  try {
+    const forms = await RegistrationForm.find();
+    res.status(200).json(forms);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
+
+module.exports = { createRegistrationForm, getRegistrationForms };
