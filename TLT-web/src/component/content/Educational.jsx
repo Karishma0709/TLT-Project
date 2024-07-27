@@ -219,42 +219,17 @@ const Educational = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (degree === "") {
-      setDegreeAlert(true);
-    } else {
-      setDegreeAlert(false);
-    }
-    if (college === "") {
-      setCollegeAlert(true);
-    } else {
-      setCollegeAlert(false);
-    }
-    if (year === "") {
-      setYearAlert(true);
-    } else {
-      setYearAlert(false);
-    }
-    if (myear === "") {
-      setMyearAlert(true);
-    } else {
-      setMyearAlert(false);
-    }
-    if (mud === "") {
-      setMudAlert(true);
-    } else {
-      setMudAlert(false);
-    }
-    if (degree !== "" && college !== "" && year !== "" && myear !== "" && mud !== "") {
-      const formData = {
-        degree,
-        college,
-        year,
-        myear,
-        mud,
-      };
+    setDegreeAlert(degree === "");
+    setCollegeAlert(college === "");
+    setYearAlert(year === "");
+    setMyearAlert(myear === "");
+    setMudAlert(mud === "");
 
-      fetch("YOUR_BACKEND_URL/submitEducationalDetails", {
-        method: "POST",
+    if (degree && college && year && myear && mud) {
+      const formData = { degree, college, year, myear, mud };
+
+      fetch(SummaryApi["EducationalDetails"].url, {
+        method: SummaryApi["EducationalDetails"].method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -301,6 +276,7 @@ const Educational = () => {
                 } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Degree"
+                value={degree}
               />
               {degreeAlert && (
                 <span className="text-primary-strawberryRed font-medium">
@@ -322,6 +298,7 @@ const Educational = () => {
                 } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="College/University"
+                value={college}
               />
               {collegeAlert && (
                 <span className="text-primary-strawberryRed font-medium">
@@ -345,6 +322,7 @@ const Educational = () => {
                 } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Graduation year"
+                value={year}
               />
               {yearAlert && (
                 <span className="text-primary-strawberryRed font-medium">
@@ -363,9 +341,10 @@ const Educational = () => {
                   myearAlert
                     ? "focus:outline-primary-strawberryRed"
                     : "focus:outline-primary-marineBlue"
-                } outline outline-1 outline-neutral-lightGray rounded-md p-2 mb-1`}
+                } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Master Graduation year"
+                value={myear}
               />
               {myearAlert && (
                 <span className="text-primary-strawberryRed font-medium">
@@ -376,19 +355,20 @@ const Educational = () => {
           </div>
 
           {/* -------    Master's University and Degree: -------- */}
-          <div className="flex flex-col w-[90%] sm:w-full mb-8">
-            <label className="text-primary-marineBlue font-medium mb-2 ">
+          <div className="flex flex-col w-full mb-8">
+            <label className="text-primary-marineBlue font-medium mb-2">
               Master's University and Degree in:
             </label>
             <input
               onChange={(e) => setMud(e.target.value)}
-              className={`w-full jinput ${
+              className={`jinput ${
                 mudAlert
                   ? "focus:outline-primary-strawberryRed"
                   : "focus:outline-primary-marineBlue"
               } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
               type="text"
               placeholder="Master's University and Degree"
+              value={mud}
             />
             {mudAlert && (
               <span className="text-primary-strawberryRed font-medium">
