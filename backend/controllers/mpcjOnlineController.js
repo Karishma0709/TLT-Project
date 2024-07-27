@@ -1,21 +1,30 @@
-const MPCJFormdetails = require('../models/ContactForm');
+const MPCJFormDetails = require('../models/ContactForm');
 
 const saveMPCJFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;
 
   try {
-    const newMPCJFormdetails = new MPCJFormdetails({
+    const newMPCJFormDetails = new MPCJFormDetails({
       name,
       email,
       contact,
       purchasedProduct,
     });
 
-    await newMPCJFormdetails.save();
+    await newMPCJFormDetails.save();
     res.status(201).send({ message: 'MPCJ form details saved successfully' });
   } catch (error) {
     res.status(400).send({ message: 'Error saving MPCJ form details', error });
   }
 };
 
-module.exports = { saveMPCJFormDetails };
+const findMPCJFormDetails = async (req, res) => {
+  try {
+    const mpcjFormDetails = await MPCJFormDetails.find();
+    res.status(200).send(mpcjFormDetails);
+  } catch (error) {
+    res.status(400).send({ message: 'Error retrieving MPCJ form details', error });
+  }
+};
+
+module.exports = { saveMPCJFormDetails, findMPCJFormDetails };

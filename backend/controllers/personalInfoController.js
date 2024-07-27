@@ -1,7 +1,6 @@
-// controllers/personalInfoController.js
 const PersonalInfo = require('../models/personalInfo');
 
-exports.createPersonalInfo = async (req, res) => {
+const createPersonalInfo = async (req, res) => {
   try {
     const personalInfo = new PersonalInfo(req.body);
     await personalInfo.save();
@@ -11,7 +10,7 @@ exports.createPersonalInfo = async (req, res) => {
   }
 };
 
-exports.getPersonalInfo = async (req, res) => {
+const getPersonalInfo = async (req, res) => {
   try {
     const personalInfo = await PersonalInfo.find();
     res.status(200).json(personalInfo);
@@ -19,3 +18,5 @@ exports.getPersonalInfo = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+module.exports = { createPersonalInfo, getPersonalInfo };

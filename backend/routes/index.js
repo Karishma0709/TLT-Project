@@ -18,6 +18,8 @@ router.get('/pyPaper-info', getAllPyPapersDetails);
 router.post('/pyPaper-info', createPyPapersDetails);
 router.get('/pyPaper-info', getAllPyPapersDetails);
 router.post('/saveGuardianDetails', saveGuardianDetails);
+router.get('/saveGuardianDetails', saveGuardianDetails);
+
 
 
 

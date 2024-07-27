@@ -16,4 +16,13 @@ const saveConsentDetails = async (req, res) => {
   }
 };
 
-module.exports = { saveConsentDetails };
+const findConsentDetails = async (req, res) => {
+  try {
+    const consentDetails = await ConsentDetails.find();
+    res.status(200).send(consentDetails);
+  } catch (error) {
+    res.status(400).send({ message: 'Error retrieving consent details', error });
+  }
+};
+
+module.exports = { saveConsentDetails, findConsentDetails };
