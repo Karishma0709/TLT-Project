@@ -44,5 +44,9 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "post",
   },
+  saveGuardianDetails: {
+    url: `${backendDomain}/api/saveGuardianDetails`,
+    method: "get",
+  },
 };
 export default SummaryApi;
