@@ -106,6 +106,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SummaryApi from "../../Common/SummaryAPI";
 
 const Guardiandetails = () => {
   const navigate = useNavigate();
@@ -113,38 +114,48 @@ const Guardiandetails = () => {
   const [guardianname, setGuardianname] = useState("");
   const [guardianpro, setGuardianpro] = useState("");
 
-  const [guardiannameAlert, setguardiannameAlert] = useState(false);
-  const [guardianproAlert, setguardianproAlert] = useState(false);
+  const [guardiannameAlert, setGuardiannameAlert] = useState(false);
+  const [guardianproAlert, setGuardianproAlert] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    let valid = true;
     if (guardianname === "") {
-      setguardiannameAlert(true);
+      setGuardiannameAlert(true);
+      valid = false;
     } else {
-      setguardiannameAlert(false);
+      setGuardiannameAlert(false);
     }
     if (guardianpro === "") {
-      setguardianproAlert(true);
+      setGuardianproAlert(true);
+      valid = false;
     } else {
-      setguardianproAlert(false);
+      setGuardianproAlert(false);
     }
-    if (guardianname !== "" && guardianpro !== "") {
+
+    if (valid) {
       // Make API call to save guardian details
-      fetch(SummaryApi["personal-info"].url, {
-        method: SummaryApi["personal-info"].method,
+      fetch(SummaryApi["saveGuardianDetails"].url, {
+        method: SummaryApi["saveGuardianDetails"].method,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ guardianname, guardianpro }),
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         console.log('Success:', data);
         navigate("/jet/documents");
       })
       .catch((error) => {
         console.error('Error:', error);
+        alert("There was a problem saving the guardian details.");
       });
     }
   };
