@@ -1,4 +1,4 @@
-const backendDomain = "http://localhost:7070";
+const backendDomain = "http://localhost:8080";
 
 const SummaryApi = {
   fastTrackForm: {
