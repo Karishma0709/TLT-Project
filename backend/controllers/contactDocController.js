@@ -16,4 +16,13 @@ const saveContactDocumentDetails = async (req, res) => {
   }
 };
 
-module.exports = { saveContactDocumentDetails };
+const findContactDocumentDetails = async (req, res) => {
+  try {
+    const contactDocumentDetails = await ContactDocumentDetails.find();
+    res.status(200).send(contactDocumentDetails);
+  } catch (error) {
+    res.status(400).send({ message: 'Error retrieving contact document details', error });
+  }
+};
+
+module.exports = { saveContactDocumentDetails, findContactDocumentDetails };
