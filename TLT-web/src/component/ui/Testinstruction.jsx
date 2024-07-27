@@ -1,11 +1,16 @@
 import React from "react";
 import { instructiondata } from "../data/instructiondata";
 import Testinstruction2 from "./Testinstruction2";
+import { NavLink } from "react-router-dom";
 const Testinstruction = () => {
   return (
     <>
       {instructiondata.map((items, index) => (
-        <div className="flex flex-col justify-center px-20">
+        <div
+          className="flex flex-col justify-center px-5
+           sm:px-20 "
+          key={index}
+        >
           <h6 className="text-primary font-bold text-3xl my-5">
             General Instructions:
           </h6>
@@ -20,36 +25,36 @@ const Testinstruction = () => {
             <li>{items.in5}</li>
             <li>{items.in6}</li>
             <table className="my-5 p-10">
-              <tbody className="border bottom-2 m-5 gap-6">
-                <tr className="border border-1">
+              <tbody className="border bottom-2 m-5 gap-6 ">
+                <tr className="border border-1 gap-8">
                   <th>{items.t_heading}</th>
-                  <th>{items.t_heading2}</th>
-                  <th>{items.t_heading3}</th>
-                  <th>{items.t_heading4}</th>
+                  <th className="pe-2 border-l-2">{items.t_heading2}</th>
+                  <th className="pe-2 border-l-2">{items.t_heading3}</th>
+                  <th className="border-l-2">{items.t_heading4}</th>
                 </tr>
                 <tr className="border border-1">
-                  <td>{items.sdata}</td>
-                  <td>{items.sdata2}</td>
-                  <td>{items.sdata3}</td>
-                  <td>{items.sdata4}</td>
+                  <td className="pe-5">{items.sdata}</td>
+                  <td className="ps-10 border-l-2">{items.sdata2}</td>
+                  <td className="ps-10 border-l-2">{items.sdata3}</td>
+                  <td className="border-l-2">{items.sdata4}</td>
                 </tr>
                 <tr className="border border-1">
-                  <td>{items.ndata}</td>
-                  <td>{items.ndata2}</td>
-                  <td>{items.ndata3}</td>
-                  <td>{items.ndata4}</td>
+                  <td className="pe-5">{items.ndata}</td>
+                  <td className="ps-10 border-l-2">{items.ndata2}</td>
+                  <td className="ps-10 border-l-2">{items.ndata3}</td>
+                  <td className="border-l-2">{items.ndata4}</td>
                 </tr>
                 <tr className="border border-1 border-collaps ">
                   <td>{items.mdata}</td>
-                  <td>{items.mdata2}</td>
-                  <td>{items.mdata3}</td>
-                  <td>{items.mdata4}</td>
+                  <td className="ps-10 border-l-2">{items.mdata2}</td>
+                  <td className="ps-10 border-l-2">{items.mdata3}</td>
+                  <td className="border-l-2">{items.mdata4}</td>
                 </tr>
                 <tr>
                   <td>{items.tdata}</td>
-                  <td>{items.tdata2}</td>
-                  <td>{items.tdata3}</td>
-                  <td>{items.tdata4}</td>
+                  <td className="ps-10 border-l-2">{items.tdata2}</td>
+                  <td className="ps-10 border-l-2">{items.tdata3}</td>
+                  <td className="ps-10 border-l-2">{items.tdata4}</td>
                 </tr>
               </tbody>
             </table>
@@ -80,11 +85,12 @@ const Testinstruction = () => {
             <li>{items.in15}</li>
             <li>{items.in16}</li>
           </dl>
-          <button className="bg-primary font-bold text-white w-20 p-2 rounded-md mt-3">
+          <NavLink
+            to="/Testinstruction2"
+            className="bg-primary  flex justify-center text-center font-bold text-white w-20 p-2 rounded-md mt-3 mb-2"
+          >
             Next
-          </button>
-
-          <Testinstruction2></Testinstruction2>
+          </NavLink>
         </div>
       ))}
     </>
