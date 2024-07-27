@@ -64,5 +64,13 @@ const SummaryApi = {
     url: `${backendDomain}/api/EducationalDetails`,
     method: "get",
   },
+  ConsentDetails: {
+    url: `${backendDomain}/api/ConsentDetails`,
+    method: "post",
+  },
+  ConsentDetails: {
+    url: `${backendDomain}/api/ConsentDetails`,
+    method: "get",
+  },
 };
 export default SummaryApi;

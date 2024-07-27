@@ -5,6 +5,8 @@ const { getAllPyPapersDetails,createPyPapersDetails } = require('../controllers/
 const {saveGuardianDetails} =require("../controllers/gaurdianDetailsController")
 const {saveContactDocumentDetails,findContactDocumentDetails} =require("../controllers/contactDocController")
 const {saveEducationalDetails,findEducationalDetails} =require("../controllers/educationalController")
+const {saveConsentDetails, findConsentDetails} =require("../controllers/consentController")
+
 
 
 const router = express.Router();
@@ -27,8 +29,10 @@ router.post('/constactDocumentDetails', saveContactDocumentDetails);
 router.get('/constactDocumentDetails', findContactDocumentDetails);
 
 router.post('/EducationalDetails', saveEducationalDetails);
-router.post('/EducationalDetails', findEducationalDetails);
+router.get('/EducationalDetails', findEducationalDetails);
 
+router.post('/ConsentDetails', saveConsentDetails);
+router.get('/ConsentDetails', findConsentDetails);
 
 
 
