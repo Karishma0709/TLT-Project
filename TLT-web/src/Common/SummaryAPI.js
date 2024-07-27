@@ -48,12 +48,12 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "get",
   },
-  constactDocumentDetails: {
-    url: `${backendDomain}/api/constactDocumentDetails`,
+  saveContactDocumentDetails: {
+    url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "post",
   },
-  constactDocumentDetails: {
-    url: `${backendDomain}/api/constactDocumentDetails`,
+  saveContactDocumentDetails: {
+    url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "get",
   },
 };
