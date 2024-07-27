@@ -40,5 +40,9 @@ const SummaryApi = {
     url: `${backendDomain}/api/pyPaper-info`,
     method: "get",
   },
+  saveGuardianDetails: {
+    url: `${backendDomain}/api/saveGuardianDetails`,
+    method: "post",
+  },
 };
 export default SummaryApi;
