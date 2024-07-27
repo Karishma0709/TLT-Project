@@ -48,5 +48,13 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "get",
   },
+  constactDocumentDetails: {
+    url: `${backendDomain}/api/constactDocumentDetails`,
+    method: "post",
+  },
+  constactDocumentDetails: {
+    url: `${backendDomain}/api/constactDocumentDetails`,
+    method: "get",
+  },
 };
 export default SummaryApi;
