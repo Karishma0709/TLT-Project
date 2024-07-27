@@ -4,7 +4,7 @@ import { data } from "./data/data";
 
 const Sidebar = () => {
   return (
-    <aside className="absolute top-20 sm:top-5 left-10 right-[100%] sm:relative bg-mobile h-[100px] bg-transparent sm:bg-cover bg-no-repeat w-[80%] sm:h-[100%] pt-8 sm:pl-8 sm:basis-[30%] sm:rounded-lg flex items-start justify-center sm:flex-col sm:justify-start sm:bg-primary">
+    <aside className="absolute top-20 sm:top-5 left-10 right-[100%] bg-primary sm:relative bg-mobile h-[100px] sm:bg-cover bg-no-repeat w-[80%] sm:h-[90%] pt-8 sm:pl-8 sm:basis-[30%] sm:rounded-lg flex items-start justify-center sm:flex-col sm:justify-start sm:bg-primary">
       {data.map((item, idx) => {
         return (
           <div
