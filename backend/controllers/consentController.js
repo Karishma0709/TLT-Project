@@ -1,4 +1,4 @@
-const ConsentDetails = require('../models/consentDetails');
+const ConsentDetails = require('../models/consent');
 
 const saveConsentDetails = async (req, res) => {
   const { annualIncome, accomodationAssistance } = req.body;

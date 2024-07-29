@@ -1,4 +1,4 @@
-const ContactDocumentDetails = require('../models/contactDocumentDetails');
+const ContactDocumentDetails = require('../models/contactDocument');
 
 const saveContactDocumentDetails = async (req, res) => {
   const { photo, adhaarPhoto } = req.body;
