@@ -145,8 +145,8 @@ const Documents = () => {
       formData.append("photo", photo);
       formData.append("aadhar", aadhar);
 
-      fetch("YOUR_BACKEND_URL/uploadDocuments", {
-        method: "POST",
+      fetch(SummaryApi["saveContactDocumentDetails"].url, { 
+        method: SummaryApi["saveContactDocumentDetails"].method,
         body: formData,
       })
         .then((response) => {
@@ -195,16 +195,16 @@ const Documents = () => {
                 type="file"
                 accept="image/*"
               />
-              <span
-                className={`${
-                  photoAlert ? "inline" : "hidden"
-                } text-primary-strawberryRed font-[500] absolute top-[112px] right-[30px]`}
-              >
-                This field is required
-              </span>
+              {photoAlert && (
+                <span className="text-primary-strawberryRed font-[500]">
+                  This field is required
+                </span>
+              )}
             </div>
-            {/*-------------- Aadhar -------------- */}
-            <div className="flex flex-col w-[100%] pt-5 sm:pt-0">
+          </div>
+          {/*-------------- Aadhar -------------- */}
+          <div className="flex flex-wrap pt-4">
+            <div className="flex flex-col w-[100%] mb-5">
               <label className="text-primary-marineBlue font-[500] mb-2">
                 Upload Aadhar
               </label>
@@ -218,13 +218,11 @@ const Documents = () => {
                 type="file"
                 accept="application/pdf,image/*"
               />
-              <span
-                className={`${
-                  aadharAlert ? "inline" : "hidden"
-                } text-primary-strawberryRed font-[500] absolute top-[112px] right-[360px]`}
-              >
-                This field is required
-              </span>
+              {aadharAlert && (
+                <span className="text-primary-strawberryRed font-[500]">
+                  This field is required
+                </span>
+              )}
             </div>
           </div>
 
@@ -250,4 +248,5 @@ const Documents = () => {
 };
 
 export default Documents;
+
 

@@ -32,6 +32,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/tpmForm`,
     method: "get",
   },
+  
   prevPaper: {
     url: `${backendDomain}/api/pyPaper-info`,
     method: "post",
@@ -40,6 +41,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/pyPaper-info`,
     method: "get",
   },
+
   saveGuardianDetails: {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "post",
@@ -48,6 +50,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "get",
   },
+
   saveContactDocumentDetails: {
     url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "post",
@@ -56,6 +59,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "get",
   },
+
   EducationalDetails: {
     url: `${backendDomain}/api/EducationalDetails`,
     method: "post",
@@ -64,6 +68,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/EducationalDetails`,
     method: "get",
   },
+
   ConsentDetails: {
     url: `${backendDomain}/api/ConsentDetails`,
     method: "post",

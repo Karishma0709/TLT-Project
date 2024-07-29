@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose.Schema;
+const Schema  = mongoose.Schema;
 
 const consentSchema = new Schema({
   annualIncome: { type: String, required: true },

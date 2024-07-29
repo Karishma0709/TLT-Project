@@ -1,4 +1,4 @@
-const EducationalDetails = require('../models/educationalDetails');
+const EducationalDetails = require('../models/educational');
 
 const saveEducationalDetails = async (req, res) => {
   const {

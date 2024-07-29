@@ -163,8 +163,8 @@ const Consent = () => {
         required: required === "yes",
       };
 
-      fetch("YOUR_BACKEND_URL/submitConsent", {
-        method: "POST",
+      fetch(SummaryApi["ConsentDetails"].url, {
+        method: SummaryApi["ConsentDetails"].method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -222,18 +222,20 @@ const Consent = () => {
             {/*-------  Required Assistance  --------*/}
             <div className="flex justify-center flex-col w-full sm:w-[100%]">
               <p className="text-primary-marineBlue font-medium mb-2">
-                Required Assistance for accommodation on Selection ? :
+                Required Assistance for accommodation on Selection? :
               </p>
               <div className="flex">
                 <label className="flex justify-center items-center text-primary-marineBlue font-medium mb-2">
                   <input
-                    onChange={(e) => setRequired("yes")}
+                    onChange={() => setRequired("yes")}
                     className={`jinput mr-2 ${
                       requiredAlert
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
-                    type="checkbox"
+                    type="radio"
+                    name="assistance"
+                    value="yes"
                     checked={required === "yes"}
                   />
                   Yes
@@ -241,13 +243,15 @@ const Consent = () => {
 
                 <label className="flex justify-center items-center text-primary-marineBlue font-medium mb-2 ml-5">
                   <input
-                    onChange={(e) => setRequired("no")}
+                    onChange={() => setRequired("no")}
                     className={`jinput mr-2 ${
                       requiredAlert
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
-                    type="checkbox"
+                    type="radio"
+                    name="assistance"
+                    value="no"
                     checked={required === "no"}
                   />
                   No
