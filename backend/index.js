@@ -8,6 +8,7 @@ const router = require("./routes");
  // Import the registration routes
  const app = express();
 
+
 // Middleware
 app.use(cors());
 app.use(express.json());
