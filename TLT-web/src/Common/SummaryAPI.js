@@ -32,9 +32,9 @@ const SummaryApi = {
     url: `${backendDomain}/api/tpmForm`,
     method: "get",
   },
-  
-  prevPaper: {
-    url: `${backendDomain}/api/pyPaper-info`,
+
+  prepaper: {
+    url: `${backendDomain}/api/prepaper`,
     method: "post",
   },
   pyPaper: {

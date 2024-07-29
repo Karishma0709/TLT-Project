@@ -9,10 +9,7 @@ const router = require("./routes");
  const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -21,7 +18,6 @@ app.use(cookieParser());
 app.use('/api', router);
 
 const PORT = process.env.PORT || 5050; // or any other available port
-
 
 connectDB()
   .then(() => {
