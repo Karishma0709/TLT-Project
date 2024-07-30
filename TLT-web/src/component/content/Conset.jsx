@@ -163,8 +163,8 @@ const Consent = () => {
         required: required === "yes",
       };
 
-      fetch(SummaryApi["ConsentDetails"].url, {
-        method: SummaryApi["ConsentDetails"].method,
+      fetch(SummaryApi["consentdetails"].url, {
+        method: SummaryApi["consentdetails"].method,
         headers: {
           "Content-Type": "application/json",
         },

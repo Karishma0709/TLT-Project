@@ -27,7 +27,7 @@ const SummaryApi = {
   },
   mpcjForm: {
     url: `${backendDomain}/api/mpcjForm`,
-    method: "get",
+    method: "post",
   },
   tpmForm: {
     url: `${backendDomain}/api/tpmForm`,
@@ -70,8 +70,8 @@ const SummaryApi = {
     method: "get",
   },
 
-  ConsentDetails: {
-    url: `${backendDomain}/api/ConsentDetails`,
+  consentdetails: {
+    url: `${backendDomain}/api/consentdetails`,
     method: "post",
   },
   ConsentDetails: {
