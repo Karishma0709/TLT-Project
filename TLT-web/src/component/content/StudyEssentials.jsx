@@ -6,16 +6,16 @@ import { NavLink } from "react-router-dom";
 const products = [
   {
     id: 1,
-    name: "MPCJ Paper-2 & CGCJ",
+    name: "Translation Practice Material MPCJ & CGCJ",
     href: "MpcjproductCard",
     imageSrc: cardImage1,
     imageAlt: "Front of men's Basic Tee in black.",
-    subName: "Translator Material",
+    subName: "Translation Material",
     price: "Know More",
   },
   {
     id: 2,
-    name: "MPCJ offline mock test series",
+    name: "Translation Practice Material MPCJ & CGCJ",
     href: "MockTestCard",
     imageSrc: cardImage2,
     imageAlt: "Front of men's Basic Tee in black.",
