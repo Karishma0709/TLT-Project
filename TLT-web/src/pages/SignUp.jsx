@@ -33,8 +33,7 @@ export const SignUp = () => {
   return (
     <section
       id="signup"
-      className="flex items-center justify-center min-h-screen bg-gray-100"
-    >
+      className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="container max-w-md mx-auto p-4">
         <div className="bg-white p-10 rounded-lg shadow-lg mx-auto flex flex-col items-center">
           <img src={loginIcon} className="h-20 mb-4" alt="Sign Up Icon" />
@@ -47,8 +46,7 @@ export const SignUp = () => {
                 placeholder="Enter your name"
                 value={data.name}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
-              />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"/>
             </div>
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>
@@ -58,8 +56,7 @@ export const SignUp = () => {
                 placeholder="Enter your email"
                 value={data.email}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
-              />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"/>
             </div>
 
             <div className="relative w-full">
@@ -93,8 +90,7 @@ export const SignUp = () => {
                 placeholder="Confirm your password"
                 value={data.confirmPassword}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"
-              />
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"/>
               <button
                 type="button"
                 onClick={handlePasswordToggle}
