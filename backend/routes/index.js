@@ -2,13 +2,13 @@
 const express = require('express');
 const { createRegistrationForm } = require('../controllers/registrationFormController');
 const { createPersonalInfo, getPersonalInfo } = require('../controllers/personalInfoController');
-const { getAllPyPapersDetails, createPyPapersDetails } = require('../controllers/pyPaperController');
 const { saveGuardianDetails } = require("../controllers/gaurdianDetailsController"); // Fixed typo
 const { saveContactDocumentDetails, findContactDocumentDetails } = require("../controllers/contactDocController");
 const { saveEducationalDetails, findEducationalDetails } = require("../controllers/educationalController");
 const { saveConsentDetails, findConsentDetails } = require("../controllers/consentController");
 const createPyPapersDetail = require('../controllers/pyPaperController');
-const{saveMPCJFormDetails,findMPCJFormDetails}= require("../controllers/mpcjOfflineController")
+const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
+
 
 const router = express.Router();
 router.post('/prepaper',createPyPapersDetail );
@@ -21,7 +21,7 @@ router.post("/mpcjForm",saveMPCJFormDetails)
 
 router.post('/fastTrackForm', createRegistrationForm);
 
-router.post('/personal-info', createPersonalInfo);
+router.post('/personalinfo', createPersonalInfo);
 router.get('/personal-info', getPersonalInfo);
 
 
