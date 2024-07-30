@@ -72,7 +72,7 @@ export const SignUp = () => {
               <button
                 type="button"
                 onClick={handlePasswordToggle}
-                className="absolute inset-y-3 right-0 flex items-center px-3 mt-4 text-gray-500"
+                className="absolute inset-y-3 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
                 {showPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />
@@ -94,7 +94,7 @@ export const SignUp = () => {
               <button
                 type="button"
                 onClick={handlePasswordToggle}
-                className="absolute inset-y-0 right-0 flex items-center px-3 mt-4 text-gray-500"
+                className="absolute inset-y-0 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
                 {showPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />

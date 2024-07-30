@@ -62,7 +62,7 @@ export const Login = () => {
               <button
                 type="button"
                 onClick={handlePasswordToggle}
-                className="absolute inset-y-0 right-0 flex items-center px-3 mb-3 text-gray-500"
+                className="absolute inset-y-0 right-0 flex items-center px-3 mb-2 text-gray-500"
               >
                 {showPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />
