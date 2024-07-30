@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"; // Import Link from React Router
 
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -24,10 +25,19 @@ export const SignUp = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleConfirmPasswordToggle = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(data);
+    if (data.password === data.confirmPassword) {
+      // Handle form submission logic here
+      console.log(data);
+      alert("You have successfully registered!");
+    } else {
+      alert("Passwords do not match. Please try again.");
+    }
   };
 
   return (
@@ -72,7 +82,7 @@ export const SignUp = () => {
               <button
                 type="button"
                 onClick={handlePasswordToggle}
-                className="absolute inset-y-3 right-0 flex items-center px-3 mt-6 text-gray-500"
+                className="absolute inset-y-0 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
                 {showPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />
@@ -85,7 +95,7 @@ export const SignUp = () => {
             <div className="relative w-full">
               <label className="block text-gray-700">Confirm Password :</label>
               <input
-                type={showPassword ? "text" : "password"}
+                type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 placeholder="Confirm your password"
                 value={data.confirmPassword}
@@ -93,10 +103,10 @@ export const SignUp = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"/>
               <button
                 type="button"
-                onClick={handlePasswordToggle}
+                onClick={handleConfirmPasswordToggle}
                 className="absolute inset-y-0 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
-                {showPassword ? (
+                {showConfirmPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />
                 ) : (
                   <FaEye className="h-5 w-5" aria-hidden="true" />
