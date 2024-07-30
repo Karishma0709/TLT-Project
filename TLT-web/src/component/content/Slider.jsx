@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import img1 from '../../assets/Coaching1.jpg';
-import img2 from '../../assets/Coaching2.avif';
-import img3 from '../../assets/Coaching3.avif';
-import img4 from '../../assets/Coaching4.webp';
-import img5 from '../../assets/Coaching5.webp';
-import img6 from '../../assets/Coaching6.webp';
-import img7 from '../../assets/Coaching4.webp';
+import img2 from '../../assets/Coaching2.jpg';
+import img3 from '../../assets/Coaching3.jpg';
+import img4 from '../../assets/Coaching4.jpg';
+import img5 from '../../assets/Coaching5.jpg';
+import img6 from '../../assets/Coaching6.jpg';
+import img7 from '../../assets/Coaching7.jpg';
 import img8 from '../../assets/Coaching8.jpg';
 import backImg from "../../assets/gif/back.png";
 import nextImg from "../../assets/gif/next.png"
