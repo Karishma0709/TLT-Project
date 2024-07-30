@@ -1,4 +1,4 @@
-import mentorImg from "../../assets/Mentor.jpg";
+import mentorImg from "../../assets/Mentor.png";
 
 export const data = {
   id: "1",
