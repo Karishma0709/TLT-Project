@@ -14,12 +14,12 @@ function App() {
     <>
       <Header />
       <main>
-        <Outlet/>
+        <Outlet />
       </main>
       <Hambergur />
-      <Telegram/>
+      <Telegram />
       <Whatshap />
-      <Telegram/>
+      <Telegram />
       <Footer />
     </>
   );
