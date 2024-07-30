@@ -6,12 +6,15 @@ const TnC = () => {
   return (
     <div className="px-5 md:px-20 py-8">
       <Headings heading={"h2"} style="pb-10 text-center">
-        <span className="text-primary">Terms and Conditions</span> for Admission to <br />
+        <span className="text-primary">Terms and Conditions</span> for Admission
+        to <br />
         <span className="text-primary"> TLT</span> Judicial Academy:
       </Headings>
       {courseDetails.map((section, index) => (
         <div key={index} className="section">
-          <Headings heading={"h4"} className="text-2xl font-semibold mb-2">{section.section}</Headings>
+          <Headings heading={"h4"} className="text-2xl font-semibold mb-2">
+            {section.section}
+          </Headings>
           <ul className="mb-8">
             {section.details.map((detail, detailIndex) => (
               <li key={detailIndex} className="mb-2 flex items-start">
