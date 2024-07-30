@@ -7,13 +7,15 @@ const Subjectcontent = () => {
     <div>
       {testcarddata.map((items, index) => (
         <div key={index}>
-          <Headings heading={"h4"}>{items.heading}</Headings>
+          <Headings style="text-primary font-bolder " heading={"h4"}>
+            {items.heading}
+          </Headings>
           <ul>
-            <li>{items.testitems}</li>
-            <li>{items.testitems2}</li>
-            <li>{items.testitems3}</li>
-            <li>{items.testitems4}</li>
-            <li>{items.testitems5}</li>
+            <li className="pb-4 text-justify">{items.testitems}</li>
+            <li className="pb-4 text-justify">{items.testitems2}</li>
+            <li className="pb-4 text-justify">{items.testitems3}</li>
+            <li className="pb-4 text-justify">{items.testitems4}</li>
+            <li className="pb-4 text-justify">{items.testitems5}</li>
           </ul>
         </div>
       ))}

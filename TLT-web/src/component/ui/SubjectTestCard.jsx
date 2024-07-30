@@ -13,7 +13,7 @@ const SubjectTestCard = () => {
       {subjectdata.map((items, index) => (
         <div
           key={index}
-          className="border bottom-1 shadow-md px-10 py-2 flex justify-center flex-col"
+          className="border bottom-1 shadow-md px-10 py-2 flex justify-center flex-col h-[280px]"
         >
           <div className="flex flex-wrap text-justify w-[200px]">
             <img src={items.mock_icon} className="w-[50px] me-2" />
@@ -49,7 +49,7 @@ const SubjectTestCard = () => {
           </NavLink>
         </div>
       ))}
-      <div className="w-[70%]">
+      <div className="md:w-[75%] px-8 w-[100%]">
         <Subjectcontent></Subjectcontent>
       </div>
     </div>
