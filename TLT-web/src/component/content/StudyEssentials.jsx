@@ -15,7 +15,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Translation Practice Material MPCJ & CGCJ",
+    name: "MPCJ offline mock test series",
     href: "MockTestCard",
     imageSrc: cardImage2,
     imageAlt: "Front of men's Basic Tee in black.",
@@ -44,7 +44,7 @@ const StudyEssentials = () => {
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-black">
+                    <h3 className="text-lg font-semibold text-black w-[200px]">
                       <NavLink to={`/study-Essentials/${product.href}`}>
                         <span
                           aria-hidden="true"
@@ -57,7 +57,7 @@ const StudyEssentials = () => {
                       {product.subName}
                     </p>
                   </div>
-                  <p className="text-sm font-medium bg-primary ms-1 px-10 pt-4 rounded-lg text-white">
+                  <p className="text-sm font-medium bg-primary ms-1 px-10 pt-4 mt-3 rounded-lg text-white h-14">
                     {product.price}
                   </p>
                 </div>
