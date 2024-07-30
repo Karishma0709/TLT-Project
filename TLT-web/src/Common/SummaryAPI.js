@@ -16,8 +16,8 @@ const SummaryApi = {
     method: "get",
   },
   
-  PersonalInfo: {
-    url: `${backendDomain}/api/personal-info`,
+  personalinfo: {
+    url: `${backendDomain}/api/personalinfo`,
     method: "post",
   },
 

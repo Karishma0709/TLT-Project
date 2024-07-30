@@ -1,4 +1,4 @@
-const MPCJFormDetails = require('../models/ContactForm');
+const MPCJFormDetails = require('../models/mpcjOfflineMT');
 
 const saveMPCJFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;

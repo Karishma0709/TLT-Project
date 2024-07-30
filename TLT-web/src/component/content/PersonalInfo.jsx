@@ -51,8 +51,8 @@ const PersonalInfo = () => {
     }
 
     try {
-      const response = await fetch(SummaryApi["personal-info"].url, {
-        method: SummaryApi["personal-info"].method,
+      const response = await fetch(SummaryApi["personalinfo"].url, {
+        method: SummaryApi["personalinfo"].method,
         headers: {
           "Content-Type": "application/json",
         },
