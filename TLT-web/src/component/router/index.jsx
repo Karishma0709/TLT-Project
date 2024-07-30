@@ -26,6 +26,11 @@ import PYpaperform from "../content/PYpaperform";
 import SubjectTestCard from "../ui/SubjectTestCard";
 import Testinstruction from "../ui/Testinstruction";
 import Testinstruction2 from "../ui/Testinstruction2";
+import { Login }  from "../../pages/Login";
+import { ForgotPassword } from "../../pages/ForgotPassword";
+import { SignUp } from "../../pages/SignUp";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -99,14 +104,23 @@ export const router = createBrowserRouter([
         path: "Testinstruction2",
         element: <Testinstruction2 />,
       },
+      {
+         path: "login",
+         element: <Login/>,
+      },
+
+      {
+        path: "forgotpassword",
+        element: <ForgotPassword/>,
+     },
       // {
       //   path: "login-admin",
       //   element: <Login/>,
       // },
-      // {
-      //   path: "sign-up",
-      //   element: <SignUp/>,
-      // },
+       {
+        path: "signup",
+        element: <SignUp/>,
+       },
       // {
       //   path: "mockTest/miniMock",
       //   element: <MiniMockTest/>,
