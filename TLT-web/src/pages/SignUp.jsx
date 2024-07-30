@@ -11,6 +11,7 @@ export const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    profilePic: "",
   });
 
   const handleOnChange = (e) => {
@@ -41,12 +42,16 @@ export const SignUp = () => {
   };
 
   return (
-    <section
-      id="signup"
-      className="flex items-center justify-center min-h-screen bg-gray-100">
+    <section id="signup" className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="container max-w-md mx-auto p-4">
-        <div className="bg-white p-10 rounded-lg shadow-lg mx-auto flex flex-col items-center">
-          <img src={loginIcon} className="h-20 mb-4" alt="Sign Up Icon" />
+        <div className="bg-white p-5 rounded-lg shadow-lg mx-auto flex flex-col items-center">
+          <div className="w-24 h-24 relative overflow-hidden rounded-full mb-4">
+            <img src={loginIcon} className="h-full w-full object-cover" alt="Sign Up Icon" />
+            <label className="flex flex-col items-center bg-opacity-80 bg-slate-200 py-2 cursor-pointer text-center rounded-md">
+            <span className="text-xs">Upload photo</span>
+            <input type="file" className="hidden" />
+          </label>
+          </div>
           <form className="w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
             <div className="w-full">
               <label className="block text-gray-700">Name :</label>
@@ -56,7 +61,8 @@ export const SignUp = () => {
                 placeholder="Enter your name"
                 value={data.name}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"/>
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+              />
             </div>
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>
@@ -66,7 +72,8 @@ export const SignUp = () => {
                 placeholder="Enter your email"
                 value={data.email}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"/>
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+              />
             </div>
 
             <div className="relative w-full">
@@ -100,7 +107,8 @@ export const SignUp = () => {
                 placeholder="Confirm your password"
                 value={data.confirmPassword}
                 onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"/>
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-600"
+              />
               <button
                 type="button"
                 onClick={handleConfirmPasswordToggle}
@@ -113,6 +121,8 @@ export const SignUp = () => {
                 )}
               </button>
             </div>
+
+          
 
             <button
               type="submit"
