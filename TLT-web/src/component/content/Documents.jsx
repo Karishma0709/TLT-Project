@@ -145,7 +145,7 @@ const Documents = () => {
       formData.append("photo", photo);
       formData.append("aadhar", aadhar);
 
-      fetch(SummaryApi["saveContactDocumentDetails"].url, { 
+      fetch(SummaryApi["saveContactDocumentDetails"].url, {
         method: SummaryApi["saveContactDocumentDetails"].method,
         body: formData,
       })
@@ -176,6 +176,9 @@ const Documents = () => {
         </h1>
 
         <form
+          action="http://localhost:5050/upload"
+          method="POST"
+          enctype="multipart/form-data"
           onSubmit={handleSubmit}
           className="flex flex-col relative space-y-4"
         >
@@ -248,5 +251,3 @@ const Documents = () => {
 };
 
 export default Documents;
-
-
