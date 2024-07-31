@@ -6,10 +6,10 @@ const createPyPapersDetail = async (req, res) => {
 
   console.log(req.body);
 
-  if (!number || !email || !name) {
+  if (!name || !email || !number) {
     return res
       .status(400)
-      .json({ error: "number, email, and name are required fields." });
+      .json({ error: "name, email, and number are required fields." });
   }
 
   // Proceed with saving details if validation passes

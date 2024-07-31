@@ -5,22 +5,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/fastTrackForm`,
     method: "post",
   },
-
   empowermentForm: {
     url: `${backendDomain}/api/empowermentForm`,
     method: "post",
   },
-
   jetForm: {
     url: `${backendDomain}/api/jetForm`,
     method: "get",
   },
-  
   personalinfo: {
     url: `${backendDomain}/api/personalinfo`,
     method: "post",
   },
-
   contactForm: {
     url: `${backendDomain}/api/contactForm`,
     method: "get",
@@ -31,9 +27,8 @@ const SummaryApi = {
   },
   tpmForm: {
     url: `${backendDomain}/api/tpmForm`,
-    method: "get",
+    method: "post",
   },
-
   prepaper: {
     url: `${backendDomain}/api/prepaper`,
     method: "post",
@@ -42,34 +37,30 @@ const SummaryApi = {
     url: `${backendDomain}/api/pyPaper-info`,
     method: "get",
   },
-
-  saveGuardianDetails: {
+  saveGuardianDetailsPost: {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "post",
   },
-  saveGuardianDetails: {
+  saveGuardianDetailsGet: {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "get",
   },
-
-  saveContactDocumentDetails: {
+  saveContactDocumentDetailsPost: {
     url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "post",
   },
-  saveContactDocumentDetails: {
+  saveContactDocumentDetailsGet: {
     url: `${backendDomain}/api/saveContactDocumentDetails`,
     method: "get",
   },
-
-  EducationalDetails: {
+  EducationalDetailsPost: {
     url: `${backendDomain}/api/EducationalDetails`,
     method: "post",
   },
-  EducationalDetails: {
+  EducationalDetailsGet: {
     url: `${backendDomain}/api/EducationalDetails`,
     method: "get",
   },
-
   consentdetails: {
     url: `${backendDomain}/api/consentdetails`,
     method: "post",
@@ -79,4 +70,5 @@ const SummaryApi = {
     method: "get",
   },
 };
+
 export default SummaryApi;

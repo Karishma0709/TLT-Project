@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import productCards from "../../component/data/productCards";
+import SummaryApi from "../../Common/SummaryAPI";// Ensure the correct path
 
 const MpcjContactForm1 = () => {
   const [data, setData] = useState({
@@ -18,9 +19,35 @@ const MpcjContactForm1 = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data: ", data);
+
+    // Basic validation
+    const valid = data.name && data.email && data.contact && data.purchasedProduct;
+
+    if (valid) {
+      try {
+        const response = await fetch(SummaryApi["tpmForm"].url, {
+          method: SummaryApi["tpmForm"].method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        console.log("Form submitted successfully: ", result);
+        
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    } else {
+      console.log("Please fill in all the fields");
+    }
   };
 
   return (
@@ -65,7 +92,7 @@ const MpcjContactForm1 = () => {
                 <div className="underline"></div>
               </div>
             </div>
-            <div className="form-row flex space-x-4 mb-6"></div>
+
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -82,6 +109,7 @@ const MpcjContactForm1 = () => {
                 <div className="underline"></div>
               </div>
             </div>
+
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <label
@@ -94,17 +122,21 @@ const MpcjContactForm1 = () => {
                   value={data.purchasedProduct}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-red-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                  required
                 >
+                  <option value="" disabled>
+                    Select Product
+                  </option>
                   {productCards.map((item, index) => (
                     <option key={index} value={`${item.title} ${item.price}`}>
                       {item.title} {item.price}
                     </option>
                   ))}
                 </select>
-
                 <div className="underline"></div>
               </div>
             </div>
+
             <div className="form-row submit-btn flex justify-center gap-3">
               <button
                 type="submit"

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
+import SummaryApi from "../../Common/SummaryAPI";
 
 const MpcjContactForm = () => {
   const [data, setData] = useState({
@@ -17,9 +18,35 @@ const MpcjContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form data: ", data);
+
+    // Basic validation
+    const valid = data.name && data.email && data.contact && data.purchasedProduct;
+
+    if (valid) {
+      try {
+        const response = await fetch(SummaryApi["mpcjForm"].url, {
+          method: SummaryApi["mpcjForm"].method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        console.log("Form submitted successfully: ", result);
+        
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    } else {
+      console.log("Please fill in all the fields");
+    }
   };
 
   return (
@@ -96,7 +123,9 @@ const MpcjContactForm = () => {
                   value={data.purchasedProduct}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-red-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                  required
                 >
+                  <option value="">Select Product</option>
                   <option value="MPCJ Mains Offline Mock Test - ₹ 4999">
                     MPCJ Mains Offline Mock Test - ₹ 4999
                   </option>

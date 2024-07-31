@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const pyPapersDetailsSchema = new mongoose.Schema({
-  number: { type: String, required: true },
-  email: { type: String, required: true },
   name: { type: String, required: true },
+  email: { type: String, required: true },
+  number: { type: String, required: true },
   // Other fields...
 });
 
