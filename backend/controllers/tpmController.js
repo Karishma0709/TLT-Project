@@ -1,3 +1,5 @@
+const TpmFormDetails = require('../models/tpm');
+
 const saveTpmFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;
   console.log('Received request to save TPM form details:', req.body);
@@ -29,3 +31,5 @@ const findTpmFormDetails = async (req, res) => {
     res.status(400).send({ message: 'Error retrieving TPM form details', error });
   }
 };
+
+module.exports = { saveTpmFormDetails, findTpmFormDetails };

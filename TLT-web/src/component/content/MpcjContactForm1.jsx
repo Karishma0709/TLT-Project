@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import productCards from "../../component/data/productCards";
-import SummaryApi from "../../SummaryApi"; // Ensure the correct path
+import SummaryApi from "../../Common/SummaryAPI";// Ensure the correct path
 
 const MpcjContactForm1 = () => {
   const [data, setData] = useState({
@@ -27,8 +27,8 @@ const MpcjContactForm1 = () => {
 
     if (valid) {
       try {
-        const response = await fetch(SummaryApi["prepaper"].url, {
-          method: SummaryApi["prepaper"].method,
+        const response = await fetch(SummaryApi["tpmForm"].url, {
+          method: SummaryApi["tpmForm"].method,
           headers: {
             "Content-Type": "application/json",
           },
@@ -41,7 +41,7 @@ const MpcjContactForm1 = () => {
 
         const result = await response.json();
         console.log("Form submitted successfully: ", result);
-        // Add your file download function here if needed
+        
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
       }
