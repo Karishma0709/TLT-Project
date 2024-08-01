@@ -28,7 +28,8 @@ import Testinstruction from "../ui/Testinstruction";
 import Testinstruction2 from "../ui/Testinstruction2";
 import { Login }  from "../../pages/Login";
 import { ForgotPassword } from "../../pages/ForgotPassword";
-import { SignUp } from "../../pages/SignUp";
+import SignUp from "../../pages/SignUp";
+
 
 
 export const router = createBrowserRouter([

@@ -69,6 +69,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/ConsentDetails`,
     method: "get",
   },
+ signup: {
+    url: `${backendDomain}/api/signup`,
+    method: "post",
+  },
 };
 
 export default SummaryApi;
