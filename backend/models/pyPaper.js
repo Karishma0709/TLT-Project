@@ -4,7 +4,7 @@ const pyPapersDetailsSchema = new mongoose.Schema({
   email: { type: String, required: true },
   number: { type: String, required: true },
   // Other fields...
-});
+}, { timestamps: true });
 
 const PyPapersDetails = mongoose.model("PyPapersDetails", pyPapersDetailsSchema);
 module.exports = PyPapersDetails;

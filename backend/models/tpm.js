@@ -18,7 +18,7 @@ const tpmFormSchema = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 const tpmFormDetails = mongoose.model("tpmFormDetails", tpmFormSchema);
 module.exports = tpmFormDetails;

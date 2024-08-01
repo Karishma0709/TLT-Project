@@ -41,7 +41,7 @@ const personalInfoSchema=new Schema({
             type: Date,
             default: Date.now,
           }
-    })
+    }, { timestamps: true })
 
     const personalInfoDetails=mongoose.model("personalInfoDetails",personalInfoSchema)
     module.exports=personalInfoDetails

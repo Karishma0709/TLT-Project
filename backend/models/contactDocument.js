@@ -10,7 +10,7 @@ const contactDocumentsSchema = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 const constactDocumentDetails = mongoose.model(
   "constactDocumentDetails",

@@ -115,6 +115,6 @@ const RegistrationFormSchema = new mongoose.Schema({
     required: true
   },
   institution: String,
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model('RegistrationForm', RegistrationFormSchema);

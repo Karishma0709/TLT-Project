@@ -93,7 +93,7 @@ const empowermentFormSchema=new Schema({
         required: true
       },
       institution: String,
-    });
+    }, { timestamps: true });
     
     module.exports = mongoose.model('empowermentFormDetails', empowermentFormSchema);
     

@@ -19,7 +19,7 @@ const mpcjFormSchema = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 const MPCJFormdetails = mongoose.model('MPCJFormdetails', mpcjFormSchema);
 

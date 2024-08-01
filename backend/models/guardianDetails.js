@@ -10,7 +10,7 @@ const guardianShema = new Schema({
     type: String,
     require: true,
   },
-});
+}, { timestamps: true });
 
 const guardianDetails = mongoose.model("guardianDetails", guardianShema);
 module.exports = guardianDetails;

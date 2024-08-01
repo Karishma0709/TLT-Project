@@ -21,7 +21,7 @@ const educationalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 const EducationalDetails = mongoose.model(
   "EducationalDetails",
