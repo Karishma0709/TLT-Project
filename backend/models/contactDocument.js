@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const contactDocumentsSchema = new Schema({
   photo: {
-    type: String,
-    required: true,
+    data:Buffer,
+    contentType:String    
   },
   adhaarPhoto: {
-    type: String,
-    required: true,
+    data:Buffer,
+    contentType:String
   },
 }, { timestamps: true });
 
