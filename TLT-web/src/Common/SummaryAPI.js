@@ -45,8 +45,8 @@ const SummaryApi = {
     url: `${backendDomain}/api/saveGuardianDetails`,
     method: "get",
   },
-  saveContactDocumentDetailsPost: {
-    url: `${backendDomain}/api/saveContactDocumentDetails`,
+  contactDoc: {
+    url: `${backendDomain}/api/contactDoc`,
     method: "post",
   },
   saveContactDocumentDetailsGet: {
