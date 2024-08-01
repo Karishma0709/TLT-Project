@@ -11,7 +11,7 @@ export const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    profilePic: "",
+    
   });
 
   const handleOnChange = (e) => {
