@@ -5,6 +5,7 @@ const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
 const {saveContactDocumentDetails,findContactDocumentDetails}=require("../controllers/contactDocController");
 const userSignUpController = require('../controllers/userSingUp');
+const userSignInController = require('../controllers/userSignIn');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -16,5 +17,7 @@ router.post('/contactDoc', saveContactDocumentDetails);
 router.get('/contactDoc', findContactDocumentDetails);
 
 router.post('/signup', userSignUpController)
+router.post('/signin',  userSignInController)
+
 
 module.exports = router;
