@@ -68,10 +68,13 @@ const UserModel = require('../models/userModel'); // Ensure the path is correct
 
 async function userSignUpController(req, res) {
   try {
-    const { email, password, name } = req.body;
+    const {name, email, password, } = req.body;
     console.log("req.body", req.body);
 
     // Check if email, password, and name are provided
+    if (!name) {
+      return res.status(400).json({ message: "Please provide a name", error: true, success: false });
+    }
     if (!email) {
       return res.status(400).json({ message: "Please provide an email", error: true, success: false });
     }
@@ -80,11 +83,7 @@ async function userSignUpController(req, res) {
       return res.status(400).json({ message: "Please provide a password", error: true, success: false });
     }
 
-    if (!name) {
-      return res.status(400).json({ message: "Please provide a name", error: true, success: false });
-    }
-
-    // Check if user already exists
+   // Check if user already exists
     const user = await UserModel.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User already exists", error: true, success: false });
