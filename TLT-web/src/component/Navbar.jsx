@@ -109,9 +109,39 @@ const Navbar = () => {
           <NavLink className="textWhite hover:text-red-500" to="/about">
             About
           </NavLink>
-          <NavLink className="textWhite hover:text-red-500" to="/study-essentials">
-            Study Essentials
-          </NavLink>
+
+    
+          <div className="group relative z-10">
+
+          <button className="textWhite hover:text-red-500 w-32 text-left">
+          Study Essentials
+            </button>
+            <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                to="/study-essentials"
+              >
+                Paid
+              </NavLink>
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                to="/unpaid-study-essentials"
+              >
+                Unpaid
+              </NavLink>
+
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                to="/syllabus-study-essentials"
+              >
+                Syllabus
+              </NavLink>
+            </div>
+            </div>
+
+
+
+
           <NavLink className="textWhite hover:text-red-500" to="/gallery">
             Gallery
           </NavLink>
