@@ -6,7 +6,9 @@ function Telegram() {
   return (
     <div className="">
       {" "}
-      <a target="_blank" href="https://wa.me/+919238176156">
+    
+      
+      <a href="https://t.me/theshubhamsir" target="-blank"  >
         <img src={telegram} className="telegram-img" alt="" />{" "}
       </a>
     </div>
