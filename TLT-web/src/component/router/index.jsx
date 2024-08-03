@@ -29,6 +29,8 @@ import Testinstruction2 from "../ui/Testinstruction2";
 import Login  from "../../pages/Login";
 import { ForgotPassword } from "../../pages/ForgotPassword";
 import SignUp from "../../pages/SignUp";
+import Unpaid from "../Unpaid";
+import Syllabus from "../Syllabus";
 
 
 
@@ -48,6 +50,16 @@ export const router = createBrowserRouter([
       {
         path: "study-Essentials",
         element: <StudyEssentials />,
+      },
+      {
+        path:"unpaid-study-essentials",
+        element:<Unpaid/>
+
+      },
+      {
+        path:"syllabus-study-Essentials",
+        element:<Syllabus/>
+
       },
       {
         path: "study-Essentials/MpcjproductCard",
