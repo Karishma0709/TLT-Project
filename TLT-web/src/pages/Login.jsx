@@ -299,7 +299,7 @@ const Login = () => {
         navigate("/");
       } else if(dataApi.error){
         toast.error(dataApi.message);
-        alert(dataApi.message); // Display error alert
+        alert("user not registered", dataApi.message); // Display error alert
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
