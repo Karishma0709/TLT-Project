@@ -1,7 +1,7 @@
 // import React, { useState } from 'react';
 // import { FaEyeSlash, FaEye } from 'react-icons/fa';
 // import { Link, useNavigate } from 'react-router-dom';
-// import loginIcon from "../assets/signup-icon.webp";// Ensure the path is correct
+// import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 // import SummaryApi from '../Common/SummaryAPI';
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
@@ -16,11 +16,10 @@
 //     confirmPassword: ""
 //   });
 //   const navigate = useNavigate();
-//   const [message, setMessage] = useState("");
 
 //   const handleOnChange = (e) => {
 //     const { name, value } = e.target;
-//     setData(prev => ({
+//     setData((prev) => ({
 //       ...prev,
 //       [name]: value
 //     }));
@@ -30,13 +29,11 @@
 //     e.preventDefault();
 
 //     if (data.password !== data.confirmPassword) {
-//       setMessage("Passwords do not match!");
 //       toast.error("Passwords do not match!");
 //       return;
 //     }
 
 //     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
-//       setMessage("All fields are required!");
 //       toast.error("All fields are required!");
 //       return;
 //     }
@@ -51,22 +48,17 @@
 //       });
 
 //       const result = await response.json();
-//       if (result.success) {
+//       console.log("API response:", result); // Log the response for debugging
+//       if (response.ok && result.success) {
 //         toast.success(result.message);
+//         alert("user register successfully");
 //         navigate("/login");
-//       } 
-//       if(result.error){
-//         toast.error(result.message)
+//       } else {
+//         toast.error(result.message || "Sign Up failed!");
 //       }
-//       if (response.ok) {
-//         setMessage("Sign Up successful!");
-//       }
-//       else {
-//         setMessage(result.message || "Sign Up failed!");
-//       }
-//     }catch (error) {
+//     } catch (error) {
 //       console.error("Error:", error);
-//       setMessage("An error occurred during Sign Up!");
+//       toast.error("An error occurred during Sign Up!");
 //     }
 //   };
 
@@ -83,7 +75,6 @@
 //       <div className="container max-w-md mx-auto p-4">
 //         <div className="bg-white p-5 rounded-lg shadow-lg mx-auto flex flex-col items-center">
 //           <div className="w-24 h-24 relative overflow-hidden rounded-full mb-4">
-           
 //             <img src={loginIcon} className="h-full w-full object-cover" alt="Sign Up Icon" />
 //             <label className="flex flex-col items-center bg-opacity-80 bg-slate-200 py-2 cursor-pointer text-center rounded-md">
 //               <span className="text-xs">Upload photo</span>
@@ -113,7 +104,6 @@
 //                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
 //               />
 //             </div>
-
 //             <div className="relative w-full">
 //               <label className="block text-gray-700">Password :</label>
 //               <input
@@ -136,7 +126,6 @@
 //                 )}
 //               </button>
 //             </div>
-
 //             <div className="relative w-full">
 //               <label className="block text-gray-700">Confirm Password :</label>
 //               <input
@@ -159,7 +148,6 @@
 //                 )}
 //               </button>
 //             </div>
-
 //             <button
 //               type="submit"
 //               className="w-full py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
@@ -179,16 +167,14 @@
 //   );
 // };
 
-// export default SignUp
-
-
+// export default SignUp;
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 import SummaryApi from '../Common/SummaryAPI';
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
+//import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -214,16 +200,18 @@ const SignUp = () => {
 
     if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match!");
+      alert("Passwords do not match!");
       return;
     }
 
     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
       toast.error("All fields are required!");
+      alert("All fields are required!");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5050/api/signUp", {
+      const response = await fetch(SummaryApi.signUp.url, {
         method: SummaryApi.signUp.method,
         headers: {
           "Content-Type": "application/json"
@@ -232,15 +220,19 @@ const SignUp = () => {
       });
 
       const result = await response.json();
+      console.log("API response:", result); // Log the response for debugging
       if (response.ok && result.success) {
         toast.success(result.message);
+        alert("User registered successfully!");
         navigate("/login");
       } else {
         toast.error(result.message || "Sign Up failed!");
+        alert(result.message || "Sign Up failed!");
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("An error occurred during Sign Up!");
+      alert("An error occurred during Sign Up!");
     }
   };
 
@@ -350,3 +342,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+
