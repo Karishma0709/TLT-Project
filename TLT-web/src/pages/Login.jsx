@@ -111,18 +111,20 @@
 import React, { useState } from "react";
 import loginIcon from "../assets/signup-icon.webp"; // Ensure this path and file name are correct
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the eye icons
-import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link, useNavigate } from "react-router-dom"; // Import Link from React Router
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-// Ensure that toast is properly initialized
+// Initialize toast notifications
 
-export const Login = () => {
+
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -140,8 +142,8 @@ export const Login = () => {
     e.preventDefault();
     // Handle form submission logic here
     try {
-      const dataResponse = await fetch(SummaryApi.signin.url, {
-        method: SummaryApi.signin.method,
+      const dataResponse = await fetch(SummaryApi.signIn.url, {
+        method: SummaryApi.signIn.method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -151,6 +153,8 @@ export const Login = () => {
 
       if (dataApi.success) {
         toast.success("User successfully logged in!");
+        console.log("User successfully logged in!");
+        navigate("/");
       } else {
         toast.error(dataApi.message);
       }
@@ -158,8 +162,6 @@ export const Login = () => {
       toast.error("Something went wrong. Please try again.");
     }
   };
-
-  console.log("data login", data);
 
   return (
     <section
@@ -225,3 +227,5 @@ export const Login = () => {
     </section>
   );
 };
+
+export default Login;

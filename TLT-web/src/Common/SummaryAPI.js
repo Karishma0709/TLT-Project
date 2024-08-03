@@ -69,12 +69,12 @@ const SummaryApi = {
     url: `${backendDomain}/api/ConsentDetails`,
     method: "get",
   },
- signup: {
-    url: `${backendDomain}/api/signup`,
+ signUp: {
+    url: `${backendDomain}/api/signUp`,
     method: "post",
   },
-  signin: {
-    url: `${backendDomain}/api/signin`,
+  signIn: {
+    url: `${backendDomain}/api/signIn`,
     method: "post",
   },
 };

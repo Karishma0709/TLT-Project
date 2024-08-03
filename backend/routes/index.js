@@ -16,8 +16,8 @@ router.get('/tpmForm', findTpmFormDetails);
 router.post('/contactDoc', saveContactDocumentDetails);
 router.get('/contactDoc', findContactDocumentDetails);
 
-router.post('/signup', userSignUpController)
-router.post('/signin',  userSignInController)
+router.post('/signUp',  userSignUpController)
+router.post('/signIn',  userSignInController)
 
 
 module.exports = router;
