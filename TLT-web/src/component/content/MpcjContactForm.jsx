@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import SummaryApi from "../../Common/SummaryAPI";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MpcjContactForm = () => {
   const [data, setData] = useState({
@@ -40,12 +42,16 @@ const MpcjContactForm = () => {
 
         const result = await response.json();
         console.log("Form submitted successfully: ", result);
+        toast.success("Form submitted successfully!");
+        setIsModalOpen(false);
         
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
+        toast.error("There was a problem submitting the form. Please try again.");
       }
     } else {
       console.log("Please fill in all the fields");
+      toast.error("Please fill in all the fields.");
     }
   };
 
@@ -145,6 +151,7 @@ const MpcjContactForm = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
