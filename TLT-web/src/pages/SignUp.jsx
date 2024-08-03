@@ -42,8 +42,8 @@
 //     }
 
 //     try {
-//       const response = await fetch(SummaryApi.signup.url, {
-//         method: SummaryApi.signup.method,
+//       const response = await fetch(SummaryApi.signUp.url, {
+//         method: SummaryApi.signUp.method,
 //         headers: {
 //           "Content-Type": "application/json"
 //         },
@@ -51,15 +51,22 @@
 //       });
 
 //       const result = await response.json();
-//       if (response.ok) {
+//       if (result.success) {
 //         toast.success(result.message);
 //         navigate("/login");
-//       } else {
-//         toast.error(result.message);
+//       } 
+//       if(result.error){
+//         toast.error(result.message)
 //       }
-//     } catch (error) {
+//       if (response.ok) {
+//         setMessage("Sign Up successful!");
+//       }
+//       else {
+//         setMessage(result.message || "Sign Up failed!");
+//       }
+//     }catch (error) {
 //       console.error("Error:", error);
-//       toast.error("An error occurred during Sign Up!");
+//       setMessage("An error occurred during Sign Up!");
 //     }
 //   };
 
@@ -174,13 +181,14 @@
 
 // export default SignUp
 
+
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 import SummaryApi from '../Common/SummaryAPI';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
+// import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -192,7 +200,6 @@ const SignUp = () => {
     confirmPassword: ""
   });
   const navigate = useNavigate();
-  const [message, setMessage] = useState("");
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -206,20 +213,18 @@ const SignUp = () => {
     e.preventDefault();
 
     if (data.password !== data.confirmPassword) {
-      setMessage("Passwords do not match!");
       toast.error("Passwords do not match!");
       return;
     }
 
     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
-      setMessage("All fields are required!");
       toast.error("All fields are required!");
       return;
     }
 
     try {
-      const response = await fetch(SummaryApi.signup.url, {
-        method: SummaryApi.signup.method,
+      const response = await fetch("http://localhost:5050/api/signUp", {
+        method: SummaryApi.signUp.method,
         headers: {
           "Content-Type": "application/json"
         },
@@ -227,11 +232,11 @@ const SignUp = () => {
       });
 
       const result = await response.json();
-      if (response.ok) {
+      if (response.ok && result.success) {
         toast.success(result.message);
         navigate("/login");
       } else {
-        toast.error(result.message);
+        toast.error(result.message || "Sign Up failed!");
       }
     } catch (error) {
       console.error("Error:", error);
