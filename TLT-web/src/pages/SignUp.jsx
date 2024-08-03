@@ -332,7 +332,7 @@ const SignUp = () => {
           <div className="mt-4 text-center">
             <p className="text-sm">
               Already have an account?
-              <Link to="/login" className="text-blue-500 hover:underline"> Login</Link>
+              <Link to="/login" className="text-blue-500 hover:underline text-red-500"> Login</Link>
             </p>
           </div>
         </div>
