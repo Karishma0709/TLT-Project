@@ -11,7 +11,7 @@ const SummaryApi = {
   },
   jetForm: {
     url: `${backendDomain}/api/jetForm`,
-    method: "get",
+    method: "post",
   },
   personalinfo: {
     url: `${backendDomain}/api/personalinfo`,

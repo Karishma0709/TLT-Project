@@ -7,6 +7,7 @@ const {saveContactDocumentDetails,findContactDocumentDetails}=require("../contro
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
+const {createJetForm} = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 
 // Define routes
@@ -17,6 +18,7 @@ router.post("/mpcjForm", saveMPCJFormDetails);
 router.get('/tpmForm', findTpmFormDetails);
 router.post('/contactDoc', saveContactDocumentDetails);
 router.get('/contactDoc', findContactDocumentDetails);
+router.post('/jetForm', createJetForm);
 
 router.post('/signUp',  userSignUpController)
 router.post('/signIn',  userSignInController)

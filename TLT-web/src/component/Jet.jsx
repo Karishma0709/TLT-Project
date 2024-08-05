@@ -1,31 +1,85 @@
-import { BrowserRouter, Routes, Route, NavLink, Link } from "react-router-dom";
-import PersonalInfo from "./content/PersonalInfo";
-import Guardiandetails from "./content/Guardiandetails";
-import Documents from "./content/Documents";
-import NotFound from "./content/NotFound";
-import Sidebar from "./Sidebar";
-import Educational from "./content/Educational";
-import Conset from "./content/Conset";
-import ThankYou from "./content/ThankYou";
+import React, { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import PersonalInfo from "../component/content/PersonalInfo";
+import GuardianDetails from "../component/content/Guardiandetails";
+import Documents from "../component/content/Documents";
+import Educational from "../component/content/Educational";
+import Consent from "../component/content/Conset"
+import Sidebar from "../component/Sidebar";
+import SummaryApi from "../Common/SummaryAPI";
+import ThankYou from "../component/content/ThankYou";
 
-const Jet = () => {
+const MultiStepForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    category: "",
+    address: "",
+    dob: "",
+    state: "",
+    city: "",
+    gender: "",
+    guardianName: "",
+    guardianProffesion: "",
+    photo: null,
+    aadhar: null,
+    degree: "",
+    college: "",
+    graduationYear: "",
+    masterGraduationYear: "",
+    masterUniversityAndDegree: "",
+    annualIncome: "",
+    accomodationRequirement: "",
+  });
+
+  const handleChange = (updatedData) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      ...updatedData,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const form = new FormData();
+      for (const key in formData) {
+        form.append(key, formData[key]);
+      }
+
+      const response = await fetch(SummaryApi["jetForm"].url, {
+        method: SummaryApi["jetForm"].method,
+        body: form,
+      });
+
+      if (response.ok) {
+        navigate("/thankyou");
+      } else {
+        console.error("Failed to submit form data");
+      }
+    } catch (error) {
+      console.error("Error submitting form data", error);
+    }
+  };
+
   return (
-    <div className="bg-white  w-[100%] sm:h-[40rem]  h-[50%] mt-[0px] sm:mt-[0px] rounded-xl shadow-xl p-4 flex flex-col sm:flex sm:flex-row justify-between items-center">
+    <div className="bg-white w-[100%] sm:h-[40rem] h-[50%] mt-[0px] sm:mt-[0px] rounded-xl shadow-xl p-4 flex flex-col sm:flex sm:flex-row items-center">
       <Sidebar />
-      {/* <a className="justify-center items-center" href={"/jet/personalInfo"}>
-        <button>Fill out a form</button>
-      </a> */}
-      <Routes>
-        <Route path="/personalInfo" element={<PersonalInfo />} />
-        <Route path="/guardiandetails" element={<Guardiandetails />} />
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/conset" element={<Conset />} />
-        <Route path="/educational" element={<Educational />} />
-        <Route path="/thankyou" element={<ThankYou />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div>
+        <div className="w-full">
+          <Routes>
+            <Route path="/personalinfo" element={<PersonalInfo formData={formData} handleChange={handleChange} />} />
+            <Route path="/guardiandetails" element={<GuardianDetails formData={formData} handleChange={handleChange} />} />
+            <Route path="/documents" element={<Documents formData={formData} handleChange={handleChange} />} />
+            <Route path="/educational" element={<Educational formData={formData} handleChange={handleChange} />} />
+            <Route path="/consent" element={<Consent formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />} />
+            <Route path="/thankyou" element={<ThankYou />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Jet;
+export default MultiStepForm;

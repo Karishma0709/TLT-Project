@@ -1,22 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import SummaryApi from "../../Common/SummaryAPI";
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ formData, handleChange }) => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    number: "",
-    category: "",
-    address: "",
-    dob: "",
-    state: "",
-    city: "",
-    gender: "",
-  });
-
-  const [alerts, setAlerts] = useState({
+  const [alerts, setAlerts] = React.useState({
     name: false,
     email: false,
     number: false,
@@ -28,17 +15,18 @@ const PersonalInfo = () => {
     gender: false,
   });
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    handleChange({
       [name]: type === "checkbox" ? checked : value,
-    }));
+    });
   };
 
-  const handleSubmit = async (event) => {
+  const handleNext = (event) => {
     event.preventDefault();
-
+    console.log("handleNext called");
+    console.log("Current Form Data:", formData);
+    // Validate fields and set alerts
     const newAlerts = {};
     for (const key in formData) {
       newAlerts[key] = formData[key] === "";
@@ -46,27 +34,13 @@ const PersonalInfo = () => {
 
     setAlerts(newAlerts);
 
+    // Check for validation errors
     if (Object.values(newAlerts).some((alert) => alert)) {
-      return;
+      return; // If there are errors, don't proceed
     }
 
-    try {
-      const response = await fetch(SummaryApi["personalinfo"].url, {
-        method: SummaryApi["personalinfo"].method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        navigate("/jet/guardiandetails");
-      } else {
-        console.error("Failed to submit form data");
-      }
-    } catch (error) {
-      console.error("Error submitting form data", error);
-    }
+  
+    navigate("/jet/guardiandetails");
   };
 
   return (
@@ -75,7 +49,7 @@ const PersonalInfo = () => {
         <h1 className="mt-6 text-3xl font-[800] mb-5 text-primary-marineBlue">
           Personal info
         </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <div className="flex flex-col">
           <div className="form-wrapper flex flex-wrap flex-col relative">
             <div className="flex flex-wrap sm:flex-nowrap">
               <div className="flex flex-wrap sm:flex-nowrap w-[100%] sm:w-[50%] flex-col">
@@ -84,7 +58,7 @@ const PersonalInfo = () => {
                 </label>
                 <input
                   name="name"
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   value={formData.name}
                   className={`jinput ${
                     alerts.name
@@ -107,7 +81,7 @@ const PersonalInfo = () => {
                   Male
                   <input
                     name="gender"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     checked={formData.gender === "male"}
                     value="male"
                     className={`mx-2 jinput ${
@@ -115,7 +89,7 @@ const PersonalInfo = () => {
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
-                    type="checkbox"
+                    type="radio"
                   />
                 </label>
                 <span
@@ -129,7 +103,7 @@ const PersonalInfo = () => {
                   Female
                   <input
                     name="gender"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     checked={formData.gender === "female"}
                     value="female"
                     className={`mx-2 jinput ${
@@ -137,7 +111,7 @@ const PersonalInfo = () => {
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
-                    type="checkbox"
+                    type="radio"
                   />
                 </label>
                 <span
@@ -151,7 +125,7 @@ const PersonalInfo = () => {
                   Other
                   <input
                     name="gender"
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     checked={formData.gender === "other"}
                     value="other"
                     className={`jinput mx-2 ${
@@ -159,7 +133,7 @@ const PersonalInfo = () => {
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
-                    type="checkbox"
+                    type="radio"
                   />
                 </label>
                 <span
@@ -178,7 +152,7 @@ const PersonalInfo = () => {
                 </label>
                 <input
                   name="category"
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   value={formData.category}
                   className={`jinput ${
                     alerts.category
@@ -202,14 +176,15 @@ const PersonalInfo = () => {
                 </label>
                 <input
                   name="dob"
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   value={formData.dob}
                   className={`jinput ${
                     alerts.dob
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px]`}
+                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
                   type="date"
+                  placeholder="e.g.Stephen King"
                 />
                 <span
                   className={`${
@@ -220,138 +195,141 @@ const PersonalInfo = () => {
                 </span>
               </div>
             </div>
-            <div className="flex">
-              <div className="flex flex-col w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-2">
-                  Email Address
-                </label>
-                <input
-                  name="email"
-                  onChange={handleChange}
-                  value={formData.email}
-                  className={`jinput ${
-                    alerts.email
-                      ? "focus:outline-primary-strawberryRed"
-                      : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
-                  type="email"
-                  placeholder="e.g.stephenking@lorem.com"
-                />
-                <span
-                  className={`${
-                    alerts.email ? "inline" : "hidden"
-                  } text-primary-strawberryRed font-[500] text-sm`}
-                >
-                  This field is required
-                </span>
-              </div>
-              <div className="flex flex-col w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-2 mt-2">
-                  Phone Number
-                </label>
-                <input
-                  name="number"
-                  onChange={handleChange}
-                  value={formData.number}
-                  className={`jinput ${
-                    alerts.number
-                      ? "focus:outline-primary-strawberryRed"
-                      : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
-                  type="text"
-                  placeholder="e.g.+1 234 567 890"
-                />
-                <span
-                  className={`${
-                    alerts.number ? "inline" : "hidden"
-                  } text-primary-strawberryRed text-sm`}
-                >
-                  This field is required
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
-                Address
+          </div>
+          <div className="flex flex-wrap mt-2">
+            <div className="flex flex-col w-[100%] sm:w-[50%]">
+              <label className="text-primary-marineBlue font-[500] mb-2">
+                Email Address
               </label>
               <input
-                name="address"
-                onChange={handleChange}
-                value={formData.address}
+                name="email"
+                onChange={handleInputChange}
+                value={formData.email}
                 className={`jinput ${
-                  alerts.address
+                  alerts.email
                     ? "focus:outline-primary-strawberryRed"
                     : "focus:outline-primary-marineBlue"
                 } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
-                type="text"
-                placeholder="e.g.123 Main Street"
+                type="email"
+                placeholder="e.g.stephenking@lorem.com"
               />
               <span
                 className={`${
-                  alerts.address ? "inline" : "hidden"
+                  alerts.email ? "inline" : "hidden"
                 } text-primary-strawberryRed text-sm`}
               >
                 This field is required
               </span>
             </div>
-            <div className="flex flex-wrap sm:flex-nowrap">
-              <div className="flex flex-col w-[100%] sm:w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
-                  State
-                </label>
-                <input
-                  name="state"
-                  onChange={handleChange}
-                  value={formData.state}
-                  className={`jinput ${
-                    alerts.state
-                      ? "focus:outline-primary-strawberryRed"
-                      : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
-                  type="text"
-                  placeholder="e.g.California"
-                />
-                <span
-                  className={`${
-                    alerts.state ? "inline" : "hidden"
-                  } text-primary-strawberryRed text-sm`}
-                >
-                  This field is required
-                </span>
-              </div>
-              <div className="flex flex-col w-[100%] sm:w-[50%]">
-                <label className="text-primary-marineBlue font-[500] mb-1 mt-1">
-                  City
-                </label>
-                <input
-                  name="city"
-                  onChange={handleChange}
-                  value={formData.city}
-                  className={`jinput ${
-                    alerts.city
-                      ? "focus:outline-primary-strawberryRed"
-                      : "focus:outline-primary-marineBlue"
-                  } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
-                  type="text"
-                  placeholder="e.g.Los Angeles"
-                />
-                <span
-                  className={`${
-                    alerts.city ? "inline" : "hidden"
-                  } text-primary-strawberryRed text-sm`}
-                >
-                  This field is required
-                </span>
-              </div>
+            <div className="flex flex-col w-[100%] sm:w-[50%]">
+              <label className="text-primary-marineBlue font-[500] mb-2">
+                Phone Number
+              </label>
+              <input
+                name="number"
+                onChange={handleInputChange}
+                value={formData.number}
+                className={`jinput ${
+                  alerts.number
+                    ? "focus:outline-primary-strawberryRed"
+                    : "focus:outline-primary-marineBlue"
+                } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
+                type="text"
+                placeholder="e.g. +1 234 567 890"
+              />
+              <span
+                className={`${
+                  alerts.number ? "inline" : "hidden"
+                } text-primary-strawberryRed text-sm`}
+              >
+                This field is required
+              </span>
             </div>
           </div>
+          <div className="flex flex-wrap mt-1">
+            <div className="flex flex-col w-[100%] sm:w-[50%]">
+              <label className="text-primary-marineBlue font-[500] mb-2">
+                State
+              </label>
+              <input
+                name="state"
+                onChange={handleInputChange}
+                value={formData.state}
+                className={`jinput ${
+                  alerts.state
+                    ? "focus:outline-primary-strawberryRed"
+                    : "focus:outline-primary-marineBlue"
+                } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
+                type="text"
+                placeholder="e.g.New York"
+              />
+              <span
+                className={`${
+                  alerts.state ? "inline" : "hidden"
+                } text-primary-strawberryRed text-sm`}
+              >
+                This field is required
+              </span>
+            </div>
+            <div className="flex flex-col w-[100%] sm:w-[50%]">
+              <label className="text-primary-marineBlue font-[500] mb-2">
+                City
+              </label>
+              <input
+                name="city"
+                onChange={handleInputChange}
+                value={formData.city}
+                className={`jinput ${
+                  alerts.city
+                    ? "focus:outline-primary-strawberryRed"
+                    : "focus:outline-primary-marineBlue"
+                } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
+                type="text"
+                placeholder="e.g.New York City"
+              />
+              <span
+                className={`${
+                  alerts.city ? "inline" : "hidden"
+                } text-primary-strawberryRed text-sm`}
+              >
+                This field is required
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col mt-1">
+            <label className="text-primary-marineBlue font-[500] mb-2">
+              Address
+            </label>
+            <input
+              name="address"
+              onChange={handleInputChange}
+              value={formData.address}
+              className={`jinput ${
+                alerts.address
+                  ? "focus:outline-primary-strawberryRed"
+                  : "focus:outline-primary-marineBlue"
+              } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
+              type="text"
+              placeholder="e.g.123 Main Street"
+            />
+            <span
+              className={`${
+                alerts.address ? "inline" : "hidden"
+              } text-primary-strawberryRed text-sm`}
+            >
+              This field is required
+            </span>
+          </div>
+          <div className="lex justify-between items-center pt-[20px] sm:pt-[35px]">
           <button
-            type="submit"
-            className="mt-3 w-[25%] bg-primary text-white rounded-[4px] p-3"
-          >
-            Next Step
-          </button>
-        </form>
+              className="bg-primary lg:mr-16 text-white border-0 rounded-md px-6 py-3 transition-all duration-300 hover:opacity-75"
+              onClick={handleNext}
+              type="button" 
+            >
+              Next Step
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
