@@ -1,16 +1,18 @@
+
 // import React, { useState } from 'react';
 // import { FaEyeSlash, FaEye } from 'react-icons/fa';
 // import { Link, useNavigate } from 'react-router-dom';
 // import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 // import SummaryApi from '../Common/SummaryAPI';
 // import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
+// //import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
 
 // const SignUp = () => {
 //   const [showPassword, setShowPassword] = useState(false);
 //   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 //   const [data, setData] = useState({
 //     email: "",
+//     batch:"",
 //     password: "",
 //     name: "",
 //     confirmPassword: ""
@@ -30,11 +32,13 @@
 
 //     if (data.password !== data.confirmPassword) {
 //       toast.error("Passwords do not match!");
+//       alert("Passwords do not match!");
 //       return;
 //     }
 
 //     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
 //       toast.error("All fields are required!");
+//       alert("All fields are required!");
 //       return;
 //     }
 
@@ -51,14 +55,16 @@
 //       console.log("API response:", result); // Log the response for debugging
 //       if (response.ok && result.success) {
 //         toast.success(result.message);
-//         alert("user register successfully");
+//         alert("User registered successfully!");
 //         navigate("/login");
 //       } else {
 //         toast.error(result.message || "Sign Up failed!");
+//         alert(result.message || "Sign Up failed!");
 //       }
 //     } catch (error) {
 //       console.error("Error:", error);
 //       toast.error("An error occurred during Sign Up!");
+//       alert("An error occurred during Sign Up!");
 //     }
 //   };
 
@@ -89,6 +95,17 @@
 //                 name="name"
 //                 placeholder="Enter your name"
 //                 value={data.name}
+//                 onChange={handleOnChange}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+//               />
+//             </div>
+//             <div className="w-full">
+//               <label className="block text-gray-700">Batch :</label>
+//               <input
+//                 type="text"
+//                 name="batch"
+//                 placeholder="Enter your batch"
+//                 value={data.batch}
 //                 onChange={handleOnChange}
 //                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
 //               />
@@ -158,7 +175,7 @@
 //           <div className="mt-4 text-center">
 //             <p className="text-sm">
 //               Already have an account?
-//               <Link to="/login" className="text-blue-500 hover:underline"> Login</Link>
+//               <Link to="/login" className="text-blue-500 hover:underline text-red-500"> Login</Link>
 //             </p>
 //           </div>
 //         </div>
@@ -168,19 +185,22 @@
 // };
 
 // export default SignUp;
+
+
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 import SummaryApi from '../Common/SummaryAPI';
 import { toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
+import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
+    batch: "",
     password: "",
     name: "",
     confirmPassword: ""
@@ -200,13 +220,11 @@ const SignUp = () => {
 
     if (data.password !== data.confirmPassword) {
       toast.error("Passwords do not match!");
-      alert("Passwords do not match!");
       return;
     }
 
     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
       toast.error("All fields are required!");
-      alert("All fields are required!");
       return;
     }
 
@@ -223,16 +241,13 @@ const SignUp = () => {
       console.log("API response:", result); // Log the response for debugging
       if (response.ok && result.success) {
         toast.success(result.message);
-        alert("User registered successfully!");
         navigate("/login");
       } else {
         toast.error(result.message || "Sign Up failed!");
-        alert(result.message || "Sign Up failed!");
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("An error occurred during Sign Up!");
-      alert("An error occurred during Sign Up!");
     }
   };
 
@@ -263,6 +278,17 @@ const SignUp = () => {
                 name="name"
                 placeholder="Enter your name"
                 value={data.name}
+                onChange={handleOnChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+              />
+            </div>
+            <div className="w-full">
+              <label className="block text-gray-700">Batch :</label>
+              <input
+                type="text"
+                name="batch"
+                placeholder="Enter your batch"
+                value={data.batch}
                 onChange={handleOnChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
               />
@@ -332,7 +358,7 @@ const SignUp = () => {
           <div className="mt-4 text-center">
             <p className="text-sm">
               Already have an account?
-              <Link to="/login" className="text-blue-500 hover:underline text-red-500"> Login</Link>
+              <Link to="/login" className="text-blue-500 hover:underline"> Login</Link>
             </p>
           </div>
         </div>
@@ -342,5 +368,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
 

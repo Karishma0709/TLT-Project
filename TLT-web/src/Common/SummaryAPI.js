@@ -78,7 +78,7 @@ const SummaryApi = {
     method: "post",
   },
   current_user: {
-    url: `${backendDomain}/api/user-details`,
+    url: `${backendDomain}/api/userDetails`,
     method: "get",
   },
 };

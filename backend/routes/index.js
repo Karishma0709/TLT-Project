@@ -20,7 +20,7 @@ router.get('/contactDoc', findContactDocumentDetails);
 
 router.post('/signUp',  userSignUpController)
 router.post('/signIn',  userSignInController)
-router.get('/user-details',authToken, userDetailsController)
+router.get('/userDetails',authToken, userDetailsController)
 
 
 module.exports = router;

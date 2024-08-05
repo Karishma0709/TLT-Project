@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true // Added required validation for consistency
   },
+  batch:{
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     unique: true,
