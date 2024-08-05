@@ -282,17 +282,7 @@ const SignUp = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
               />
             </div>
-            <div className="w-full">
-              <label className="block text-gray-700">Batch :</label>
-              <input
-                type="text"
-                name="batch"
-                placeholder="Enter your batch"
-                value={data.batch}
-                onChange={handleOnChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
-              />
-            </div>
+            
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>
               <input
