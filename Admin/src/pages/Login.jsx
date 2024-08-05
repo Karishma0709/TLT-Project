@@ -381,12 +381,12 @@
 // export default Login;
 
 import React, { useContext, useState } from "react";
-import loginIcon from "../assets/signup-icon.webp"; // Ensure this path and file name are correct
+// import loginIcon from "../assets/signup-icon.webp"; // Ensure this path and file name are correct
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the eye icons
 import { Link, useNavigate } from "react-router-dom"; // Import Link from React Router
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import SummaryApi from "../Common/SummaryAPI";
+import SummaryApi from "../Common/SummaryApi";
 import Context from "../context";
 
 const Login = () => {
@@ -396,8 +396,8 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const { fetchUserDetails } = useContext(Context);
-  console.log("generalContext", generalContext.fetchUserDetails())
+  // const { fetchUserDetails } = useContext(Context);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({
@@ -427,7 +427,8 @@ const Login = () => {
       if (dataApi.success) {
         toast.success(dataApi.message);
         alert("User successfully logged in!");
-        navigate("/");
+        navigate("/dashborad");
+        // fetchUserDetails();
         fetchUserDetails();
       } else if (dataApi.error) {
         toast.error(dataApi.message);
@@ -447,7 +448,7 @@ const Login = () => {
     >
       <div className="container max-w-md mx-auto p-4">
         <div className="bg-white p-10 rounded-lg shadow-lg mx-auto flex flex-col items-center">
-          <img src={loginIcon} className="h-20 mb-4" alt="Login Icon" />
+          {/* <img src={loginIcon} className="h-20 mb-4" alt="Login Icon" /> */}
           <form className="w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>

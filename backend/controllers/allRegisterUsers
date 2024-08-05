@@ -1,5 +1,6 @@
-import UserModel from "../models/userModel";
+const UserModel = require("../models/userModel");
 
+<<<<<<< HEAD
 async function allRegisterUser (){
   try{
        console.log("userid all users", req.userId)
@@ -10,14 +11,27 @@ async function allRegisterUser (){
         data :allUsers,
         success:true,
         error : false
+=======
+// Ensure this is an Express route handler function
+async function allRegisterUser(req, res) {
+  try {
+    console.log("userid all users", req.userId);
+>>>>>>> ad57190bb135808afa13a3f12b119638dffb2896
 
-       })
-  }catch(error){
+    const allUsers = await UserModel.find();
+    res.json({
+      message: "All users",
+      data: allUsers,
+      success: true,
+      error: false
+    });
+  } catch (error) {
     res.status(500).json({
-      message: err.message || err,
+      message: error.message || error,
       error: true,
-      success: false,
+      success: false
     });
   }
 }
+
 module.exports = allRegisterUser;
