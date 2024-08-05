@@ -1,23 +1,24 @@
-import UserModel from "../models/userModel";
+const UserModel = require("../models/userModel");
 
-async function allRegisterUser (){
-  try{
-       console.log("userid all users", req.userId)
-       
-        const allRegisterUser = await UserModel.find()
-       res.json({
-        message : "All user",
-        data :allUsers,
-        success:true,
-        error : false
+// Ensure this is an Express route handler function
+async function allRegisterUser(req, res) {
+  try {
+    console.log("userid all users", req.userId);
 
-       })
-  }catch(error){
+    const allUsers = await UserModel.find();
+    res.json({
+      message: "All users",
+      data: allUsers,
+      success: true,
+      error: false
+    });
+  } catch (error) {
     res.status(500).json({
-      message: err.message || err,
+      message: error.message || error,
       error: true,
-      success: false,
+      success: false
     });
   }
 }
+
 module.exports = allRegisterUser;
