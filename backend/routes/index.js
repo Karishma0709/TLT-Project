@@ -8,6 +8,7 @@ const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
+const userLogout = require('../controllers/userLogout');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -21,6 +22,7 @@ router.get('/contactDoc', findContactDocumentDetails);
 router.post('/signUp',  userSignUpController)
 router.post('/signIn',  userSignInController)
 router.get('/userDetails',authToken, userDetailsController)
+router.get('/userLogout', userLogout)
 
 
 module.exports = router;
