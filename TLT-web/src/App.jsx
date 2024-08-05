@@ -120,7 +120,7 @@ function App() {
         dispatch(setUserDetails(dataApi.data));
       }
 
-      console.log("data-user", dataApi);
+      
     } catch (error) {
       console.error("Error fetching user details:", error);
     }

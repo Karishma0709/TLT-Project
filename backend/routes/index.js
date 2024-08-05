@@ -9,6 +9,7 @@ const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
+const allRegisterUser = require('../controllers/allRegisterUsers');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -24,5 +25,6 @@ router.post('/signIn',  userSignInController)
 router.get('/userDetails',authToken, userDetailsController)
 router.get('/userLogout', userLogout)
 
+router.get("/registerUser", allRegisterUser)
 
 module.exports = router;

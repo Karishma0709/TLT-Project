@@ -31,6 +31,7 @@ import { ForgotPassword } from "../../pages/ForgotPassword";
 import SignUp from "../../pages/SignUp";
 import Unpaid from "../Unpaid";
 import Syllabus from "../Syllabus";
+import { RegisterUser } from "../../pages/RegisterUser";
 
 
 
@@ -165,6 +166,10 @@ export const router = createBrowserRouter([
           {
             path: "thankyou",
             element: <ThankYou />,
+          },
+          {
+            path: "register",
+            element: <RegisterUser />,
           },
         ],
       },

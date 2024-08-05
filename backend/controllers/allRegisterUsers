@@ -1,0 +1,12 @@
+async function allRegisterUser (){
+  try{
+       console.log("userid all users", req.userId)
+  }catch(error){
+    res.status(500).json({
+      message: err.message || err,
+      error: true,
+      success: false,
+    });
+  }
+}
+module.exports = allRegisterUser;
