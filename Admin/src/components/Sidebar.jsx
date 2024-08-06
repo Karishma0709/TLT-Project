@@ -37,8 +37,9 @@ const Sidebar = () => {
                  {/***navigation */}       
                 <div>   
                     <nav className='grid p-4'>
-                        <Link to={"user"} className='px-2 py-1 hover:bg-slate-100'>All Users</Link>
-                        <Link to={"details"} className='px-2 py-1 hover:bg-slate-100'>Details</Link>
+                        <Link to={"user"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>All Users</Link>
+                        <Link to={"py-paper"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Previou Year Paper</Link>
+                        <Link to={"mpcj-form"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>MPCJ form</Link>
                     </nav>
                 </div>  
         </aside>

@@ -10,6 +10,8 @@ const {createJetForm,upload } = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
+const mpcjGetData = require('../controllers/mpcjGetController');
+const allPyPapers = require('../controllers/allPyPaper');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -25,5 +27,7 @@ router.get('/userDetails',authToken, userDetailsController)
 router.get('/userLogout', userLogout)
 
 router.get("/registerUser", allRegisterUser)
+router.get("/all-papers", allPyPapers)
+router.get("/mpcj-data", mpcjGetData)
 
 module.exports = router;

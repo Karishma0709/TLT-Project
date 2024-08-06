@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import SignUp from "../pages/SignUp";
 import User from "../components/User";
 import Details from "../components/Details";
+import MpcjData from "../components/MpcjData";
 
 export const router = createBrowserRouter([
     {
@@ -20,8 +21,12 @@ export const router = createBrowserRouter([
               element: <User/>,
             },
             {
-              path:"details",
+              path:"py-paper",
               element: <Details/>,
+            },
+            {
+              path:"mpcj-form",
+              element:<MpcjData/>
             }
           ]
         },

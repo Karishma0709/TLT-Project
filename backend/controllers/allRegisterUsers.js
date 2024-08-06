@@ -1,13 +1,14 @@
-const PyPapersDetails = require("../models/pyPaper");
+const UserModel = require("../models/userModel");
 
 // Ensure this is an Express route handler function
-async function allPyPapers(req, res) {
+async function allRegisterUser(req, res) {
   try {
+    console.log("userid all users", req.userId);
 
-    const allpapers = await PyPapersDetails.find();
+    const allUsers = await UserModel.find();
     res.json({
       message: "All users",
-      data: allpapers,
+      data: allUsers,
       success: true,
       error: false
     });
@@ -20,4 +21,4 @@ async function allPyPapers(req, res) {
   }
 }
 
-module.exports = allPyPapers;
+module.exports = allRegisterUser;
