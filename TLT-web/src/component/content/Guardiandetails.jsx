@@ -75,7 +75,7 @@ const GuardianDetails = ({ formData, handleChange }) => {
                 <input
                   name="guardianProffesion"
                   onChange={handleInputChange}
-                  value={formData.guardianProffesion}
+                  value={formData.guardianProffesion || ""}
                   className={`jinput ${
                     alerts.guardianProffesion
                       ? "focus:outline-primary-strawberryRed"
