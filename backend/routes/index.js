@@ -3,7 +3,6 @@ const router = express.Router();
 const { saveTpmFormDetails, findTpmFormDetails } = require('../controllers/tpmController');
 const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
-const {saveContactDocumentDetails,findContactDocumentDetails}=require("../controllers/contactDocController");
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
@@ -18,8 +17,6 @@ router.post('/tpmForm', saveTpmFormDetails);
 router.post("/mpcjForm", saveMPCJFormDetails);
 
 router.get('/tpmForm', findTpmFormDetails);
-router.post('/contactDoc', saveContactDocumentDetails);
-router.get('/contactDoc', findContactDocumentDetails);
 router.post('/jetform', upload.fields([{ name: 'photo' }, { name: 'aadhar' }]), createJetForm);
 
 router.post('/signUp',  userSignUpController)
