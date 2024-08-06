@@ -102,38 +102,12 @@ import Footer from "./component/Footer.jsx";
 import Hambergur from "./component/content/Hambergur.jsx";
 import Whatshap from "./component/whatsapp/Whatsapp.jsx";
 import Telegram from "./component/telegram/Telegram.jsx";
- import Context from "./context/index.jsx";
-
-import SummaryApi from "./Common/SummaryAPI.js";
-import { setUserDetails } from './store/userSlice'; // Assuming you have this action
 
 function App() {
-  const dispatch = useDispatch();
-
-  const fetchUserDetails = async () => {
-    try {
-      const dataResponse = await fetch(SummaryApi.current_user.url, {
-        method: 'GET',  // Assuming you want to use GET method
-        credentials: "include"
-      });
-      const dataApi = await dataResponse.json();
-      if (dataApi.success) {
-        dispatch(setUserDetails(dataApi.data));
-      }
-
-      
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-    }
-  };
-
-  useEffect(() => {
-    // Fetch user details
-    fetchUserDetails();
-  }, [dispatch]); // Add dispatch to dependencies
+ 
 
   return (
-    <Context.Provider value={{ fetchUserDetails }}>
+    <>
       <ToastContainer />
       <Header />
       <main>
@@ -142,8 +116,7 @@ function App() {
       <Hambergur />
       <Telegram />
       <Whatshap />
-      <Footer />
-    </Context.Provider>
+      <Footer /></>
   );
 }
 

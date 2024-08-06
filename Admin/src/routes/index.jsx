@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
       element: <App />,
       children: [
         {
-          path: "dashborad",
+          path: "dashboard",
           element: <Sidebar/>,
           children:[
             {
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
           element: <Login/>,
         },
         {
-          path: "signup",
+          path: "sign-up",
           element: <SignUp/>,
         },
     ]
