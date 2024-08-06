@@ -7,7 +7,7 @@ const {saveContactDocumentDetails,findContactDocumentDetails}=require("../contro
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
-const {createJetForm} = require("../controllers/jetController")
+const {createJetForm,upload } = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
@@ -20,7 +20,7 @@ router.post("/mpcjForm", saveMPCJFormDetails);
 router.get('/tpmForm', findTpmFormDetails);
 router.post('/contactDoc', saveContactDocumentDetails);
 router.get('/contactDoc', findContactDocumentDetails);
-router.post('/jetform', createJetForm);
+router.post('/jetform', upload.fields([{ name: 'photo' }, { name: 'aadhar' }]), createJetForm);
 
 router.post('/signUp',  userSignUpController)
 router.post('/signIn',  userSignInController)
