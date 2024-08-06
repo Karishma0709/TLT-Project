@@ -1,23 +1,26 @@
-
-
 const bcrypt = require('bcryptjs');
 const UserModel = require('../models/userModel'); // Ensure the path is correct
 
 async function userSignUpController(req, res) {
   try {
-    const {name, email, password, } = req.body;
+    const {name,batch,  email, password, } = req.body;
     console.log("req.body", req.body);
 
     // Check if email, password, and name are provided
     if (!name) {
       return res.status(400).json({ message: "Please provide a name", error: true, success: false });
     }
+    
+    
     if (!email) {
       return res.status(400).json({ message: "Please provide an email", error: true, success: false });
     }
 
     if (!password) {
       return res.status(400).json({ message: "Please provide a password", error: true, success: false });
+    }
+    if (!batch) {
+      return res.status(400).json({ message: "Please provide a batch", error: true, success: false });
     }
 
    // Check if user already exists
@@ -37,6 +40,7 @@ async function userSignUpController(req, res) {
     // Prepare payload
     const payload = {
       name,
+      batch,
       email,
       password: hashPassword,
       role: "GENERAL"

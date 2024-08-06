@@ -190,10 +190,10 @@
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
-import SummaryApi from '../Common/SummaryAPI';
+// import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
+import SummaryApi from '../Common/SummaryApi';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -241,7 +241,7 @@ const SignUp = () => {
       console.log("API response:", result); // Log the response for debugging
       if (response.ok && result.success) {
         toast.success(result.message);
-        navigate("/login");
+        navigate("/");
       } else {
         toast.error(result.message || "Sign Up failed!");
       }
@@ -264,7 +264,7 @@ const SignUp = () => {
       <div className="container max-w-md mx-auto p-4">
         <div className="bg-white p-5 rounded-lg shadow-lg mx-auto flex flex-col items-center">
           <div className="w-24 h-24 relative overflow-hidden rounded-full mb-4">
-            <img src={loginIcon} className="h-full w-full object-cover" alt="Sign Up Icon" />
+            {/* <img src={loginIcon} className="h-full w-full object-cover" alt="Sign Up Icon" /> */}
             <label className="flex flex-col items-center bg-opacity-80 bg-slate-200 py-2 cursor-pointer text-center rounded-md">
               <span className="text-xs">Upload photo</span>
               <input type="file" className="hidden" />
@@ -282,7 +282,17 @@ const SignUp = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
               />
             </div>
-            
+            <div className="w-full">
+              <label className="block text-gray-700">Batch :</label>
+              <input
+                type="text"
+                name="batch"
+                placeholder="Enter your batch"
+                value={data.batch}
+                onChange={handleOnChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+              />
+            </div>
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>
               <input
@@ -348,7 +358,7 @@ const SignUp = () => {
           <div className="mt-4 text-center">
             <p className="text-sm">
               Already have an account?
-              <Link to="/login" className="text-blue-500 hover:underline"> Login</Link>
+              <Link to="/" className="text-blue-500 hover:underline"> Login</Link>
             </p>
           </div>
         </div>
