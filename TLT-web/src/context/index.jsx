@@ -1,8 +1,14 @@
-import { createContext } from "react";
+// import { createContext } from "react";
 
-const Context =  createContext(null)
 
-export default Context;
+// const Context =  createContext(null)
+
+// export default Context;
+
+import React, { createContext } from 'react';
+
+export const generalContext = createContext();
+
 
 
 
