@@ -2,7 +2,7 @@ export const data = [
   {
     id: 1,
     step: "step 1",
-    title: "your info",
+    title: "your Details",
     linkTo: "personalInfo",
   },
   {
@@ -27,7 +27,7 @@ export const data = [
     id: 5,
     step: "step 5",
     title: "Consent",
-    linkTo: "conset",
+    linkTo: "consent",
   },
 ];
 

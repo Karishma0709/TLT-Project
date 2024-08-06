@@ -26,6 +26,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
     event.preventDefault();
     console.log("handleNext called");
     console.log("Current Form Data:", formData);
+    navigate("/jet/guardiandetails");
     // Validate fields and set alerts
     const newAlerts = {};
     for (const key in formData) {
@@ -39,14 +40,14 @@ const PersonalInfo = ({ formData, handleChange }) => {
       return; // If there are errors, don't proceed
     }
   
-    navigate("/jet/guardiandetails");
+   
   };
 
   return (
     <div className="flex row w-full h-full sm:pl-[120px] mb-10">
       <div className="w-full sm:w-[60%] p-4 pl-[0px]">
         <h1 className="mt-6 text-3xl font-[800] mb-5 text-primary-marineBlue">
-          Personal info
+          Personal Details
         </h1>
         <div className="flex flex-col">
           <div className="form-wrapper flex flex-wrap flex-col relative">
