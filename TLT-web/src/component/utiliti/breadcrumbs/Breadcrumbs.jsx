@@ -1,12 +1,13 @@
 import React from "react";
 import "./helper";
 import Headings from "../heading/Heading";
+import bannerImg from "../../../assets/banner1.png"
 
 const Breadcrumbs = ({ children, heading }) => {
   return (
     <>
       <div className="h-[40vh] lg:h-[65vh] w-full flex items-center justify-center m-0 relative">
-        <div className="flex text-center justify-center items-center w-full h-full  px-5 md:px-20">
+        <div className="flex text-center justify-center items-center w-full h-full  px-5 md:px-20 banner2">
           <div className="flex flex-col gap-2 text-center justify-center items-center">
             <Headings heading={'h2'}> 
               {heading ? heading.firstLetterCapital() : "About"}

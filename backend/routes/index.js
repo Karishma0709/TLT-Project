@@ -18,7 +18,7 @@ router.post("/mpcjForm", saveMPCJFormDetails);
 router.get('/tpmForm', findTpmFormDetails);
 router.post('/contactDoc', saveContactDocumentDetails);
 router.get('/contactDoc', findContactDocumentDetails);
-router.post('/jetForm', createJetForm);
+router.post('/jetform', createJetForm);
 
 router.post('/signUp',  userSignUpController)
 router.post('/signIn',  userSignInController)

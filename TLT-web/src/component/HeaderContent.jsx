@@ -13,7 +13,7 @@ export const HeaderContent = ({ isHome }) => {
           <div className="mx-5 md:mx-20">
             <div className="flex flex-col lg:flex-row gap-10 md:justify-between">
               <div className="w-full lg:w-2/3 mb-6 lg:mb-0">
-                <div className="uppercase font-semibold text-xs inline-block tracking-wider">
+                <div className="uppercase font-semibold text-xs inline-block tracking-wider ">
                   <Headings heading={'h6'} style={'text-shadow'}>
                     WELCOME TO TLT JUDICIAL ACADEMY
                   </Headings>

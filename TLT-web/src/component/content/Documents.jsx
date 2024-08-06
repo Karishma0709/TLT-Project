@@ -27,8 +27,6 @@ const Documents = ({ formData, handleChange }) => {
     } else {
       alert("Please upload documents");
     }
-
-    navigate("/jet/educational");
   };
 
   return (
@@ -38,9 +36,7 @@ const Documents = ({ formData, handleChange }) => {
           Document Upload
         </h1>
 
-        <div
-          className="flex flex-col relative space-y-4"
-        >
+        <div className="flex flex-col relative space-y-4">
           <div className="flex flex-wrap pt-4">
             <div className="flex flex-col w-[100%] mb-5">
               <label className="text-primary-marineBlue font-[500] mb-2">

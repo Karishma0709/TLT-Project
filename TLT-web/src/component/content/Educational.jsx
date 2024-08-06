@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Educational = ({ formData, handleChange }) => {
   const navigate = useNavigate();
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const handleNext = (event) => {
     event.preventDefault();
+    setHasSubmitted(true);
 
     const { degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree } = formData;
     if (degree && college && graduationYear && masterGraduationYear && masterUniversityAndDegree) {
-      navigate("/jet/conset");
+      console.log("Form data before navigation:", formData);
+      navigate("/jet/consent");
     } else {
       alert("Please fill in all fields");
     }
@@ -31,11 +34,11 @@ const Educational = ({ formData, handleChange }) => {
               <input
                 value={formData.degree || ""}
                 onChange={(e) => handleChange({ degree: e.target.value })}
-                className={`jinput ${formData.degree ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
+                className={`jinput ${formData.degree || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Degree"
               />
-              {!formData.degree && (
+              {(!formData.degree && hasSubmitted) && (
                 <span className="text-primary-strawberryRed font-medium">
                   This field is required
                 </span>
@@ -49,11 +52,11 @@ const Educational = ({ formData, handleChange }) => {
               <input
                 value={formData.college || ""}
                 onChange={(e) => handleChange({ college: e.target.value })}
-                className={`jinput ${formData.college ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
+                className={`jinput ${formData.college || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="College/University"
               />
-              {!formData.college && (
+              {(!formData.college && hasSubmitted) && (
                 <span className="text-primary-strawberryRed font-medium">
                   This field is required
                 </span>
@@ -69,11 +72,11 @@ const Educational = ({ formData, handleChange }) => {
               <input
                 value={formData.graduationYear || ""}
                 onChange={(e) => handleChange({ graduationYear: e.target.value })}
-                className={`jinput ${formData.graduationYear ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
+                className={`jinput ${formData.graduationYear || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Graduation year"
               />
-              {!formData.graduationYear && (
+              {(!formData.graduationYear && hasSubmitted) && (
                 <span className="text-primary-strawberryRed font-medium">
                   This field is required
                 </span>
@@ -87,11 +90,11 @@ const Educational = ({ formData, handleChange }) => {
               <input
                 value={formData.masterGraduationYear || ""}
                 onChange={(e) => handleChange({ masterGraduationYear: e.target.value })}
-                className={`jinput ${formData.masterGraduationYear ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
+                className={`jinput ${formData.masterGraduationYear || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Master Graduation year"
               />
-              {!formData.masterGraduationYear && (
+              {(!formData.masterGraduationYear && hasSubmitted) && (
                 <span className="text-primary-strawberryRed font-medium">
                   This field is required
                 </span>
@@ -107,11 +110,11 @@ const Educational = ({ formData, handleChange }) => {
             <input
               value={formData.masterUniversityAndDegree || ""}
               onChange={(e) => handleChange({ masterUniversityAndDegree: e.target.value })}
-              className={`jinput ${formData.masterUniversityAndDegree ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
+              className={`jinput ${formData.masterUniversityAndDegree || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
               type="text"
               placeholder="Master's University and Degree"
             />
-            {!formData.masterUniversityAndDegree && (
+            {(!formData.masterUniversityAndDegree && hasSubmitted) && (
               <span className="text-primary-strawberryRed font-medium">
                 This field is required
               </span>

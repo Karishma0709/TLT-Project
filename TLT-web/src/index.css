@@ -130,3 +130,21 @@ color: white;
 .zoom-in-out {
   animation: zoom 2s infinite;
 }
+
+
+.banner1{
+  background-image: url(assets/banner1.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+ aspect-ratio: 16/9;
+}
+
+.banner2{
+  background-image: url(assets/banner2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+ aspect-ratio: 16/9;
+}

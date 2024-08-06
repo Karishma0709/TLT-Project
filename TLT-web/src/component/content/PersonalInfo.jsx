@@ -38,7 +38,6 @@ const PersonalInfo = ({ formData, handleChange }) => {
     if (Object.values(newAlerts).some((alert) => alert)) {
       return; // If there are errors, don't proceed
     }
-
   
     navigate("/jet/guardiandetails");
   };

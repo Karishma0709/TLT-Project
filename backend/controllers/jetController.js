@@ -1,12 +1,16 @@
 const multer = require('multer');
-const path = require('path');
-const ContactDocumentDetails = require('../models/contactDocument');
 const JetForm = require('../models/jetForm');
+const fs = require('fs');
+const path = require('path');
 
-// Multer configuration for file uploads
+const uploadDir = './uploads';
+if (!fs.existsSync(uploadDir)){
+  fs.mkdirSync(uploadDir);
+}
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads'); // Ensure this directory exists
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -15,59 +19,35 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Route to save contact document details
-const saveContactDocumentDetails = async (req, res) => {
+const createJetForm = async (req, res) => {
+
+  console.log("hey")
   upload.fields([{ name: 'photo' }, { name: 'aadhar' }])(req, res, async function (err) {
     if (err) {
       return res.status(400).send({ message: 'Error uploading files', err });
     }
 
-    const { files } = req;
-    if (!files || !files.photo || !files.aadhar) {
-      return res.status(400).send({ message: 'Photo and Aadhar are required' });
-    }
+    const { body, files } = req;
 
     try {
-      const newContactDocumentDetails = new ContactDocumentDetails({
+      const newJetForm = new JetForm({
+        ...body,
         photo: {
           data: files.photo[0].filename,
           contentType: files.photo[0].mimetype,
         },
-        aadhar: {
+        adhaarPhoto: {
           data: files.aadhar[0].filename,
           contentType: files.aadhar[0].mimetype,
         },
       });
 
-      await newContactDocumentDetails.save();
-      res.status(200).send({ message: 'Successfully uploaded and saved document details' });
+      await newJetForm.save();
+      res.status(201).json({ message: "Form data saved successfully" });
     } catch (error) {
-      res.status(500).send({ message: 'Error saving contact document details', error });
+      res.status(400).json({ error: error.message });
     }
   });
 };
 
-// Route to create JetForm data
-const createJetForm = async (req, res) => {
-  const formData = req.body;
-
-  try {
-    const newJetForm = new JetForm(formData);
-    await newJetForm.save();
-    res.status(201).json({ message: "Form data saved successfully" });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-// Route to find contact document details
-const findContactDocumentDetails = async (req, res) => {
-  try {
-    const contactDocumentDetails = await ContactDocumentDetails.find();
-    res.status(200).send(contactDocumentDetails);
-  } catch (error) {
-    res.status(400).send({ message: 'Error retrieving contact document details', error });
-  }
-};
-
-module.exports = { saveContactDocumentDetails, createJetForm, findContactDocumentDetails };
+module.exports = { createJetForm };

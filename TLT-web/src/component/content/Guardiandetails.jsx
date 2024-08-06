@@ -49,7 +49,7 @@ const GuardianDetails = ({ formData, handleChange }) => {
                 <input
                   name="guardianName"
                   onChange={handleInputChange}
-                  value={formData.guardianName}
+                  value={formData.guardianName|| ""}
                   className={`jinput ${
                     alerts.guardianName
                       ? "focus:outline-primary-strawberryRed"

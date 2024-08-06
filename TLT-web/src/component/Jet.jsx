@@ -4,7 +4,7 @@ import PersonalInfo from "../component/content/PersonalInfo";
 import GuardianDetails from "../component/content/Guardiandetails";
 import Documents from "../component/content/Documents";
 import Educational from "../component/content/Educational";
-import Consent from "../component/content/Conset"
+import Consent from "../component/content/Consent"
 import Sidebar from "../component/Sidebar";
 import SummaryApi from "../Common/SummaryAPI";
 import ThankYou from "../component/content/ThankYou";
@@ -22,7 +22,7 @@ const MultiStepForm = () => {
     city: "",
     gender: "",
     guardianName: "",
-    guardianProffesion: "",
+    guardianEmail: "",
     photo: null,
     aadhar: null,
     degree: "",
@@ -38,6 +38,14 @@ const MultiStepForm = () => {
     setFormData((prevData) => ({
       ...prevData,
       ...updatedData,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0],
     }));
   };
 
@@ -71,7 +79,7 @@ const MultiStepForm = () => {
           <Routes>
             <Route path="/personalinfo" element={<PersonalInfo formData={formData} handleChange={handleChange} />} />
             <Route path="/guardiandetails" element={<GuardianDetails formData={formData} handleChange={handleChange} />} />
-            <Route path="/documents" element={<Documents formData={formData} handleChange={handleChange} />} />
+            <Route path="/documents" element={<Documents formData={formData} handleChange={handleChange} handleFileChange={handleFileChange} />} />
             <Route path="/educational" element={<Educational formData={formData} handleChange={handleChange} />} />
             <Route path="/consent" element={<Consent formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />} />
             <Route path="/thankyou" element={<ThankYou />} />

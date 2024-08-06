@@ -16,7 +16,7 @@ import RegistrationDetails from "../content/RegistrationDetails";
 import Jet from "../Jet";
 import Guardiandetails from "../content/Guardiandetails";
 import Documents from "../content/Documents";
-import Conset from "../content/Conset";
+import Consent from "../content/Consent";
 import Educational from "../content/Educational";
 import ThankYou from "../content/ThankYou";
 import PersonalInfo from "../content/PersonalInfo";
@@ -155,8 +155,8 @@ export const router = createBrowserRouter([
             element: <Documents />,
           },
           {
-            path: "conset",
-            element: <Conset />,
+            path: "consent",
+            element: <Consent />,
           },
           {
             path: "educational",
