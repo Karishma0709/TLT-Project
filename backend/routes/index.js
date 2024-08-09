@@ -13,6 +13,7 @@ const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
 const mpcjGetData = require('../controllers/mpcjGetController');
 const allPyPapers = require('../controllers/allPyPaper');
+const saveMarquee = require('../controllers/saveMarque');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -32,5 +33,6 @@ router.get('/userLogout', userLogout)
 router.get("/registerUser", allRegisterUser)
 router.get("/all-papers", allPyPapers)
 router.get("/mpcj-data", mpcjGetData)
+router.post("/marquee",saveMarquee)
 
 module.exports = router;
