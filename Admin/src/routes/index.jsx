@@ -6,6 +6,9 @@ import SignUp from "../pages/SignUp";
 import User from "../components/User";
 import Details from "../components/Details";
 import MpcjData from "../components/MpcjData";
+import TpmData from "../components/TpmData";
+import InfoMarquee from "../components/InfoMarquee";
+import Notification from "../components/Notification";
 
 export const router = createBrowserRouter([
     {
@@ -27,7 +30,24 @@ export const router = createBrowserRouter([
             {
               path:"mpcj-form",
               element:<MpcjData/>
-            }
+            },
+            {
+              path:"mpcj-form",
+              element:<MpcjData/>
+            },
+            {
+              path:"tpm-form",
+              element:<TpmData/>
+            },
+            {
+              path:"info-marquee",
+              element:<InfoMarquee/>
+            },
+            {
+              path:"notification",
+              element:<Notification/>
+            },
+            
           ]
         },
         {
