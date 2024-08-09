@@ -25,6 +25,10 @@ const SummaryApi = {
        url:`${backendDomain}/api/tmp-data`,
        method: "get"
       },
+      Allmarquee:{
+       url:`${backendDomain}/api/marquee`,
+       method: "post"
+      },
 
 }
 export default SummaryApi;
