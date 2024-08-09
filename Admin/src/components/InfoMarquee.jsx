@@ -24,7 +24,7 @@ const InfoMarquee = () => {
       header: {
         "contect-type" : "application/json"
       },
-      body:JSON.stringify(data)
+      body:JSON.stringify(marqueeData)
     })
     const dataApi = await contactResponse.json()
     
