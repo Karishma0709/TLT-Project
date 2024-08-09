@@ -20,6 +20,11 @@ const SummaryApi = {
       AllmpcjData:{
        url:`${backendDomain}/api/mpcj-data`,
        method: "get"
-      }
+      },
+      AlltpmData:{
+       url:`${backendDomain}/api/tmp-data`,
+       method: "get"
+      },
+
 }
 export default SummaryApi;
