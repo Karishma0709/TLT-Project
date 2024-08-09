@@ -12,11 +12,8 @@ const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
 const mpcjGetData = require('../controllers/mpcjGetController');
 const allPyPapers = require('../controllers/allPyPaper');
-<<<<<<< HEAD
 const saveMarquee = require('../controllers/saveMarque');
-=======
 const tpmGetData = require('../controllers/tpmGetController');
->>>>>>> ba95ab08130e9210c737d901227f3421e0feb1fd
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -34,10 +31,7 @@ router.get('/userLogout', userLogout)
 router.get("/registerUser", allRegisterUser)
 router.get("/all-papers", allPyPapers)
 router.get("/mpcj-data", mpcjGetData)
-<<<<<<< HEAD
 router.post("/marquee",saveMarquee)
-=======
 router.get("/tmp-data", tpmGetData)
->>>>>>> ba95ab08130e9210c737d901227f3421e0feb1fd
 
 module.exports = router;
