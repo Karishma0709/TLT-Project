@@ -1,4 +1,4 @@
-const backendDomain = "https://tlt-project-backend.onrender.com";
+const backendDomain = "http://localhost:5050";
 
 const SummaryApi = {
   fastTrackForm: {
