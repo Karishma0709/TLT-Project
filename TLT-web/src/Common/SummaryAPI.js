@@ -89,6 +89,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/registerUser`,
     method: "get",
   },
+  AllmarqueeGet: {
+    url: `${backendDomain}/api/marquee-data`,
+    method: "get",
+  },
 };
 
 export default SummaryApi;

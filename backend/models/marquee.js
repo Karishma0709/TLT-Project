@@ -2,7 +2,9 @@ const { default: mongoose } = require("mongoose");
 
 const marqueeSchema= new mongoose.Schema(
     {
-       marquee:String 
+       marquee:{
+        type:String
+       }
     },
 );
 

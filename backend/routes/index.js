@@ -14,6 +14,7 @@ const mpcjGetData = require('../controllers/mpcjGetController');
 const allPyPapers = require('../controllers/allPyPaper');
 const saveMarquee = require('../controllers/saveMarque');
 const tpmGetData = require('../controllers/tpmGetController');
+const marqueeGetData = require('../controllers/GetMarque');
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -33,5 +34,6 @@ router.get("/all-papers", allPyPapers)
 router.get("/mpcj-data", mpcjGetData)
 router.post("/marquee",saveMarquee)
 router.get("/tmp-data", tpmGetData)
+router.get("/marquee-data", marqueeGetData)
 
 module.exports = router;
