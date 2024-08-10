@@ -46,7 +46,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174','http://localhost:5175',] ,// Update with your frontend origin
+  origin: ['http://localhost:5173', 'http://localhost:5174','http://localhost:5175', 'https://tlt-project-1.onrender.com'] ,// Update with your frontend origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
