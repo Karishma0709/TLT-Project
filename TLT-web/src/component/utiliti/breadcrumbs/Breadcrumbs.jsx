@@ -1,7 +1,7 @@
 import React from "react";
 import "./helper";
 import Headings from "../heading/Heading";
-import bannerImg from "../../../assets/banner1.png"
+// import bannerImg from "../../../assets/banner1.png"
 
 const Breadcrumbs = ({ children, heading }) => {
   return (
