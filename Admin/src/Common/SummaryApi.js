@@ -29,6 +29,10 @@ const SummaryApi = {
        url:`${backendDomain}/api/marquee`,
        method: "post"
       },
+      updateMarquee:{
+        url:`${backendDomain}/api/marquee-delete/66b7478bd7949159d6205937`,
+       method: "put"
+      }
 
 }
 export default SummaryApi;
