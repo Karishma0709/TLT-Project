@@ -2,13 +2,13 @@ const marqueeModel = require("../models/marquee");
 const mongoose = require('mongoose');
 
 async function marqueeUpdate(req, res) {
-    const { _id } = req.params;
-    const { marquee } = req.body;
+    const { id } = req.params;
+    console.log("aaaa",req.body)
 
     try {
         const updatedMarquee = await marqueeModel.findByIdAndUpdate(
-            _id,
-            { marquee: marquee },
+            {_id:id},
+           req.body ,
             { new: true }
         );
 

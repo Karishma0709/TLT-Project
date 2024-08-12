@@ -18,6 +18,7 @@ const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 
+
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
 router.post('/tpmForm', saveTpmFormDetails);
@@ -36,8 +37,9 @@ router.get("/all-papers", allPyPapers)
 router.get("/mpcj-data", mpcjGetData)
 router.post("/marquee",saveMarquee)
 router.get("/tmp-data", tpmGetData)
-router.get("/marquee-data", marqueeGetData)
-router.put("/marquee/:_id",marqueeUpdate)
+router.get("/marquee-data/:id", marqueeGetData)
+router.put("/marquee-data/:id",marqueeUpdate)
 router.delete("/marquee-delete/:id", marqueeDelete)
 
-module.exports = router;
+
+module.exports = router; 
