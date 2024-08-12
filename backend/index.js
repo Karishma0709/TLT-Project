@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/', router);
+app.use('/api', router);
 
 const PORT = process.env.PORT || 5050; // Changed port number
 
