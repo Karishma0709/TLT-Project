@@ -16,7 +16,7 @@ const InfoMarquee = () => {
     })
   }
 
-
+// added functionality to post the data 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const contactResponse = await fetch(SummaryApi.Allmarquee.url, {
@@ -38,6 +38,10 @@ const InfoMarquee = () => {
     console.log("data", dataApi);
   }
 
+
+
+  
+
   return (
     <div>
 
@@ -45,11 +49,11 @@ const InfoMarquee = () => {
         <label className='font-semibold pb-2' htmlFor="marquee">Marquee:</label>
         <textarea name="marquee" id="" placeholder='write your marquee' className='w-full p-3 max-h-svh border border-black' value={marqueeData.marquee} onChange={handleOnChange} ></textarea>
         <div className=' text-center'>
-          <button className='p-2 rounded-md my-4 font-semibold shadow-red-300 shadow'>Submit</button>
+          <button className='p-2 rounded-md my-4 font-semibold shadow-red-300 shadow'>Update</button>
+          
         </div>
-
+  
       </form>
-
     </div>
   )
 }

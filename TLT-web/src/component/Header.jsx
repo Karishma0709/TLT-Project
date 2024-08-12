@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Navlogo from './Navlogo';
 import { HeaderContent } from './HeaderContent';
 import Breadcrumbs from './utiliti/breadcrumbs/Breadcrumbs';
+import MarqueeUI from './MarqueeUI'
 
 const Header = () => {
   const location = useLocation();
@@ -13,9 +14,8 @@ const Header = () => {
 
   return (
     <div className='navbody'>
-      <marquee width="100%" behavior="scroll" className="bg-red-600 fixed bottom-0 z-20 font-bold py-1 text-white text-shadow">
-      Admissions are open :- Empowerment batch is going to start from 1st of July 2024....!!!!   Hurry up get yourself registered 
-      </marquee>
+      
+      <MarqueeUI />
       <Navlogo />
       <Navbar />
       {isHome ? (
