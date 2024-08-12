@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/db');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const router = require("./routes"); // Import the registration routes
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
