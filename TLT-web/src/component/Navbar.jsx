@@ -101,7 +101,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
+        {/* <div className="flex items-center space-x-4">
           <div className="text-2xl cursor-pointer">
             <NavLink to="/profile">
               <FaRegUser />
@@ -116,7 +116,7 @@ const Navbar = () => {
               </NavLink>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="relative flex space-x-4 items-center p-0 m-0 z-10">
           <div className="group relative">
             <button className="bg-primary text-white uppercase font-bold text-sm py-7 px-4 inline-block transition duration-300 ease-in-out hover:bg-red-600 m-0 rounded-e-md">
