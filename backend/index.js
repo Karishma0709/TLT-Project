@@ -18,7 +18,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/api', router);
+router.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
 
 const PORT = process.env.PORT || 5050; // Changed port number
 
