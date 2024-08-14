@@ -30,7 +30,7 @@ const SummaryApi = {
        method: "post"
       },
       updateMarquee:{
-        url:`${backendDomain}/api/marquee-delete/66b7478bd7949159d6205937`,
+        url:`${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
        method: "put"
       }
 

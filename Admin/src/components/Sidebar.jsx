@@ -43,6 +43,7 @@ const Sidebar = () => {
                         <Link to={"tpm-form"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>TPM form</Link>
                         <Link to={"info-marquee"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Marquee</Link>
                         <Link to={"notification"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Notification</Link>
+                        <Link to={"update-headline"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>HeadLine</Link>
                     </nav>
                 </div>  
         </aside>

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import SummaryApi from '../Common/SummaryAPI';
 
 const MarqueeUI = () => {
-  const [marqueeData, setMarqueeData] = useState([]);
+  const [marqueeData, setMarqueeData] = useState('');
 
   const fetchAllData = async () => {
     try {
@@ -15,7 +15,7 @@ const MarqueeUI = () => {
       const dataResponse = await fetchData.json();
       console.log(dataResponse);
       if (dataResponse.success) {
-        setMarqueeData(dataResponse.data);
+        setMarqueeData(dataResponse.data.marquee); // Access the "marquee" property directly
       } else {
         toast.error(dataResponse.message);
       }
@@ -30,9 +30,7 @@ const MarqueeUI = () => {
 
   return (
     <marquee width="100%" behavior="scroll" className="bg-red-600 fixed bottom-0 z-20 font-bold py-1 text-white text-shadow">
-      {marqueeData.map((item, index) => (
-        <span key={index}>{item.marquee} </span> // Adjust "marqueeText" to the correct property name in your data
-      ))}
+      {marqueeData || "No Marquee Data Available"} {/* Display marquee data or a fallback message */}
     </marquee>
   );
 };
