@@ -11,7 +11,7 @@ const Documents = ({ formData, handleChange }) => {
     e.preventDefault();
 
     if (!formData.photo) {
-      setPhotoAlert(true);
+      setPhotoAlert(true);     
     } else {
       setPhotoAlert(false);
     }

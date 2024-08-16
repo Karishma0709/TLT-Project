@@ -75,9 +75,9 @@ const Navbar = () => {
               </NavLink>
             </div>
           </div>
-          {/* <NavLink className="textWhite hover:text-red-700" to="/gallery">
+          <NavLink className="textWhite hover:text-red-700" to="/gallery">
             Gallery
-          </NavLink> */}
+          </NavLink>
           <NavLink className="textWhite hover:text-red-700" to="/previous-year">
             Previous Year Paper
           </NavLink>
