@@ -56,7 +56,7 @@ const Login = () => {
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
-      alert("Something went wrong. Please try again."); // Display general error alert
+      
     }
     console.log("data login", data);
   };

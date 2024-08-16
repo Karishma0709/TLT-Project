@@ -15,7 +15,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173',`${FRONTEND_URL}`,`${ADMIN_URL}`] ,// Update with your frontend origin
+  origin: [`${FRONTEND_URL}`,`${ADMIN_URL}`] ,// Update with your frontend origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

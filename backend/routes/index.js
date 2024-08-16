@@ -17,6 +17,8 @@ const tpmGetData = require('../controllers/tpmGetController');
 const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
+const saveNotification = require('../controllers/saveNotification');
+const notifyUpdate = require('../controllers/updateNotify');
 
 
 // Define routes
@@ -39,7 +41,9 @@ router.post("/marquee",saveMarquee)
 router.get("/tmp-data", tpmGetData)
 router.get("/marquee-data/:id", marqueeGetData)
 router.put("/marquee-data/:id",marqueeUpdate)
-router.delete("/marquee-delete/:id", marqueeDelete)
+// router.delete("/marquee-delete/:id", marqueeDelete)
+router.post("/notifies", saveNotification)
+router.put("/notifies/:id", notifyUpdate)
 
 
 module.exports = router; 

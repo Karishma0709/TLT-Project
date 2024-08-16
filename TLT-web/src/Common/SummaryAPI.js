@@ -90,7 +90,7 @@ const SummaryApi = {
     method: "get",
   },
   AllmarqueeGet: {
-    url: `${backendDomain}/api/marquee-data`,
+    url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
     method: "get",
   },
 };

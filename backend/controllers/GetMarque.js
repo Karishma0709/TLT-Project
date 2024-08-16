@@ -1,10 +1,10 @@
 const marqueeModel = require("../models/marquee");
 
 async function marqueeGetData(req, res) {
- 
+   const {id}=req.params
   try {
-    const marqueeData = await marqueeModel.find();
-    res.json({
+    const marqueeData = await marqueeModel.findById(id);
+    res.status(200).json({
       message: "Marquee data",
       data: marqueeData,
       success: true,

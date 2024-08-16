@@ -9,6 +9,7 @@ import MpcjData from "../components/MpcjData";
 import TpmData from "../components/TpmData";
 import InfoMarquee from "../components/InfoMarquee";
 import Notification from "../components/Notification";
+import UpdateMarquee from "../components/UpdateMarquee";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
               path:"notification",
               element:<Notification/>
             },
+            {
+              path:"update-headline",
+              element:<UpdateMarquee/>
+            }
             
           ]
         },
