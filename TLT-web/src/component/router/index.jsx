@@ -32,6 +32,7 @@ import SignUp from "../../pages/SignUp";
 import Unpaid from "../Unpaid";
 import Syllabus from "../Syllabus";
 import { RegisterUser } from "../../pages/RegisterUser";
+import LeaderBoard from "../LeaderBoard";
 
 
 
@@ -127,6 +128,10 @@ export const router = createBrowserRouter([
         path: "forgotpassword",
         element: <ForgotPassword/>,
      },
+     {
+      path: "leaderboard",
+      element: <LeaderBoard/>,
+   },
       // {
       //   path: "login-admin",
       //   element: <Login/>,

@@ -133,15 +133,25 @@ color: white;
 
 
 .banner1{
-  background-image: url(assets/banner1.png);
+  background-image: url(assets/banner1.webp);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
  aspect-ratio: 16/9;
 }
 
-.banner2{
-  background-image: url(assets/banner2.png);
+.banner2 {
+  background-image: url('assets/banner2.webp'); 
+  background-position: center; 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  height: 100%;
+  width: 100%; 
+}
+
+
+.banner3{
+  background-image: url(assets/banner3.webp);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
