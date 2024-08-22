@@ -94,7 +94,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                to="/"
+                to="/leaderboard"
               >
                 Mini Mock
               </NavLink>

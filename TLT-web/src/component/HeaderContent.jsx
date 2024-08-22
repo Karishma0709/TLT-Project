@@ -10,10 +10,10 @@ export const HeaderContent = ({ isHome }) => {
     <div>
       {isHome ? (
         <div className="my-10 md:my-20">
-          <div className="mx-5 md:mx-20">
+          <div className="mr-5 md:mr-20">
             <div className="flex flex-col lg:flex-row gap-10 md:justify-between">
-              <div className="w-full lg:w-2/3 mb-6 lg:mb-0">
-                <div className="uppercase font-semibold text-xs inline-block tracking-wider ">
+              <div className="w-full lg:w-2/3 mb-6 lg:mb-0 banner1">
+                {/* <div className="uppercase font-semibold text-xs inline-block tracking-wider ">
                   <Headings heading={'h6'} style={'text-shadow'}>
                     WELCOME TO TLT JUDICIAL ACADEMY
                   </Headings>
@@ -23,7 +23,7 @@ export const HeaderContent = ({ isHome }) => {
                 </Headings>
                 <p className="tracking-wider py-3">
                   Far far away, behind the word mountains, far from the countries Vokalia <br /> and Consonantia, there live the blind texts.
-                </p>
+                </p> */}
                 
               </div>
               
