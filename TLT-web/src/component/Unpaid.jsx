@@ -3,6 +3,7 @@ import Headings from "./utiliti/heading/Heading";
 import updaidProduct from "./data/unpaid";
 
 const Unpaid = () => {
+  
   return (
     <div className="px-5 md:px-20 py-8">
       <Headings heading={"h2"} style="text-center">
@@ -28,8 +29,10 @@ const Unpaid = () => {
                 <td className="py-3 px-5">
                   <a
                     href={item.pdf} 
+                    target="_blank"
                     download
                     className="bg-primary text-white py-1 px-4 rounded hover:bg-red-700"
+      
                   >
                     Download PDF
                   </a>
