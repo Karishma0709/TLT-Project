@@ -67,12 +67,35 @@ const Navbar = () => {
               >
                 Unpaid
               </NavLink>
-              <NavLink
+              <div  className="group relative">
+              <button
                 className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
                 to="/syllabus-study-essentials"
               >
                 Syllabus
-              </NavLink>
+              </button>
+              <div className="absolute left-full top-0 ml-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                  <NavLink
+                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                    to="/syllabus/mp"
+                  >
+                    MP State
+                  </NavLink>
+                  <NavLink
+                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                    to="/syllabus/delhi"
+                  >
+                    Delhi
+                  </NavLink>
+                  <NavLink
+                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                    to="/syllabus/rajasthan"
+                  >
+                    Rajasthan State
+                  </NavLink>
+                </div>
+              </div>
+              
             </div>
           </div>
           <NavLink className="textWhite hover:text-red-700" to="/gallery">
