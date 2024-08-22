@@ -32,7 +32,6 @@ const Unpaid = () => {
                     target="_blank"
                     download
                     className="bg-primary text-white py-1 px-4 rounded hover:bg-red-700"
-      
                   >
                     Download PDF
                   </a>
