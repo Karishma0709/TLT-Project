@@ -16,7 +16,6 @@ const Breadcrumbs = ({ children, heading, bannerImage }) => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          paddingTop: "500px",
         }}
       >
         <div className="flex text-center justify-center items-center w-full h-full px-5 md:px-20">
