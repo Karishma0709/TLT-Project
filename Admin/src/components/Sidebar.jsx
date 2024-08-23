@@ -21,17 +21,21 @@ const Sidebar = () => {
 
         <aside className='bg-red-500 min-h-full  w-full  max-w-60 customShadow text-white'>
                 <div className='h-32  flex justify-center items-center flex-col'>
-                    {/* <div className='text-5xl cursor-pointer relative flex justify-center'>
-                        {
+                    <div className='text-5xl cursor-pointer relative flex justify-center'>
+                    <FaRegCircleUser/>
+                        {/* {
                         user?.profilePic ? (
                             <img src={user?.profilePic} className='w-20 h-20 rounded-full' alt={user?.name} />
                         ) : (
                             <FaRegCircleUser/>
                         )
-                        }
-                    </div> */}
-                    {/* <p className='capitalize text-lg font-semibold'>{user?.name}</p>
-                    <p className='text-sm'>{user?.role}</p> */}
+                        } */}
+                    </div>
+                    <p className='capitalize text-lg font-semibold'>
+                        {/* {user?.name} */}
+                        Admin
+                    </p>
+                    {/* <p className='text-sm'>{user?.role}</p> */}
                 </div>
 
                  {/***navigation */}       
