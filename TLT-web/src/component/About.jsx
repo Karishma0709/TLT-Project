@@ -8,12 +8,17 @@ import banner2 from "../assets/banner2.webp"
 const About = () => {
   return (
     <div>
-     <Breadcrumbs   heading={'About'} bannerImage={banner2}>
+     <div  className="h-[40vh] lg:h-[65vh] w-full flex items-center justify-center m-0 relative"
+        style={{
+          backgroundImage: `url(${banner2})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          paddingTop: "800px"}}></div>
      <AboutFirm />
      <MissionVision/>
      <Mentor />
-     </Breadcrumbs>
-    </div>
+     </div> 
   );
 };
 

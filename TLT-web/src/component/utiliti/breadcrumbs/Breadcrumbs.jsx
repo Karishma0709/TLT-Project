@@ -16,15 +16,18 @@ const Breadcrumbs = ({ children, heading, bannerImage }) => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
+          paddingTop: "500px",
         }}
       >
         <div className="flex text-center justify-center items-center w-full h-full px-5 md:px-20">
           <div className="flex flex-col gap-2 text-center justify-center items-center">
-            <Headings heading={'h2'}>
+            <Headings heading={"h2"}>
               {heading ? capitalizeFirstLetter(heading) : "About"}
             </Headings>
             <button className="text-primary text-lg font-medium rounded-full px-6 py-1 mt-2 border border-red-500">
-              {heading ? `Home / ${capitalizeFirstLetter(heading)}` : "Home / About"}
+              {heading
+                ? `Home / ${capitalizeFirstLetter(heading)}`
+                : "Home / About"}
             </button>
           </div>
         </div>

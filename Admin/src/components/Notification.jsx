@@ -33,7 +33,7 @@ const Notification = ({ notificationId }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label className='font-semibold pb-2' htmlFor="notification">Notification:</label>
+        <label className='font-semibold pb-2' htmlFor="notification">Notification Title:</label>
         <textarea
           name="notification"
           placeholder='Write your notification'
