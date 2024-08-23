@@ -1,5 +1,5 @@
 const mongoose=require("mongoose")
-const PdfSchema=mongoose.SchemaTypeOptions({
+const PdfSchema=mongoose.Schema({
     name:{
         type:String,
         required:true
