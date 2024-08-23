@@ -47,10 +47,11 @@ const Testimony = () => {
   };
 
   const isMiddleSlide = (index) => {
-    // Calculate the middle slide index based on the active slide
-    const middleSlideIndex = activeSlide + Math.floor(slidesToShow / 2);
-    return index === middleSlideIndex;
+    const middleSlideIndex = (activeSlide + Math.floor(slidesToShow / 2)) % data.length;
+    const adjustedIndex = (index + data.length) % data.length;
+    return adjustedIndex === middleSlideIndex;
   };
+
 
   return (
     <div className="m-5 md:m-20">

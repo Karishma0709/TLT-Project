@@ -46,10 +46,11 @@ const YoutubeGallery = () => {
 
   const isMiddleSlide = (index) => {
     // Calculate the middle slide index based on the active slide
-    const middleSlideIndex = activeSlide + Math.floor(slidesToShow / 2);
+    const middleSlideIndex = (activeSlide + Math.floor(slidesToShow / 2)) % videos.length;
+    // Return true if the current slide is the middle slide
     return index === middleSlideIndex;
   };
-
+  
   return (
     <section className="mt-20">
       <div className="mx-5 md:mx-20 my-5 md:my-20">

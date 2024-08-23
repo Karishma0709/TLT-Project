@@ -19,7 +19,7 @@ const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 const saveNotification = require('../controllers/saveNotification');
 const notifyUpdate = require('../controllers/updateNotify');
-
+const PyPaperPDF =require("../controllers/PyPaperPdf")
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -46,4 +46,5 @@ router.post("/notifies", saveNotification)
 router.put("/notifies/:id", notifyUpdate)
 
 
+router.post("/PyPaperPDF",PyPaperPDF)
 module.exports = router; 
