@@ -1,6 +1,4 @@
-// const backendDomain = "https://tlt-project-6ivu.onrender.com";
-const backendDomain = "http://localhost:5054";
-
+const backendDomain = "https://tlt-project-6ivu.onrender.com";
 
 const SummaryApi = {
   fastTrackForm: {
@@ -98,5 +96,3 @@ const SummaryApi = {
 };
 
 export default SummaryApi;
-
-
