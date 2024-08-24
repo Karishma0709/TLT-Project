@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 // import { useSelector } from 'react-redux'
 import { FaRegCircleUser } from "react-icons/fa6";
+import { RiAdminFill } from "react-icons/ri";
+import { IoMdNotifications } from "react-icons/io";
+import { IoSettings } from "react-icons/io5";
+import { IoIosAlert } from "react-icons/io";
+import { FaFilePdf } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import ROLE from '../Common/Role';
 
@@ -41,14 +47,15 @@ const Sidebar = () => {
                  {/***navigation */}       
                 <div>   
                     <nav className='grid p-4'>
-                        <Link to={"user"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>All Users</Link>
-                        <Link to={"py-paper"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Previou Year Paper</Link>
-                        <Link to={"Prevyearpaperpdf"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Previou Year Paper Pdf</Link>
-                        <Link to={"mpcj-form"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>MPCJ form</Link>
-                        <Link to={"tpm-form"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>TPM form</Link>
-                        <Link to={"update-headline"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>HeadLine</Link>
-                        <Link to={"notification"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Notification</Link>
-                        <Link to={"info-marquee"} className='px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'>Setting</Link>
+                    <Link to={"dashboardcards"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><MdDashboard  className='mr-2'/>Dashboard</Link>
+                        <Link to={"user"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><RiAdminFill  className='mr-2' />All Users</Link>
+                        <Link to={"py-paper"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><FaFilePdf  className='mr-2' />Previou Year Paper</Link>
+                        <Link to={"Prevyearpaperpdf"} className='flex items-center space-x-5 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><FaFilePdf  className='mr-2' />Previou Year Paper Pdf</Link>
+                        <Link to={"mpcj-form"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><RiAdminFill  className='mr-2'/>MPCJ form</Link>
+                        <Link to={"tpm-form"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><RiAdminFill  className='mr-2'/>TPM form</Link>
+                        <Link to={"update-headline"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><IoIosAlert  className='mr-2'/>Alert</Link>
+                        <Link to={"notification"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><IoMdNotifications  className='mr-2'/>Notifications</Link>
+                        <Link to={"info-marquee"} className='flex items-center space-x-2 px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold'><IoSettings  className='mr-2'/>Setting</Link>
                     
                         
                     </nav>

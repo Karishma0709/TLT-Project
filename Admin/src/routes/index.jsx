@@ -11,6 +11,7 @@ import InfoMarquee from "../components/InfoMarquee";
 import Notification from "../components/Notification";
 import UpdateMarquee from "../components/UpdateMarquee";
 import { Prevyearpaperpdf } from "../components/Prevyearpaperpdf";
+import Dashboard from "../components/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
           path: "dashboard",
           element: <Sidebar/>,
           children:[
+            {
+              path:"dashboardcards",
+              element: <Dashboard/>,
+            },
             {
               path:"user",
               element: <User/>,
