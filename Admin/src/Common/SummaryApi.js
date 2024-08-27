@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
 const backendDomain = "http://localhost:5054";
+=======
+const backendDomain = "https://tlt-project-6ivu.onrender.com";
+// const backendDomain = "http://localhost:5054";
+>>>>>>> 00d8c117b36cffd1f2730bfa94e4fb04e07f38f4
 
 const SummaryApi = {
     signUp: {
@@ -34,10 +39,13 @@ const SummaryApi = {
         url:`${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
        method: "put"
       },
+<<<<<<< HEAD
       updateNotification:{
         url:`${backendDomain}/api/notifies/66ba7625a71ad33c8069aa6b`,
        method: "put"
       },
+=======
+>>>>>>> 00d8c117b36cffd1f2730bfa94e4fb04e07f38f4
       PyPaperPDF:{
       url:`${backendDomain}/api/PyPaperPDF`,
        method: "post"

@@ -50,54 +50,53 @@ const Navbar = () => {
           <NavLink className="textWhite hover:text-red-700" to="/about">
             About
           </NavLink>
-          <div className="group relative z-10">
-            <button className="textWhite hover:text-red-700 w-32 text-left">
-              Study Essentials
-            </button>
-            <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-              <NavLink
-                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                to="/study-essentials"
-              >
-                Paid
-              </NavLink>
-              <NavLink
-                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                to="/unpaid-study-essentials"
-              >
-                Unpaid
-              </NavLink>
-              <div  className="group relative">
-              <button
-                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                to="/syllabus-study-essentials"
-              >
-                Syllabus
-              </button>
-              <div className="absolute left-full top-0 ml-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                  <NavLink
-                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                    to="/syllabus/mp"
-                  >
-                    MP State
-                  </NavLink>
-                  <NavLink
-                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                    to="/syllabus/delhi"
-                  >
-                    Delhi
-                  </NavLink>
-                  <NavLink
-                    className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                    to="/syllabus/rajasthan"
-                  >
-                    Rajasthan State
-                  </NavLink>
-                </div>
-              </div>
-              
-            </div>
-          </div>
+          <div className="relative z-10 group ">
+  <button className="textWhite hover:text-red-700 w-32 text-left">
+    Study Essentials
+  </button>
+  <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+    <NavLink
+      className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors group-hover:opacity-100  duration-300 ease-in-out font-semibold rounded-md"
+      to="/study-essentials"
+    >
+      Paid
+    </NavLink>
+    <NavLink
+      className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+      to="/unpaid-study-essentials"
+    >
+      Unpaid
+    </NavLink>
+    <div className="relative group">
+      <button
+        className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+      >
+        Syllabus
+      </button>
+      <div className="absolute left-full top-0 ml-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+        <NavLink
+          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+          to="/syllabus/mp"
+        >
+          MP State
+        </NavLink>
+        <NavLink
+          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+          to="/syllabus/delhi"
+        >
+          Delhi
+        </NavLink>
+        <NavLink
+          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+          to="/syllabus/rajasthan"
+        >
+          Rajasthan State
+        </NavLink>
+      </div>
+    </div>
+  </div>
+</div>
+
           <NavLink className="textWhite hover:text-red-700" to="/gallery">
             Gallery
           </NavLink>
