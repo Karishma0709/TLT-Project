@@ -1,10 +1,6 @@
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
-<<<<<<< HEAD
-const backendDomain = "http://localhost:5054"
-=======
 const backendDomain = "http://localhost:5054";
 
->>>>>>> 10f5c1df44bfd8df6c8b88024a4a38bf1aef59d0
 const SummaryApi = {
     signUp: {
         url: `${backendDomain}/api/signUp`,
@@ -38,15 +34,13 @@ const SummaryApi = {
         url:`${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
        method: "put"
       },
-<<<<<<< HEAD
       updateNotification:{
         url:`${backendDomain}/api/notifies/66ba7625a71ad33c8069aa6b`,
        method: "put"
-=======
+      },
       PyPaperPDF:{
       url:`${backendDomain}/api/PyPaperPDF`,
        method: "post"
->>>>>>> 10f5c1df44bfd8df6c8b88024a4a38bf1aef59d0
       }
 
 }

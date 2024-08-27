@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
               element:<TpmData/>
             },
             {
-              path:"info-marquee",
+              path:"product-upload",
               element:<InfoMarquee/>
             },
             {
