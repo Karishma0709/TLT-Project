@@ -46,12 +46,13 @@ const userDetailsController = async (req, res) => {
     });
   }
 };
-const getUserCount = async (req, res) => {
-  try {
-    const count = await User.find().countDocuments();
-    res.json({ count });
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching user count' });
-  }
-};
-module.exports = {getUserCount,userDetailsController};
+// const getUserCount = async (req, res) => {
+//   try {
+//     const count = await User.find().countDocuments();
+//     res.json({ count });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Error fetching user count' });
+//   }
+// };
+module.exports = userDetailsController;
+
