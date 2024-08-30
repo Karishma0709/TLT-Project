@@ -40,7 +40,7 @@ const Notification = () => {
     formData.append("url", url);
     console.log(notificationText, url);
     const result = await axios.post(
-      "http://localhost:5054/api/notifies",
+      "http://localhost:8080/api/notifies",
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },

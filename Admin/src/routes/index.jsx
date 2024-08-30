@@ -12,6 +12,7 @@ import Notification from "../components/Notification";
 import UpdateMarquee from "../components/UpdateMarquee";
 import Prevyearpaperpdf from "../components/Prevyearpaperpdf";
 import Dashboard from "../components/Dashboard";
+import Unpaid from "../components/Unpaid";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
           {
             path: "Prevyearpaperpdf",
             element: <Prevyearpaperpdf />,
+          },
+          {
+            path: "Unpaid",
+            element: <Unpaid />,
           },
         ],
       },
