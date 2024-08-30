@@ -1,5 +1,5 @@
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
-const backendDomain = "http://localhost:5054";
+const backendDomain = "http://localhost:8080";
 
 const SummaryApi = {
     signUp: {
@@ -41,10 +41,17 @@ const SummaryApi = {
       UnpaidPDF:{
         url:`${backendDomain}/api/upload-files`,
          method: "post"
-        },  UnpaidPDF:{
+        }, UnpaidPDF:{
           url:`${backendDomain}/api/get-files`,
            method: "get"
-          }
+        },notifies: {
+            url: `${backendDomain}/api/notifies`,
+            method: "post",
+          },
+          notifies: {
+            url: `${backendDomain}/api/notifies`,
+            method: "get",
+          },
 
 }
 export default SummaryApi;

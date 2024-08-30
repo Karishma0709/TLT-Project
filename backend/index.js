@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api', router);
 
-const PORT = process.env.PORT || 5054; // Changed port number
+const PORT = process.env.PORT || 8080; // Changed port number
 
 connectDB()
   .then(() => {

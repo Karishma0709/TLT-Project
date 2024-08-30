@@ -53,11 +53,17 @@ router.get("/tmp-data", tpmGetData)
 router.get("/marquee-data/:id", marqueeGetData)
 router.put("/marquee-data/:id",marqueeUpdate)
 // router.delete("/marquee-delete/:id", marqueeDelete)
-router.post("/notifies", saveNotification)
-router.put("/notifies/:id", notifyUpdate)
-
-
 router.post("/PyPaperPDF",PyPaperPDF)
+
+
+
+//Noticiation
+// router.post("/notifies", saveNotification)
+// router.put("/notifies/:id", notifyUpdate)
+
+
+
+
 
 
   // Unpadie
@@ -74,7 +80,7 @@ const storage = multer.diskStorage({
 
 require('../models/UnpaidProduct')
 const unpdfSchema=mongoose.model("unpaidpdf")
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage }) 
 
 
 router.post("/upload-files",upload.single("file"),async(req,res)=>{

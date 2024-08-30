@@ -1,5 +1,5 @@
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
-const backendDomain = "http://localhost:5054";
+const backendDomain = "http://localhost:8080";
 
 
 const SummaryApi = {
@@ -95,8 +95,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
     method: "get",
   },
+  notifies: {
+    url: `${backendDomain}/api/notifies`,
+    method: "get",
+  },
 };
 
 export default SummaryApi;
-
-
