@@ -10,9 +10,9 @@ const { saveTpmFormDetails, findTpmFormDetails } = require('../controllers/tpmCo
 const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
 const userSignUpController = require('../controllers/userSingUp');
-const userSignInController = require('../controllers/userSignIn');       
-const userDetailsController = require('../controllers/userDetails');
-// const {createJetForm,upload } = require("../controllers/jetController")
+const userSignInController = require('../controllers/userSignIn');
+const {userDetailsController,getUserCount} = require('../controllers/userDetails');
+const {createJetForm,upload } = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
@@ -26,8 +26,6 @@ const marqueeDelete = require('../controllers/marqueDelete');
 const saveNotification = require('../controllers/saveNotification');
 const notifyUpdate = require('../controllers/updateNotify');
 const PyPaperPDF =require("../controllers/PyPaperPdf");
-const { default: mongoose } = require('mongoose');
-const { create } = require('../models/tpm');
 
 
 // Define routes
