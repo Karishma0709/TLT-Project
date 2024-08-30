@@ -5,7 +5,7 @@ const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
-const userDetailsController = require('../controllers/userDetails');
+const {userDetailsController,getUserCount} = require('../controllers/userDetails');
 const {createJetForm,upload } = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
@@ -19,7 +19,8 @@ const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 const saveNotification = require('../controllers/saveNotification');
 const notifyUpdate = require('../controllers/updateNotify');
-const PyPaperPDF =require("../controllers/PyPaperPdf")
+const PyPaperPDF =require("../controllers/PyPaperPdf");
+
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -45,6 +46,7 @@ router.put("/marquee-data/:id",marqueeUpdate)
 router.post("/notifies", saveNotification)
 router.put("/notifies/:id", notifyUpdate)
 
+router.get('/count', getUserCount);
 
 router.post("/PyPaperPDF",PyPaperPDF)
 module.exports = router; 

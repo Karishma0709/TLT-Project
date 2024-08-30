@@ -1,4 +1,4 @@
-// const UserModel = require("../models/userModel");
+const UserModel = require("../models/userModel");
 
 // async function userDetailsController(req, res){
 //    try{
@@ -46,5 +46,12 @@ const userDetailsController = async (req, res) => {
     });
   }
 };
-
-module.exports = userDetailsController;
+const getUserCount = async (req, res) => {
+  try {
+    const count = await User.find().countDocuments();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching user count' });
+  }
+};
+module.exports = {getUserCount,userDetailsController};
