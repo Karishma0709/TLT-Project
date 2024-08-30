@@ -1,5 +1,5 @@
-const backendDomain = "https://tlt-project-6ivu.onrender.com";
-// const backendDomain = "http://localhost:5054";
+// const backendDomain = "https://tlt-project-6ivu.onrender.com";
+const backendDomain = "http://localhost:5054";
 
 const SummaryApi = {
     signUp: {
@@ -37,7 +37,14 @@ const SummaryApi = {
       PyPaperPDF:{
       url:`${backendDomain}/api/PyPaperPDF`,
        method: "post"
-      }
+      },
+      UnpaidPDF:{
+        url:`${backendDomain}/api/upload-files`,
+         method: "post"
+        },  UnpaidPDF:{
+          url:`${backendDomain}/api/get-files`,
+           method: "get"
+          }
 
 }
 export default SummaryApi;
