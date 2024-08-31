@@ -12,7 +12,6 @@ const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpc
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');       
 const userDetailsController = require('../controllers/userDetails');
-// const {createJetForm,upload } = require("../controllers/jetController")
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
@@ -23,8 +22,9 @@ const tpmGetData = require('../controllers/tpmGetController');
 const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
-// const saveNotification = require('../controllers/saveNotification');
-// const notifyUpdate = require('../controllers/updateNotify');
+const notifyController = require('../controllers/notifyController');
+const empowermentController=require('../controllers/empowermentController')
+
 const PyPaperPDF =require("../controllers/PyPaperPdf");
 const { default: mongoose } = require('mongoose');
 const { create } = require('../models/tpm');
@@ -53,69 +53,48 @@ router.get("/tmp-data", tpmGetData)
 router.get("/marquee-data/:id", marqueeGetData)
 router.put("/marquee-data/:id",marqueeUpdate)
 // router.delete("/marquee-delete/:id", marqueeDelete)
-// router.post("/notifies", saveNotification)
-// router.put("/notifies/:id", notifyUpdate)
-
 // router.get('/count', getUserCount);
 
 router.post("/PyPaperPDF",PyPaperPDF)
 
+/// Notification
 
+router.use("/notifiesfiles", express.static("files"));
 
-//Noticiation
-// router.post("/notifies", saveNotification)
-// router.put("/notifies/:id", notifyUpdate)
+const storagee = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './notifiesfiles');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const uploads = multer({ storage: storagee });
 
+router.post("/notifies", uploads.single("url"), notifyController.createNotification);
+router.get('/getnotifies', notifyController.getNotifications);
 
-// router.use("/notifiesfiles",express.static("notifiesfiles"))
+////////empowermentForm
 
-// const storagee = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, './notifiesfiles');
-//   },
-//   filename: function (req, file, cb) {
-//     const uniqueSuffix = Date.now();
-//     cb(null, uniqueSuffix + path.extname(file.originalname));
-//   }
-// });
+router.use("/empowermentForm", express.static("files"));
 
-// const uploadd = multer({ storagee: storagee });
-
-// require('../models/notify');
-// const notifySchema = mongoose.model("Notify");
-
-// router.post("/notifies", uploadd.single("file"), async (req, res) => {
-//   console.log(req.file); // File information
-//   const notificationText = req.body.notificationText; // Text data
-//   const fileName = req.file.filename; // File name
-
-//   try {
-//     await notifySchema.create({
-//       notificationText: notificationText,
-//       url: fileName // Store the file name
-//     });
-//     res.send({ Status: "ok" });
-//   } catch (error) {
-//     console.error(error);
-//     res.json({ status: error.message });
-//   }
-// });
-
-// router.get('/getnotifies', async (req, res) => {
-//   try {
-//     const data = await notifySchema.find({});
-//     res.send({ status: "ok", data: data });
-//   } catch (error) {
-//     console.error(error);
-//     res.json({ status: error.message });
-//   }
-// });
+const empowermentstorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './notifiesfiles');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now();
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const Euploads = multer({ storage: empowermentstorage });
+router.post("/empowermentForm", Euploads.single("image"), empowermentController.createEmpowerment);
+router.get('/getempowermentForm', empowermentController.getempowerment);
 
 
 
-
-
-  // Unpadie
+/////////// Unpadie
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
