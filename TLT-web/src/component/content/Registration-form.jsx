@@ -8,7 +8,6 @@ const RegistrationForm = () => {
   const [selectedCity, setSelectedCity] = useState("");
 
   const [data, setData] = useState({
-    picture: "",
     name: "",
     placeOfBirth: "",
     dateOfBirth: "",
@@ -25,7 +24,6 @@ const RegistrationForm = () => {
     permanentAddress: "",
     permanentState: "",
     permanentCity: "",
-    aadharCard: "",
     lastExamDetails: "",
     mains: "",
     score: "",
@@ -35,6 +33,12 @@ const RegistrationForm = () => {
     oldStudentOfShubhamSir: "",
     institution: "",
   });
+
+  const [file, setFile]=useState({
+     aadharCard: "",
+     picture: "",
+
+})
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -191,7 +195,7 @@ const RegistrationForm = () => {
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit}className="mt-5 ">
+      <form onSubmit={handleSubmit} className="mt-5 ">
         <div className="space-y-6 sm:px-10 md:px-2 ">
           <div className="sm:flex items-center">
             <label

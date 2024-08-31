@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const RegistrationFormSchema = new mongoose.Schema({
+const FastTrackFormSchema = new mongoose.Schema({
   picture: {
-    type: Buffer,
+    type: String,
     required: true
   },
   name: {
@@ -71,7 +71,7 @@ const RegistrationFormSchema = new mongoose.Schema({
     required: true
   },
   aadharCard: {
-    type: Buffer,
+    type: String,
     required: true
   },
   lastExamDetails: {
@@ -117,4 +117,4 @@ const RegistrationFormSchema = new mongoose.Schema({
   institution: String,
 },{ timestamps: true });
 
-module.exports = mongoose.model('RegistrationForm', RegistrationFormSchema);
+module.exports = mongoose.model('FastTrackForm', FastTrackFormSchema);
