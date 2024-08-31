@@ -96,7 +96,7 @@ router.get('/get-files', async (req, res) => {
 });
 
 // Fast Track Form routes
-router.post('/api/fastTrackForm', upload.fields([
+router.post('/fastTrackForm', upload.fields([
     { name: 'picture', maxCount: 1 },
     { name: 'aadharCard', maxCount: 1 }
 ]), FastTrackFormDetails);

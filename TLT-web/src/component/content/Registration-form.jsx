@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import SummaryApi from "../../Common/SummaryAPI";
+// import SummaryApi from "../../Common/SummaryAPI";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const RegistrationForm = () => {
   const [selectedState, setSelectedState] = useState("");
@@ -860,34 +861,54 @@ const RegistrationForm = () => {
 
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
+        formData.append(key, data[key]);
     });
     Object.keys(files).forEach((key) => {
-      if (files[key]) {
-        formData.append(key, files[key]);
-      }
+        if (files[key]) {
+            formData.append(key, files[key]);
+        }
     });
 
     try {
-      const contactResponse = await fetch(SummaryApi.fastTrackForm.url, {
-        method: SummaryApi.fastTrackForm.method,
-        body: formData,
-      });
-
-      const dataApi = await contactResponse.json();
-
-      if (dataApi.success) {
-        toast.success("Data is successfully submitted!");
-      } else {
-        toast.error(dataApi.message);
-      }
-
-      console.log("data", dataApi);
+        const result = await axios.post(
+            "http://localhost:8080/api/fastTrackForm",
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" },
+            }
+        );
+        console.log(result);
+        if (result.data.status === "ok") {
+            alert("Uploaded Successfully !!!");
+        }
     } catch (error) {
-      toast.error("An error occurred while submitting the form.");
-      console.error("Error submitting form:", error);
+        console.error("Error details:", error.response ? error.response.data : error.message);
+        alert("An error occurred: " + (error.response ? error.response.data : error.message));
     }
-  };
+};
+
+
+
+  //   try {
+  //     const contactResponse = await fetch(SummaryApi.fastTrackForm.url, {
+  //       method: SummaryApi.fastTrackForm.method,
+  //       body: formData,
+  //     });
+
+  //     const dataApi = await contactResponse.json();
+
+  //     if (dataApi.success) {
+  //       toast.success("Data is successfully submitted!");
+  //     } else {
+  //       toast.error(dataApi.message);
+  //     }
+
+  //     console.log("data", dataApi);
+  //   } catch (error) {
+  //     toast.error("An error occurred while submitting the form.");
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
 
   return (
     <div className="text-justify mx-auto sm:px-10 px-5 md:px-10 lg:px-40 py-0 ">
