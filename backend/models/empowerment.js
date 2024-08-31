@@ -67,30 +67,24 @@ const empowermentFormSchema=new Schema({
         type: String,
         required: true
       },
-      permanentCity: {
-        type: String,
-        required: true
-      },
-      aadharCard: {
-        type: Buffer,
-        required: true
-      },
+      aadharCard: { type: String, required: true },
+    permanentCity: { type: String, required: true },
        
+      // feesPaid: {
+      //   onlineUPI: {
+      //     type: String,
+      //     enum: ['yes', 'no'],
+      //     required: true
+      //   },
+      //   amountPaid: {
+      //     type: Number,
+      //     required: true
+      //   }
+      // },
+      oldStudentOfShubhamSir: { type: Boolean, required: true },
       feesPaid: {
-        onlineUPI: {
-          type: String,
-          enum: ['yes', 'no'],
-          required: true
-        },
-        amountPaid: {
-          type: Number,
-          required: true
-        }
-      },
-      oldStudentOfShubhamSir: {
-        type: String,
-        enum: ['yes', 'no'],
-        required: true
+          amountPaid: { type: Number, required: true },
+          onlineUPI: { type: Boolean, required: true }
       },
       institution: String,
     }, { timestamps: true });
