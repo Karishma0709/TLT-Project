@@ -23,8 +23,8 @@ const tpmGetData = require('../controllers/tpmGetController');
 const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
-const saveNotification = require('../controllers/saveNotification');
-const notifyUpdate = require('../controllers/updateNotify');
+// const saveNotification = require('../controllers/saveNotification');
+// const notifyUpdate = require('../controllers/updateNotify');
 const PyPaperPDF =require("../controllers/PyPaperPdf");
 const { default: mongoose } = require('mongoose');
 const { create } = require('../models/tpm');
@@ -53,8 +53,8 @@ router.get("/tmp-data", tpmGetData)
 router.get("/marquee-data/:id", marqueeGetData)
 router.put("/marquee-data/:id",marqueeUpdate)
 // router.delete("/marquee-delete/:id", marqueeDelete)
-router.post("/notifies", saveNotification)
-router.put("/notifies/:id", notifyUpdate)
+// router.post("/notifies", saveNotification)
+// router.put("/notifies/:id", notifyUpdate)
 
 // router.get('/count', getUserCount);
 
@@ -66,6 +66,50 @@ router.post("/PyPaperPDF",PyPaperPDF)
 // router.post("/notifies", saveNotification)
 // router.put("/notifies/:id", notifyUpdate)
 
+
+// router.use("/notifiesfiles",express.static("notifiesfiles"))
+
+// const storagee = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './notifiesfiles');
+//   },
+//   filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now();
+//     cb(null, uniqueSuffix + path.extname(file.originalname));
+//   }
+// });
+
+// const uploadd = multer({ storagee: storagee });
+
+// require('../models/notify');
+// const notifySchema = mongoose.model("Notify");
+
+// router.post("/notifies", uploadd.single("file"), async (req, res) => {
+//   console.log(req.file); // File information
+//   const notificationText = req.body.notificationText; // Text data
+//   const fileName = req.file.filename; // File name
+
+//   try {
+//     await notifySchema.create({
+//       notificationText: notificationText,
+//       url: fileName // Store the file name
+//     });
+//     res.send({ Status: "ok" });
+//   } catch (error) {
+//     console.error(error);
+//     res.json({ status: error.message });
+//   }
+// });
+
+// router.get('/getnotifies', async (req, res) => {
+//   try {
+//     const data = await notifySchema.find({});
+//     res.send({ status: "ok", data: data });
+//   } catch (error) {
+//     console.error(error);
+//     res.json({ status: error.message });
+//   }
+// });
 
 
 

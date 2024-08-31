@@ -3,33 +3,6 @@ import axios from "axios";
 import SummaryApi from "../Common/SummaryApi";
 
 const Notification = () => {
-  // const [notificationText, setNotificationText] = useState("");
-  // const [url, setUrl] = useState("");
-
-  // const handleNotificationChange = (e) => {
-  //   setNotificationText(e.target.value);
-  // };
-
-  // const handleUrlChange = (e) => {
-  //   setUrl(e.target.value);
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.put(`${SummaryApi.updateNotification.url}`, {
-  //       notification: notificationText,
-  //       url: url,
-  //     });
-  //     console.log("Notification updated successfully:", response.data);
-  //     alert("Notification updated successfully:", response.data);
-  //     // Optionally, clear the input or display a success message
-  //   } catch (error) {
-
-  //     console.error("Error updating notification:", error);
-  //     alert("Error updating notification:", error);
-  //   }
-  // };
   const [notificationText, setNotificationText] = useState("");
   const [url, setUrl] = useState("");
 
@@ -46,27 +19,27 @@ const Notification = () => {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
+    console.log(result);
+    if (result.data.status === "ok") {
+      alert("uploaded Successfully !!!");
+    }
   };
   return (
     <div>
       <form onSubmit={SubmitImage}>
-        <label className="font-semibold pb-2" htmlFor="notification">
-          Notification Title:
-        </label>
-        <textarea
-          name="notification"
+        <label className="font-semibold pb-2">Notification Title:</label>
+        <input
+          name="notificationText"
           placeholder="Write your notification"
           className="w-full p-3 max-h-svh border border-black"
           onChange={(e) => setNotificationText(e.target.value)}
           required
-        ></textarea>
+        ></input>
 
-        <label className="font-semibold pb-2 mt-4" htmlFor="url">
-          URL:
-        </label>
+        <label className="font-semibold pb-2 mt-4">URL:</label>
         <input
           type="text"
-          name="url"
+          name="file"
           placeholder="Enter the URL"
           className="w-full p-3 max-h-svh border border-black"
           onChange={(e) => setUrl(e.target.value)}

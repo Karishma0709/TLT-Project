@@ -7,9 +7,9 @@ require('dotenv').config();
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const router = require("./routes"); // Import the registration routes
+const Router2=require("./routes/NotificationRouter")
 const ADMIN_URL = process.env.ADMIN_URL
 const FRONTEND_URL = process.env.FRONTEND_URL
-
 
 const app = express();
 
@@ -29,9 +29,10 @@ app.get('/', (req, res) => {
 });
 
 
-
 // Routes
 app.use('/api', router);
+app.use('/api', Router2);
+
 
 const PORT = process.env.PORT || 8080; // Changed port number
 

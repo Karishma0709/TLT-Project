@@ -95,10 +95,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
     method: "get",
   },
-  notifies: {
-    url: `${backendDomain}/api/notifies`,
-    method: "get",
-  },
+
 };
 
 export default SummaryApi;

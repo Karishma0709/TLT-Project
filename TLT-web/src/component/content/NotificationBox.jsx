@@ -1,10 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-
-// import { notificationsData } from "../data/notificationsData";
 import axios from "axios";
 
 const NotificationBox = () => {
   const marqueeRef = useRef(null);
+  const [notifay, setNotifay] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getPdf();
+  }, []);
+
+  const getPdf = async () => {
+    try {
+      const result = await axios.get("http://localhost:8080/api/getnotifies");
+      setNotifay(result.data.data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load notifications.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleMouseOver = () => {
     if (marqueeRef.current) {
@@ -18,41 +35,36 @@ const NotificationBox = () => {
     }
   };
 
-  const [notifay, setNotifay] = useState(null);
-  useEffect(() => {
-    getPdf();
-  }, []);
-
-  const getPdf = async () => {
-    const result = await axios.get("http://localhost:5174/api/notifies");
-    console.log(result.data.data);
-    setNotifay(result.data.data);
-  };
-
   return (
     <div className="h-[400px] text-black p-4 overflow-hidden">
       <h2 className="text-3xl font-bold mb-4 text-center">
         Latest <span className="text-primary">Notifications</span>
       </h2>
-      <marquee
-        ref={marqueeRef}
-        height="100%"
-        behavior="scroll"
-        direction="up"
-        scrollamount="3"
-        loop="true"
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-      >
-        <ul>
-          {notifay == null
-            ? ""
-            : notifay.map((notification, index) => (
+      {loading ? (
+        <p className="text-center">Loading...</p>
+      ) : error ? (
+        <p className="text-center text-red-500">{error}</p>
+      ) : (
+        <marquee
+          ref={marqueeRef}
+          height="100%"
+          behavior="scroll"
+          direction="up"
+          scrollamount="3"
+          loop="true"
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+        >
+          <ul>
+            {notifay.length === 0 ? (
+              <li className="text-center">No notifications available.</li>
+            ) : (
+              notifay.map((notification, index) => (
                 <li key={index} className="mb-6 text-primary font-bold">
                   <span>
-                    {notification.title}
+                    {notification.notificationText}
                     <a
-                      href={notification.link}
+                      href={notification.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -60,9 +72,11 @@ const NotificationBox = () => {
                     </a>
                   </span>
                 </li>
-              ))}
-        </ul>
-      </marquee>
+              ))
+            )}
+          </ul>
+        </marquee>
+      )}
     </div>
   );
 };

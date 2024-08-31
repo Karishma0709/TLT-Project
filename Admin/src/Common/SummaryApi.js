@@ -45,11 +45,11 @@ const SummaryApi = {
           url:`${backendDomain}/api/get-files`,
            method: "get"
         },notifies: {
-            url: `${backendDomain}/api/notifies`,
+            url:`${backendDomain}/api/notifies`,
             method: "post",
           },
-          notifies: {
-            url: `${backendDomain}/api/notifies`,
+          notifiess: {
+            url:`${backendDomain}/api/getnotifies`,
             method: "get",
           },
 
