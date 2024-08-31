@@ -1,11 +1,10 @@
 const express = require('express');
-const router = express.Router();
-const path = require('path');
-
 const multer = require('multer');
+const path = require('path');
+const mongoose = require('mongoose');
+const router = express.Router();
 
-router.use("/files",express.static("files"))
-
+// Import controllers
 const { saveTpmFormDetails, findTpmFormDetails } = require('../controllers/tpmController');
 const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
@@ -23,116 +22,83 @@ const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 const notifyController = require('../controllers/notifyController');
-const empowermentController=require('../controllers/empowermentController')
+const empowermentController = require('../controllers/empowermentController');
+const PyPaperPDF = require("../controllers/PyPaperPdf");
+const FastTrackFormDetails = require('../controllers/fastractFormController');
+// const unpdfSchema = mongoose.model("unpaidpdf");
 
-const PyPaperPDF =require("../controllers/PyPaperPdf");
-const { default: mongoose } = require('mongoose');
-const { create } = require('../models/tpm');
+// Static file setup
+router.use("/files", express.static("files"));
+router.use("/notifiesfiles", express.static("files"));
+router.use("/empowermentForm", express.static("files"));
 
+// Multer storage configurations
+const multerStorage = (directory) => multer.diskStorage({
+    destination: (req, file, cb) => cb(null, directory),
+    filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+});
+
+const upload = multer({ storage: multerStorage('./files') });
+const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
+const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
 
 // Define routes
-
-
 router.post('/prepaper', createPyPapersDetail);
 router.post('/tpmForm', saveTpmFormDetails);
 router.post("/mpcjForm", saveMPCJFormDetails);
 router.get('/tpmForm', findTpmFormDetails);
 
+router.post('/signUp', userSignUpController);
+router.post('/signIn', userSignInController);
+router.get('/userDetails', authToken, userDetailsController);
+router.get('/userLogout', userLogout);
 
+router.get("/registerUser", allRegisterUser);
+router.get("/all-papers", allPyPapers);
+router.get("/mpcj-data", mpcjGetData);
+router.post("/marquee", saveMarquee);
+router.get("/tmp-data", tpmGetData);
+router.get("/marquee-data/:id", marqueeGetData);
+router.put("/marquee-data/:id", marqueeUpdate);
+router.delete("/marquee-delete/:id", marqueeDelete);
 
-router.post('/signUp',  userSignUpController)
-router.post('/signIn',  userSignInController)
-router.get('/userDetails',authToken, userDetailsController)
-router.get('/userLogout', userLogout)
+router.post("/PyPaperPDF", PyPaperPDF);
 
-router.get("/registerUser", allRegisterUser)
-router.get("/all-papers", allPyPapers)
-router.get("/mpcj-data", mpcjGetData)
-router.post("/marquee",saveMarquee)
-router.get("/tmp-data", tpmGetData)
-router.get("/marquee-data/:id", marqueeGetData)
-router.put("/marquee-data/:id",marqueeUpdate)
-// router.delete("/marquee-delete/:id", marqueeDelete)
-// router.get('/count', getUserCount);
-
-router.post("/PyPaperPDF",PyPaperPDF)
-
-/// Notification
-
-router.use("/notifiesfiles", express.static("files"));
-
-const storagee = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './notifiesfiles');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now();
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
-});
-const uploads = multer({ storage: storagee });
-
-router.post("/notifies", uploads.single("url"), notifyController.createNotification);
+// Notification routes
+router.post("/notifies", notifyUpload.single("url"), notifyController.createNotification);
 router.get('/getnotifies', notifyController.getNotifications);
 
-////////empowermentForm
-
-router.use("/empowermentForm", express.static("files"));
-
-const empowermentstorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './notifiesfiles');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now();
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
-});
-const Euploads = multer({ storage: empowermentstorage });
-router.post("/empowermentForm", Euploads.single("image"), empowermentController.createEmpowerment);
+// Empowerment Form routes
+router.post("/empowermentForm", empowermentUpload.single("image"), empowermentController.createEmpowerment);
 router.get('/getempowermentForm', empowermentController.getempowerment);
 
+// Unpaid product file upload routes
+router.post("/upload-files", upload.single("file"), async (req, res) => {
+    console.log(req.file);
+    const title = req.body.title;
+    const fileName = req.file.filename;
+    try {
+        await unpdfSchema.create({ title: title, pdf: fileName });
+        res.send({ Status: "ok" });
+    } catch (error) {
+        res.json({ status: error });
+    }
+});
 
+router.get('/get-files', async (req, res) => {
+    try {
+        unpdfSchema.find({}).then((data) => {
+            res.send({ status: "ok", data: data });
+        });
+    } catch (error) {
+        res.json({ status: "error", error: error.message });
+    }
+});
 
-/////////// Unpadie
+// Fast Track Form routes
+router.post('/api/fastTrackForm', upload.fields([
+    { name: 'picture', maxCount: 1 },
+    { name: 'aadharCard', maxCount: 1 }
+]), FastTrackFormDetails);
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './files')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() 
-    cb(null, uniqueSuffix + file.originalname)
-  }
-})
-
-require('../models/UnpaidProduct')
-const unpdfSchema=mongoose.model("unpaidpdf")
-const upload = multer({ storage: storage }) 
-
-
-router.post("/upload-files",upload.single("file"),async(req,res)=>{
-  console.log(req.file)
-  const title=req.body.title;
-  const fileName=req.file.filename
-  try{
-await unpdfSchema.create({title:title,pdf:fileName})
-res.send({Status:"ok"})
-  }catch(error){
-res.json({status:error})
-  }
-})
-
-router.get('/get-files',async(req,res)=>{
-  try{unpdfSchema.find({}).then((data)=>{
-res.send({status:"ok",data:data})
-  })}catch(error){
-  }
-})
-
-
-
-module.exports = router; 
-
-
-
+module.exports = router;
