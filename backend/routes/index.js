@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const router = express.Router();
 
+
 // Import controllers
 const { saveTpmFormDetails, findTpmFormDetails } = require('../controllers/tpmController');
 const createPyPapersDetail = require('../controllers/pyPaperController');
@@ -31,6 +32,7 @@ const FastTrackFormDetails = require('../controllers/fastractFormController');
 router.use("/files", express.static("files"));
 router.use("/notifiesfiles", express.static("files"));
 router.use("/empowermentForm", express.static("files"));
+router.use("/fastTrackForm", express.static("files"));
 
 
 // Multer storage configurations
@@ -42,6 +44,7 @@ const multerStorage = (directory) => multer.diskStorage({
 const upload = multer({ storage: multerStorage('./files') });
 const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
+const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
 
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
@@ -97,7 +100,7 @@ router.get('/get-files', async (req, res) => {
 });
 
 // Fast Track Form routes
-router.post('/fastTrackForm', upload.fields([
+router.post('/fastTrackForm', fastTrackUpload.fields([
     { name: 'picture', maxCount: 1 },
     { name: 'aadharCard', maxCount: 1 }
 ]), FastTrackFormDetails);
