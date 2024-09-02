@@ -77,7 +77,7 @@ const FastTrackFormSchema = new mongoose.Schema(
     },
     prelims: {
       type: String,
-      enum: ["yes", "no"],
+      enum: ["yes"],
     },
     mains: {
       type: String,
