@@ -74,7 +74,7 @@ const FastTrackFormSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  lastExamDetails: {
+
     prelims: {
       type: String,
       enum: ['yes', 'no'],
@@ -85,7 +85,7 @@ const FastTrackFormSchema = new mongoose.Schema({
       enum: ['yes', 'no'],
       required: true
     },
-    state: {
+    targetedstate: {
       type: String,
       required: true
     },
@@ -97,17 +97,15 @@ const FastTrackFormSchema = new mongoose.Schema({
       type: Number,
       required: true
     }
-  },
+,
   feesPaid: {
-    onlineUPI: {
       type: String,
       enum: ['yes', 'no'],
       required: true
-    },
-    amountPaid: {
-      type: Number,
-      required: true
-    }
+  },
+  amountPaid: {
+    type: Number,
+    required: true
   },
   oldStudentOfShubhamSir: {
     type: String,

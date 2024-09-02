@@ -10,30 +10,31 @@ const RegistrationForm = () => {
  // Add state for cities
 
   const [data, setData] = useState({
-    name: "",
-    placeOfBirth: "",
-    dateOfBirth: "",
-    fullAddress: "",
-    state: "",
-    pincode: "",
-    qualification: "",
-    collegeUniversity: "",
-    pursuingLLB: "",
-    yearOfPassing: "",
-    email: "",
-    fatherName: "",
-    motherName: "",
-    permanentAddress: "",
-    permanentState: "",
-    permanentCity: "",
-    lastExamDetails: "",
-    mains: "",
-    score: "",
-    year: "",
-    feesPaid: "",
-    amountPaid: "",
-    oldStudentOfShubhamSir: "",
-    institution: "",
+      name:"",
+      placeOfBirth:"",
+      dateOfBirth:"",
+      fullAddress:"",
+      state:"",
+      pinCode:"",
+      qualification:"",
+      collegeUniversity:"",
+      pursuingLLB:"",
+      yearOfPassing:"",
+      email:"",
+      fatherName:"",
+      motherName:"",
+      permanentAddress:"",
+      permanentState:"",
+      permanentCity:"",
+      aadharCard:"",
+      feesPaid:"",
+      prelims:"",
+      mains:"",
+      targetedstate:"",
+      score:"",
+      year:"",
+      oldStudentOfShubhamSir:"",
+      institution:"",
   });
 
   const [files, setFiles] = useState({
@@ -862,6 +863,7 @@ const RegistrationForm = () => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
         formData.append(key, data[key]);
+        
     });
     Object.keys(files).forEach((key) => {
         if (files[key]) {
@@ -1031,7 +1033,7 @@ const RegistrationForm = () => {
             </label>
             <input
               type="number"
-              name="pincode"
+              name="pinCode"
               id="pincode"
               autoComplete="off"
               value={data.pincode}
@@ -1268,7 +1270,7 @@ const RegistrationForm = () => {
                 Prelims:
                 <input
                   type="radio"
-                  name="lastExamPrelims"
+                  name="prelims"
                   value="yes"
                   className="mx-2 mt-1"/>
               </label>
@@ -1278,7 +1280,7 @@ const RegistrationForm = () => {
                 Mains:
                 <input
                   type="radio"
-                  name="lastExamMains"
+                  name="mains"
                   value="yes"
                   className="mx-2 mt-1"/>{" "}
               </label>
@@ -1293,7 +1295,7 @@ const RegistrationForm = () => {
             </label>
             <input
               type="text"
-              name="lastExamState"
+              name="targetedstate"
               id="last-exam-state"
               className="border rounded w-full p-2"/>
           </div>
