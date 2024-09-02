@@ -2,6 +2,8 @@ const FastTrackForm = require("../models/FastTrackForm");
 
 const FastTrackFormDetails = async (req, res) => {
   try {
+    console.log("Request received:", req.body,req.files);
+
     const {
       name,
       placeOfBirth,
@@ -67,6 +69,7 @@ const FastTrackFormDetails = async (req, res) => {
     res
       .status(201)
       .json({ message: "Form created successfully!", form: newFastTrackForm });
+      console.log(req.body)
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

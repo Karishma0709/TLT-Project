@@ -25,12 +25,13 @@ const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const PyPaperPDF = require("../controllers/PyPaperPdf");
 const FastTrackFormDetails = require('../controllers/fastractFormController');
-// const unpdfSchema = mongoose.model("unpaidpdf");
+
 
 // Static file setup
 router.use("/files", express.static("files"));
 router.use("/notifiesfiles", express.static("files"));
 router.use("/empowermentForm", express.static("files"));
+
 
 // Multer storage configurations
 const multerStorage = (directory) => multer.diskStorage({

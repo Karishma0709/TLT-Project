@@ -4,7 +4,7 @@ const backendDomain = "http://localhost:8080";
 
 const SummaryApi = {
   fastTrackForm: {
-    url: `${backendDomain}/api/fastTrackForm`,
+    url: `${backendDomain}/api/`,
     method: "post",
   },
   empowermentForm: {

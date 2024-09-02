@@ -697,33 +697,25 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
     Object.keys(files).forEach((key) => {
       if (files[key]) {
         formData.append(key, files[key]);
       }
     });
-    console.log(data,files)
 
-  //   try {
-  //     const result = await axios.post(
-  //       "http://localhost:8080/api/fastTrackForm",
-  //       formData,
-  //       {
-  //         headers: { "Content-Type": "multipart/form-data" },
-  //       }
-  //     );
-  //     console.log(result);
-  //     if (result.data.status === "ok") {
-  //       toast.success("Uploaded Successfully !!!");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error details:", error.response ? error.response.data : error.message);
-  //     toast.error("An error occurred: " + (error.response ? error.response.data : error.message));
-  //   }
-   };
+    try {
+      const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      console.log(response.data);
+      if (response.status === 201) {
+        alert('Form submitted successfully');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
 
   return (
     <div className="text-justify mx-auto sm:px-10 px-5 md:px-10 lg:px-40 py-0 ">
