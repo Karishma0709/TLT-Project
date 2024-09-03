@@ -79,17 +79,30 @@ router.get('/getnotifies', notifyController.getNotifications);
 
 router.use("/empowermentForm", express.static("files"));
 
-const empowermentstorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './notifiesfiles');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now();
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
+const empowermentStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './notifiesfiles'); // Directory to store the files
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + path.extname(file.originalname);
+    cb(null, uniqueSuffix);
+  }
 });
-const Euploads = multer({ storage: empowermentstorage });
-router.post("/empowermentForm", Euploads.single("image"), empowermentController.createEmpowerment);
+
+// Initialize Multer with the storage configuration
+const Euploads = multer({ storage: empowermentStorage });
+// .fields([
+// { name: 'photo', maxCount: 1 },
+// { name: 'aadharCard', maxCount: 1 }
+// ]);
+router.post(
+  "/empowermentForm",
+  Euploads.fields([
+    { name: 'photo', maxCount: 1 },
+    { name: 'aadharCard', maxCount: 1 }
+  ]),
+  empowermentController.createEmpowerment
+);
 router.get('/getempowermentForm', empowermentController.getempowerment);
 
 

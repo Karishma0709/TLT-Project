@@ -9,7 +9,7 @@ const NotificationBox = () => {
 
   useEffect(() => {
     getPdf();
-  }, []); 
+  }, []);
 
   const getPdf = async () => {
     try {
