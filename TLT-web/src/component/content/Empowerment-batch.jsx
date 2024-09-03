@@ -2,70 +2,127 @@ import React, { useState } from "react";
 import Registration from "./Registration";
 import axios from "axios";
 
-import SummaryApi from "../../Common/SummaryAPI";
-import { toast } from "react-toastify";
-
 const EmpowermentBatch = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [aadhar, setAadhar] = useState("");
-  const [image, setImage] = useState("");
+  const [aadharCard, setAadhar] = useState("");
+  const [photo, setImage] = useState("");
+  // const [pursuingLLB, setPursuingLLB] = useState(false);
 
   const [data, setData] = useState({
     name: "",
-    birthplace: "",
-    birthdate: "",
-    address: "",
+    placeOfBirth: "",
+    dateOfBirth: "",
+    fullAddress: "",
     state: "",
-    pincode: "",
+    pinCode: "",
     qualification: "",
-    university: "",
-    pursuingLLb: "",
+    collegeUniversity: "",
+    pursuingLLB: "",
     yearOfPassing: "",
     email: "",
     fatherName: "",
     motherName: "",
     permanentAddress: "",
-    pState: "",
-    pCity: "",
-    paidAmount: "",
-    oldStudent: "",
-    institute: "",
+    permanentState: "",
+    permanentCity: "",
+    feesPaid: {
+      onlineUPI: "",
+      amountPaid: 0, // Initialize amountPaid with a default value (0)
+    },
+    oldStudentOfShubhamSir: "",
+    institution: "",
   });
 
-  const SubmitImage = async (e) => {
+  const submitImage = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
-    formData.append("data", data);
-    formData.append("image", image);
-    console.log(data, image);
-    const result = await axios.post(
-      "http://localhost:8080/api/empowermentForm",
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
+
+    formData.append("name", data.name);
+    formData.append("placeOfBirth", data.placeOfBirth);
+    formData.append("dateOfBirth", data.dateOfBirth);
+    formData.append("fullAddress", data.fullAddress);
+    formData.append("state", data.state);
+    formData.append("pinCode", data.pinCode);
+    formData.append("qualification", data.qualification);
+    formData.append("collegeUniversity", data.collegeUniversity);
+    formData.append("pursuingLLB", data.pursuingLLB || "");
+    // Ensure value is set
+    formData.append("yearOfPassing", data.yearOfPassing);
+    formData.append("email", data.email);
+    formData.append("fatherName", data.fatherName);
+    formData.append("motherName", data.motherName);
+    formData.append("permanentAddress", data.permanentAddress);
+    formData.append("permanentState", data.permanentState);
+    formData.append("permanentCity", data.permanentCity);
+    formData.append("institution", data.institution);
+    formData.append("onlineUPI", data.feesPaid.onlineUPI);
+    formData.append("amountPaid", data.feesPaid.amountPaid);
+    formData.append("oldStudentOfShubhamSir", data.oldStudentOfShubhamSir);
+    formData.append("institution", data.institution);
+    if (photo) formData.append("photo", photo);
+    if (aadharCard) formData.append("aadharCard", aadharCard);
+    console.log(formData.get("fieldName"));
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/empowermentForm",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json(); // Get error details from the response
+        console.error("Error details:", errorData); // Log detailed error message
+        throw new Error("Network response was not ok");
       }
-    );
-    console.log(result);
-    if (result.data.status === "ok") {
-      alert("uploaded Successfully !!!");
+
+      const result = await response.json();
+      console.log("Success:", result);
+    } catch (error) {
+      console.error("Error:", error.message); // Log error message
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((...prev) => {
-      return { ...prev, [name]: value };
-    });
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleRadioChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const value = e.target.value === "yes";
+    const { name } = e.target;
+
+    if (name === "onlineUPI") {
+      setData((prev) => ({
+        ...prev,
+        feesPaid: {
+          ...prev.feesPaid,
+          onlineUPI: value,
+        },
+      }));
+    } else if (name === "amountPaid") {
+      setData((prev) => ({
+        ...prev,
+        feesPaid: {
+          ...prev.feesPaid,
+          amountPaid: e.target.value,
+        },
+      }));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   console.log("data", data);
-
-  //
 
   const states = [
     { id: 1, name: "Andaman and Nicobar Islands" },
@@ -866,6 +923,7 @@ const EmpowermentBatch = () => {
       "Titagarh",
     ],
   };
+
   return (
     <div className="">
       <div className="px-5 md:px-10 lg:px-20 py-0">
@@ -879,27 +937,19 @@ const EmpowermentBatch = () => {
           </h2>
         </div>
         <br />
-        <form
-          className="mt-0"
-          onSubmit={SubmitImage}
-          action="/empowermentForm"
-          method="post"
-          encType="multipart/form-data"
-        >
+        <form className="mt-0" onSubmit={submitImage}>
           <div className="space-y-5">
             <div className="sm:flex items-center">
-              <label
-                htmlFor="photo"
-                className="block text-left font-bold text-lg sm:w-1/4"
-              >
+              <label className="block text-left font-bold text-lg sm:w-1/4">
                 Choose picture:
               </label>
               <input
                 type="file"
                 name="photo"
                 id="photo"
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) => setImage(e.target.files[0])}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -916,57 +966,61 @@ const EmpowermentBatch = () => {
                 id="name"
                 onChange={handleChange}
                 value={data.name}
+                required
                 className="border rounded w-full p-2"
               />
             </div>
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="birthplace"
+                htmlFor="placeOfBirth"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Place Of Birth:
               </label>
               <input
                 type="text"
-                name="birthplace"
-                id="birthplace"
+                name="placeOfBirth"
+                id="placeOfBirth"
                 onChange={handleChange}
-                value={data.birthplace}
+                value={data.placeOfBirth}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="birthdate"
+                htmlFor="dateOfBirth"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Date Of Birth:
               </label>
               <input
                 type="date"
-                name="birthdate"
-                id="birthdate"
+                name="dateOfBirth"
+                id="dateOfBirth"
                 onChange={handleChange}
-                value={data.birthdate}
+                value={data.dateOfBirth}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="address"
+                htmlFor="fullAddress"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Full Address:
               </label>
-              <textarea
-                name="address"
-                id="address"
+              <input
+                name="fullAddress"
+                id="fullAddress"
                 onChange={handleChange}
-                value={data.address}
+                value={data.fullAddress}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -986,6 +1040,7 @@ const EmpowermentBatch = () => {
                   setData((prev) => ({ ...prev, state: e.target.value }));
                 }}
                 value={data.state}
+                required
               >
                 <option value="" disabled>
                   Select State
@@ -1000,18 +1055,19 @@ const EmpowermentBatch = () => {
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="pincode"
+                htmlFor="pinCode"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Pin Code:
               </label>
               <input
                 type="number"
-                name="pincode"
-                id="pincode"
+                name="pinCode"
+                id="pinCode"
                 onChange={handleChange}
-                value={data.pincode}
+                value={data.pinCode}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1029,22 +1085,24 @@ const EmpowermentBatch = () => {
                 onChange={handleChange}
                 value={data.qualification}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="university"
+                htmlFor="collegeUniversity"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 College/University:
               </label>
               <input
                 type="text"
-                name="university"
-                id="university"
+                name="collegeUniversity"
+                id="collegeUniversity"
                 onChange={handleChange}
-                value={data.university}
+                value={data.collegeUniversity}
+                required
                 className="border rounded w-full p-2"
               />
             </div>
@@ -1057,7 +1115,7 @@ const EmpowermentBatch = () => {
                 <label>
                   <input
                     type="radio"
-                    name="pursuingLLb"
+                    name="pursuingLLB"
                     value="yes"
                     onChange={handleRadioChange}
                     className="mr-2"
@@ -1067,10 +1125,11 @@ const EmpowermentBatch = () => {
                 <label>
                   <input
                     type="radio"
-                    name="pursuingLLb"
+                    name="pursuingLLB"
                     value="no"
                     onChange={handleRadioChange}
                     className="mr-2"
+                    required
                   />
                   No
                 </label>
@@ -1091,6 +1150,7 @@ const EmpowermentBatch = () => {
                 onChange={handleChange}
                 value={data.yearOfPassing}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1108,6 +1168,7 @@ const EmpowermentBatch = () => {
                 onChange={handleChange}
                 value={data.email}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1131,6 +1192,7 @@ const EmpowermentBatch = () => {
                 onChange={handleChange}
                 value={data.fatherName}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1148,6 +1210,7 @@ const EmpowermentBatch = () => {
                 onChange={handleChange}
                 value={data.motherName}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1158,7 +1221,7 @@ const EmpowermentBatch = () => {
               >
                 Permanent Address:
               </label>
-              <textarea
+              <input
                 name="permanentAddress"
                 id="permanentAddress"
                 onChange={handleChange}
@@ -1169,20 +1232,24 @@ const EmpowermentBatch = () => {
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="pState"
+                htmlFor="permanentState"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 State:
               </label>
               <select
                 className="form-control border rounded w-full p-2"
-                name="pState"
-                id="pState"
+                name="permanentState"
+                id="permanentState"
                 onChange={(e) => {
                   setSelectedState(e.target.value);
-                  setData((prev) => ({ ...prev, pState: e.target.value }));
+                  setData((prev) => ({
+                    ...prev,
+                    permanentState: e.target.value,
+                  }));
                 }}
-                value={data.pState}
+                value={data.permanentState}
+                required
               >
                 <option value="" disabled>
                   Select State
@@ -1196,19 +1263,17 @@ const EmpowermentBatch = () => {
             </div>
 
             <div className="sm:flex items-center">
-              <label
-                htmlFor="pCity"
-                className="block text-left font-bold text-lg sm:w-1/4"
-              >
+              <label className="block text-left font-bold text-lg sm:w-1/4">
                 City:
               </label>
               <select
                 className="form-control border rounded w-full p-2"
-                name="pCity"
-                id="pCity"
+                name="permanentCity"
+                id="permanentCity"
                 onChange={handleChange}
-                value={data.pCity}
+                value={data.permanentCity}
                 disabled={!selectedState}
+                required
               >
                 <option value="" disabled>
                   Select City
@@ -1224,17 +1289,17 @@ const EmpowermentBatch = () => {
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="adhaarPhoto"
+                htmlFor="aadharCard"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Upload Aadhar (Front and Back):
               </label>
               <input
                 type="file"
-                name="adhaarPhoto"
-                id="adhaarPhoto"
+                name="aadharCard"
+                id="aadharCard"
                 multiple
-                onChange={(e) => setAadhar(e.target.value)}
+                onChange={(e) => setAadhar(e.target.files[0])}
                 className="border rounded w-full p-2"
                 required
               />
@@ -1251,28 +1316,38 @@ const EmpowermentBatch = () => {
                 Online / UPI:
                 <input
                   type="radio"
-                  name="paymentMethod"
+                  name="onlineUPI"
                   value="yes"
                   onChange={handleRadioChange}
                   className="mx-2 mt-1"
+                  required
                 />
               </label>
             </div>
 
             <div className="sm:flex items-center">
               <label
-                htmlFor="paidAmount"
+                htmlFor="amountPaid"
                 className="block text-left font-bold text-lg sm:w-1/4"
               >
                 Amount Paid:
               </label>
               <input
                 type="number"
-                name="paidAmount"
-                id="paidAmount"
-                onChange={handleChange}
-                value={data.paidAmount}
+                name="amountPaid"
+                id="amountPaid"
+                onChange={(e) =>
+                  setData((prev) => ({
+                    ...prev,
+                    feesPaid: {
+                      ...prev.feesPaid,
+                      amountPaid: e.target.value,
+                    },
+                  }))
+                }
+                value={data.feesPaid.amountPaid}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 
@@ -1284,20 +1359,22 @@ const EmpowermentBatch = () => {
                 <label>
                   <input
                     type="radio"
-                    name="oldStudent"
+                    name="oldStudentOfShubhamSir"
                     value="yes"
                     onChange={handleRadioChange}
                     className="mr-2"
+                    required
                   />
                   Yes
                 </label>
                 <label>
                   <input
                     type="radio"
-                    name="oldStudent"
+                    name="oldStudentOfShubhamSir"
                     value="no"
                     onChange={handleRadioChange}
                     className="mr-2"
+                    required
                   />
                   No
                 </label>
@@ -1313,11 +1390,12 @@ const EmpowermentBatch = () => {
               </label>
               <input
                 type="text"
-                name="institute"
-                id="institute"
+                name="institution"
+                id="institution"
                 onChange={handleChange}
-                value={data.institute}
+                value={data.institution}
                 className="border rounded w-full p-2"
+                required
               />
             </div>
 

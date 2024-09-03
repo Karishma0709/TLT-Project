@@ -72,9 +72,38 @@ router.post("/PyPaperPDF", PyPaperPDF);
 router.post("/notifies", notifyUpload.single("url"), notifyController.createNotification);
 router.get('/getnotifies', notifyController.getNotifications);
 
-// Empowerment Form routes
-router.post("/empowermentForm", empowermentUpload.single("image"), empowermentController.createEmpowerment);
+////////empowermentForm
+
+// router.use("/empowermentForm", express.static("files"));
+
+
+const empowermentStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './notifiesfiles'); // Directory to store the files
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() +file.originalname;
+    cb(null, uniqueSuffix);
+  }
+});
+
+// Initialize Multer with the storage configuration
+const Euploads = multer({ storage: empowermentStorage });
+
+router.post(
+  "/empowermentForm",
+  Euploads.fields([
+    { name: 'photo', maxCount: 1 },
+    { name: 'aadharCard', maxCount: 1 }
+  ]),
+  empowermentController.createEmpowerment
+);
 router.get('/getempowermentForm', empowermentController.getempowerment);
+
+
+
+
+
 
 // Unpaid product file upload routes
 router.post("/upload-files", upload.single("file"), async (req, res) => {
