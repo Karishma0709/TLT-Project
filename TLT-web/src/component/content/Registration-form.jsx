@@ -9,7 +9,7 @@ const RegistrationForm = () => {
   const [cities, setCities] = useState([]);
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-
+  
   const [data, setData] = useState({
     name: "",
     placeOfBirth: "",
@@ -27,7 +27,6 @@ const RegistrationForm = () => {
     permanentAddress: "",
     permanentState: "",
     permanentCity: "",
-    aadharCard: "",
     feesPaid: "",
     amountPaid: "",
     prelims: "",
@@ -43,10 +42,10 @@ const RegistrationForm = () => {
     picture: null,
     aadharCard: null,
   });
-
+  
   useEffect(() => {
     // Fetch states when component mounts
-    const fetchedStates = State.getStatesOfCountry("IN"); // 'IN' is for India, change if needed
+    const fetchedStates = State.getStatesOfCountry('IN'); // 'IN' is for India, change if needed
     setStates(fetchedStates);
   }, []);
 
@@ -76,6 +75,8 @@ const RegistrationForm = () => {
     }));
   };
 
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,19 +89,15 @@ const RegistrationForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/fastTrackForm",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
+        headers: { 'Content-Type':'multipart/form-data' },
+      });
       console.log(response.data);
       if (response.status === 201) {
-        alert("Form submitted successfully");
+        alert('Form submitted successfully');
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error('Error submitting form:', error);
     }
   };
 
@@ -127,9 +124,8 @@ const RegistrationForm = () => {
               name="picture"
               id="picture"
               autoComplete="off"
-              onChange={handleFileChange}
-              className="border rounded w-full p-2"
-            />
+              onChange={handleFileChange}              
+              className="border rounded w-full p-2"/>
           </div>
 
           <div className="sm:flex items-center">
@@ -501,21 +497,19 @@ const RegistrationForm = () => {
           </div>
 
           <div className="sm:flex items-center">
-            <label
-              htmlFor="aadhar-card"
-              className="block text-left font-bold text-lg  sm:w-1/4 "
-            >
-              Upload Aadhar (Front and Back):
-            </label>
-            <input
-              type="file"
-              name="aadharCard"
-              id="aadhar-card"
-              autoComplete="off"
-              onChange={handleFileChange}
-              className="border rounded w-full p-2"
-            />
-          </div>
+             <label
+               htmlFor="aadhar-card"
+               className="block text-left font-bold text-lg  sm:w-1/4 ">
+               Upload Aadhar (Front and Back):
+             </label>
+             <input
+               type="file"
+               name="aadharCard"
+               id="aadhar-card"
+               autoComplete="off"
+               onChange={handleFileChange}
+               className="border rounded w-full p-2"/>
+           </div>
 
           {/* Last Exam */}
           <div>

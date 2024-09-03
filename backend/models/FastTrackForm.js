@@ -27,7 +27,7 @@ const FastTrackFormSchema = new mongoose.Schema(
       required: true,
     },
     pinCode: {
-      type: String,
+      type: Number,
       required: true,
     },
     qualification: {
@@ -77,12 +77,11 @@ const FastTrackFormSchema = new mongoose.Schema(
     },
     prelims: {
       type: String,
-      enum: ["yes"],
+      enum: ["yes",""],
     },
     mains: {
       type: String,
-      enum: ["yes"],
-     
+      enum: ["yes",""],
     },
     targetedstate: {
       type: String,

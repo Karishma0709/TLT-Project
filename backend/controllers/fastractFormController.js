@@ -4,6 +4,12 @@ const FastTrackFormDetails = async (req, res) => {
   try {
     console.log("Request received:", req.body,req.files);
 
+
+    if (!req.files || !req.files["picture"] || !req.files["aadharCard"]) {
+      return res.status(400).json({ error: 'Both picture and aadharCard fields are required.' });
+    }
+
+
     const {
       name,
       placeOfBirth,
@@ -66,13 +72,22 @@ const FastTrackFormDetails = async (req, res) => {
     });
 
     await newFastTrackForm.save();
-    res
-      .status(201)
-      .json({ message: "Form created successfully!", form: newFastTrackForm });
-      console.log(req.body)
+    res.status(201).json({ message: "Form created successfully!", form: newFastTrackForm });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
+
+
+const getFastTrackForm=async(req,res)=>{
+  try{
+const fastTrackFormData=await FastTrackForm.find()
+res.status(200).json({ fastTrackFormData });
+  }
+  catch(error){
+res.status(500).json({error:"Internal server error."})
+  }
+}
 
 module.exports = FastTrackFormDetails;
