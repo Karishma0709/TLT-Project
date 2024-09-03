@@ -13,6 +13,7 @@ import UpdateMarquee from "../components/UpdateMarquee";
 import Prevyearpaperpdf from "../components/Prevyearpaperpdf";
 import Dashboard from "../components/Dashboard";
 import Unpaid from "../components/Unpaid";
+import EmpowermentAdmin from "../components/EmpowermentAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
           {
             path: "Unpaid",
             element: <Unpaid />,
+          },
+          {
+            path: "EmpowermentAdmin",
+            element: <EmpowermentAdmin />,
           },
         ],
       },

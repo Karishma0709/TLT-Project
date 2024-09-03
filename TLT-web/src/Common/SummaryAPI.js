@@ -7,7 +7,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/fastTrackForm`,
     method: "post",
   },
-  empowermentForm: {
+  empowermentForm: { 
     url: `${backendDomain}/api/empowermentForm`,
     method: "post",
   },
