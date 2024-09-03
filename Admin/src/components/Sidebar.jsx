@@ -123,6 +123,12 @@ const Sidebar = () => {
               Unpaid Products
             </Link>
             <Link
+              to={"EmpowermentAdmin"}
+              className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
+            >
+              EmpowermentAdmin
+            </Link>
+            <Link
               to={"tpm-form"}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >

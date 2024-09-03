@@ -52,6 +52,10 @@ const SummaryApi = {
             url:`${backendDomain}/api/getnotifies`,
             method: "get",
           },
+          EmpowermentAdmin: {
+            url:`${backendDomain}/api/getempowermentForm`,
+            method: "get",
+          },
 
 }
 export default SummaryApi;

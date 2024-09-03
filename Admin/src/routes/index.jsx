@@ -13,8 +13,8 @@ import UpdateMarquee from "../components/UpdateMarquee";
 import Prevyearpaperpdf from "../components/Prevyearpaperpdf";
 import Dashboard from "../components/Dashboard";
 import Unpaid from "../components/Unpaid";
+import EmpowermentAdmin from "../components/EmpowermentAdmin";
 import FastTractForm from "../components/FastTractForm";
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -73,8 +73,12 @@ export const router = createBrowserRouter([
             element: <Unpaid />,
           },
           {
-            path: "fastTractForm",
-            element: <FastTractForm />,
+            path: "EmpowermentAdmin",
+            element: <EmpowermentAdmin />,
+          },
+          {
+            path: "fastTrackForm",
+            element: <FastTractForm/>,
           },
         ],
       },

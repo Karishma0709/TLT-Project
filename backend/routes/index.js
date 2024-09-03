@@ -74,7 +74,7 @@ router.get('/getnotifies', notifyController.getNotifications);
 
 ////////empowermentForm
 
-// router.use("/empowermentForm", express.static("files"));
+router.use("/empowermentForm", express.static("notifiesfiles"));
 
 
 const empowermentStorage = multer.diskStorage({
@@ -106,6 +106,11 @@ router.get('/getempowermentForm', empowermentController.getempowerment);
 
 
 // Unpaid product file upload routes
+require('../models/UnpaidProduct');
+
+const unpdfSchema = mongoose.model("unpaidpdf");
+
+ 
 router.post("/upload-files", upload.single("file"), async (req, res) => {
     console.log(req.file);
     const title = req.body.title;
@@ -114,9 +119,14 @@ router.post("/upload-files", upload.single("file"), async (req, res) => {
         await unpdfSchema.create({ title: title, pdf: fileName });
         res.send({ Status: "ok" });
     } catch (error) {
+
         res.json({ status: error });
     }
 });
+
+
+
+
 
 router.get('/get-files', async (req, res) => {
     try {
@@ -127,7 +137,6 @@ router.get('/get-files', async (req, res) => {
         res.json({ status: "error", error: error.message });
     }
 });
-
 
 router.post('/fastTrackForm', fastTrackUpload.fields([
     { name: 'picture', maxCount: 1 },
