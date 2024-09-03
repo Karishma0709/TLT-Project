@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
-const router = require("./routes"); // Import the registration routes
+const router = require("./routes"); 
 const ADMIN_URL = process.env.ADMIN_URL
 const FRONTEND_URL = process.env.FRONTEND_URL
 
