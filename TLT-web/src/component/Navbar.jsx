@@ -73,26 +73,6 @@ const Navbar = () => {
       >
         Syllabus
       </button>
-      <div className="absolute left-full top-0 ml-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-        <NavLink
-          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-          to="/syllabus/mp"
-        >
-          MP State
-        </NavLink>
-        <NavLink
-          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-          to="/syllabus/delhi"
-        >
-          Delhi
-        </NavLink>
-        <NavLink
-          className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-          to="/syllabus/rajasthan"
-        >
-          Rajasthan State
-        </NavLink>
-      </div>
     </div>
   </div>
 </div>
@@ -142,7 +122,7 @@ const Navbar = () => {
         <div className="relative flex space-x-4 items-center p-0 m-0 z-10">
           <div className="group relative">
             <button className="bg-primary text-white uppercase font-bold text-sm py-7 px-4 inline-block transition duration-300 ease-in-out hover:bg-red-600 m-0 rounded-e-md">
-              Registration In
+              Registered In
             </button>
             <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
               <NavLink

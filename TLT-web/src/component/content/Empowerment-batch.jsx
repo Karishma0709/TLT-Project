@@ -933,7 +933,7 @@ const EmpowermentBatch = () => {
       <div className="text-justify mx-auto sm:px-10 px-5 md:px-10 lg:px-40 py-0 ">
         <div className="mt-4 ">
           <h2 className="text-white bg-red-500 text-center text-3xl py-3 px-4 sm:px-20">
-            EMPOWERMENT BATCH 01
+            EMPOWERMENT BATCH 
           </h2>
         </div>
         <br />
