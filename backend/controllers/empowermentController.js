@@ -110,6 +110,7 @@ require('../models/empowerment');
 const ESchema = mongoose.model("empowermentFormDetails");
 
 const createEmpowerment = async (req, res) => {
+  console.log(req.body, req.files)
     const requiredFields = [
       'name', 'placeOfBirth', 'dateOfBirth', 'fullAddress', 'state', 'pinCode',
       'qualification', 'collegeUniversity', 'pursuingLLB', 'yearOfPassing', 'email',

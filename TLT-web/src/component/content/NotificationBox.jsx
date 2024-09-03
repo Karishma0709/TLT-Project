@@ -67,6 +67,7 @@ const NotificationBox = () => {
                       href={notification.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => console.log(notification.url)}
                     >
                       <span className="latest text-black"> Click Here!</span>
                     </a>
