@@ -9,7 +9,9 @@ const RegistrationForm = () => {
   const [cities, setCities] = useState([]);
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  
+  const [aadharCard, setAadhar] = useState("");
+  const [picture, setPicture] = useState("");
+
   const [data, setData] = useState({
     name: "",
     placeOfBirth: "",
@@ -38,10 +40,10 @@ const RegistrationForm = () => {
     institution: "",
   });
 
-  const [files, setFiles] = useState({
-    picture: null,
-    aadharCard: null,
-  });
+  // const [files, setFiles] = useState({
+  //   picture: null,
+  //   aadharCard: null,
+  // });
   
   useEffect(() => {
    
@@ -67,44 +69,62 @@ const RegistrationForm = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setFiles((prev) => ({
-      ...prev,
-      [name]: files[0],
-    }));
-  };
+  // const handleFileChange = (e) => {
+  //   const { name, files } = e.target;
+  //   setFiles((prev) => ({
+  //     ...prev,
+  //     [name]: files[0],
+  //   }));
+  // };
 
  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => formData.append(key, data[key]));
-    Object.keys(files).forEach((key) => {
-      if (files[key]) {
-        formData.append(key, files[key]);
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("placeOfBirth", data.placeOfBirth);
+      formData.append("dateOfBirth", data.dateOfBirth);
+      formData.append("fullAddress", data.fullAddress);
+      formData.append("state", data.state);
+      formData.append("pinCode", data.pinCode);
+      formData.append("qualification", data.qualification);
+      formData.append("collegeUniversity", data.collegeUniversity);
+      formData.append("pursuingLLB", data.pursuingLLB || "");
+      formData.append("yearOfPassing", data.yearOfPassing);
+      formData.append("email", data.email);
+      formData.append("fatherName", data.fatherName);
+      formData.append("motherName", data.motherName);
+      formData.append("permanentAddress", data.permanentAddress);
+      formData.append("permanentState", data.permanentState);
+      formData.append("permanentCity", data.permanentCity);
+      formData.append("institution", data.institution);
+      formData.append("feesPaid", data.feesPaid);
+      formData.append("amountPaid", data.amountPaid);
+      formData.append("oldStudentOfShubhamSir", data.oldStudentOfShubhamSir);
+      formData.append("prelims", data.prelims);
+      formData.append("mains", data.mains);
+      formData.append("targetedstate", data.targetedstate);
+      formData.append("score", data.score);
+      formData.append("year", data.year);
+    
+      if (picture) formData.append("picture", picture);
+      if (aadharCard) formData.append("aadharCard", aadharCard);
+    
+      try {
+        const response = await axios.post("http://localhost:8080/api/fastTrackForm", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+    
+        if (response.status === 201) {
+          toast.success("Form submitted successfully");
+        }
+      } catch (error) {
+        toast.error("Error submitting form: " + error.message);
       }
-    });
-
-    try {
-      // const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
-      //   headers: { 'Content-Type':'multipart/form-data' },
-      // });
-      const response = await axios.post('http://localhost:8080/api/fastTrackForm',{
-        method:"POST",
-        body:"formData"
-      })
-
-      console.log(response.data);
-      if (response.status === 201) {
-        alert('Form submitted successfully');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
+    };
 
   return (
     <div className="text-justify mx-auto sm:px-10 px-5 md:px-10 lg:px-40 py-0 ">
@@ -128,7 +148,7 @@ const RegistrationForm = () => {
               name="picture"
               id="picture"
               autoComplete="off"
-              onChange={handleFileChange}              
+              onChange={(e)=>setPicture(e.target.files[0])}              
               className="border rounded w-full p-2"/>
           </div>
           
@@ -480,7 +500,7 @@ const RegistrationForm = () => {
                name="aadharCard"
                id="aadhar-card"
                autoComplete="off"
-               onChange={handleFileChange}
+               onChange={(e)=>setAadhar(e.target.files[0])}
                className="border rounded w-full p-2"/>
            </div>
 
