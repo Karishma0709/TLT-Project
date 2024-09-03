@@ -26,7 +26,7 @@ const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const PyPaperPDF = require("../controllers/PyPaperPdf");
 const FastTrackFormDetails = require('../controllers/fastractFormController');
-
+const getFastTrackForms = require('../controllers/fastractFormController');
 
 // Static file setup
 router.use("/files", express.static("files"));
