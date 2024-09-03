@@ -27,7 +27,7 @@ const FastTrackFormSchema = new mongoose.Schema(
       required: true,
     },
     pinCode: {
-      type: String,
+      type: Number,
       required: true,
     },
     qualification: {
