@@ -128,15 +128,13 @@ router.get('/get-files', async (req, res) => {
     }
 });
 
-// Fast Track Form routes
-// router.post('/fastTrackForm', fastTrackUpload.fields([
-//     { name: 'picture', maxCount: 1 },
-//     { name: 'aadharCard', maxCount: 1 }
-// ]), FastTrackFormDetails);
 
 router.post('/fastTrackForm', fastTrackUpload.fields([
     { name: 'picture', maxCount: 1 },
     { name: 'aadharCard', maxCount: 1 }
 ]), FastTrackFormDetails);
+
+router.get('/getfastTrackForm', getFastTrackForms);
+
 
 module.exports = router;

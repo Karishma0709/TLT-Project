@@ -79,4 +79,15 @@ const FastTrackFormDetails = async (req, res) => {
   }
 };
 
+
+const getFastTrackForm=async(req,res)=>{
+  try{
+const fastTrackFormData=await FastTrackForm.find()
+res.status(200).json({ fastTrackFormData });
+  }
+  catch(error){
+res.status(500).json({error:"Internal server error."})
+  }
+}
+
 module.exports = FastTrackFormDetails;
