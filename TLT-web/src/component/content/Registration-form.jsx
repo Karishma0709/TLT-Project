@@ -27,7 +27,6 @@ const RegistrationForm = () => {
     permanentAddress: "",
     permanentState: "",
     permanentCity: "",
-    aadharCard: "",
     feesPaid: "",
     amountPaid: "",
     prelims: "",
@@ -45,8 +44,8 @@ const RegistrationForm = () => {
   });
   
   useEffect(() => {
-    // Fetch states when component mounts
-    const fetchedStates = State.getStatesOfCountry('IN'); // 'IN' is for India, change if needed
+   
+    const fetchedStates = State.getStatesOfCountry('IN'); 
     setStates(fetchedStates);
   }, []);
 
@@ -90,9 +89,14 @@ const RegistrationForm = () => {
     });
 
     try {
-      const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
-        headers: { 'Content-Type':'multipart/form-data' },
-      });
+      // const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
+      //   headers: { 'Content-Type':'multipart/form-data' },
+      // });
+      const response = await axios.post('http://localhost:8080/api/fastTrackForm',{
+        method:"POST",
+        body:"formData"
+      })
+
       console.log(response.data);
       if (response.status === 201) {
         alert('Form submitted successfully');
