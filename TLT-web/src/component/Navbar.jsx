@@ -67,13 +67,13 @@ const Navbar = () => {
     >
       Unpaid
     </NavLink>
-    <div className="relative group">
-      <button
-        className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+
+      <NavLink
+        className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md "  to="/syllabus"
       >
         Syllabus
-      </button>
-    </div>
+      </NavLink>
+
   </div>
 </div>
 

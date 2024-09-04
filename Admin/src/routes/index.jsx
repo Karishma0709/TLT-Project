@@ -15,6 +15,7 @@ import Dashboard from "../components/Dashboard";
 import Unpaid from "../components/Unpaid";
 import EmpowermentAdmin from "../components/EmpowermentAdmin";
 import FastTrackForm from "../components/FastTrackForm";
+import SyllabusUpload from "../components/SyllabusUpload";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
           {
             path: "FastTrackForm",
             element: <FastTrackForm/>,
+          },
+          {
+            path: "SyllabusUpload",
+            element: <SyllabusUpload/>,
           },
         ],
       },
