@@ -82,7 +82,7 @@ const EmpowermentAdmin = () => {
                     <td>{data._id}</td>
                     <td>
                       <img
-                        src={data.photo}
+                        src={`http://localhost:8080/notifiesfiles/${data.photo}`}
                         alt="User's Photo"
                         onError={(e) => console.log("Image failed to load:", e)}
                       />
@@ -267,7 +267,7 @@ const EmpowermentAdmin = () => {
                     </td>
                     <td>
                       <img
-                        src={data.aadharCard}
+                        src={`http://localhost:8080/notifiesfiles/${data.aadharCard}`}
                         alt="User's Photo"
                         onError={(e) => console.log("Image failed to load:", e)}
                       />
