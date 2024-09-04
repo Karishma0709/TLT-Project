@@ -36,8 +36,8 @@ const NotificationBox = () => {
   };
 
   return (
-    <div className="h-[400px] text-black p-4 overflow-hidden">
-      <h2 className="text-3xl font-bold mb-4 text-center">
+    <div className=" text-black p-4 overflow-hidden">
+      <h2 className="text-3xl font-bold my-5 text-center">
         Latest <span className="text-primary">Notifications</span>
       </h2>
       {loading ? (

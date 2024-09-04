@@ -90,4 +90,4 @@ res.status(500).json({error:"Internal server error."})
   }
 }
 
-module.exports = FastTrackFormDetails;
+module.exports = { FastTrackFormDetails, getFastTrackForm };

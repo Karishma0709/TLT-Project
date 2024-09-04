@@ -9,10 +9,10 @@ export const HeaderContent = ({ isHome }) => {
   return (
     <div>
       {isHome ? (
-        <div className="my-10 md:my-20">
-          <div className="mr-5 md:mr-20">
-            <div className="flex flex-col lg:flex-row gap-10 md:justify-between">
-              <div className="w-full lg:w-2/3 mb-6 lg:mb-0 banner1">
+        <div className="my-5">
+          <div style={{backgroundColor:"#B6C2BC"}}>
+            <div className="flex flex-col lg:flex-row md:justify-between">
+              <div className="w-full lg:w-3/4 mb-6 lg:mb-0 banner1">
                 {/* <div className="uppercase font-semibold text-xs inline-block tracking-wider ">
                   <Headings heading={'h6'} style={'text-shadow'}>
                     WELCOME TO TLT JUDICIAL ACADEMY
@@ -27,7 +27,7 @@ export const HeaderContent = ({ isHome }) => {
                 
               </div>
               
-              <div className="w-full lg:w-1/3 grid grid-flow-row lg:justify-end justify-center  ">
+              <div className="w-full lg:w-1/4 grid grid-flow-row justify-center  ">
                 {/* NotificationBox component */}
                 <NotificationBox />
               </div>

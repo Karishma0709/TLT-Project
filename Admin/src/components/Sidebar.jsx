@@ -112,7 +112,7 @@ const Sidebar = () => {
               MPCJ form
             </Link>
             <Link
-              to={"fastTractForm"}
+              to={"FastTrackForm"}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >FastTrack Form Data
             </Link>
