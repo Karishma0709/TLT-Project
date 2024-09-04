@@ -36,6 +36,14 @@ const EmpowermentAdmin = () => {
     }
   };
 
+  const deleteEdata = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/Edelete/${id}`);
+      getdata(); // Refresh the data after delete
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
   return (
     <div>
       <h1>Empowerment Data</h1>
@@ -66,6 +74,7 @@ const EmpowermentAdmin = () => {
             <th>Old Student of Shubham Sir</th>
             <th>Institution</th>
             <th>timestamps</th>
+            <th>Oprations</th>
             {edata === null
               ? ""
               : edata.map((data, index) => (
@@ -302,10 +311,16 @@ const EmpowermentAdmin = () => {
                     <td>{data.timestamps}</td>
                     <td>
                       <button
-                        className="bg-slate-600 text-white"
+                        className="bg-slate-600 text-white p-2 rounded-2xl"
                         onClick={() => UpdateEdata(data._id)}
                       >
                         Update
+                      </button>
+                      <button
+                        className="bg-purple-500 text-white p-2 rounded-2xl"
+                        onClick={() => deleteEdata(data._id)}
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>

@@ -22,6 +22,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
+app.use('/notifiesfiles', express.static('notifiesfiles'));
+
+
 
 app.get('/', (req, res) => {
   res.send('Server is running!');

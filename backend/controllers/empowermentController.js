@@ -114,12 +114,29 @@ res.status(201).json(updateUser)
 }catch(error){
   console.error(error);
   res.json({ status: error.message });
+}}
+
+
+const Edelete= async(req,res)=>{
+try{
+const id=req.params.id;
+const userExist=await ESchema.findById({_id:id})
+if(!userExist){
+return res.status(404).json({message:"User Not Found."})
+}
+await  ESchema.findByIdAndDelete(id)
+res.status(201).json({message:"user Deletes Successfully"})
+}catch(error){
+  console.error(error);
+  res.json({ status: error.message });
 }
 }
+
 
   
 module.exports = {
     createEmpowerment,
     getempowerment,
-    Update
+    Update,
+    Edelete
 };
