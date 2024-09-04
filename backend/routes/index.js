@@ -45,8 +45,8 @@ const multerStorage = (directory) => multer.diskStorage({
 const upload = multer({ storage: multerStorage('./files') });
 const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
-// const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
 const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
+// const fastTrackUpload = multer({ storage: mult/erStorage('./fastTrackfiles') });
 // Define routes
 router.post('/prepaper', createPyPapersDetail);
 router.post('/tpmForm', saveTpmFormDetails);
@@ -75,7 +75,7 @@ router.get('/getnotifies', notifyController.getNotifications);
 
 ////////empowermentForm
 
-router.use("/empowermentForm", express.static("notifiesfiles"));
+// router.use("/empowermentForm", express.static("notifiesfiles"));
 
 
 const empowermentStorage = multer.diskStorage({
@@ -101,8 +101,8 @@ router.post(
 );
 router.get('/getempowermentForm', empowermentController.getempowerment);
 
-
-
+router.put("/Eupdate/:id",empowermentController.Update)
+router.delete("/Edelete/:id",empowermentController.Edelete)
 
 
 
