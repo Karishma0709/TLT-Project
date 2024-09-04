@@ -62,6 +62,7 @@ const EmpowermentAdmin = () => {
             <th>collegeUniversity</th>
             <th>Pursuing LL.B</th>
             <th>Year Of Passing</th>
+            <th>Batch</th>
             <th>Email</th>
             <th>Father's Name</th>
             <th>Mother's Name</th>
@@ -185,6 +186,16 @@ const EmpowermentAdmin = () => {
                         onChange={(e) => handleChange(e, data._id)}
                       />
                     </td>
+
+                    <td>
+                      <input
+                        type="text"
+                        name="Batch"
+                        value={editData[data._id]?.Batch || data.Batch || ""}
+                        onChange={(e) => handleChange(e, data._id)}
+                      />
+                    </td>
+
                     <td>
                       <input
                         type="Number"
