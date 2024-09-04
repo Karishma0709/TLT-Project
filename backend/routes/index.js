@@ -25,8 +25,9 @@ const marqueeDelete = require('../controllers/marqueDelete');
 const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const PyPaperPDF = require("../controllers/PyPaperPdf");
-const FastTrackFormDetails = require('../controllers/fastractFormController');
-const getFastTrackForms = require('../controllers/fastractFormController');
+const { FastTrackFormDetails, getFastTrackForm } = require("../controllers/fastractFormController");
+
+
 
 // Static file setup
 router.use("/files", express.static("files"));
@@ -143,7 +144,7 @@ router.post('/fastTrackForm', fastTrackUpload.fields([
     { name: 'aadharCard', maxCount: 1 }
 ]), FastTrackFormDetails);
 
-router.get('/getfastTrackForm', getFastTrackForms);
+router.get('/getfastTrackForm', getFastTrackForm);
 
 
 module.exports = router;
