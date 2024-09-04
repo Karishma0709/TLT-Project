@@ -56,6 +56,10 @@ const SummaryApi = {
             url:`${backendDomain}/api/getempowermentForm`,
             method: "get",
           },
+          FastTractFormAdmin: {
+            url:`${backendDomain}/api/getFastTrackForm`,
+            method: "get",
+          },
 
 }
 export default SummaryApi;

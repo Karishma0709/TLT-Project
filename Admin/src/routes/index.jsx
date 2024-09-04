@@ -14,7 +14,8 @@ import Prevyearpaperpdf from "../components/Prevyearpaperpdf";
 import Dashboard from "../components/Dashboard";
 import Unpaid from "../components/Unpaid";
 import EmpowermentAdmin from "../components/EmpowermentAdmin";
-import FastTractForm from "../components/FastTractForm";
+import FastTrackForm from "../components/FastTrackForm";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -77,8 +78,8 @@ export const router = createBrowserRouter([
             element: <EmpowermentAdmin />,
           },
           {
-            path: "fastTrackForm",
-            element: <FastTractForm/>,
+            path: "FastTrackForm",
+            element: <FastTrackForm/>,
           },
         ],
       },
