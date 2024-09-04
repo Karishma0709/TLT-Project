@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
 
       },
       {
-        path:"syllabus-study-Essentials",
+        path:"syllabus",
         element:<Syllabus/>
 
       },
@@ -140,6 +140,7 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignUp/>,
        },
+    
       // {
       //   path: "mockTest/miniMock",
       //   element: <MiniMockTest/>,

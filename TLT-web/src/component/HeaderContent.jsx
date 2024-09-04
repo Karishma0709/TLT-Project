@@ -28,7 +28,7 @@ export const HeaderContent = ({ isHome }) => {
               </div>
               
               <div className="w-full lg:w-1/4 grid grid-flow-row justify-center  ">
-                {/* NotificationBox component */}
+               
                 <NotificationBox />
               </div>
             </div>
