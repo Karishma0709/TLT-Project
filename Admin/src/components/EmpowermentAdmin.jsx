@@ -49,32 +49,33 @@ const EmpowermentAdmin = () => {
       <h1>Empowerment Data</h1>
       <div>
         <div>
-          <table className="shadow-md rounded-lg border-b border-gray-200 rounded-lg">
-            <th className="bg-gray-800 text-white">s.no</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Choose picture:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Name:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Place Of Birth:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Date Of Birth:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Full Address:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">State:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Pin Code:</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Qualification</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">collegeUniversity</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Pursuing LL.B</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Year Of Passing</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Email</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Father's Name</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Mother's Name</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Permanent Address</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">State</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">City</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Upload Aadhar (Front and Back)</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Online / UPI</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Amount Paid</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Old Student of Shubham Sir</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Institution</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">timestamps</th>
-            <th className="bg-gray-800 text-white text-left py-2 px-4">Oprations</th>
+          <table className="border">
+            <th>s.no</th>
+            <th>Choose picture:</th>
+            <th>Name:</th>
+            <th>Place Of Birth:</th>
+            <th>Date Of Birth:</th>
+            <th>Full Address:</th>
+            <th>State:</th>
+            <th>Pin Code:</th>
+            <th>Qualification</th>
+            <th>collegeUniversity</th>
+            <th>Pursuing LL.B</th>
+            <th>Year Of Passing</th>
+            <th>Batch</th>
+            <th>Email</th>
+            <th>Father's Name</th>
+            <th>Mother's Name</th>
+            <th>Permanent Address</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Upload Aadhar (Front and Back)</th>
+            <th>Online / UPI</th>
+            <th>Amount Paid</th>
+            <th>Old Student of Shubham Sir</th>
+            <th>Institution</th>
+            <th>timestamps</th>
+            <th>Oprations</th>
             {edata === null
               ? ""
               : edata.map((data, index) => (
@@ -185,6 +186,16 @@ const EmpowermentAdmin = () => {
                         onChange={(e) => handleChange(e, data._id)}
                       />
                     </td>
+
+                    <td>
+                      <input
+                        type="text"
+                        name="Batch"
+                        value={editData[data._id]?.Batch || data.Batch || ""}
+                        onChange={(e) => handleChange(e, data._id)}
+                      />
+                    </td>
+
                     <td>
                       <input
                         type="Number"

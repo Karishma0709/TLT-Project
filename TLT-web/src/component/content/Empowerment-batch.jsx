@@ -5,6 +5,7 @@ import axios from "axios";
 const EmpowermentBatch = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [Batch, setBatch] = useState("");
   const [aadharCard, setAadhar] = useState("");
   const [photo, setImage] = useState("");
   // const [pursuingLLB, setPursuingLLB] = useState(false);
@@ -20,6 +21,7 @@ const EmpowermentBatch = () => {
     collegeUniversity: "",
     pursuingLLB: "",
     yearOfPassing: "",
+    Batch: "",
     email: "",
     fatherName: "",
     motherName: "",
@@ -47,9 +49,11 @@ const EmpowermentBatch = () => {
     formData.append("pinCode", data.pinCode);
     formData.append("qualification", data.qualification);
     formData.append("collegeUniversity", data.collegeUniversity);
-    formData.append("pursuingLLB", data.pursuingLLB || "");
+    formData.append("pursuingLLB", data.pursuingLLB ? "yes" : "no");
     // Ensure value is set
     formData.append("yearOfPassing", data.yearOfPassing);
+    formData.append("Batch", data.Batch);
+
     formData.append("email", data.email);
     formData.append("fatherName", data.fatherName);
     formData.append("motherName", data.motherName);
@@ -123,6 +127,14 @@ const EmpowermentBatch = () => {
   };
 
   console.log("data", data);
+
+  const Batchs = [
+    { id: 1, name: "Batch 1" },
+    { id: 2, name: "Batch 2" },
+    { id: 3, name: "Batch 3" },
+    { id: 4, name: "Batch 4" },
+    { id: 5, name: "Batch 5" },
+  ];
 
   const states = [
     { id: 1, name: "Andaman and Nicobar Islands" },
@@ -933,7 +945,7 @@ const EmpowermentBatch = () => {
       <div className="text-justify mx-auto sm:px-10 px-5 md:px-10 lg:px-40 py-0 ">
         <div className="mt-4 ">
           <h2 className="text-white bg-red-500 text-center text-3xl py-3 px-4 sm:px-20">
-            EMPOWERMENT BATCH 
+            EMPOWERMENT BATCH
           </h2>
         </div>
         <br />
@@ -1152,6 +1164,35 @@ const EmpowermentBatch = () => {
                 className="border rounded w-full p-2"
                 required
               />
+            </div>
+
+            <div className="sm:flex items-center">
+              <label
+                htmlFor="state"
+                className="block text-left font-bold text-lg sm:w-1/4"
+              >
+                Batch
+              </label>
+              <select
+                className="form-control border rounded w-full p-2"
+                name="Batch"
+                id="Batch"
+                onChange={(e) => {
+                  setBatch(e.target.value);
+                  setData((prev) => ({ ...prev, Batch: e.target.value }));
+                }}
+                value={data.Batch}
+                required
+              >
+                <option value="" disabled>
+                  Batch
+                </option>
+                {Batchs.map((state) => (
+                  <option key={state.id} value={state.id}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="sm:flex items-center">

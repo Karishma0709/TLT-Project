@@ -52,6 +52,10 @@ const empowermentFormSchema = new Schema(
       type: Number,
       required: true,
     },
+    Batch: {
+      type:String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
