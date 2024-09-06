@@ -25,7 +25,7 @@ const marqueeDelete = require('../controllers/marqueDelete');
 const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const PyPaperPDF = require("../controllers/PyPaperPdf");
-const { FastTrackFormDetails, getFastTrackForm } = require("../controllers/fastractFormController");
+const { FastTrackFormDetails, getFastTrackForm, deleteFastTrackForm , updateFastTrackForm} = require("../controllers/fastractFormController");
 
 
 
@@ -149,6 +149,7 @@ router.post('/fastTrackForm', fastTrackUpload.fields([
 ]), FastTrackFormDetails);
 
 router.get('/getfastTrackForm', getFastTrackForm);
-
+router.put("/updateFastTrackForm/:id", updateFastTrackForm); 
+router.delete("/deleteFastTrackForm/:id", deleteFastTrackForm);
 
 module.exports = router;

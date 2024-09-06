@@ -9,7 +9,6 @@ const FastTrackFormDetails = async (req, res) => {
       return res.status(400).json({ error: 'Both picture and aadharCard fields are required.' });
     }
 
-
     const {
       name,
       placeOfBirth,
@@ -79,7 +78,7 @@ const FastTrackFormDetails = async (req, res) => {
   }
 };
 
-
+// get the data from backend to admin portal
 const getFastTrackForm=async(req,res)=>{
   try{
 const fastTrackFormData=await FastTrackForm.find()
@@ -90,4 +89,52 @@ res.status(500).json({error:"Internal server error."})
   }
 }
 
-module.exports = { FastTrackFormDetails, getFastTrackForm };
+
+// Delete FastTrackForm Controller
+const deleteFastTrackForm = async (req, res) => {
+  try {
+    const formId = req.params.id; // Get form ID from request parameters
+
+    const deletedForm = await FastTrackForm.findByIdAndDelete(formId);
+
+    if (!deletedForm) {
+      return res.status(404).json({ error: "Form not found" });
+    }
+
+    res.status(200).json({ message: "Form deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+// Update FastTrackForm by ID
+const updateFastTrackForm = async (req, res) => {
+  try {
+    console.log("Update Request received:", req.body);
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    if (!updatedData || Object.keys(updatedData).length === 0) {
+      return res.status(400).json({ message: "No data provided for update" });
+    }
+
+    const updatedForm = await FastTrackForm.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedForm) {
+      return res.status(404).json({ message: "Form not found" });
+    }
+
+    res.status(200).json(updatedForm);
+  } catch (error) {
+    console.error("Error updating form:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+module.exports = { FastTrackFormDetails, getFastTrackForm, deleteFastTrackForm, updateFastTrackForm};
