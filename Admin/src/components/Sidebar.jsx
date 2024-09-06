@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 // import { useSelector } from 'react-redux'
-import { FaRegCircleUser } from "react-icons/fa6";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import ROLE from "../Common/Role";
+import { FaRegCircleUser } from 'react-icons/fa6';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import ROLE from '../Common/Role';
 
 const Sidebar = () => {
   // const user = useSelector(state => state?.user?.user)
@@ -88,73 +88,74 @@ const Sidebar = () => {
             </Link> */}
 
             <Link
-              to={"user"}
+              to={'user'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               All Users
             </Link>
             <Link
-              to={"py-paper"}
+              to={'py-paper'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Previou Year Paper
             </Link>
             <Link
-              to={"Prevyearpaperpdf"}
+              to={'Prevyearpaperpdf'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Previou Year Paper Pdf
             </Link>
             <Link
-              to={"mpcj-form"}
+              to={'mpcj-form'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               MPCJ form
             </Link>
             <Link
-              to={"FastTrackForm"}
+              to={'FastTrackForm'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
-            >FastTrack Form Data
+            >
+              FastTrack Form Data
             </Link>
             <Link
-              to={"Unpaid"}
+              to={'Unpaid'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Unpaid Products
             </Link>
             <Link
-              to={"EmpowermentAdmin"}
+              to={'EmpowermentAdmin'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               EmpowermentAdmin
             </Link>
             <Link
-              to={"tpm-form"}
+              to={'tpm-form'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               TPM form
             </Link>
             <Link
-              to={"update-headline"}
+              to={'update-headline'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               HeadLine
             </Link>
             <Link
-              to={"notification"}
+              to={'notification'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Notification
             </Link>
 
             <Link
-              to={"SyllabusUpload"}
+              to={'SyllabusUpload'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Upload Syllabus
             </Link>
             <Link
-              to={"info-marquee"}
+              to={'info-marquee'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
             >
               Setting

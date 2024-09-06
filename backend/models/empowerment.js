@@ -47,7 +47,7 @@ const empowermentFormSchema = new Schema(
       type: String,
       enum: ["yes", "no"],
       required: true,
-    },
+    }, 
     yearOfPassing: {
       type: Number,
       required: true,

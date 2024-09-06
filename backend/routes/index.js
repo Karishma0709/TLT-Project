@@ -72,6 +72,10 @@ router.post("/PyPaperPDF", PyPaperPDF);
 // Notification routes
 router.post("/notifies", notifyUpload.single("url"), notifyController.createNotification);
 router.get('/getnotifies', notifyController.getNotifications);
+router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
+router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
+
+
 
 ////////empowermentForm
 
