@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 // Import controllers
-const { saveTpmFormDetails, findTpmFormDetails } = require('../controllers/tpmController');
+const { saveTpmFormDetails, findTpmFormDetails, updateTpmFormDetails, deleteTpmFormDetails } = require('../controllers/tpmController');
 const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
 const userSignUpController = require('../controllers/userSingUp');
@@ -47,11 +47,26 @@ const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
 // const fastTrackUpload = multer({ storage: mult/erStorage('./fastTrackfiles') });
-// Define routes
+
+
+
+// Previous paper routes
 router.post('/prepaper', createPyPapersDetail);
+
+
+// TPM routes
 router.post('/tpmForm', saveTpmFormDetails);
+router.get("/tmp-data", tpmGetData);
+router.put('/updateTpmFormDetails', updateTpmFormDetails);
+router.delete('/deleteTpmFormDetails', deleteTpmFormDetails);
+// router.get('/tpmForm', findTpmFormDetails);
+
+
+
+
+
 router.post("/mpcjForm", saveMPCJFormDetails);
-router.get('/tpmForm', findTpmFormDetails);
+
 
 router.post('/signUp', userSignUpController);
 router.post('/signIn', userSignInController);
@@ -62,7 +77,7 @@ router.get("/registerUser", allRegisterUser);
 router.get("/all-papers", allPyPapers);
 router.get("/mpcj-data", mpcjGetData);
 router.post("/marquee", saveMarquee);
-router.get("/tmp-data", tpmGetData);
+
 router.get("/marquee-data/:id", marqueeGetData);
 router.put("/marquee-data/:id", marqueeUpdate);
 router.delete("/marquee-delete/:id", marqueeDelete);

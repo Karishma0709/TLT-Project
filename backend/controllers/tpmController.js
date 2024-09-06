@@ -1,5 +1,6 @@
 const TpmFormDetails = require('../models/tpm');
 
+// Save TPM form details
 const saveTpmFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;
   console.log('Received request to save TPM form details:', req.body);
@@ -20,6 +21,7 @@ const saveTpmFormDetails = async (req, res) => {
   }
 };
 
+// Find all TPM form details
 const findTpmFormDetails = async (req, res) => {
   console.log('Received request to find TPM form details');
 
@@ -32,4 +34,52 @@ const findTpmFormDetails = async (req, res) => {
   }
 };
 
-module.exports = { saveTpmFormDetails, findTpmFormDetails };
+// Update TPM form details by ID
+const updateTpmFormDetails = async (req, res) => {
+  const { id } = req.params;
+  const { name, email, contact, purchasedProduct } = req.body;
+  console.log(`Received request to update TPM form details for ID: ${id}`);
+
+  try {
+    const updatedTpmFormDetails = await TpmFormDetails.findByIdAndUpdate(
+      id,
+      { name, email, contact, purchasedProduct },
+      { new: true }
+    );
+
+    if (!updatedTpmFormDetails) {
+      return res.status(404).send({ message: 'TPM form details not found' });
+    }
+
+    res.status(200).send({ message: 'TPM form details updated successfully', data: updatedTpmFormDetails });
+  } catch (error) {
+    console.error('Error updating TPM form details:', error);
+    res.status(400).send({ message: 'Error updating TPM form details', error });
+  }
+};
+
+// Delete TPM form details by ID
+const deleteTpmFormDetails = async (req, res) => {
+  const { id } = req.params;
+  console.log(`Received request to delete TPM form details for ID: ${id}`);
+
+  try {
+    const deletedTpmFormDetails = await TpmFormDetails.findByIdAndDelete(id);
+
+    if (!deletedTpmFormDetails) {
+      return res.status(404).send({ message: 'TPM form details not found' });
+    }
+
+    res.status(200).send({ message: 'TPM form details deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting TPM form details:', error);
+    res.status(400).send({ message: 'Error deleting TPM form details', error });
+  }
+};
+
+module.exports = {
+  saveTpmFormDetails,
+  findTpmFormDetails,
+  updateTpmFormDetails,
+  deleteTpmFormDetails,
+};
