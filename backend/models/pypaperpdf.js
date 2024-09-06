@@ -1,14 +1,18 @@
 const mongoose=require("mongoose")
-const PdfSchema=mongoose.Schema({
+const pyPaperSchema=mongoose.Schema({
     name:{
         type:String,
         required:true
     },
-    image:{
+    pyimage:{
+        data:Buffer,
+        contentType:String
+    },
+    pypdf:{
         data:Buffer,
         contentType:String
     }
 })
 
 
-module.exports=PdfModule=mongoose.model('PdfModule',PdfSchema)
+module.exports=pyPaperModule=mongoose.model('pyPaperModule',pyPaperSchema)

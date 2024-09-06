@@ -30,17 +30,22 @@ const Details = () => {
 
   const handleUpdate = (paperId) => {
     // Implement the update functionality here
-    toast.info(`Update functionality for paper ID: ${paperId} will be implemented.`);
+    toast.info(
+      `Update functionality for paper ID: ${paperId} will be implemented.`
+    );
   };
 
   const handleDelete = (paperId) => {
     // Implement the delete functionality here
-    toast.warn(`Delete functionality for paper ID: ${paperId} will be implemented.`);
+    toast.warn(
+      `Delete functionality for paper ID: ${paperId} will be implemented.`
+    );
   };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Details</h2>
+
       <table className="min-w-full border-collapse bg-white">
         <thead>
           <tr className="bg-gray-800 text-white">
@@ -54,12 +59,17 @@ const Details = () => {
         </thead>
         <tbody>
           {allPapers.map((paper, index) => (
-            <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
+            <tr
+              key={index}
+              className="border-b border-gray-200 hover:bg-gray-100"
+            >
               <td className="p-3">{index + 1}</td>
               <td className="p-3">{paper.name}</td>
               <td className="p-3">{paper.email}</td>
               <td className="p-3">{paper.number}</td>
-              <td className="p-3">{new Date(paper.createdAt).toLocaleDateString()}</td>
+              <td className="p-3">
+                {new Date(paper.createdAt).toLocaleDateString()}
+              </td>
               <td className="p-3 flex gap-2">
                 <button
                   onClick={() => handleUpdate(paper._id)}

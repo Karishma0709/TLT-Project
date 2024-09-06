@@ -39,6 +39,7 @@ const TpmData = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
+  
       <h2 className="text-2xl font-bold text-gray-800 mb-4">TPM Data</h2>
       <table className="min-w-full border-collapse bg-white">
         <thead>
@@ -54,7 +55,10 @@ const TpmData = () => {
         </thead>
         <tbody>
           {tpmData.map((data, index) => (
-            <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
+            <tr
+              key={index}
+              className="border-b border-gray-200 hover:bg-gray-100"
+            >
               <td className="p-3">{index + 1}</td>
               <td className="p-3">{data.name}</td>
               <td className="p-3">{data.email}</td>
