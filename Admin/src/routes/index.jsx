@@ -1,90 +1,90 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Login from "../pages/Login";
-import Sidebar from "../components/Sidebar";
-import SignUp from "../pages/SignUp";
-import User from "../components/User";
-import Details from "../components/Details";
-import MpcjData from "../components/MpcjData";
-import TpmData from "../components/TpmData";
-import InfoMarquee from "../components/InfoMarquee";
-import Notification from "../components/Notification";
-import UpdateMarquee from "../components/UpdateMarquee";
-import Prevyearpaperpdf from "../components/Prevyearpaperpdf";
-import Dashboard from "../components/Dashboard";
-import Unpaid from "../components/Unpaid";
-import EmpowermentAdmin from "../components/EmpowermentAdmin";
-import FastTrackForm from "../components/FastTrackForm";
-import SyllabusUpload from "../components/SyllabusUpload";
+import { createBrowserRouter } from 'react-router-dom';
+import App from '../App';
+import Login from '../pages/Login';
+import Sidebar from '../components/Sidebar';
+import SignUp from '../pages/SignUp';
+import User from '../components/User';
+import Details from '../components/Details';
+import MpcjData from '../components/MpcjData';
+import TpmData from '../components/TpmData';
+import InfoMarquee from '../components/InfoMarquee';
+import Notification from '../components/Notification';
+import UpdateMarquee from '../components/UpdateMarquee';
+import Prevyearpaperpdf from '../components/Prevyearpaperpdf';
+import Dashboard from '../components/Dashboard';
+import Unpaid from '../components/Unpaid';
+import EmpowermentAdmin from '../components/EmpowermentAdmin';
+import FastTrackForm from '../components/FastTrackForm';
+import SyllabusUpload from '../components/SyllabusUpload';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "",
+        path: '',
         element: <Login />,
       },
       {
-        path: "sign-up",
+        path: 'sign-up',
         element: <SignUp />,
       },
       {
-        path: "dashboard",
+        path: 'dashboard',
         element: <Sidebar />,
         children: [
           {
-            path: "dashboardcards",
+            path: 'dashboardcards',
             element: <Dashboard />,
           },
           {
-            path: "user",
+            path: 'user',
             element: <User />,
           },
           {
-            path: "py-paper",
+            path: 'py-paper',
             element: <Details />,
           },
           {
-            path: "mpcj-form",
+            path: 'mpcj-form',
             element: <MpcjData />,
           },
           {
-            path: "tpm-form",
+            path: 'tpm-form',
             element: <TpmData />,
           },
           {
-            path: "info-marquee",
+            path: 'info-marquee',
             element: <InfoMarquee />,
           },
           {
-            path: "notification",
+            path: 'notification',
             element: <Notification />,
           },
           {
-            path: "update-headline",
+            path: 'update-headline',
             element: <UpdateMarquee />,
           },
           {
-            path: "Prevyearpaperpdf",
+            path: 'Prevyearpaperpdf',
             element: <Prevyearpaperpdf />,
           },
           {
-            path: "Unpaid",
+            path: 'Unpaid',
             element: <Unpaid />,
           },
           {
-            path: "EmpowermentAdmin",
+            path: 'EmpowermentAdmin',
             element: <EmpowermentAdmin />,
           },
           {
-            path: "FastTrackForm",
-            element: <FastTrackForm/>,
+            path: 'FastTrackForm',
+            element: <FastTrackForm />,
           },
           {
-            path: "SyllabusUpload",
-            element: <SyllabusUpload/>,
+            path: 'SyllabusUpload',
+            element: <SyllabusUpload />,
           },
         ],
       },
