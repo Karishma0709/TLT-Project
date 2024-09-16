@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+
+
 const Consent = ({ formData = {}, files = {}, handleChange }) => {
   const navigate = useNavigate();
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -30,7 +32,7 @@ const Consent = ({ formData = {}, files = {}, handleChange }) => {
   
       if (response.status === 201) {
         // Navigate to Thank You page after successful submission
-        navigate("/thankyou");
+        navigate("/jet/thankyou");
       } else {
         alert('Form submission failed. Please try again.');
       }
