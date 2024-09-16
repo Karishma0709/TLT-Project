@@ -5,8 +5,8 @@ const Educational = ({ formData, handleChange }) => {
   const navigate = useNavigate();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const handleNext = (event) => {
-    event.preventDefault();
+  const handleNext = (e) => {
+    e.preventDefault();
     setHasSubmitted(true);
 
     const { degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree } = formData;
@@ -32,8 +32,9 @@ const Educational = ({ formData, handleChange }) => {
                 Graduation/Degree in:
               </label>
               <input
+              name="degree"
                 value={formData.degree || ""}
-                onChange={(e) => handleChange({ degree: e.target.value })}
+                onChange={handleChange}
                 className={`jinput ${formData.degree || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Degree"
@@ -50,8 +51,9 @@ const Educational = ({ formData, handleChange }) => {
                 College/University:
               </label>
               <input
+              name="college"
                 value={formData.college || ""}
-                onChange={(e) => handleChange({ college: e.target.value })}
+                onChange={handleChange}
                 className={`jinput ${formData.college || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="College/University"
@@ -70,8 +72,9 @@ const Educational = ({ formData, handleChange }) => {
                 Graduation year:
               </label>
               <input
+               name="graduationYear"
                 value={formData.graduationYear || ""}
-                onChange={(e) => handleChange({ graduationYear: e.target.value })}
+                onChange={handleChange}
                 className={`jinput ${formData.graduationYear || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Graduation year"
@@ -88,8 +91,9 @@ const Educational = ({ formData, handleChange }) => {
                 Master Graduation year:
               </label>
               <input
+              name="masterGraduationYear"
                 value={formData.masterGraduationYear || ""}
-                onChange={(e) => handleChange({ masterGraduationYear: e.target.value })}
+                onChange={handleChange}
                 className={`jinput ${formData.masterGraduationYear || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Master Graduation year"
@@ -108,8 +112,9 @@ const Educational = ({ formData, handleChange }) => {
               Master's University and Degree in:
             </label>
             <input
+            name="masterUniversityAndDegree"
               value={formData.masterUniversityAndDegree || ""}
-              onChange={(e) => handleChange({ masterUniversityAndDegree: e.target.value })}
+              onChange={handleChange}
               className={`jinput ${formData.masterUniversityAndDegree || !hasSubmitted ? "focus:outline-primary-marineBlue" : "focus:outline-primary-strawberryRed"} outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
               type="text"
               placeholder="Master's University and Degree"

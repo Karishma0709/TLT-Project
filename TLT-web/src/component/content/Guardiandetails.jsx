@@ -5,22 +5,18 @@ const GuardianDetails = ({ formData, handleChange }) => {
   const navigate = useNavigate();
   const [alerts, setAlerts] = useState({
     guardianName: false,
-    guardianProffesion: false,
+    guardianProfession: false,
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    handleChange({ [name]: value });
-  };
 
-  const handleNext = (event) => {
-    event.preventDefault();
+  const handleNext = (e) => {
+    e.preventDefault();
     console.log("handleNext called");
     console.log("Current Form Data:", formData);
 
     const newAlerts = {
       guardianName: formData.guardianName === "",
-      guardianProffesion: formData.guardianProffesion === "",
+      guardianProfession: formData.guardianProfession === "",
     };
 
     setAlerts(newAlerts);
@@ -48,7 +44,7 @@ const GuardianDetails = ({ formData, handleChange }) => {
                 </label>
                 <input
                   name="guardianName"
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   value={formData.guardianName|| ""}
                   className={`jinput ${
                     alerts.guardianName
@@ -73,11 +69,11 @@ const GuardianDetails = ({ formData, handleChange }) => {
                   Guardian Profession
                 </label>
                 <input
-                  name="guardianProffesion"
-                  onChange={handleInputChange}
-                  value={formData.guardianProffesion || ""}
+                  name="guardianProfession"
+                  onChange={handleChange}
+                  value={formData.guardianProfession || ""}
                   className={`jinput ${
-                    alerts.guardianProffesion
+                    alerts.guardianProfession
                       ? "focus:outline-primary-strawberryRed"
                       : "focus:outline-primary-marineBlue"
                   } outline outline-1 outline-neutral-lightGray rounded-[4px] p-3`}
@@ -86,7 +82,7 @@ const GuardianDetails = ({ formData, handleChange }) => {
                 />
                 <span
                   className={`${
-                    alerts.guardianProffesion ? "inline" : "hidden"
+                    alerts.guardianProfession ? "inline" : "hidden"
                   } text-primary-strawberryRed text-sm`}
                 >
                   This field is required

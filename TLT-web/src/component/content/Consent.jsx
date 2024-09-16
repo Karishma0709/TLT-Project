@@ -1,20 +1,51 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-const Consent = ({ formData, handleChange }) => {
+const Consent = ({ formData = {}, files = {}, handleChange }) => {
   const navigate = useNavigate();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setHasSubmitted(true);
 
-    const { annualIncome, accomodationRequirement } = formData;
-    if (annualIncome && accomodationRequirement) {
-      console.log("Form data before navigation:", formData);
-      navigate("/jet/thankyou");
-    } else {
-      alert("Please fill in all fields");
+    // Prepare the form data
+    const form = new FormData();
+    // Append form fields
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== undefined && formData[key] !== null) {
+        form.append(key, formData[key]);
+      }
+    });
+
+    // Append file fields
+    if (files.photo) {
+      form.append('photo', files.photo);
+    }
+    if (files.adhaarPhoto) {
+      form.append('adhaarPhoto', files.adhaarPhoto);
+    }
+
+    console.log('Form Data:', formData);
+    console.log('Files:', files);
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/createJetForm", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 201) {
+        alert("Form submitted successfully");
+        navigate("/jet/thankyou");
+      }
+    } catch (error) {
+      console.error("Error submitting form data:", error.response?.data || error.message || error);
+      alert("Failed to submit the form. Please try again.");
+    } finally {
+      console.log("Form submission attempted");
     }
   };
 
@@ -27,22 +58,23 @@ const Consent = ({ formData, handleChange }) => {
 
         <form onSubmit={handleSubmit} className="flex flex-col mt-10">
           <div className="flex flex-wrap gap-4 mb-6">
-            {/*------------- Annual Income: --------------- */}
+            {/* Annual Income */}
             <div className="flex flex-col w-full sm:w-[100%]">
               <label className="text-primary-marineBlue font-medium mb-2">
                 Annual Income:
               </label>
               <input
                 name="annualIncome"
-                onChange={(e) => handleChange({ annualIncome: e.target.value })}
+                onChange={handleChange}
                 value={formData.annualIncome}
-                className={`jinput ${
+                className={`input ${
                   hasSubmitted && !formData.annualIncome
                     ? "focus:outline-primary-strawberryRed"
                     : "focus:outline-primary-marineBlue"
                 } outline outline-1 outline-neutral-lightGray rounded-md p-3 mb-1`}
                 type="text"
                 placeholder="Annual Income"
+                aria-required="true"
               />
               {hasSubmitted && !formData.annualIncome && (
                 <span className="text-primary-strawberryRed font-medium">
@@ -50,7 +82,8 @@ const Consent = ({ formData, handleChange }) => {
                 </span>
               )}
             </div>
-            {/*------- Required Assistance --------*/}
+
+            {/* Required Assistance */}
             <div className="flex justify-center flex-col w-full sm:w-[100%]">
               <p className="text-primary-marineBlue font-medium mb-2">
                 Required Assistance for accommodation on Selection? :
@@ -58,32 +91,34 @@ const Consent = ({ formData, handleChange }) => {
               <div className="flex">
                 <label className="flex justify-center items-center text-primary-marineBlue font-medium mb-2">
                   <input
-                    onChange={() => handleChange({ accomodationRequirement: "yes" })}
-                    className={`jinput mr-2 ${
+                    onChange={handleChange}
+                    className={`input mr-2 ${
                       hasSubmitted && !formData.accomodationRequirement
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
                     type="radio"
-                    name="assistance"
+                    name="accomodationRequirement"
                     value="yes"
                     checked={formData.accomodationRequirement === "yes"}
+                    aria-required="true"
                   />
                   Yes
                 </label>
 
                 <label className="flex justify-center items-center text-primary-marineBlue font-medium mb-2 ml-5">
                   <input
-                    onChange={() => handleChange({ accomodationRequirement: "no" })}
-                    className={`jinput mr-2 ${
+                    onChange={handleChange}
+                    className={`input mr-2 ${
                       hasSubmitted && !formData.accomodationRequirement
                         ? "focus:outline-primary-strawberryRed"
                         : "focus:outline-primary-marineBlue"
                     }`}
                     type="radio"
-                    name="assistance"
+                    name="accomodationRequirement"
                     value="no"
                     checked={formData.accomodationRequirement === "no"}
+                    aria-required="true"
                   />
                   No
                 </label>
@@ -99,8 +134,9 @@ const Consent = ({ formData, handleChange }) => {
 
           <div className="flex justify-around sm:justify-between items-center pt-[7px] sm:pt-[29px]">
             <button
+              type="button"
               onClick={() => navigate("/jet/educational")}
-              className="text-neutral-coolGray font-[500] capitalize transition-all duration-300 hover:text-primary-marineBlue cursor-pointer"
+              className="text-neutral-coolGray font-medium capitalize transition-all duration-300 hover:text-primary-marineBlue cursor-pointer"
             >
               Go back
             </button>

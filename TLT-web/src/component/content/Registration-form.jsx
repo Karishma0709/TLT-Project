@@ -34,7 +34,7 @@ const RegistrationForm = () => {
     targetedstate: "",
     score: "",
     year: "",
-    oldStudentOfShubhamSir: "",
+    oldStudentO7fShubhamSir: "",
     institution: "",
   });
 
