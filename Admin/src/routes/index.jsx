@@ -16,6 +16,7 @@ import Unpaid from '../components/Unpaid';
 import EmpowermentAdmin from '../components/EmpowermentAdmin';
 import FastTrackForm from '../components/FastTrackForm';
 import SyllabusUpload from '../components/SyllabusUpload';
+import JetFormDetails from '../components/JetFormDetails';
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
           {
             path: 'SyllabusUpload',
             element: <SyllabusUpload />,
+          },
+          {
+            path: 'jetformdetail',
+            element: <JetFormDetails />,
           },
         ],
       },
