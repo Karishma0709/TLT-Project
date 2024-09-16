@@ -107,6 +107,8 @@ router.post(
 
 
 router.get("/getpydata",PyPaperPDF.getPydata)
+router.put('/pypaperdataupdate/:id', PyPaperPDF.Pypaperdataupdate);
+router.delete('/pypaperdataDelete/:id', PyPaperPDF.PypaperdataDelete);
 
 // router.post("/PyPaperPDF", PyPaperPDF);
 

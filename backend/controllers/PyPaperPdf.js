@@ -7,8 +7,7 @@ async function PyPaperPDF(req,res){
   console.log(req.file,req.body)
 
 const Papertitle=req.body.Papertitle;
-const paperimage = req.file;  // Access the uploaded files array
-console.log(paperimage); // const paperimage = req.file;  // Corrected to access the file's filename
+const paperimage = req.file.filename;  // For single file
 try{
   await Pypschema.create({
     Papertitle: Papertitle,
@@ -29,5 +28,35 @@ const getPydata = async (req, res) => {
   }
 };
 
+const Pypaperdataupdate = async(req,res)=>{
+  try{
+    const id=req.params.id;
+    const userExist=await Pypschema.findOne({_id:id})
+  if(!userExist){
+  return res.status(404).json({message:"User not found"})
+  }
+  const updateUser=await Pypschema.findByIdAndUpdate(id,req.body,{new:true})
+  res.status(201).json(updateUser)
+  }catch(error){
+    console.error(error);
+    res.json({ status: error.message });
+  }}
 
-module.exports = {PyPaperPDF,getPydata};
+
+  const PypaperdataDelete= async(req,res)=>{
+    try{
+    const id=req.params.id;
+    const userExist=await Pypschema.findById({_id:id})
+    if(!userExist){
+    return res.status(404).json({message:"User Not Found."})
+    }
+    await  Pypschema.findByIdAndDelete(id)
+    res.status(201).json({message:"user Deletes Successfully"})
+    }catch(error){
+      console.error(error);
+      res.json({ status: error.message });
+    }
+    }
+
+
+module.exports = {PyPaperPDF,getPydata,Pypaperdataupdate,PypaperdataDelete};

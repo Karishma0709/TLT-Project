@@ -41,7 +41,10 @@ export const PYpapers = () => {
                   className="flex justify-content-center items-center text-center flex-col w-80 md:w-60"
                 >
                   <div>
-                    <img src={item.paperimage} className="w-80 md:w-60" />
+                    <img
+                      src={`http://localhost:8080/notifiesfiles/${item.paperimage}`}
+                      className="w-80 md:w-60"
+                    />
                   </div>
                   <div className="text-lg font-medium opacity-75">
                     {item.Papertitle}
