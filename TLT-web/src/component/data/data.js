@@ -29,6 +29,12 @@ export const data = [
     title: "Consent",
     linkTo: "consent",
   },
+  // {
+  //   id: 6,
+  //   step: "step 6",
+  //   title: "Thankyou",
+  //   linkTo: "thanyou",
+  // },
 ];
 
 

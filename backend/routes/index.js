@@ -26,6 +26,12 @@ const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const PyPaperPDF = require("../controllers/PyPaperPdf");
 const { FastTrackFormDetails, getFastTrackForm, deleteFastTrackForm , updateFastTrackForm} = require("../controllers/fastractFormController");
+const {
+  createJetForm,
+  getJetForms,
+  deleteJetForm,
+  updateJetForm,
+} = require('../controllers/jetController');
 
 
 
@@ -33,8 +39,8 @@ const { FastTrackFormDetails, getFastTrackForm, deleteFastTrackForm , updateFast
 router.use("/files", express.static("files"));
 router.use("/notifiesfiles", express.static("files"));
 router.use("/empowermentForm", express.static("files"));
-// router.use("/fastTrackForm", express.static("files"));
 router.use("/fastTrackForm", express.static("files")); 
+router.use("/jetForm", express.static("files")); 
 
 // Multer storage configurations
 const multerStorage = (directory) => multer.diskStorage({
@@ -42,12 +48,12 @@ const multerStorage = (directory) => multer.diskStorage({
     filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
 });
 
+//storage file name
 const upload = multer({ storage: multerStorage('./files') });
 const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
-// const fastTrackUpload = multer({ storage: mult/erStorage('./fastTrackfiles') });
-
+const jetFormUpload = multer({ storage: multerStorage('./jetFormfiles') });
 
 
 // Previous paper routes
@@ -62,10 +68,21 @@ router.delete('/deleteTpmFormDetails', deleteTpmFormDetails);
 // router.get('/tpmForm', findTpmFormDetails);
 
 
+// JET form routes
+router.post('/createJetForm', jetFormUpload.fields([
+  { name: 'photo', maxCount: 1 },
+  { name: 'adhaarPhoto', maxCount: 1 }
+]), createJetForm);
+router.get('/getJetForms', getJetForms);
+router.put('/updateJetForm/:id', updateJetForm);
+router.delete('/deleteJetForm/:id', deleteJetForm);
 
 
 
+
+// MPCJ Routes
 router.post("/mpcjForm", saveMPCJFormDetails);
+router.get("/mpcj-data", mpcjGetData);
 
 
 router.post('/signUp', userSignUpController);
@@ -75,7 +92,7 @@ router.get('/userLogout', userLogout);
 
 router.get("/registerUser", allRegisterUser);
 router.get("/all-papers", allPyPapers);
-router.get("/mpcj-data", mpcjGetData);
+
 router.post("/marquee", saveMarquee);
 
 router.get("/marquee-data/:id", marqueeGetData);
@@ -152,13 +169,10 @@ router.put("/Eupdate/:id",empowermentController.Update)
 router.delete("/Edelete/:id",empowermentController.Edelete)
 
 
-
 // Unpaid product file upload routes
 require('../models/UnpaidProduct');
 
-const unpdfSchema = mongoose.model("unpaidpdf");
-
- 
+const unpdfSchema = mongoose.model("unpaidpdf"); 
 router.post("/upload-files", upload.single("file"), async (req, res) => {
     console.log(req.file);
     const title = req.body.title;
@@ -173,9 +187,6 @@ router.post("/upload-files", upload.single("file"), async (req, res) => {
 });
 
 
-
-
-
 router.get('/get-files', async (req, res) => {
     try {
         unpdfSchema.find({}).then((data) => {
@@ -186,6 +197,8 @@ router.get('/get-files', async (req, res) => {
     }
 });
 
+
+// Fast Track Routes
 router.post('/fastTrackForm', fastTrackUpload.fields([
     { name: 'picture', maxCount: 1 },
     { name: 'aadharCard', maxCount: 1 }

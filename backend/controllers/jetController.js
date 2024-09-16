@@ -1,152 +1,98 @@
-// const multer = require('multer');
-// const JetForm = require('../models/jetForm');
-// const fs = require('fs');
-// const path = require('path');
-
-// const uploadDir = './uploads';
-// if (!fs.existsSync(uploadDir)){
-//   fs.mkdirSync(uploadDir);
-// }
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, uploadDir);
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-
-// const upload = multer({ storage });
-
-// const createJetForm = async (req, res) => {
-
-//   console.log("hey")
-//   upload.fields([{ name: 'photo' }, { name: 'aadhar' }])(req, res, async function (err) {
-//     if (err) {
-//       return res.status(400).send({ message: 'Error uploading files', err });
-//     }
-
-//     const { body, files } = req;
-
-//     try {
-//       const newJetForm = new JetForm({
-//         ...body,
-//         photo: {
-//           data: files.photo[0].filename,
-//           contentType: files.photo[0].mimetype,
-//         },
-//         adhaarPhoto: {
-//           data: files.aadhar[0].filename,
-//           contentType: files.aadhar[0].mimetype,
-//         },
-//       });
-
-//       await newJetForm.save();
-//       res.status(201).json({ message: "Form data saved successfully" });
-//     } catch (error) {
-//       res.status(400).json({ error: error.message });
-//     }
-//   });
-// };
-
-// module.exports = { createJetForm };
-
-
-// const multer = require('multer');
-// const JetForm = require('../models/jetForm');
-// const fs = require('fs');
-// const path = require('path');
-
-// const uploadDir = './uploads';
-// if (!fs.existsSync(uploadDir)){
-//   fs.mkdirSync(uploadDir);
-// }
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, uploadDir);
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
-
-// const upload = multer({ storage });
-
-// const createJetForm = async (req, res) => {
-//   try {
-//     const { body, files } = req;
-
-//     const newJetForm = new JetForm({
-//       ...body,
-//       photo: {
-//         data: files.photo[0].filename,
-//         contentType: files.photo[0].mimetype,
-//       },
-//       adhaarPhoto: {
-//         data: files.aadhar[0].filename,
-//         contentType: files.aadhar[0].mimetype,
-//       },
-//     });
-
-//     await newJetForm.save();
-//     res.status(201).json({ message: "Form data saved successfully" });
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// };
-
-// module.exports = { createJetForm, upload };
-
-
-const multer = require('multer');
-const JetForm = require('../models/jetForm');
-const fs = require('fs');
-const path = require('path');
-
-const uploadDir = './uploads';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
+const JetForm = require("../models/jetForm");
 
 const createJetForm = async (req, res) => {
   try {
-    console.log("Request received at /jetform endpoint");
-    const { body, files } = req;
+    console.log("Request received:", req.body, req.files);
 
-    console.log("Request body:", body);
-    console.log("Uploaded files:", files);
+    if (!req.files || !req.files["photo"] || !req.files["adhaarPhoto"]) {
+      return res.status(400).json({ error: 'Both photo and adhaarPhoto fields are required.' });
+    }
+
+    const {
+      name, email, number, category, address, dob, state, city, gender,guardianName,guardianProfession,
+      degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree,
+      annualIncome, accomodationRequirement
+    } = req.body;
+
+    const photo = req.files["photo"][0].path;
+    const adhaarPhoto = req.files["adhaarPhoto"][0].path;
 
     const newJetForm = new JetForm({
-      ...body,
-      photo: {
-        data: files.photo[0].filename,
-        contentType: files.photo[0].mimetype,
-      },
-      adhaarPhoto: {
-        data: files.aadhar[0].filename,
-        contentType: files.aadhar[0].mimetype,
-      },
+      name, email, number, category, address, dob, state, city, gender,guardianName,guardianProfession,
+      degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree,
+      annualIncome, accomodationRequirement, photo, adhaarPhoto
     });
 
     await newJetForm.save();
-    res.status(201).json({ message: 'Form data saved successfully' });
+    res.status(201).json({ message: "Jet Form created successfully!", form: newJetForm });
   } catch (error) {
-    console.error("Error saving form data:", error);
-    res.status(400).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = { createJetForm, upload };
+
+
+const getJetForms = async (req, res) => {
+  try {
+    const jetForms = await JetForm.find();
+    res.status(200).json({ jetForms });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+const deleteJetForm = async (req, res) => {
+  try {
+    const formId = req.params.id;
+
+    const deletedForm = await JetForm.findByIdAndDelete(formId);
+
+    if (!deletedForm) {
+      return res.status(404).json({ error: "Form not found" });
+    }
+
+    res.status(200).json({ message: "Form deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+const updateJetForm = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    if (!updatedData || Object.keys(updatedData).length === 0) {
+      return res.status(400).json({ message: "No data provided for update" });
+    }
+
+    const updatedForm = await JetForm.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedForm) {
+      return res.status(404).json({ message: "Form not found" });
+    }
+
+    res.status(200).json(updatedForm);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+module.exports = {
+  createJetForm,
+  getJetForms,
+  deleteJetForm,
+  updateJetForm,
+};

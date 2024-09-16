@@ -15,14 +15,8 @@ const PersonalInfo = ({ formData, handleChange }) => {
     gender: false,
   });
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    handleChange({
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
 
-  const handleNext = (event) => {
+    const handleNext = (event) => {
     event.preventDefault();
     console.log("handleNext called");
     console.log("Current Form Data:", formData);
@@ -58,7 +52,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                 </label>
                 <input
                   name="name"
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   value={formData.name}
                   className={`jinput ${
                     alerts.name
@@ -81,7 +75,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                   Male
                   <input
                     name="gender"
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     checked={formData.gender === "male"}
                     value="male"
                     className={`mx-2 jinput ${
@@ -103,7 +97,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                   Female
                   <input
                     name="gender"
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     checked={formData.gender === "female"}
                     value="female"
                     className={`mx-2 jinput ${
@@ -125,7 +119,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                   Other
                   <input
                     name="gender"
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     checked={formData.gender === "other"}
                     value="other"
                     className={`jinput mx-2 ${
@@ -152,7 +146,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                 </label>
                 <input
                   name="category"
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   value={formData.category}
                   className={`jinput ${
                     alerts.category
@@ -176,7 +170,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
                 </label>
                 <input
                   name="dob"
-                  onChange={handleInputChange}
+                  onChange={handleChange}
                   value={formData.dob}
                   className={`jinput ${
                     alerts.dob
@@ -203,7 +197,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
               </label>
               <input
                 name="email"
-                onChange={handleInputChange}
+                onChange={handleChange}
                 value={formData.email}
                 className={`jinput ${
                   alerts.email
@@ -227,7 +221,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
               </label>
               <input
                 name="number"
-                onChange={handleInputChange}
+                onChange={handleChange}
                 value={formData.number}
                 className={`jinput ${
                   alerts.number
@@ -253,7 +247,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
               </label>
               <input
                 name="state"
-                onChange={handleInputChange}
+                onChange={handleChange}
                 value={formData.state}
                 className={`jinput ${
                   alerts.state
@@ -277,7 +271,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
               </label>
               <input
                 name="city"
-                onChange={handleInputChange}
+                onChange={handleChange}
                 value={formData.city}
                 className={`jinput ${
                   alerts.city
@@ -302,7 +296,7 @@ const PersonalInfo = ({ formData, handleChange }) => {
             </label>
             <input
               name="address"
-              onChange={handleInputChange}
+              onChange={handleChange}
               value={formData.address}
               className={`jinput ${
                 alerts.address
