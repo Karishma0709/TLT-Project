@@ -82,7 +82,33 @@ router.get("/marquee-data/:id", marqueeGetData);
 router.put("/marquee-data/:id", marqueeUpdate);
 router.delete("/marquee-delete/:id", marqueeDelete);
 
-router.post("/PyPaperPDF", PyPaperPDF);
+// PY paper 
+
+const PYmainStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './notifiesfiles'); // Directory to store the files
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() +file.originalname;
+    cb(null, uniqueSuffix);
+  }
+});
+
+// const PYmainStorage = multer({ dest: 'notifiesfiles/' });
+
+// Initialize Multer with the storage configuration
+const PYmainuploads = multer({ storage: PYmainStorage });
+
+router.post(
+  "/PyPaperPDF",
+  PYmainuploads.single('paperimage'),
+  PyPaperPDF.PyPaperPDF
+);
+
+
+router.get("/getpydata",PyPaperPDF.getPydata)
+
+// router.post("/PyPaperPDF", PyPaperPDF);
 
 // Notification routes
 router.post("/notifies", notifyUpload.single("url"), notifyController.createNotification);

@@ -11,7 +11,7 @@ const createEmpowerment = async (req, res) => {
       'fatherName', 'motherName', 'permanentAddress', 'permanentState', 'permanentCity',
       'institution'
     ];
-  
+
     // Check for missing fields in the request body
     for (const field of requiredFields) {
       if (!req.body[field]) {
@@ -53,7 +53,7 @@ const createEmpowerment = async (req, res) => {
     const aadharCard = req.files.aadharCard[0].filename; // Store filename instead of buffer
   
     const { amountPaid = 0, onlineUPI = false } = feesPaid;
-  
+    
     try {
       // Save to the database
       await ESchema.create({

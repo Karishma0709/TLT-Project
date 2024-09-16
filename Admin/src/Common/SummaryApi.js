@@ -38,6 +38,10 @@ const SummaryApi = {
       url:`${backendDomain}/api/PyPaperPDF`,
        method: "post"
       },
+      PyPaperPDF:{
+        url:`${backendDomain}/api/getpydata`,
+         method: "get"
+        },
       UnpaidPDF:{
         url:`${backendDomain}/api/upload-files`,
          method: "post"

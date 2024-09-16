@@ -95,6 +95,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
     method: "get",
   },
+  PyPaperPDF:{
+    url:`${backendDomain}/api/getpydata`,
+     method: "get"
+    },
 
 };
 
