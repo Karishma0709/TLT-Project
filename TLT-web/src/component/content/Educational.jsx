@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Educational = ({ formData, handleChange }) => {
+const Educational = ({ formData, handleChange, files }) => {
   const navigate = useNavigate();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 

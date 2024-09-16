@@ -8,46 +8,38 @@ const Consent = ({ formData = {}, files = {}, handleChange }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setHasSubmitted(true);
-
-    // Prepare the form data
-    const form = new FormData();
-    // Append form fields
-    Object.keys(formData).forEach((key) => {
-      if (formData[key] !== undefined && formData[key] !== null) {
-        form.append(key, formData[key]);
-      }
-    });
-
-    // Append file fields
-    if (files.photo) {
-      form.append('photo', files.photo);
-    }
-    if (files.adhaarPhoto) {
-      form.append('adhaarPhoto', files.adhaarPhoto);
-    }
-
-    console.log('Form Data:', formData);
-    console.log('Files:', files);
-
+    
     try {
-      const response = await axios.post("http://localhost:8080/api/createJetForm", form, {
+      const formDataToSend = new FormData();
+      
+      // Append form data fields
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
+  
+      // Append file fields
+      formDataToSend.append('photo', files.photo);
+      formDataToSend.append('adhaarPhoto', files.adhaarPhoto);
+  
+      // Make the POST request to your backend
+      const response = await axios.post('http://localhost:8080/api/createJetForm', formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       if (response.status === 201) {
-        alert("Form submitted successfully");
-        navigate("/jet/thankyou");
+        // Navigate to Thank You page after successful submission
+        navigate("/thankyou");
+      } else {
+        alert('Form submission failed. Please try again.');
       }
     } catch (error) {
-      console.error("Error submitting form data:", error.response?.data || error.message || error);
-      alert("Failed to submit the form. Please try again.");
-    } finally {
-      console.log("Form submission attempted");
+      console.error('Error submitting form:', error);
+      alert('Failed to submit the form.');
     }
   };
+  
 
   return (
     <div className="flex w-full h-full sm:pl-[120px]">

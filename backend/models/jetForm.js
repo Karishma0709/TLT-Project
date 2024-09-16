@@ -13,8 +13,14 @@ const JetformSchema = new Schema(
     state: { type: String, required: true },
     city: { type: String, required: true },
     address: { type: String, required: true },
-    guardianName: { type: String,required: true  },
-    guardianProfession: { type: String,required: true  },
+    guardianProfession: {
+      type: String,
+      required: true, // This makes the field required
+    },
+    guardianName: {
+      type: String,
+      required: true, // This makes the field required
+    },
     photo: { type: String,required: true  },
     adhaarPhoto: { type: String,required: true  },
     degree: { type: String,required: true  },

@@ -7,7 +7,7 @@ import Educational from "../component/content/Educational";
 import Consent from "../component/content/Consent";
 import Sidebar from "../component/Sidebar";
 import ThankYou from "../component/content/ThankYou";
-import axios from "axios";
+
 
 const MultiStepForm = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const MultiStepForm = () => {
     city: "",
     gender: "",
     guardianName: "",
-    guardianProfession: "",
+  guardianProfession: "",
     degree: "",
     college: "",
     graduationYear: "",
@@ -66,8 +66,8 @@ const MultiStepForm = () => {
           <Route path="/personalinfo" element={<PersonalInfo formData={formData} handleChange={handleChange} />} />
           <Route path="/guardiandetails" element={<GuardianDetails formData={formData} handleChange={handleChange} />} />
           <Route path="/documents" element={<Documents files={files} handleFileChange={handleFileChange} />} />
-          <Route path="/educational" element={<Educational formData={formData} handleChange={handleChange} />} />
-          <Route path="/consent" element={<Consent formData={formData} handleChange={handleChange} />} />
+          <Route path="/educational" element={<Educational formData={formData}  files={files} handleChange={handleChange} />} />
+          <Route path="/consent" element={<Consent formData={formData}  files={files} handleChange={handleChange} />} />
           <Route path="/thankyou" element={<ThankYou />} />
         </Routes>
       </div>

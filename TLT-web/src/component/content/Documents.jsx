@@ -8,18 +8,36 @@ const Documents = ({ files, handleFileChange }) => {
 
   const handleNext = (e) => {
     e.preventDefault();
+    
+    // Log the file inputs to see what is captured
     console.log("Current Form files:", files);
-
+  
     setPhotoAlert(!files.photo);
     setAadharAlert(!files.adhaarPhoto);
-
+  
+    // Create a new FormData object to check the form submission
+    const formData = new FormData();
+    if (files.photo) {
+      formData.append('photo', files.photo);
+    }
+    if (files.adhaarPhoto) {
+      formData.append('adhaarPhoto', files.adhaarPhoto);
+    }
+  
+    // Log the FormData content
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+  
+    // Only navigate if both files are uploaded
     if (files.photo && files.adhaarPhoto) {
+      // At this point, you should submit formData to your backend to store the images
       navigate("/jet/educational");
     } else {
       alert("Please upload all required documents");
     }
   };
-
+  
   return (
     <div className="flex w-full h-full sm:pl-[120px]">
       <div className="w-full sm:w-[60%] p-4 pl-[0px]">

@@ -9,7 +9,7 @@ const createJetForm = async (req, res) => {
     }
 
     const {
-      name, email, number, category, address, dob, state, city, gender,
+      name, email, number, category, address, dob, state, city, gender,guardianName,guardianProfession,
       degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree,
       annualIncome, accomodationRequirement
     } = req.body;
@@ -18,7 +18,7 @@ const createJetForm = async (req, res) => {
     const adhaarPhoto = req.files["adhaarPhoto"][0].path;
 
     const newJetForm = new JetForm({
-      name, email, number, category, address, dob, state, city, gender,
+      name, email, number, category, address, dob, state, city, gender,guardianName,guardianProfession,
       degree, college, graduationYear, masterGraduationYear, masterUniversityAndDegree,
       annualIncome, accomodationRequirement, photo, adhaarPhoto
     });
