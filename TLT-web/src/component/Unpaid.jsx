@@ -1,8 +1,8 @@
-import React from "react";
-import Headings from "./utiliti/heading/Heading";
+import React from 'react';
+import Headings from './utiliti/heading/Heading';
 // import updaidProduct from "./data/unpaid";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Unpaid = () => {
   const [allImage, setAllImage] = useState(null);
@@ -11,7 +11,7 @@ const Unpaid = () => {
   }, []);
 
   const getPdf = async () => {
-    const result = await axios.get("http://localhost:8080/api/get-files"); //backend wala port number aya ga
+    const result = await axios.get('http://localhost:8080/api/get-files'); //backend wala port number aya ga
     console.log(result.data.data);
     setAllImage(result.data.data);
   };
@@ -19,13 +19,13 @@ const Unpaid = () => {
   const showPdf = (pdf) => {
     window.open(
       `http://localhost:5054/api/files/${pdf}`,
-      "_blank",
-      "noreferrer"
+      '_blank',
+      'noreferrer'
     );
   };
   return (
     <div className="px-5 md:px-20 py-8">
-      <Headings heading={"h2"} style="text-center">
+      <Headings heading={'h2'} style="text-center">
         Bare <span className="text-primary">Act</span>
       </Headings>
       <div className="overflow-x-auto">
@@ -39,7 +39,7 @@ const Unpaid = () => {
           </thead>
           <tbody className="text-gray-700">
             {allImage == null
-              ? ""
+              ? ''
               : allImage.map((data, index) => (
                   <tr
                     key={index}

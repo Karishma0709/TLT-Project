@@ -211,7 +211,7 @@ const RegistrationForm = () => {
               id="state"
               value={data.state}
               onChange={(e) => {
-                setSelectedState(e.target.value);
+                setSelectedState(e.tbarget.value);
                 setData((prev) => ({
                   ...prev,
                   state: e.target.value,

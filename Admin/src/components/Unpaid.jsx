@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Unpaid = () => {
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState("");
+  const [title, setTitle] = useState('');
+  const [file, setFile] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  useEffect(() => {
+    getUploadedFiles();
+  }, []);
 
   const SubmitImage = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("file", file);
+    formData.append('title', title);
+    formData.append('file', file);
 
     try {
       const result = await axios.post(
-        "http://localhost:8080/api/upload-files", //backend port
+        'http://localhost:8080/api/upload-files', //backend port
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { 'Content-Type': 'multipart/form-data' },
         }
       );
 
-      if (result.data.status === "ok") {
-        alert("Uploaded Successfully!");
+      if (result.data.status === 'ok') {
+        alert('Uploaded Successfully!');
         getUploadedFiles();
-        setTitle("");
-        setFile("");
+        setTitle('');
+        setFile('');
       }
     } catch (error) {
-      console.error("There was an error uploading the file!", error);
+      console.error('There was an error uploading the file!', error);
     }
   };
 
   // Fetch uploaded files from backend
   const getUploadedFiles = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/uploaded-files");
+      const result = await axios.get('http://localhost:8080/api/get-files');
       setUploadedFiles(result.data);
     } catch (error) {
-      console.error("Error fetching the uploaded files!", error);
+      console.error('Error fetching the uploaded files!', error);
     }
   };
-
-  useEffect(() => {
-    getUploadedFiles();
-  }, []);
 
   return (
     <div className="mx-auto p-6 bg-white rounded shadow-lg">
@@ -98,7 +98,7 @@ const Unpaid = () => {
                   <td className="border border-gray-800 p-2">{file.title}</td>
                   <td className="border border-gray-800 p-2">
                     <a
-                      href={`/uploads/${file.filename}`} // Update with actual file path
+                      href={`/uploads/${file.pdf}`} // Update with actual file path
                       className="text-blue-500 hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -110,7 +110,10 @@ const Unpaid = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="3" className="border border-gray-800 p-2 text-center">
+                <td
+                  colSpan="3"
+                  className="border border-gray-800 p-2 text-center"
+                >
                   No files uploaded yet.
                 </td>
               </tr>
