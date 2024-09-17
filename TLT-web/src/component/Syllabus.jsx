@@ -10,14 +10,14 @@ const Syllabus = () => {
   }, []);
 
   const getPdf = async () => {
-    const result = await axios.get("http://localhost:8080/api/get-files"); //backend
+    const result = await axios.get("http://localhost:8080/api/getSyllabusUpload"); //backend
     console.log(result.data.data);
     setSyllabus(result.data.data);
   };
 
   const showPdf = (pdf) => {
     window.open(
-      `http://localhost:5054/api/files/${pdf}`,
+      `http://localhost:5054/api/SyllabusUploadFiles/${pdf}`,
       "_blank",
       "noreferrer"
     );

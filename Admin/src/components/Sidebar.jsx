@@ -154,6 +154,13 @@ const Sidebar = () => {
             >
               Upload Syllabus
             </Link>
+
+            <Link
+              to={'jetformdetail'}
+              className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
+            >
+             Jet Form Details
+            </Link>
             <Link
               to={'info-marquee'}
               className="px-2 py-1 hover:bg-slate-100 hover:text-black hover:font-semibold"
