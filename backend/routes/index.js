@@ -32,7 +32,7 @@ const {
   deleteJetForm,
   updateJetForm,
 } = require('../controllers/jetController');
-
+const {CreateSyllabusUpload,getSyllabusFiles}=require('../controllers/syllabusUploadController')
 
 
 // Static file setup
@@ -41,6 +41,8 @@ router.use("/notifiesfiles", express.static("files"));
 router.use("/empowermentForm", express.static("files"));
 router.use("/fastTrackForm", express.static("files")); 
 router.use("/jetForm", express.static("files")); 
+router.use("/syllabusUpload", express.static("files"));
+
 
 // Multer storage configurations
 const multerStorage = (directory) => multer.diskStorage({
@@ -54,6 +56,7 @@ const notifyUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const empowermentUpload = multer({ storage: multerStorage('./notifiesfiles') });
 const fastTrackUpload = multer({ storage: multerStorage('./fastTrackfiles') });
 const jetFormUpload = multer({ storage: multerStorage('./jetFormfiles') });
+const syllabusUpload = multer({ storage: multerStorage('./SyllabusUploadFiles') });
 
 
 // Previous paper routes
@@ -194,7 +197,7 @@ router.get('/get-files', async (req, res) => {
         });
     } catch (error) {
         res.json({ status: "error", error: error.message });
-    }
+    }  
 });
 
 
@@ -207,5 +210,9 @@ router.post('/fastTrackForm', fastTrackUpload.fields([
 router.get('/getfastTrackForm', getFastTrackForm);
 router.put("/updateFastTrackForm/:id", updateFastTrackForm); 
 router.delete("/deleteFastTrackForm/:id", deleteFastTrackForm);
+
+//SyllabusUpload Routes
+router.post("/SyllabusUpload", syllabusUpload.single("file"), CreateSyllabusUpload);
+router.get('/getSyllabusUpload', getSyllabusFiles);
 
 module.exports = router;
