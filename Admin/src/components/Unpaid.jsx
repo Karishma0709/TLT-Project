@@ -5,6 +5,7 @@ const Unpaid = () => {
   const [title, setTitle] = useState('');
   const [file, setFile] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [editData, setEditData] = useState({});
 
   useEffect(() => {
     getUploadedFiles();
@@ -35,14 +36,41 @@ const Unpaid = () => {
       console.error('There was an error uploading the file!', error);
     }
   };
+  const handleChange = (e, id) => {
+    setEditData({
+      ...uploadedFiles,
+      [id]: { ...uploadedFiles[id], [e.target.name]: e.target.value },
+    });
+  };
 
   // Fetch uploaded files from backend
   const getUploadedFiles = async () => {
     try {
       const result = await axios.get('http://localhost:8080/api/get-files');
-      setUploadedFiles(result.data);
+      console.log(result.data.data);
+      setUploadedFiles(result.data.data);
     } catch (error) {
       console.error('Error fetching the uploaded files!', error);
+    }
+  };
+
+  const deleteUnpaiddata = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/pypaperdataDelete/${id}`);
+      getPydata(); // Refresh the data after delete
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
+  const UpdateUnpaiddata = async (id) => {
+    try {
+      const updateuser = await axios.put(
+        `http://localhost:8080/api/unpaidUpdate/${id}`,
+        editData[id]
+      );
+    } catch (error) {
+      console.error('Error updating user:', error);
     }
   };
 
@@ -88,6 +116,8 @@ const Unpaid = () => {
               <th className="border border-gray-800 p-2">S.No</th>
               <th className="border border-gray-800 p-2">Title</th>
               <th className="border border-gray-800 p-2">Action</th>
+              <th className="border border-gray-800 p-2">Update</th>
+              <th className="border border-gray-800 p-2">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -95,16 +125,39 @@ const Unpaid = () => {
               uploadedFiles.map((file, index) => (
                 <tr key={file._id} className="text-center hover:bg-gray-100">
                   <td className="border border-gray-800 p-2">{index + 1}</td>
-                  <td className="border border-gray-800 p-2">{file.title}</td>
+                  <td className="border border-gray-800 p-2">
+                    <input
+                      type="text"
+                      name="title"
+                      value={editData[file._id]?.title || file.title || ''}
+                      onChange={(e) => handleChange(e, file._id)}
+                    />
+                  </td>
                   <td className="border border-gray-800 p-2">
                     <a
-                      href={`/uploads/${file.pdf}`} // Update with actual file path
+                      href={`/files/${file.pdf}`} // Update with actual file path
                       className="text-blue-500 hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       View
                     </a>
+                  </td>
+                  <td className="border border-gray-800 p-2">
+                    <button
+                      className="rounded p-2 text-white bg-blue-600"
+                      onClick={() => UpdateUnpaiddata(file._id)}
+                    >
+                      Update
+                    </button>
+                  </td>
+                  <td className="border border-gray-800 p-2">
+                    <button
+                      className="rounded p-2 text-white bg-red-500"
+                      onClick={() => deleteUnpaiddata(file._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))

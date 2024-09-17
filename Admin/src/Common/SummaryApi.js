@@ -48,7 +48,17 @@ const SummaryApi = {
         }, UnpaidPDF:{
           url:`${backendDomain}/api/get-files`,
            method: "get"
-        },notifies: {
+        },
+        UnpaidPDF:{
+          url:`${backendDomain}/api/unpaidUpdate`,
+           method: "put"
+        },
+        UnpaidPDF:{
+          url:`${backendDomain}/api/unpaidDelete`,
+           method: "delete"
+        },
+        
+        notifies: {
             url:`${backendDomain}/api/notifies`,
             method: "post",
           },

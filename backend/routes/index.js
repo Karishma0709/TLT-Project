@@ -197,6 +197,34 @@ router.get('/get-files', async (req, res) => {
     }
 });
 
+router.put('/unpaidUpdate/:id',async(req,res)=>{
+  try{
+    const id=req.params.id;
+    const userExist=await unpdfSchema.findOne({_id:id})
+  if(!userExist){
+  return res.status(404).json({message:"User not found"})
+  }
+  const updateUser=await unpdfSchema.findByIdAndUpdate(id,req.body,{new:true})
+  res.status(201).json(updateUser)
+  }catch(error){
+    console.error(error);
+    res.json({ status: error.message });
+  }})
+
+router.delete('/unpaidDelete/:id',async(req,res)=>{
+  try{
+  const id=req.params.id;
+  const userExist=await unpdfSchema.findById({_id:id})
+  if(!userExist){
+  return res.status(404).json({message:"User Not Found."})
+  }
+  await  unpdfSchema.findByIdAndDelete(id)
+  res.status(201).json({message:"user Deletes Successfully"})
+  }catch(error){
+    console.error(error);
+    res.json({ status: error.message });
+  }
+  })
 
 // Fast Track Routes
 router.post('/fastTrackForm', fastTrackUpload.fields([

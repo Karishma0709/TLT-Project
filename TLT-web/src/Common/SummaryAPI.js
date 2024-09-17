@@ -99,6 +99,17 @@ const SummaryApi = {
     url:`${backendDomain}/api/getpydata`,
      method: "get"
     },
+    UnpaidPDF:{
+      url:`${backendDomain}/api/unpaidUpdate`,
+       method: "put"
+    },
+    UnpaidPDF:{
+      url:`${backendDomain}/api/unpaidDelete`,
+       method: "delete"
+    },
+
+
+    
 
 };
 

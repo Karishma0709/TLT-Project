@@ -56,8 +56,8 @@ const Prevyearpaperpdf = () => {
 
   const deletePYPdata = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/pypaperdataDelete/${id}`);
-      getPydata(); // Refresh the data after delete
+      await axios.delete(`http://localhost:8080/api/unpaidDelete/${id}`);
+      fetchUploadedPdfs(); // Refresh the data after delete
     } catch (error) {
       console.error('Error deleting user:', error);
     }
