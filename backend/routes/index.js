@@ -7,7 +7,6 @@ const router = express.Router();
 
 // Import controllers
 const { saveTpmFormDetails, findTpmFormDetails, updateTpmFormDetails, deleteTpmFormDetails } = require('../controllers/tpmController');
-const createPyPapersDetail = require('../controllers/pyPaperController');
 const { saveMPCJFormDetails, findMPCJFormDetails } = require('../controllers/mpcjOfflineController');
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');       
@@ -33,6 +32,13 @@ const {
   updateJetForm,
 } = require('../controllers/jetController');
 const {CreateSyllabusUpload,getSyllabusFiles}=require('../controllers/syllabusUploadController')
+const {
+  createPyPapersDetail,
+  getAllPyPapers,
+  updatePyPapersDetail,
+  deletePyPapersDetail
+} = require('../controllers/pyPaperController');
+
 
 
 // Static file setup
@@ -59,9 +65,12 @@ const jetFormUpload = multer({ storage: multerStorage('./jetFormfiles') });
 const syllabusUpload = multer({ storage: multerStorage('./SyllabusUploadFiles') });
 
 
-// Previous paper routes
-router.post('/prepaper', createPyPapersDetail);
 
+// Previous paper routes
+router.post('/createPyPapersDetail', createPyPapersDetail);
+router.get('/getAllPyPapers', getAllPyPapers);
+router.put('/updatePyPapersDetail/:id', updatePyPapersDetail);
+router.delete('/deletePyPapersDetail/:id',deletePyPapersDetail);
 
 // TPM routes
 router.post('/tpmForm', saveTpmFormDetails);
@@ -94,7 +103,7 @@ router.get('/userDetails', authToken, userDetailsController);
 router.get('/userLogout', userLogout);
 
 router.get("/registerUser", allRegisterUser);
-router.get("/all-papers", allPyPapers);
+
 
 router.post("/marquee", saveMarquee);
 
