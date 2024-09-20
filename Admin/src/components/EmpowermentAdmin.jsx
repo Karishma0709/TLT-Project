@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import SummaryApi from '../Common/SummaryApi';
 
 const EmpowermentAdmin = () => {
   const [edata, setEdata] = useState(null);
@@ -11,9 +12,10 @@ const EmpowermentAdmin = () => {
     getdata();
   }, []);
   const getdata = async () => {
-    const result = await axios.get(
-      'http://localhost:8080/api/getempowermentForm'
-    );
+    const result = await axios({
+      url: SummaryApi.EmpowermentAdmin.url,
+      method: SummaryApi.EmpowermentAdmin.method,
+    });
     console.log(result.data.data);
     setEdata(result.data.data);
   };
@@ -27,18 +29,28 @@ const EmpowermentAdmin = () => {
 
   const UpdateEdata = async (id) => {
     try {
-      const updateuser = await axios.put(
-        `http://localhost:8080/api/Eupdate/${id}`,
-        editData[id]
-      );
+      const apiUrl = SummaryApi.EmpowermentAdminUpdate.url.replace(':id', id);
+
+      const updateuser = await axios({
+        url: apiUrl,
+        method: SummaryApi.EmpowermentAdminUpdate.method,
+        data: editData[id],
+      });
     } catch (error) {
       console.error('Error updating user:', error);
     }
   };
 
   const deleteEdata = async (id) => {
+    const apiUrl = SummaryApi.EmpowermentAdminDelete.url.replace(':id', id);
+
     try {
-      await axios.delete(`http://localhost:8080/api/Edelete/${id}`);
+      await axios({
+        url: apiUrl,
+        method: SummaryApi.EmpowermentAdminDelete.method,
+        data: editData[id],
+      });
+
       getdata(); // Refresh the data after delete
     } catch (error) {
       console.error('Error deleting user:', error);

@@ -23,6 +23,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use('/notifiesfiles', express.static('notifiesfiles'));
+app.use('/files', express.static('files'));
+
 
 
 

@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { State, City } from "country-state-city";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { State, City } from 'country-state-city';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegistrationForm = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+
   const [data, setData] = useState({
-    name: "",
-    placeOfBirth: "",
-    dateOfBirth: "",
-    fullAddress: "",
-    state: "",
-    pinCode: "",
-    qualification: "",
-    collegeUniversity: "",
-    pursuingLLB: "",
-    yearOfPassing: "",
-    email: "",
-    fatherName: "",
-    motherName: "",
-    permanentAddress: "",
-    permanentState: "",
-    permanentCity: "",
-    feesPaid: "",
-    amountPaid: "",
-    prelims: "",
-    mains: "",
-    targetedstate: "",
-    score: "",
-    year: "",
-    oldStudentO7fShubhamSir: "",
-    institution: "",
+    name: '',
+    placeOfBirth: '',
+    dateOfBirth: '',
+    fullAddress: '',
+    state: '',
+    pinCode: '',
+    qualification: '',
+    collegeUniversity: '',
+    pursuingLLB: '',
+    yearOfPassing: '',
+    email: '',
+    fatherName: '',
+    motherName: '',
+    permanentAddress: '',
+    permanentState: '',
+    permanentCity: '',
+    feesPaid: '',
+    amountPaid: '',
+    prelims: '',
+    mains: '',
+    targetedstate: '',
+    score: '',
+    year: '',
+    oldStudentO7fShubhamSir: '',
+    institution: '',
   });
 
   const [files, setFiles] = useState({
     picture: null,
     aadharCard: null,
   });
-  
+
   useEffect(() => {
     // Fetch states when component mounts
     const fetchedStates = State.getStatesOfCountry('IN'); // 'IN' is for India, change if needed
@@ -52,7 +52,7 @@ const RegistrationForm = () => {
   useEffect(() => {
     if (selectedState) {
       // Fetch cities when a state is selected
-      const fetchedCities = City.getCitiesOfState("IN", selectedState);
+      const fetchedCities = City.getCitiesOfState('IN', selectedState);
       setCities(fetchedCities);
     } else {
       setCities([]);
@@ -75,8 +75,6 @@ const RegistrationForm = () => {
     }));
   };
 
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,9 +87,13 @@ const RegistrationForm = () => {
     });
 
     try {
-      const response = await axios.post('http://localhost:8080/api/fastTrackForm', formData, {
-        headers: { 'Content-Type':'multipart/form-data' },
-      });
+      const response = await axios.post(
+        'http://localhost:8080/api/fastTrackForm',
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      );
       console.log(response.data);
       if (response.status === 201) {
         alert('Form submitted successfully');
@@ -124,8 +126,9 @@ const RegistrationForm = () => {
               name="picture"
               id="picture"
               autoComplete="off"
-              onChange={handleFileChange}              
-              className="border rounded w-full p-2"/>
+              onChange={handleFileChange}
+              className="border rounded w-full p-2"
+            />
           </div>
 
           <div className="sm:flex items-center">
@@ -211,12 +214,12 @@ const RegistrationForm = () => {
               id="state"
               value={data.state}
               onChange={(e) => {
-                setSelectedState(e.tbarget.value);
+                setSelectedState(e.target.value);
                 setData((prev) => ({
                   ...prev,
                   state: e.target.value,
                 }));
-                setSelectedCity(""); // Reset city when state changes
+                setSelectedCity(''); // Reset city when state changes
               }}
             >
               <option value="" disabled>
@@ -323,7 +326,7 @@ const RegistrationForm = () => {
                   autoComplete="off"
                   onChange={handleInput}
                   className="mr-2"
-                />{" "}
+                />{' '}
                 Yes
               </label>
               <label>
@@ -334,7 +337,7 @@ const RegistrationForm = () => {
                   autoComplete="off"
                   onChange={handleInput}
                   className="mr-2"
-                />{" "}
+                />{' '}
                 No
               </label>
             </div>
@@ -451,7 +454,7 @@ const RegistrationForm = () => {
                   ...prev,
                   permanentState: e.target.value,
                 }));
-                setSelectedCity(""); // Reset city when state changes
+                setSelectedCity(''); // Reset city when state changes
               }}
             >
               <option value="" disabled>
@@ -497,19 +500,21 @@ const RegistrationForm = () => {
           </div>
 
           <div className="sm:flex items-center">
-             <label
-               htmlFor="aadhar-card"
-               className="block text-left font-bold text-lg  sm:w-1/4 ">
-               Upload Aadhar (Front and Back):
-             </label>
-             <input
-               type="file"
-               name="aadharCard"
-               id="aadhar-card"
-               autoComplete="off"
-               onChange={handleFileChange}
-               className="border rounded w-full p-2"/>
-           </div>
+            <label
+              htmlFor="aadhar-card"
+              className="block text-left font-bold text-lg  sm:w-1/4 "
+            >
+              Upload Aadhar (Front and Back):
+            </label>
+            <input
+              type="file"
+              name="aadharCard"
+              id="aadhar-card"
+              autoComplete="off"
+              onChange={handleFileChange}
+              className="border rounded w-full p-2"
+            />
+          </div>
 
           {/* Last Exam */}
           <div>
@@ -539,7 +544,7 @@ const RegistrationForm = () => {
                   value="yes"
                   onChange={handleInput}
                   className="mx-2 mt-1"
-                />{" "}
+                />{' '}
               </label>
             </div>
           </div>
@@ -610,7 +615,7 @@ const RegistrationForm = () => {
                 value="yes"
                 onChange={handleInput}
                 className="mx-2 mt-1"
-              />{" "}
+              />{' '}
             </label>
           </div>
 
@@ -644,7 +649,7 @@ const RegistrationForm = () => {
                   autoComplete="off"
                   onChange={handleInput}
                   className="mr-2"
-                />{" "}
+                />{' '}
                 Yes
               </label>
               <label>
@@ -655,7 +660,7 @@ const RegistrationForm = () => {
                   autoComplete="off"
                   onChange={handleInput}
                   className="mr-2"
-                />{" "}
+                />{' '}
                 No
               </label>
             </div>
