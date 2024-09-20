@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
+import SummaryApi from '../Common/SummaryApi';
 
 const TpmData = () => {
   const [tpmData, setTpmData] = useState([]);
@@ -16,7 +17,10 @@ const TpmData = () => {
   // Fetch all TPM data
   const fetchAllData = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/getTpmFormDetails");
+      const result = await axios({
+        url: SummaryApi.TpmData.url,
+        method: SummaryApi.TpmData.method,
+      });
       if (result.status === 200) {
         setTpmData(result.data);
       } else {
@@ -37,11 +41,13 @@ const TpmData = () => {
 
   // Update TPM data
   const updateTpmData = async (id) => {
+    const apiurl = SummaryApi.TpmDataUpdate.url.replace(':id', id);
     try {
-      const response = await axios.put(
-        `http://localhost:8080/api/updateTpmFormDetails/${id}`,
-        editData[id]
-      );
+      const response = await axios({
+        url: apiurl,
+        method: SummaryApi.TpmDataUpdate.method,
+        data: editData[id],
+      });
       setEditMode(null); // Exit edit mode after updating
       fetchAllData(); // Fetch updated data
       toast.success('Data updated successfully!');
@@ -53,8 +59,14 @@ const TpmData = () => {
 
   // Delete TPM data
   const deleteTpmData = async (id) => {
+    const apiurl = SummaryApi.TpmDataDelete.url.replace(':id', id);
+
     try {
-      await axios.delete(`http://localhost:8080/api/deleteTpmFormDetails/${id}`);
+      await axios({
+        url: apiurl,
+        method: SummaryApi.TpmDataDelete.method,
+        data: editData[id],
+      });
       fetchAllData(); // Fetch updated data
       toast.success('Data deleted successfully!');
     } catch (error) {
@@ -91,7 +103,9 @@ const TpmData = () => {
             <tbody>
               {tpmData.map((data, index) => (
                 <tr
-                  className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
+                  className={`border-b border-gray-200 ${
+                    index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                  } hover:bg-gray-100`}
                   key={data._id}
                 >
                   <td className="py-2 px-4">{index + 1}</td>

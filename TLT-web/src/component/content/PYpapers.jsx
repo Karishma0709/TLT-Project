@@ -27,7 +27,7 @@ export const PYpapers = () => {
 
   return (
     <>
-      <div className="flex justify-center flex-wrap gap-12 my-8">
+      <div className="flex justify-center flex-col text-center flex-wrap gap-12 my-8">
         <Headings heading={'h2'}>
           Previous <span className="text-primary"> Year Papers</span>
         </Headings>

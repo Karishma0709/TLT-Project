@@ -99,7 +99,7 @@ const deleteFastTrackForm = async (req, res) => {
 
     if (!deletedForm) {
       return res.status(404).json({ error: "Form not found" });
-    }
+    } 
 
     res.status(200).json({ message: "Form deleted successfully" });
   } catch (error) {

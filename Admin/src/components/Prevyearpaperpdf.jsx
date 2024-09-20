@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SummaryApi from '../Common/SummaryApi';
 
 const Prevyearpaperpdf = () => {
   const [uploadedPdfs, setUploadedPdfs] = useState(null);
@@ -16,14 +17,14 @@ const Prevyearpaperpdf = () => {
     const formData = new FormData();
     formData.append('Papertitle', Papertitle);
     formData.append('paperimage', paperimage);
+
     try {
-      const result = await axios.post(
-        'http://localhost:8080/api/PyPaperPDF',
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
+      const result = await axios({
+        url: SummaryApi.PyPaperPDF.url,
+        method: SummaryApi.PyPaperPDF.method,
+        data: formData, // Pass formData here
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
 
       if (result.data.status === 'ok') {
         alert('Uploaded Successfully!');
@@ -44,19 +45,28 @@ const Prevyearpaperpdf = () => {
   };
 
   const UpdatePYPdata = async (id) => {
+    const apiUrl = SummaryApi.PyPaperPDFupload.url.replace(':id', id);
+
     try {
-      const updateuser = await axios.put(
-        `http://localhost:8080/api/pypaperdataupdate/${id}`,
-        editData[id]
-      );
+      const updateuser = await axios({
+        url: apiUrl,
+        method: SummaryApi.PyPaperPDFupload.method,
+        data: editData[id],
+      });
     } catch (error) {
       console.error('Error updating user:', error);
     }
   };
 
   const deletePYPdata = async (id) => {
+    const apiUrl = SummaryApi.PyPaperPDFDelete.url.replace(':id', id);
+
     try {
-      await axios.delete(`http://localhost:8080/api/unpaidDelete/${id}`);
+      await axios({
+        url: apiUrl,
+        method: SummaryApi.PyPaperPDFDelete.method,
+        data: editData[id],
+      });
       fetchUploadedPdfs(); // Refresh the data after delete
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -65,7 +75,10 @@ const Prevyearpaperpdf = () => {
 
   const fetchUploadedPdfs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getpydata');
+      const response = await axios({
+        url: SummaryApi.GetPyPaperPDF.url,
+        method: SummaryApi.GetPyPaperPDF.method,
+      });
       console.log(response.data.data);
       setUploadedPdfs(response.data.data);
     } catch (error) {
