@@ -114,7 +114,6 @@ router.get('/userDetails', authToken, userDetailsController);
 router.get('/userLogout', userLogout);
 
 router.get('/registerUser', allRegisterUser);
-router.get('/all-papers', allPyPapers);
 
 router.post('/marquee', saveMarquee);
 
