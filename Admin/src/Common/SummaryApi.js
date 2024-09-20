@@ -1,5 +1,5 @@
-const backendDomain = "https://tlt-project-6ivu.onrender.com";
-// const backendDomain = "http://localhost:8080";
+// const backendDomain = "https://tlt-project-6ivu.onrender.com";
+const backendDomain = "http://localhost:8080";
 
 const SummaryApi = {
     signUp: {
@@ -14,18 +14,18 @@ const SummaryApi = {
         url: `${backendDomain}/api/registerUser`,
         method: "get",
       },
-      ALlpyPapers:{
-        url:`${backendDomain}/api/all-papers`,
-        method: "get",
-      },
+      // ALlpyPapers:{
+      //   url:`${backendDomain}/api/all-papers`,
+      //   method: "get",
+      // },
       AllmpcjData:{
        url:`${backendDomain}/api/mpcj-data`,
        method: "get"
       },
-      AlltpmData:{
-       url:`${backendDomain}/api/tmp-data`,
-       method: "get"
-      },
+      // AlltpmData:{
+      //  url:`${backendDomain}/api/tmp-data`,
+      //  method: "get"
+      // },
       Allmarquee:{
        url:`${backendDomain}/api/marquee`,
        method: "post"

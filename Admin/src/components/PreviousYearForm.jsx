@@ -13,10 +13,7 @@ const PreviousYearForm = () => {
   const fetchAllPapers = async () => {
     try {
       const result = await axios.get("http://localhost:8080/api/getAllPyPapers");
-      console.log("API Response:", result);
-      console.log("Full API Response:", result.data);
-      console.log("Data Property:", result.data.data);
-      if (Array.isArray(result.data.data)) {
+           if (Array.isArray(result.data.data)) {
         setAllPapers(result.data.data);
       } else {
         console.error("Unexpected data format:", result.data.data);
@@ -151,7 +148,7 @@ const PreviousYearForm = () => {
                       <>
                         <button
                           onClick={() => toggleEditMode(paper._id)}
-                          className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-yellow-700"
+                          className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
                         >
                           Update
                         </button>

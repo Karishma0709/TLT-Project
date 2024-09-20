@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
-import productCards from "../../component/data/productCards";
-import SummaryApi from "../../Common/SummaryAPI";
+import productCards from "../data/productCards";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const MpcjContactForm1 = () => {
+const TPMForm = () => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -29,14 +28,13 @@ const MpcjContactForm1 = () => {
 
     if (valid) {
       try {
-        const response = await fetch(SummaryApi["tpmForm"].url, {
-          method: SummaryApi["tpmForm"].method,
+        const response = await fetch("http://localhost:8080/api/createTpmFormDetails", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         });
-
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -44,14 +42,18 @@ const MpcjContactForm1 = () => {
         const result = await response.json();
         console.log("Form submitted successfully: ", result);
         toast.success("Form submitted successfully!");
-        setIsModalOpen(false);
-        
+        setData({
+          name: "",
+          email: "",
+          contact: "",
+          purchasedProduct: "",
+        });
+
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
         toast.error("There was a problem submitting the form. Please try again.");
       }
     } else {
-      console.log("Please fill in all the fields");
       toast.error("Please fill in all the fields.");
     }
   };
@@ -61,8 +63,8 @@ const MpcjContactForm1 = () => {
       <div className="form-box flex justify-center items-center min-h-screen">
         <div className="container-main p-6 rounded-lg max-w-lg mx-auto">
           <h2 className="text-4xl font-bold bg-clip-text text-gray-900 text-center mb-6">
-            Get your MPCJ Mains Offline Mock Test Series,
-            <span className="text-red-500">Today!</span>
+            Get your Translation Practice Material for MPCJ & CGCJ, 
+            <span className="text-red-500"> Today!</span>
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="form-row flex space-x-4 mb-6">
@@ -120,19 +122,19 @@ const MpcjContactForm1 = () => {
               <div className="input-data w-full relative">
                 <label
                   htmlFor="TPM"
-                  className="block mb-2 text-sm font-medium text-gray-500 dark:text-white pl-4"
-                ></label>
+                  className="block mb-2 text-sm font-medium text-gray-500"
+                >
+                  Purchased Product
+                </label>
                 <select
                   id="TPM"
                   name="purchasedProduct"
                   value={data.purchasedProduct}
                   onChange={handleChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-red-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
                   required
                 >
-                  <option value="" disabled>
-                    Select Product
-                  </option>
+                  <option value="" disabled>Select Product</option>
                   {productCards.map((item, index) => (
                     <option key={index} value={`${item.title} ${item.price}`}>
                       {item.title} {item.price}
@@ -146,7 +148,7 @@ const MpcjContactForm1 = () => {
             <div className="form-row submit-btn flex justify-center gap-3">
               <button
                 type="submit"
-                className="relative inline-block text-white bg-gradient-to-r p-4 px-14 from-red-700 to-red-400 hover:from-red-400 hover:to-red-700 font-semibold py-2 rounded-full transition-ease-out"
+                className="relative inline-block text-white bg-gradient-to-r p-4 px-14 from-red-700 to-red-400 hover:from-red-400 hover:to-red-700 font-semibold py-2 rounded-full transition-ease-out" 
               >
                 Submit
               </button>
@@ -154,10 +156,9 @@ const MpcjContactForm1 = () => {
           </form>
         </div>
       </div>
-       <ToastContainer />
+      <ToastContainer />
     </div>
-    
   );
 };
 
-export default MpcjContactForm1;
+export default TPMForm;

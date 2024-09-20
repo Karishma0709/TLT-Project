@@ -1,7 +1,7 @@
 const TpmFormDetails = require('../models/tpm');
 
 // Save TPM form details
-const saveTpmFormDetails = async (req, res) => {
+const createTpmFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;
   console.log('Received request to save TPM form details:', req.body);
 
@@ -22,7 +22,7 @@ const saveTpmFormDetails = async (req, res) => {
 };
 
 // Find all TPM form details
-const findTpmFormDetails = async (req, res) => {
+const getTpmFormDetails = async (req, res) => {
   console.log('Received request to find TPM form details');
 
   try {
@@ -78,8 +78,8 @@ const deleteTpmFormDetails = async (req, res) => {
 };
 
 module.exports = {
-  saveTpmFormDetails,
-  findTpmFormDetails,
+  createTpmFormDetails,
+  getTpmFormDetails,
   updateTpmFormDetails,
   deleteTpmFormDetails,
 };
