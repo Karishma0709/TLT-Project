@@ -23,13 +23,12 @@ const MpcjContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     const valid = data.name && data.email && data.contact && data.purchasedProduct;
 
     if (valid) {
       try {
-        const response = await fetch(SummaryApi["mpcjForm"].url, {
-          method: SummaryApi["mpcjForm"].method,
+        const response = await fetch("http://localhost:8080/api/createMPCJFormDetails", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -43,7 +42,6 @@ const MpcjContactForm = () => {
         const result = await response.json();
         console.log("Form submitted successfully: ", result);
         toast.success("Form submitted successfully!");
-        setIsModalOpen(false);
         
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
@@ -54,6 +52,7 @@ const MpcjContactForm = () => {
       toast.error("Please fill in all the fields.");
     }
   };
+
 
   return (
     <div className="form-container mx-5 md:my-20 my-10">
