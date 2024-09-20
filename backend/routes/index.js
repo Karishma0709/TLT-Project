@@ -13,18 +13,21 @@ const {
 } = require('../controllers/tpmController');
 
 const {
-  saveMPCJFormDetails,
-  findMPCJFormDetails,
+  createMPCJFormDetails,
+  getMPCJFormDetails,
+  updateMPCJFormDetails,
+  deleteMPCJFormDetails,
 } = require('../controllers/mpcjOfflineController');
+
+
+
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
-const mpcjGetData = require('../controllers/mpcjGetController');
 const saveMarquee = require('../controllers/saveMarque');
-// const tpmGetData = require('../controllers/tpmGetController');
 const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
@@ -105,8 +108,24 @@ router.put('/updateJetForm/:id', updateJetForm);
 router.delete('/deleteJetForm/:id', deleteJetForm);
 
 // MPCJ Routes
-router.post('/mpcjForm', saveMPCJFormDetails);
-router.get('/mpcj-data', mpcjGetData);
+router.post('/createMPCJFormDetails', createMPCJFormDetails);
+router.get('/getMPCJFormDetails', getMPCJFormDetails);
+router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
+router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.post('/signUp', userSignUpController);
 router.post('/signIn', userSignInController);
