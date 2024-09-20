@@ -4,7 +4,6 @@ import Login from '../pages/Login';
 import Sidebar from '../components/Sidebar';
 import SignUp from '../pages/SignUp';
 import User from '../components/User';
-import Details from '../components/Details';
 import MpcjData from '../components/MpcjData';
 import TpmData from '../components/TpmData';
 import InfoMarquee from '../components/InfoMarquee';
@@ -17,6 +16,7 @@ import EmpowermentAdmin from '../components/EmpowermentAdmin';
 import FastTrackForm from '../components/FastTrackForm';
 import SyllabusUpload from '../components/SyllabusUpload';
 import JetFormDetails from '../components/JetFormDetails';
+import PreviousYearForm from '../components/PreviousYearForm';
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'py-paper',
-            element: <Details />,
+            element: <PreviousYearForm />,
           },
           {
             path: 'mpcj-form',

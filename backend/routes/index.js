@@ -6,12 +6,12 @@ const router = express.Router();
 
 // Import controllers
 const {
-  saveTpmFormDetails,
-  findTpmFormDetails,
+  createTpmFormDetails,
+  getTpmFormDetails,
   updateTpmFormDetails,
   deleteTpmFormDetails,
 } = require('../controllers/tpmController');
-const createPyPapersDetail = require('../controllers/pyPaperController');
+
 const {
   saveMPCJFormDetails,
   findMPCJFormDetails,
@@ -23,9 +23,8 @@ const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
 const mpcjGetData = require('../controllers/mpcjGetController');
-const allPyPapers = require('../controllers/allPyPaper');
 const saveMarquee = require('../controllers/saveMarque');
-const tpmGetData = require('../controllers/tpmGetController');
+// const tpmGetData = require('../controllers/tpmGetController');
 const marqueeGetData = require('../controllers/GetMarque');
 const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
@@ -48,6 +47,12 @@ const {
   CreateSyllabusUpload,
   getSyllabusFiles,
 } = require('../controllers/syllabusUploadController');
+const {
+  createPyPapersDetail,
+  getAllPyPapers,
+  updatePyPapersDetail,
+  deletePyPapersDetail,
+} = require('../controllers/pyPaperController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -75,14 +80,16 @@ const syllabusUpload = multer({
 });
 
 // Previous paper routes
-router.post('/prepaper', createPyPapersDetail);
+router.post('/createPyPapersDetail', createPyPapersDetail);
+router.get('/getAllPyPapers', getAllPyPapers);
+router.put('/updatePyPapersDetail/:id', updatePyPapersDetail);
+router.delete('/deletePyPapersDetail/:id', deletePyPapersDetail);
 
 // TPM routes
-router.post('/tpmForm', saveTpmFormDetails);
-router.get('/tmp-data', tpmGetData);
-router.put('/updateTpmFormDetails', updateTpmFormDetails);
-router.delete('/deleteTpmFormDetails', deleteTpmFormDetails);
-// router.get('/tpmForm', findTpmFormDetails);
+router.post('/createTpmFormDetails', createTpmFormDetails);
+router.get('/getTpmFormDetails', getTpmFormDetails);
+router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
+router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 
 // JET form routes
 router.post(

@@ -9,7 +9,7 @@ const SummaryApi = {
   },
   empowermentForm: { 
     url: `${backendDomain}/api/empowermentForm`,
-    method: "post",
+    method: "post", 
   },
   jetForm: {
     url: `${backendDomain}/api/jetForm`,

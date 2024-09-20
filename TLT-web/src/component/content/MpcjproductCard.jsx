@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Headings from "../utiliti/heading/Heading";
 import styless from "./MpcjproductCard.module.css";
 import productCards from '../../component/data/productCards';
-import MpcjContactForm1 from "./MpcjContactForm1";
+import TPMForm from "./TPMForm";
 
 const MpcjproductCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +44,7 @@ const MpcjproductCard = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
           <div className="bg-white p-3 rounded-lg max-w-full w-full bg-opacity-75">
             <button className="absolute text-3xl  font-bold z-50 m-7 sm:right-16 sm:top-8 right-4 top-3 text-black" onClick={handleCloseModal}>X</button>
-            <MpcjContactForm1 />
+            <TPMForm />
           </div>
         </div>
       )}
