@@ -96,12 +96,12 @@ const SummaryApi = {
     method: 'get',
   },
   SyllabusUpdate: {
-    url: `${backendDomain}/api/updateSyllabus`,
+    url: `${backendDomain}/api/updateSyllabusById/:id`,
     method: 'put',
   },
   SyllabusDelete: {
-    url: `${backendDomain}/api/deleteSyllabus`,
-    method: 'Delete',
+    url: `${backendDomain}/api/deleteSyllabusById/:id`,
+    method: 'delete',
   },
 };
 export default SummaryApi;

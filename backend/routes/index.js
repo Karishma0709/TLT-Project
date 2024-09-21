@@ -46,10 +46,7 @@ const {
   deleteJetForm,
   updateJetForm,
 } = require('../controllers/jetController');
-const {
-  CreateSyllabusUpload,
-  getSyllabusFiles,
-} = require('../controllers/syllabusUploadController');
+const { createSyllabusUpload, getSyllabusFiles, updateSyllabusById, deleteSyllabusById } = require('../controllers/syllabusUploadController');
 const {
   createPyPapersDetail,
   getAllPyPapers,
@@ -63,7 +60,7 @@ router.use('/notifiesfiles', express.static('files'));
 router.use('/empowermentForm', express.static('files'));
 router.use('/fastTrackForm', express.static('files'));
 router.use('/jetForm', express.static('files'));
-router.use('/syllabusUpload', express.static('files'));
+router.use('/files', express.static('files'));
 
 // Multer storage configurations
 const multerStorage = (directory) =>
@@ -112,19 +109,6 @@ router.post('/createMPCJFormDetails', createMPCJFormDetails);
 router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 router.post('/signUp', userSignUpController);
@@ -274,12 +258,10 @@ router.get('/getfastTrackForm', getFastTrackForm);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
 
-//SyllabusUpload Routes
-router.post(
-  '/SyllabusUpload',
-  syllabusUpload.single('file'),
-  CreateSyllabusUpload
-);
+/// SyllabusUpload Routes
+router.post('/SyllabusUpload', syllabusUpload.single('file'), createSyllabusUpload);
 router.get('/getSyllabusUpload', getSyllabusFiles);
+router.put('/updateSyllabusById/:id', syllabusUpload.single('file'), updateSyllabusById);
+router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
 
 module.exports = router;
