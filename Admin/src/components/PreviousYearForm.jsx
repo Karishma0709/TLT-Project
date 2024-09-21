@@ -12,15 +12,17 @@ const PreviousYearForm = () => {
 
   const fetchAllPapers = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/getAllPyPapers");
-           if (Array.isArray(result.data.data)) {
+      const result = await axios.get(
+        'http://localhost:8080/api/getAllPyPapers'
+      );
+      if (Array.isArray(result.data.data)) {
         setAllPapers(result.data.data);
       } else {
-        console.error("Unexpected data format:", result.data.data);
+        console.error('Unexpected data format:', result.data.data);
         setAllPapers([]); // Set to empty array if data format is unexpected
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
       setAllPapers([]); // Set to empty array on error
     }
   };
@@ -28,10 +30,12 @@ const PreviousYearForm = () => {
   // Delete paper data
   const deletePaper = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/deletePyPapersDetail/${id}`);
+      await axios.delete(
+        `http://localhost:8080/api/deletePyPapersDetail/${id}`
+      );
       fetchAllPapers();
     } catch (error) {
-      console.error("Error deleting paper:", error);
+      console.error('Error deleting paper:', error);
     }
   };
 
@@ -52,7 +56,7 @@ const PreviousYearForm = () => {
       setEditMode(null); // Exit edit mode after updating
       fetchAllPapers(); // Fetch updated data
     } catch (error) {
-      console.error("Error updating paper:", error);
+      console.error('Error updating paper:', error);
     }
   };
 
@@ -63,7 +67,9 @@ const PreviousYearForm = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Previous Year Paper Details</h1>
+      <h1 className="text-2xl font-semibold mb-4">
+        Previous Year Paper Details
+      </h1>
       <div>
         {allPapers.length === 0 ? (
           <p className="text-gray-500">No data available</p>
@@ -82,7 +88,9 @@ const PreviousYearForm = () => {
             <tbody>
               {allPapers.map((paper, index) => (
                 <tr
-                  className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
+                  className={`border-b border-gray-200 ${
+                    index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                  } hover:bg-gray-100`}
                   key={paper._id}
                 >
                   <td className="py-2 px-4 text-gray-600">{index + 1}</td>

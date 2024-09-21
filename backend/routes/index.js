@@ -19,8 +19,6 @@ const {
   deleteMPCJFormDetails,
 } = require('../controllers/mpcjOfflineController');
 
-
-
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
@@ -112,20 +110,6 @@ router.post('/createMPCJFormDetails', createMPCJFormDetails);
 router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.post('/signUp', userSignUpController);
 router.post('/signIn', userSignInController);
