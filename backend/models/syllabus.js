@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const syllabusSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   pdf: {
     type: String,
-    required: true
-  }
-});
+    required: true,
+  },
+}, { timestamps: true });
 
 const SyllabusUpload = mongoose.model('SyllabusUpload', syllabusSchema);
 
