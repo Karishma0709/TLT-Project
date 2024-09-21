@@ -1,3 +1,5 @@
+import TpmData from '../components/TpmData';
+
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
 const backendDomain = 'http://localhost:8080';
 
@@ -38,9 +40,17 @@ const SummaryApi = {
     url: `${backendDomain}/api/PyPaperPDF`,
     method: 'post',
   },
-  PyPaperPDF: {
+  GetPyPaperPDF: {
     url: `${backendDomain}/api/getpydata`,
     method: 'get',
+  },
+  PyPaperPDFupload: {
+    url: `${backendDomain}/api/pypaperdataupdate/:id`,
+    method: 'put',
+  },
+  PyPaperPDFDelete: {
+    url: `${backendDomain}/api/pypaperdataDelete/:id`,
+    method: 'delete',
   },
   UnpaidPDF: {
     url: `${backendDomain}/api/upload-files`,
@@ -101,6 +111,18 @@ const SummaryApi = {
   },
   SyllabusDelete: {
     url: `${backendDomain}/api/deleteSyllabusById/:id`,
+    method: 'delete',
+  },
+  TpmData: {
+    url: `${backendDomain}/api/getTpmFormDetails`,
+    method: 'get',
+  },
+  TpmDataUpdate: {
+    url: `${backendDomain}/api/updateTpmFormDetails/:id`,
+    method: 'put',
+  },
+  TpmDataDelete: {
+    url: `${backendDomain}/api/deleteTpmFormDetails/:id`,
     method: 'delete',
   },
 };

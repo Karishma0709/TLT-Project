@@ -119,7 +119,7 @@ const FastTrackForm = () => {
                 </th>
                 <th className="py-2 px-4 text-left">Institution</th>
                 <th className="py-2 px-4 text-left">Actions</th>
-              </tr>
+              </tr> 
             </thead>
             <tbody>
               {fastTrackdata.map((data, index) => (
