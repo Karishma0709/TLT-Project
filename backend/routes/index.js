@@ -33,7 +33,12 @@ const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
-const PyPaperPDF = require('../controllers/PyPaperPdf');
+const{
+  createPyPaperPDFupload,
+  getPyPaperPDFupload,
+  updatePyPaperPDFupload,
+  deletePyPaperPDFupload,
+}=require("../controllers/PrevYearPaperPDFUploadController")
 const {
   FastTrackFormDetails,
   getFastTrackForm,
@@ -54,13 +59,22 @@ const {
   deletePyPapersDetail,
 } = require('../controllers/pyPaperController');
 
+const {
+createUnpaidUpload,
+getUnpaidFiles,
+updateUnpaidById,
+deleteUnpaidById,
+} = require('../controllers/unpaidProductController');
+
+
 // Static file setup
 router.use('/files', express.static('files'));
 router.use('/notifiesfiles', express.static('files'));
 router.use('/empowermentForm', express.static('files'));
 router.use('/fastTrackForm', express.static('files'));
 router.use('/jetForm', express.static('files'));
-router.use('/files', express.static('files'));
+
+
 
 // Multer storage configurations
 const multerStorage = (directory) =>
@@ -78,6 +92,13 @@ const jetFormUpload = multer({ storage: multerStorage('./jetFormfiles') });
 const syllabusUpload = multer({
   storage: multerStorage('./SyllabusUploadFiles'),
 });
+const prevYearPDFuploadUpload = multer({
+  storage: multerStorage('./prevYearPDFuploadUpload'),
+});
+const unpaidProductUpload = multer({
+  storage: multerStorage('./unpaidProductUploadFiles'),
+});
+
 
 // Previous paper routes
 router.post('/createPyPapersDetail', createPyPapersDetail);
@@ -111,54 +132,12 @@ router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 
 
-router.post('/signUp', userSignUpController);
-router.post('/signIn', userSignInController);
-router.get('/userDetails', authToken, userDetailsController);
-router.get('/userLogout', userLogout);
+// PY paper PDF upload routers
+router.post('/createPyPaperPDFupload', prevYearPDFuploadUpload.single('paperimage'), createPyPaperPDFupload);
+router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
+router.put('/  updatePyPaperPDFupload/:id',   updatePyPaperPDFupload);
+router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);
 
-router.get('/registerUser', allRegisterUser);
-
-router.post('/marquee', saveMarquee);
-
-router.get('/marquee-data/:id', marqueeGetData);
-router.put('/marquee-data/:id', marqueeUpdate);
-router.delete('/marquee-delete/:id', marqueeDelete);
-
-// PY paper
-
-const PYmainStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './notifiesfiles'); // Directory to store the files
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + file.originalname;
-    cb(null, uniqueSuffix);
-  },
-});
-
-// const PYmainStorage = multer({ dest: 'notifiesfiles/' });
-
-// Initialize Multer with the storage configuration
-const PYmainuploads = multer({ storage: PYmainStorage });
-
-router.post(
-  '/PyPaperPDF',
-  PYmainuploads.single('paperimage'),
-  PyPaperPDF.PyPaperPDF
-);
-router.get('/getpydata', PyPaperPDF.getPydata);
-router.put('/pypaperdataupdate/:id', PyPaperPDF.Pypaperdataupdate);
-router.delete('/pypaperdataDelete/:id', PyPaperPDF.PypaperdataDelete);
-
-// Notification routes
-router.post(
-  '/notifies',
-  notifyUpload.single('url'),
-  notifyController.createNotification
-);
-router.get('/getnotifies', notifyController.getNotifications);
-router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
-router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
 
 ////////empowermentForm
 const empowermentStorage = multer.diskStorage({
@@ -185,6 +164,72 @@ router.post(
 router.get('/getempowermentForm', empowermentController.getempowerment);
 router.put('/Eupdate/:id', empowermentController.Update);
 router.delete('/Edelete/:id', empowermentController.Edelete);
+
+// Fast Track Routes
+router.post(
+  '/fastTrackForm',
+  fastTrackUpload.fields([
+    { name: 'picture', maxCount: 1 },
+    { name: 'aadharCard', maxCount: 1 },
+  ]),
+  FastTrackFormDetails
+);
+
+router.get('/getfastTrackForm', getFastTrackForm);
+router.put('/updateFastTrackForm/:id', updateFastTrackForm);
+router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
+
+/// SyllabusUpload Routes
+router.post('/SyllabusUpload', syllabusUpload.single('file'), createSyllabusUpload);
+router.get('/getSyllabusUpload', getSyllabusFiles);
+router.put('/updateSyllabusById/:id', syllabusUpload.single('file'), updateSyllabusById);
+router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
+
+
+
+//unpaid product upload Routes
+router.post('/upload', unpaidProductUpload.single('file'), createUnpaidUpload);
+router.get('/get-files', getUnpaidFiles);
+router.put('/unpaidUpdate/:id', unpaidProductUpload.single('file'), updateUnpaidById);
+router.delete('/unpaidDelete/:id', deleteUnpaidById);
+
+
+
+
+
+
+router.post('/signUp', userSignUpController);
+router.post('/signIn', userSignInController);
+router.get('/userDetails', authToken, userDetailsController);
+router.get('/userLogout', userLogout);
+
+router.get('/registerUser', allRegisterUser);
+
+router.post('/marquee', saveMarquee);
+
+router.get('/marquee-data/:id', marqueeGetData);
+router.put('/marquee-data/:id', marqueeUpdate);
+router.delete('/marquee-delete/:id', marqueeDelete);
+
+
+
+
+
+
+
+
+
+// Notification routes
+router.post(
+  '/notifies',
+  notifyUpload.single('url'),
+  notifyController.createNotification
+);
+router.get('/getnotifies', notifyController.getNotifications);
+router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
+router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
+
+
 
 // Unpaid product file upload routes
 require('../models/UnpaidProduct');
@@ -244,24 +289,6 @@ router.delete('/unpaidDelete/:id', async (req, res) => {
   }
 });
 
-// Fast Track Routes
-router.post(
-  '/fastTrackForm',
-  fastTrackUpload.fields([
-    { name: 'picture', maxCount: 1 },
-    { name: 'aadharCard', maxCount: 1 },
-  ]),
-  FastTrackFormDetails
-);
 
-router.get('/getfastTrackForm', getFastTrackForm);
-router.put('/updateFastTrackForm/:id', updateFastTrackForm);
-router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
-
-/// SyllabusUpload Routes
-router.post('/SyllabusUpload', syllabusUpload.single('file'), createSyllabusUpload);
-router.get('/getSyllabusUpload', getSyllabusFiles);
-router.put('/updateSyllabusById/:id', syllabusUpload.single('file'), updateSyllabusById);
-router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
 
 module.exports = router;

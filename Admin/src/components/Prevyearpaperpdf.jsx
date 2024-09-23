@@ -1,186 +1,181 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SummaryApi from '../Common/SummaryApi';
 
-const Prevyearpaperpdf = () => {
-  const [uploadedPdfs, setUploadedPdfs] = useState(null);
-  const [Papertitle, setTitle] = useState('');
-  const [paperimage, setStateimg] = useState('');
-  const [editData, setEditData] = useState({});
+const PrevYearPaperUpload = () => {
+  const [title, setTitle] = useState('');
+  const [file, setFile] = useState(null);
+  const [paperList, setPaperList] = useState([]);
+  const [error, setError] = useState('');
+  const [editId, setEditId] = useState(null);
+  const [updatedTitle, setUpdatedTitle] = useState('');
 
-  useEffect(() => {
-    fetchUploadedPdfs();
-  }, []);
+  const fetchPapers = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/getPyPaperPDFupload');
+      setPaperList(response.data.data);
+    } catch (error) {
+      console.error('Error fetching previous year papers:', error);
+      setError('Error fetching previous year papers');
+    }
+  };
 
-  const Submitpydata = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('Papertitle', Papertitle);
-    formData.append('paperimage', paperimage);
+    formData.append('title', title);
+    formData.append('file', file);
 
     try {
-      const result = await axios({
-        url: SummaryApi.PyPaperPDF.url,
-        method: SummaryApi.PyPaperPDF.method,
-        data: formData, // Pass formData here
-        headers: { 'Content-Type': 'multipart/form-data' },
+      await axios.post('http://localhost:8080/api/createPyPaperPDFupload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-
-      if (result.data.status === 'ok') {
-        alert('Uploaded Successfully!');
-        setTitle('');
-        setStateimg('');
-        fetchUploadedPdfs(); // Refetch data after upload
-      }
+      fetchPapers();
+      setTitle('');
+      setFile(null);
     } catch (error) {
-      console.error('There was an error uploading the file!', error);
+      console.error('Error uploading previous year paper:', error);
+      setError('Error uploading previous year paper');
     }
   };
 
-  const handleChange = (e, id) => {
-    setEditData({
-      ...uploadedPdfs,
-      [id]: { ...uploadedPdfs[id], [e.target.name]: e.target.value },
-    });
-  };
+  const updatePaper = async (id) => {
+    if (!updatedTitle) {
+      setError('Title is required for update');
+      return;
+    }
 
-  const UpdatePYPdata = async (id) => {
-    const apiUrl = SummaryApi.PyPaperPDFupload.url.replace(':id', id);
+    const apiUrl = `http://localhost:8080/api/updatePyPaperPDFupload/${id}`;
+    const formData = new FormData();
+    formData.append('title', updatedTitle);
+    if (file) {
+      formData.append('file', file);
+    }
 
     try {
-      const updateuser = await axios({
-        url: apiUrl,
-        method: SummaryApi.PyPaperPDFupload.method,
-        data: editData[id],
+      await axios.put(apiUrl, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+      fetchPapers();
+      resetEdit();
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error('Error updating previous year paper:', error);
+      setError('Error updating previous year paper');
     }
   };
 
-  const deletePYPdata = async (id) => {
-    const apiUrl = SummaryApi.PyPaperPDFDelete.url.replace(':id', id);
-
+  const deletePaper = async (id) => {
+    const apiUrl = `http://localhost:8080/api/deletePyPaperPDFupload/${id}`;
     try {
-      await axios({
-        url: apiUrl,
-        method: SummaryApi.PyPaperPDFDelete.method,
-        data: editData[id],
-      });
-      fetchUploadedPdfs(); // Refresh the data after delete
+      await axios.delete(apiUrl);
+      fetchPapers();
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error('Error deleting previous year paper:', error);
+      setError('Error deleting previous year paper');
     }
   };
 
-  const fetchUploadedPdfs = async () => {
-    try {
-      const response = await axios({
-        url: SummaryApi.GetPyPaperPDF.url,
-        method: SummaryApi.GetPyPaperPDF.method,
-      });
-      console.log(response.data.data);
-      setUploadedPdfs(response.data.data);
-    } catch (error) {
-      console.error('Error fetching uploaded PDFs:', error);
-    }
+  const resetEdit = () => {
+    setEditId(null);
+    setUpdatedTitle('');
+    setFile(null);
   };
+
+  useEffect(() => {
+    fetchPapers();
+  }, []);
 
   return (
-    <>
-      <div className="mx-auto p-6 bg-white rounded shadow-lg">
-        <form
-          className="flex flex-col items-center gap-6 border p-6 rounded"
-          onSubmit={Submitpydata}
-        >
-          <h4 className="text-xl font-bold mb-2 text-gray-700">Upload PDF</h4>
+    <div className="mx-auto p-5">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md max-w-md mx-auto">
+        <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">Upload Previous Year Paper (PDF)</h1>
+        <input
+          type="text"
+          className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
+          placeholder="Title"
+          value={editId ? updatedTitle : title}
+          required
+          onChange={(e) => (editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value))}
+        />
+        <input
+          type="file"
+          className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
+          accept="application/pdf"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <div className="flex justify-center">
+          <button className="bg-[#1F2937] text-white p-2 rounded hover:bg-gray-800 w-full" type="submit">
+            {editId ? 'Update' : 'Submit'}
+          </button>
+        </div>
+      </form>
 
-          <div className="flex items-start">
-            <div className="flex flex-col">
-              <label>Paper Image</label>
-              <input
-                type="file"
-                className="border rounded p-2 mb-4"
-                name="paperimage"
-                required
-                onChange={(e) => setStateimg(e.target.files[0])}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label>Paper Title</label>
-              <input
-                type="text"
-                className="border rounded p-2 mb-4"
-                name="Papertitle"
-                required
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="bg-gray-800 text-white p-2 rounded hover:bg-gray-900"
-            >
-              Upload
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div className="w-full h-full mt-8">
-        {Array.isArray(uploadedPdfs) && uploadedPdfs.length > 0 ? (
-          <table className="table-auto border-collapse w-full">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 border">#</th>
-                <th className="px-4 py-2 border">Paper Title</th>
-                <th className="px-4 py-2 border">Image</th>
-                <th className="px-4 py-2 border">Update</th>
-                <th className="px-4 py-2 border">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {uploadedPdfs.map((item, index) => (
-                <tr key={item._id}>
-                  <td className="px-4 py-2 border">{index + 1}</td>
-                  <td className="px-4 py-2 border">
+      <div className="mt-10">
+        <h2 className="text-xl font-bold mb-4 text-[#1F2937]">Uploaded Previous Year Papers</h2>
+        <table className="w-full table-auto border-collapse border border-[#1F2937]">
+          <thead>
+            <tr className="bg-[#1F2937] text-white">
+              <th className="border border-[#1F2937] p-2">S.No</th>
+              <th className="border border-[#1F2937] p-2">Title</th>
+              <th className="border border-[#1F2937] p-2">File Name</th>
+              <th className="border border-[#1F2937] p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paperList.map((paper, index) => (
+              <tr key={paper._id} className="text-center">
+                <td className="border border-[#1F2937] p-2">{index + 1}</td>
+                <td className="border border-[#1F2937] p-2">
+                  {editId === paper._id ? (
                     <input
                       type="text"
-                      name="Papertitle"
-                      value={
-                        editData[item._id]?.Papertitle || item.Papertitle || ''
-                      }
-                      onChange={(e) => handleChange(e, item._id)}
+                      className="form-control border border-gray-300 rounded p-2 w-full"
+                      value={updatedTitle}
+                      onChange={(e) => setUpdatedTitle(e.target.value)}
                     />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <img
-                      src={`http://localhost:8080/notifiesfiles/${item.paperimage}`}
-                      className="w-20"
-                      alt="Paper"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <button onClick={() => UpdatePYPdata(item._id)}>
-                      Upload
-                    </button>
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <button onClick={() => deletePYPdata(item._id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No uploaded PDFs available.</p>
-        )}
+                  ) : (
+                    paper.title
+                  )}
+                </td>
+                <td className="border border-[#1F2937] p-2">{paper.pdf}</td>
+                <td className="border border-[#1F2937] p-2">
+                  {editId === paper._id ? (
+                    <>
+                      <button className="bg-green-500 text-white p-1 rounded mr-2" onClick={() => updatePaper(paper._id)}>
+                        Save
+                      </button>
+                      <button className="bg-gray-500 text-white p-1 rounded" onClick={resetEdit}>
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="bg-blue-500 text-white p-1 rounded mr-2"
+                        onClick={() => {
+                          setEditId(paper._id);
+                          setUpdatedTitle(paper.title);
+                        }}
+                      >
+                        Update
+                      </button>
+                      <button className="bg-red-500 text-white p-1 rounded" onClick={() => deletePaper(paper._id)}>
+                        Delete
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </>
+      {error && <p className="text-red-500">{error}</p>}
+    </div>
   );
 };
 
-export default Prevyearpaperpdf;
+export default PrevYearPaperUpload;
