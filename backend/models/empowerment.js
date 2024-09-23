@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const empowermentFormSchema = new Schema(
@@ -45,15 +45,15 @@ const empowermentFormSchema = new Schema(
     },
     pursuingLLB: {
       type: String,
-      enum: ["yes", "no"],
+      enum: ['yes', 'no'],
       required: true,
-    }, 
+    },
     yearOfPassing: {
       type: Number,
       required: true,
     },
     Batch: {
-      type:String,
+      type: String,
       required: true,
     },
     email: {
@@ -81,8 +81,8 @@ const empowermentFormSchema = new Schema(
       required: true,
     },
     oldStudentOfShubhamSir: {
-      type:String,
-      enum: ["yes", "no"],
+      type: String,
+      enum: ['yes', 'no'],
       required: true,
     },
     feesPaid: {
@@ -91,7 +91,7 @@ const empowermentFormSchema = new Schema(
         required: true,
       },
       onlineUPI: {
-        type:String,
+        type: String,
         required: true,
       },
     },
@@ -103,4 +103,7 @@ const empowermentFormSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("empowermentFormDetails", empowermentFormSchema);
+module.exports = mongoose.model(
+  'empowermentFormDetails',
+  empowermentFormSchema
+);

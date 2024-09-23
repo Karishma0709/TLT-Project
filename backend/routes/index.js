@@ -44,7 +44,12 @@ const {
   deleteJetForm,
   updateJetForm,
 } = require('../controllers/jetController');
-const { createSyllabusUpload, getSyllabusFiles, updateSyllabusById, deleteSyllabusById } = require('../controllers/syllabusUploadController');
+const {
+  createSyllabusUpload,
+  getSyllabusFiles,
+  updateSyllabusById,
+  deleteSyllabusById,
+} = require('../controllers/syllabusUploadController');
 const {
   createPyPapersDetail,
   getAllPyPapers,
@@ -108,10 +113,6 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 23ba212712763f672140421388e017cf11a11603
 router.post('/signUp', userSignUpController);
 router.post('/signIn', userSignInController);
 router.get('/userDetails', authToken, userDetailsController);
@@ -260,9 +261,17 @@ router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
 
 /// SyllabusUpload Routes
-router.post('/SyllabusUpload', syllabusUpload.single('file'), createSyllabusUpload);
+router.post(
+  '/SyllabusUpload',
+  syllabusUpload.single('file'),
+  createSyllabusUpload
+);
 router.get('/getSyllabusUpload', getSyllabusFiles);
-router.put('/updateSyllabusById/:id', syllabusUpload.single('file'), updateSyllabusById);
+router.put(
+  '/updateSyllabusById/:id',
+  syllabusUpload.single('file'),
+  updateSyllabusById
+);
 router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
 
 module.exports = router;

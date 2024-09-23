@@ -5,7 +5,9 @@ const createSyllabusUpload = async (req, res) => {
   try {
     const { title } = req.body;
     if (!req.file) {
-      return res.status(400).json({ status: 'error', message: 'File is required' });
+      return res
+        .status(400)
+        .json({ status: 'error', message: 'File is required' });
     }
     const fileName = req.file.filename;
     const newSyllabus = new SyllabusUpload({ title, pdf: fileName });
@@ -34,9 +36,15 @@ const updateSyllabusById = async (req, res) => {
     if (req.body.title) updatedData.title = req.body.title;
     if (req.file) updatedData.pdf = req.file.filename;
 
-    const updatedSyllabus = await SyllabusUpload.findByIdAndUpdate(id, updatedData, { new: true });
+    const updatedSyllabus = await SyllabusUpload.findByIdAndUpdate(
+      id,
+      updatedData,
+      { new: true }
+    );
     if (!updatedSyllabus) {
-      return res.status(404).json({ status: 'error', message: 'Syllabus not found' });
+      return res
+        .status(404)
+        .json({ status: 'error', message: 'Syllabus not found' });
     }
     res.status(200).json({ status: 'success', data: updatedSyllabus });
   } catch (error) {
@@ -50,9 +58,13 @@ const deleteSyllabusById = async (req, res) => {
     const { id } = req.params;
     const deletedSyllabus = await SyllabusUpload.findByIdAndDelete(id);
     if (!deletedSyllabus) {
-      return res.status(404).json({ status: 'error', message: 'Syllabus not found' });
+      return res
+        .status(404)
+        .json({ status: 'error', message: 'Syllabus not found' });
     }
-    res.status(204).json({ status: 'success', message: 'Syllabus deleted successfully' });
+    res
+      .status(204)
+      .json({ status: 'success', message: 'Syllabus deleted successfully' });
   } catch (error) {
     res.status(500).json({ status: 'error', message: error.message });
   }

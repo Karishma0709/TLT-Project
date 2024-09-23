@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SummaryApi from '../Common/SummaryApi';
 
 const Notification = () => {
   const [notificationText, setNotificationText] = useState('');
@@ -14,7 +15,10 @@ const Notification = () => {
   // Fetch all notifications
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getnotifies');
+      const response = await axios({
+        url: SummaryApi.Getnotifiess.url,
+        method: SummaryApi.Getnotifiess.method,
+      });
       setNotifications(response.data.data);
     } catch (error) {
       console.error('Error fetching notifications:', error);
@@ -23,8 +27,14 @@ const Notification = () => {
 
   // Handle delete notification
   const deleteNotifydata = async (id) => {
+    const apiUrl = SummaryApi.notifiesDelete.url.replace(':id', id);
+
     try {
-      await axios.delete(`http://localhost:8080/api/Notificationdelete/${id}`);
+      await axios({
+        url: apiUrl,
+        method: SummaryApi.notifiesDelete.method,
+        data: editData[id],
+      });
       fetchNotifications(); // Refresh the data after delete
     } catch (error) {
       console.error('Error deleting notification:', error);
@@ -39,13 +49,12 @@ const Notification = () => {
     formData.append('url', url);
 
     try {
-      const result = await axios.post(
-        'http://localhost:8080/api/notifies',
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
+      const result = await axios({
+        url: SummaryApi.notifies.url,
+        method: SummaryApi.notifies.method,
+        data: formData, // Pass formData here
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       if (result.data.status === 'ok') {
         alert('Uploaded Successfully !!!');
         fetchNotifications(); // Refresh list after upload

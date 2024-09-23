@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 const NotificationBox = () => {
   const marqueeRef = useRef(null);
@@ -13,11 +13,11 @@ const NotificationBox = () => {
 
   const getPdf = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/getnotifies");
+      const result = await axios.get('http://localhost:8080/api/getnotifies');
       setNotifay(result.data.data);
     } catch (err) {
       console.error(err);
-      setError("Failed to load notifications.");
+      setError('Failed to load notifications.');
     } finally {
       setLoading(false);
     }

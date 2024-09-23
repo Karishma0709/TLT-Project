@@ -1,14 +1,14 @@
-import React from "react";
-import AboutFirm from "./content/AboutFirm";
-import Mentor from "./content/Mentor";
-import MissionVision from "./content/MissionVision";
+import React from 'react';
+import AboutFirm from './content/AboutFirm';
+import Mentor from './content/Mentor';
+import MissionVision from './content/MissionVision';
 
 const About = () => {
   return (
     <>
       <div className="my-5">
-        <div className="flex flex-row md:justify-between">
-          <div className="w-full mb-6 lg:mb-0 banner2"></div>
+        <div className="flex flex-row w-full md:justify-between banner2 bg-cover">
+          <div className="w-full flex lg:mb-0 banner2 bg-contain bg-bottom"></div>
         </div>
       </div>
 
