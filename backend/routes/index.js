@@ -25,10 +25,15 @@ const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
-const saveMarquee = require('../controllers/saveMarque');
-const marqueeGetData = require('../controllers/GetMarque');
-const marqueeUpdate = require('../controllers/marqueUpdate');
-const marqueeDelete = require('../controllers/marqueDelete');
+
+const {
+  createMarquee,
+  getMarquees,
+  getMarqueeById,
+  updateMarquee,
+  deleteMarquee
+} = require('../controllers/marqueeControllers');
+
 const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
 const {
@@ -62,7 +67,12 @@ const {
   deletePyPapersDetail,
 } = require('../controllers/pyPaperController');
 
-const { uploadUnpaidFile, getUnpaidFiles, updateUnpaidFile, deleteUnpaidFile } = require('../controllers/unpaidProductController');
+const {
+  uploadUnpaidFile,
+  getUnpaidFiles,
+  updateUnpaidFile,
+  deleteUnpaidFile,
+} = require('../controllers/unpaidProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -189,7 +199,11 @@ router.put(
 router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
 
 //unpaid product upload Routes
-router.post('/UnpaidUpload', unpaidProductUpload.single('file'), uploadUnpaidFile);
+router.post(
+  '/UnpaidUpload',
+  unpaidProductUpload.single('file'),
+  uploadUnpaidFile
+);
 router.get('/getUnpaidUpload', getUnpaidFiles);
 router.put('/updateUnpaidById/:id', upload.single('file'), updateUnpaidFile);
 router.delete('/deleteUnpaidById/:id', deleteUnpaidFile);
@@ -200,10 +214,18 @@ router.get('/userDetails', authToken, userDetailsController);
 router.get('/userLogout', userLogout);
 router.get('/registerUser', allRegisterUser);
 
-router.post('/marquee', saveMarquee);
-router.get('/marquee-data/:id', marqueeGetData);
-router.put('/marquee-data/:id', marqueeUpdate);
-router.delete('/marquee-delete/:id', marqueeDelete);
+//Maquee Routes
+router.post('/marquee', createMarquee);
+router.get('/marquee', getMarquees);
+router.get('/marquee/:id', getMarqueeById);
+router.put('/marquee/:id', updateMarquee);
+router.delete('/marquee/:id', deleteMarquee);
+
+
+// router.post('/marquee', saveMarquee);
+// router.get('/marquee-data/:id', marqueeGetData);
+// router.put('/marquee-data/:id', marqueeUpdate);
+// router.delete('/marquee-delete/:id', marqueeDelete);
 
 // Notification routes
 router.post(
@@ -214,6 +236,5 @@ router.post(
 router.get('/getnotifies', notifyController.getNotifications);
 router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
 router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
-
 
 module.exports = router;

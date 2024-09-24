@@ -1,12 +1,13 @@
-const { default: mongoose } = require("mongoose");
+// models/Marquee.js
+const mongoose = require('mongoose');
 
-const marqueeSchema= new mongoose.Schema(
-    {
-       marquee:{
-        type:String
-       }
+const marqueeSchema = new mongoose.Schema({
+    text: {
+        type: String,
+        required: true,
     },
-);
+    // Add other fields as necessary
+}, { timestamps: true });
 
-const marqueeModel= mongoose.model("marqueeModel",marqueeSchema)
-module.exports=marqueeModel
+const Marquee = mongoose.model('Marquee', marqueeSchema);
+module.exports = Marquee;
