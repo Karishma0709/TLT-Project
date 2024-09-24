@@ -12,7 +12,7 @@ export const PYpapers = () => {
   });
 
   const getPy = async () => {
-    const result = await axios.get('http://localhost:8080/api/getpydata');
+    const result = await axios.get('http://localhost:8080/api/getPyPaperPDFupload');
     console.log(result.data.data);
     setPydata(result.data.data);
   };

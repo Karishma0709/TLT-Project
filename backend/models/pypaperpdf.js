@@ -15,4 +15,4 @@ const pyPaperSchema=mongoose.Schema({
 })
 
 
-module.exports=pyPaperModule=mongoose.model('pyPaperModule',pyPaperSchema)
+module.exports=PrevYearPaperUpload=mongoose.model('PrevYearPaperUpload',pyPaperSchema)

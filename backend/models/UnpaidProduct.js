@@ -1,8 +1,18 @@
-const mongoose=require("mongoose")
+const mongoose = require('mongoose');
 
-const UproductSchema=new mongoose.Schema({
-  pdf: String,
-  title:String
-},{collection:"unpaidpdf"})
+const unpaidProductSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    pdf: {
+        type: String, // Store PDF URL or path
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
-mongoose.model("unpaidpdf",UproductSchema)
+module.exports = mongoose.model('UnpaidProduct', unpaidProductSchema);

@@ -6,7 +6,10 @@ const Notification = () => {
   const [notificationText, setNotificationText] = useState('');
   const [url, setUrl] = useState('');
   const [notifications, setNotifications] = useState([]);
- 
+  const [editId, setEditId] = useState(null);
+  const [updatedText, setUpdatedText] = useState('');
+  const [updatedUrl, setUpdatedUrl] = useState('');
+
   // Load notifications on component mount
   useEffect(() => {
     fetchNotifications();
@@ -25,22 +28,6 @@ const Notification = () => {
     }
   };
 
-  // Handle delete notification
-  const deleteNotifydata = async (id) => {
-    const apiUrl = SummaryApi.notifiesDelete.url.replace(':id', id);
-
-    try {
-      await axios({
-        url: apiUrl,
-        method: SummaryApi.notifiesDelete.method,
-        data: editData[id],
-      });
-      fetchNotifications(); // Refresh the data after delete
-    } catch (error) {
-      console.error('Error deleting notification:', error);
-    }
-  };
-
   // Handle new notification submission
   const SubmitImage = async (e) => {
     e.preventDefault();
@@ -52,7 +39,7 @@ const Notification = () => {
       const result = await axios({
         url: SummaryApi.notifies.url,
         method: SummaryApi.notifies.method,
-        data: formData, // Pass formData here
+        data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       if (result.data.status === 'ok') {
@@ -64,23 +51,19 @@ const Notification = () => {
     }
   };
 
-  // Handle change in input fields for each notification
-  const handleChange = (e, id) => {
-    const { name, value } = e.target;
-    setNotifications((prevNotifications) =>
-      prevNotifications.map((notification) =>
-        notification._id === id
-          ? { ...notification, [name]: value }
-          : notification
-      )
-    );
+  // Handle edit notification
+  const handleEdit = (notification) => {
+    setEditId(notification._id);
+    setUpdatedText(notification.notificationText);
+    setUpdatedUrl(notification.url);
   };
 
   // Handle update notification
-  const UpdateNotifydata = async (id) => {
-    const updatedNotification = notifications.find(
-      (notification) => notification._id === id
-    );
+  const updateNotification = async (id) => {
+    const updatedNotification = {
+      notificationText: updatedText,
+      url: updatedUrl,
+    };
 
     try {
       await axios.put(
@@ -89,9 +72,31 @@ const Notification = () => {
       );
       alert('Updated Successfully !!!');
       fetchNotifications(); // Refresh list after update
+      resetEdit();
     } catch (error) {
       console.error('Error updating notification:', error);
     }
+  };
+
+  // Delete notification
+  const deleteNotifydata = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this notification?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8080/api/Notificationdelete/${id}`);
+        alert('Notification deleted successfully!');
+        fetchNotifications(); // Refresh list after deletion
+      } catch (error) {
+        console.error('Error deleting notification:', error);
+      }
+    }
+  };
+
+  // Reset edit state
+  const resetEdit = () => {
+    setEditId(null);
+    setUpdatedText('');
+    setUpdatedUrl('');
   };
 
   return (
@@ -159,28 +164,45 @@ const Notification = () => {
                 >
                   <td className="border border-gray-800 p-2">{index + 1}</td>
                   <td className="border border-gray-800 p-2">
-                    <input
-                      type="text"
-                      name="notificationText"
-                      value={notification.notificationText || ''}
-                      onChange={(e) => handleChange(e, notification._id)}
-                    />
+                    {editId === notification._id ? (
+                      <input
+                        type="text"
+                        value={updatedText}
+                        onChange={(e) => setUpdatedText(e.target.value)}
+                        className="border border-gray-300 rounded-md p-2 w-full"
+                      />
+                    ) : (
+                      notification.notificationText
+                    )}
                   </td>
                   <td className="border border-gray-800 p-2">
-                    <input
-                      type="text"
-                      name="url"
-                      value={notification.url || ''}
-                      onChange={(e) => handleChange(e, notification._id)}
-                    />
+                    {editId === notification._id ? (
+                      <input
+                        type="text"
+                        value={updatedUrl}
+                        onChange={(e) => setUpdatedUrl(e.target.value)}
+                        className="border border-gray-300 rounded-md p-2 w-full"
+                      />
+                    ) : (
+                      notification.url
+                    )}
                   </td>
                   <td className="border border-gray-800 p-2">
-                    <button
-                      onClick={() => UpdateNotifydata(notification._id)}
-                      className="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-blue-700"
-                    >
+                    {editId === notification._id ? (
+                      <button
+                        onClick={() => updateNotification(notification._id)}
+                        className="bg-green-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-green-700"
+                      >
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleEdit(notification)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-blue-700"
+                      >
                       Update
-                    </button>
+                      </button>
+                    )}
                     <button
                       onClick={() => deleteNotifydata(notification._id)}
                       className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-700"
