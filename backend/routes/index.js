@@ -19,8 +19,6 @@ const {
   deleteMPCJFormDetails,
 } = require('../controllers/mpcjOfflineController');
 
-
-
 const userSignUpController = require('../controllers/userSingUp');
 const userSignInController = require('../controllers/userSignIn');
 const userDetailsController = require('../controllers/userDetails');
@@ -33,12 +31,12 @@ const marqueeUpdate = require('../controllers/marqueUpdate');
 const marqueeDelete = require('../controllers/marqueDelete');
 const notifyController = require('../controllers/notifyController');
 const empowermentController = require('../controllers/empowermentController');
-const{
+const {
   createPyPaperPDFupload,
   getPyPaperPDFupload,
   updatePyPaperPDFupload,
   deletePyPaperPDFupload,
-}=require("../controllers/PrevYearPaperPDFUploadController")
+} = require('../controllers/PrevYearPaperPDFUploadController');
 const {
   FastTrackFormDetails,
   getFastTrackForm,
@@ -51,7 +49,12 @@ const {
   deleteJetForm,
   updateJetForm,
 } = require('../controllers/jetController');
-const { createSyllabusUpload, getSyllabusFiles, updateSyllabusById, deleteSyllabusById } = require('../controllers/syllabusUploadController');
+const {
+  createSyllabusUpload,
+  getSyllabusFiles,
+  updateSyllabusById,
+  deleteSyllabusById,
+} = require('../controllers/syllabusUploadController');
 const {
   createPyPapersDetail,
   getAllPyPapers,
@@ -59,13 +62,7 @@ const {
   deletePyPapersDetail,
 } = require('../controllers/pyPaperController');
 
-const {
-createUnpaidUpload,
-getUnpaidFiles,
-updateUnpaidById,
-deleteUnpaidById,
-} = require('../controllers/unpaidProductController');
-
+const { uploadUnpaidFile, getUnpaidFiles, updateUnpaidFile, deleteUnpaidFile } = require('../controllers/unpaidProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -73,8 +70,6 @@ router.use('/notifiesfiles', express.static('files'));
 router.use('/empowermentForm', express.static('files'));
 router.use('/fastTrackForm', express.static('files'));
 router.use('/jetForm', express.static('files'));
-
-
 
 // Multer storage configurations
 const multerStorage = (directory) =>
@@ -98,7 +93,6 @@ const prevYearPDFuploadUpload = multer({
 const unpaidProductUpload = multer({
   storage: multerStorage('./unpaidProductUploadFiles'),
 });
-
 
 // Previous paper routes
 router.post('/createPyPapersDetail', createPyPapersDetail);
@@ -131,13 +125,15 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 
-
 // PY paper PDF upload routers
-router.post('/createPyPaperPDFupload', prevYearPDFuploadUpload.single('paperimage'), createPyPaperPDFupload);
+router.post(
+  '/createPyPaperPDFupload',
+  prevYearPDFuploadUpload.single('paperimage'),
+  createPyPaperPDFupload
+);
 router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
-router.put('/  updatePyPaperPDFupload/:id',   updatePyPaperPDFupload);
+router.put('/  updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
 router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);
-
 
 ////////empowermentForm
 const empowermentStorage = multer.diskStorage({
@@ -180,44 +176,35 @@ router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
 
 /// SyllabusUpload Routes
-router.post('/SyllabusUpload', syllabusUpload.single('file'), createSyllabusUpload);
+router.post(
+  '/SyllabusUpload',
+  syllabusUpload.single('file'),
+  createSyllabusUpload
+);
 router.get('/getSyllabusUpload', getSyllabusFiles);
-router.put('/updateSyllabusById/:id', syllabusUpload.single('file'), updateSyllabusById);
+router.put(
+  '/updateSyllabusById/:id',
+  syllabusUpload.single('file'),
+  updateSyllabusById
+);
 router.delete('/deleteSyllabusById/:id', deleteSyllabusById);
 
-
-
 //unpaid product upload Routes
-router.post('/upload', unpaidProductUpload.single('file'), createUnpaidUpload);
-router.get('/get-files', getUnpaidFiles);
-router.put('/unpaidUpdate/:id', unpaidProductUpload.single('file'), updateUnpaidById);
-router.delete('/unpaidDelete/:id', deleteUnpaidById);
-
-
-
-
-
+router.post('/UnpaidUpload', unpaidProductUpload.single('file'), uploadUnpaidFile);
+router.get('/getUnpaidUpload', getUnpaidFiles);
+router.put('/updateUnpaidById/:id', upload.single('file'), updateUnpaidFile);
+router.delete('/deleteUnpaidById/:id', deleteUnpaidFile);
 
 router.post('/signUp', userSignUpController);
 router.post('/signIn', userSignInController);
 router.get('/userDetails', authToken, userDetailsController);
 router.get('/userLogout', userLogout);
-
 router.get('/registerUser', allRegisterUser);
 
 router.post('/marquee', saveMarquee);
-
 router.get('/marquee-data/:id', marqueeGetData);
 router.put('/marquee-data/:id', marqueeUpdate);
 router.delete('/marquee-delete/:id', marqueeDelete);
-
-
-
-
-
-
-
-
 
 // Notification routes
 router.post(
@@ -228,67 +215,6 @@ router.post(
 router.get('/getnotifies', notifyController.getNotifications);
 router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
 router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
-
-
-
-// Unpaid product file upload routes
-require('../models/UnpaidProduct');
-
-const unpdfSchema = mongoose.model('unpaidpdf');
-router.post('/upload-files', upload.single('file'), async (req, res) => {
-  console.log(req.file);
-  const title = req.body.title;
-  const fileName = req.file.filename;
-  try {
-    await unpdfSchema.create({ title: title, pdf: fileName });
-    res.send({ Status: 'ok' });
-  } catch (error) {
-    res.json({ status: error });
-  }
-});
-
-router.get('/get-files', async (req, res) => {
-  try {
-    unpdfSchema.find({}).then((data) => {
-      res.send({ status: 'ok', data: data });
-    });
-  } catch (error) {
-    res.json({ status: 'error', error: error.message });
-  }
-});
-
-router.put('/unpaidUpdate/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const userExist = await unpdfSchema.findOne({ _id: id });
-    if (!userExist) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    const updateUser = await unpdfSchema.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-    res.status(201).json(updateUser);
-  } catch (error) {
-    console.error(error);
-    res.json({ status: error.message });
-  }
-});
-
-router.delete('/unpaidDelete/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const userExist = await unpdfSchema.findById({ _id: id });
-    if (!userExist) {
-      return res.status(404).json({ message: 'User Not Found.' });
-    }
-    await unpdfSchema.findByIdAndDelete(id);
-    res.status(201).json({ message: 'user Deletes Successfully' });
-  } catch (error) {
-    console.error(error);
-    res.json({ status: error.message });
-  }
-});
-
 
 
 module.exports = router;
