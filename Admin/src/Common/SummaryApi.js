@@ -73,9 +73,17 @@ const SummaryApi = {
     url: `${backendDomain}/api/notifies`,
     method: 'post',
   },
-  notifiess: {
+  Getnotifiess: {
     url: `${backendDomain}/api/getnotifies`,
     method: 'get',
+  },
+  notifiesUpdate: {
+    url: `${backendDomain}/api/Notificationupdate/:id`,
+    method: 'put',
+  },
+  notifiesDelete: {
+    url: `${backendDomain}/api/Notificationdelete/:id`,
+    method: 'delete',
   },
   EmpowermentAdmin: {
     url: `${backendDomain}/api/getempowermentForm`,

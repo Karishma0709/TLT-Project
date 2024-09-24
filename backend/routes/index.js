@@ -124,7 +124,6 @@ router.post('/createMPCJFormDetails', createMPCJFormDetails);
 router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
-
 // PY paper PDF upload routers
 router.post(
   '/createPyPaperPDFupload',

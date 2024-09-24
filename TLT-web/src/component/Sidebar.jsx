@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { data } from "./data/data";
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { data } from './data/data';
 
 const Sidebar = () => {
   return (
@@ -13,16 +13,16 @@ const Sidebar = () => {
           >
             <NavLink
               style={({ isActive }) => ({
-                color: isActive ? "#000" : "hsl(229, 24%, 87%)",
-                background: isActive ? "white" : "transparent",
-                border: isActive ? "none" : "2px solid hsl(229, 24%, 87%)",
-                fontWeight: "500",
-                width: "2rem",
-                height: "2rem",
-                borderRadius: "50%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                color: isActive ? '#000' : 'hsl(229, 24%, 87%)',
+                background: isActive ? 'white' : 'transparent',
+                border: isActive ? 'none' : '2px solid hsl(229, 24%, 87%)',
+                fontWeight: '500',
+                width: '2rem',
+                height: '2rem',
+                borderRadius: '50%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               })}
               to={item.linkTo}
             >

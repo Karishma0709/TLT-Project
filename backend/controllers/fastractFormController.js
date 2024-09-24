@@ -1,12 +1,13 @@
-const FastTrackForm = require("../models/FastTrackForm");
+const FastTrackForm = require('../models/FastTrackForm');
 
 const FastTrackFormDetails = async (req, res) => {
   try {
-    console.log("Request received:", req.body,req.files);
+    console.log('Request received:', req.body, req.files);
 
-
-    if (!req.files || !req.files["picture"] || !req.files["aadharCard"]) {
-      return res.status(400).json({ error: 'Both picture and aadharCard fields are required.' });
+    if (!req.files || !req.files['picture'] || !req.files['aadharCard']) {
+      return res
+        .status(400)
+        .json({ error: 'Both picture and aadharCard fields are required.' });
     }
 
     const {
@@ -37,8 +38,8 @@ const FastTrackFormDetails = async (req, res) => {
       institution,
     } = req.body;
 
-    const picture = req.files["picture"][0].path;
-    const aadharCard = req.files["aadharCard"][0].path;
+    const picture = req.files['picture'][0].path;
+    const aadharCard = req.files['aadharCard'][0].path;
 
     const newFastTrackForm = new FastTrackForm({
       picture,
@@ -71,7 +72,9 @@ const FastTrackFormDetails = async (req, res) => {
     });
 
     await newFastTrackForm.save();
-    res.status(201).json({ message: "Form created successfully!", form: newFastTrackForm });
+    res
+      .status(201)
+      .json({ message: 'Form created successfully!', form: newFastTrackForm });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
@@ -79,16 +82,14 @@ const FastTrackFormDetails = async (req, res) => {
 };
 
 // get the data from backend to admin portal
-const getFastTrackForm=async(req,res)=>{
-  try{
-const fastTrackFormData=await FastTrackForm.find()
-res.status(200).json({ fastTrackFormData });
+const getFastTrackForm = async (req, res) => {
+  try {
+    const fastTrackFormData = await FastTrackForm.find();
+    res.status(200).json({ fastTrackFormData });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error.' });
   }
-  catch(error){
-res.status(500).json({error:"Internal server error."})
-  }
-}
-
+};
 
 // Delete FastTrackForm Controller
 const deleteFastTrackForm = async (req, res) => {
@@ -98,43 +99,46 @@ const deleteFastTrackForm = async (req, res) => {
     const deletedForm = await FastTrackForm.findByIdAndDelete(formId);
 
     if (!deletedForm) {
-      return res.status(404).json({ error: "Form not found" });
-    } 
+      return res.status(404).json({ error: 'Form not found' });
+    }
 
-    res.status(200).json({ message: "Form deleted successfully" });
+    res.status(200).json({ message: 'Form deleted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 // Update FastTrackForm by ID
 const updateFastTrackForm = async (req, res) => {
   try {
-    console.log("Update Request received:", req.body);
+    console.log('Update Request received:', req.body);
     const { id } = req.params;
     const updatedData = req.body;
 
     if (!updatedData || Object.keys(updatedData).length === 0) {
-      return res.status(400).json({ message: "No data provided for update" });
+      return res.status(400).json({ message: 'No data provided for update' });
     }
 
-    const updatedForm = await FastTrackForm.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true, runValidators: true }
-    );
+    const updatedForm = await FastTrackForm.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedForm) {
-      return res.status(404).json({ message: "Form not found" });
+      return res.status(404).json({ message: 'Form not found' });
     }
 
     res.status(200).json(updatedForm);
   } catch (error) {
-    console.error("Error updating form:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error('Error updating form:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-
-module.exports = { FastTrackFormDetails, getFastTrackForm, deleteFastTrackForm, updateFastTrackForm};
+module.exports = {
+  FastTrackFormDetails,
+  getFastTrackForm,
+  deleteFastTrackForm,
+  updateFastTrackForm,
+};
