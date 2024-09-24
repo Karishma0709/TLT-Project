@@ -3,30 +3,55 @@ const UserModel = require('../models/userModel'); // Ensure the path is correct
 
 async function userSignUpController(req, res) {
   try {
-    const {name,batch,  email, password, } = req.body;
-    console.log("req.body", req.body);
+    const { name, batch, email, password } = req.body;
+    console.log('req.body', req.body);
 
     // Check if email, password, and name are provided
     if (!name) {
-      return res.status(400).json({ message: "Please provide a name", error: true, success: false });
+      return res
+        .status(400)
+        .json({
+          message: 'Please provide a name',
+          error: true,
+          success: false,
+        });
     }
-    
-    
+
     if (!email) {
-      return res.status(400).json({ message: "Please provide an email", error: true, success: false });
+      return res
+        .status(400)
+        .json({
+          message: 'Please provide an email',
+          error: true,
+          success: false,
+        });
     }
 
     if (!password) {
-      return res.status(400).json({ message: "Please provide a password", error: true, success: false });
+      return res
+        .status(400)
+        .json({
+          message: 'Please provide a password',
+          error: true,
+          success: false,
+        });
     }
     if (!batch) {
-      return res.status(400).json({ message: "Please provide a batch", error: true, success: false });
+      return res
+        .status(400)
+        .json({
+          message: 'Please provide a batch',
+          error: true,
+          success: false,
+        });
     }
 
-   // Check if user already exists
+    // Check if user already exists
     const user = await UserModel.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: "User already exists", error: true, success: false });
+      return res
+        .status(400)
+        .json({ message: 'User already exists', error: true, success: false });
     }
 
     // Hash the password
@@ -34,7 +59,13 @@ async function userSignUpController(req, res) {
     const hashPassword = bcrypt.hashSync(password, salt);
 
     if (!hashPassword) {
-      return res.status(500).json({ message: "Something went wrong with password hashing", error: true, success: false });
+      return res
+        .status(500)
+        .json({
+          message: 'Something went wrong with password hashing',
+          error: true,
+          success: false,
+        });
     }
 
     // Prepare payload
@@ -43,7 +74,7 @@ async function userSignUpController(req, res) {
       batch,
       email,
       password: hashPassword,
-      role: "GENERAL"
+      role: 'GENERAL',
     };
 
     // Create a new user
@@ -55,13 +86,12 @@ async function userSignUpController(req, res) {
       data: saveUser,
       success: true,
       error: false,
-      message: "User created successfully",
+      message: 'User created successfully',
     });
-
   } catch (err) {
-    console.error("Error in userSignUpController:", err); // Log the error for debugging
+    console.error('Error in userSignUpController:', err); // Log the error for debugging
     res.status(500).json({
-      message: err.message || "An error occurred",
+      message: err.message || 'An error occurred',
       error: true,
       success: false,
     });

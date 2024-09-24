@@ -6,7 +6,7 @@ const Notification = () => {
   const [notificationText, setNotificationText] = useState('');
   const [url, setUrl] = useState('');
   const [notifications, setNotifications] = useState([]);
-
+ 
   // Load notifications on component mount
   useEffect(() => {
     fetchNotifications();

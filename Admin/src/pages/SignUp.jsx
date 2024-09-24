@@ -1,4 +1,3 @@
-
 // import React, { useState } from 'react';
 // import { FaEyeSlash, FaEye } from 'react-icons/fa';
 // import { Link, useNavigate } from 'react-router-dom';
@@ -186,7 +185,6 @@
 
 // export default SignUp;
 
-
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -199,11 +197,11 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [data, setData] = useState({
-    email: "",
-    batch: "",
-    password: "",
-    name: "",
-    confirmPassword: ""
+    email: '',
+    batch: '',
+    password: '',
+    name: '',
+    confirmPassword: '',
   });
   const navigate = useNavigate();
 
@@ -211,7 +209,7 @@ const SignUp = () => {
     const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -219,12 +217,12 @@ const SignUp = () => {
     e.preventDefault();
 
     if (data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error('Passwords do not match!');
       return;
     }
 
     if (!data.email || !data.password || !data.name || !data.confirmPassword) {
-      toast.error("All fields are required!");
+      toast.error('All fields are required!');
       return;
     }
 
@@ -232,22 +230,22 @@ const SignUp = () => {
       const response = await fetch(SummaryApi.signUp.url, {
         method: SummaryApi.signUp.method,
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
-      console.log("API response:", result); // Log the response for debugging
+      console.log('API response:', result); // Log the response for debugging
       if (response.ok && result.success) {
         toast.success(result.message);
-        navigate("/");
+        navigate('/');
       } else {
-        toast.error(result.message || "Sign Up failed!");
+        toast.error(result.message || 'Sign Up failed!');
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("An error occurred during Sign Up!");
+      console.error('Error:', error);
+      toast.error('An error occurred during Sign Up!');
     }
   };
 
@@ -260,7 +258,10 @@ const SignUp = () => {
   };
 
   return (
-    <section id="signup" className="flex items-center justify-center min-h-screen bg-gray-100">
+    <section
+      id="signup"
+      className="flex items-center justify-center min-h-screen bg-gray-100"
+    >
       <div className="container max-w-md mx-auto p-4">
         <div className="bg-white p-5 rounded-lg shadow-lg mx-auto flex flex-col items-center">
           <div className="w-24 h-24 relative overflow-hidden rounded-full mb-4">
@@ -270,7 +271,10 @@ const SignUp = () => {
               <input type="file" className="hidden" />
             </label>
           </div>
-          <form className="w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
+          <form
+            className="w-full flex flex-col space-y-4"
+            onSubmit={handleSubmit}
+          >
             <div className="w-full">
               <label className="block text-gray-700">Name :</label>
               <input
@@ -307,7 +311,7 @@ const SignUp = () => {
             <div className="relative w-full">
               <label className="block text-gray-700">Password :</label>
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 placeholder="Enter your password"
                 value={data.password}
@@ -329,7 +333,7 @@ const SignUp = () => {
             <div className="relative w-full">
               <label className="block text-gray-700">Confirm Password :</label>
               <input
-                type={showConfirmPassword ? "text" : "password"}
+                type={showConfirmPassword ? 'text' : 'password'}
                 name="confirmPassword"
                 placeholder="Confirm your password"
                 value={data.confirmPassword}
@@ -358,7 +362,10 @@ const SignUp = () => {
           <div className="mt-4 text-center">
             <p className="text-sm">
               Already have an account?
-              <Link to="/" className="text-blue-500 hover:underline"> Login</Link>
+              <Link to="/" className="text-blue-500 hover:underline">
+                {' '}
+                Login
+              </Link>
             </p>
           </div>
         </div>
@@ -368,4 +375,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

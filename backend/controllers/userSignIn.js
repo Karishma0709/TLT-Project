@@ -1,4 +1,4 @@
- const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 
@@ -8,23 +8,23 @@ async function userSignInController(req, res) {
 
     // Check if email and password are provided
     if (!email) {
-      throw new Error("Please provide an email");
+      throw new Error('Please provide an email');
     }
 
     if (!password) {
-      throw new Error("Please provide a password");
+      throw new Error('Please provide a password');
     }
 
     // Check if user exists
     const user = await userModel.findOne({ email });
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
 
     // Compare the provided password with the stored hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new Error("Invalid password");
+      throw new Error('Invalid password');
     }
 
     // Generate JWT token
@@ -32,7 +32,9 @@ async function userSignInController(req, res) {
       _id: user._id,
       email: user.email,
     };
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
+    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
+      expiresIn: 60 * 60 * 8,
+    });
 
     // Cookie options
     const tokenOptions = {
@@ -42,13 +44,12 @@ async function userSignInController(req, res) {
     };
 
     // Set cookie and respond with success message and token
-    res.cookie("token", token, tokenOptions).status(200).json({
-      message: "User signed in successfully",
+    res.cookie('token', token, tokenOptions).status(200).json({
+      message: 'User signed in successfully',
       success: true,
       error: false,
       data: token,
     });
-
   } catch (err) {
     res.status(500).json({
       message: err.message || err,
@@ -59,4 +60,3 @@ async function userSignInController(req, res) {
 }
 
 module.exports = userSignInController;
-
