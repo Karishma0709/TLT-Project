@@ -32,8 +32,14 @@ exports.updateUnpaidFile = async (req, res) => {
     if (req.file) {
       updatedData.pdf = req.file.filename;
     }
-    const unpaid = await UnpaidProduct.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-    res.status(200).json({ message: 'Unpaid file updated successfully', unpaid });
+    const unpaid = await UnpaidProduct.findByIdAndUpdate(
+      req.params.id,
+      updatedData,
+      { new: true }
+    );
+    res
+      .status(200)
+      .json({ message: 'Unpaid file updated successfully', unpaid });
   } catch (error) {
     res.status(500).json({ message: 'Failed to update unpaid file', error });
   }
@@ -50,4 +56,3 @@ exports.deleteUnpaidFile = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete unpaid file', error });
   }
 };
-

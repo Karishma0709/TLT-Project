@@ -80,10 +80,14 @@ const Notification = () => {
 
   // Delete notification
   const deleteNotifydata = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this notification?");
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this notification?'
+    );
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8080/api/Notificationdelete/${id}`);
+        await axios.delete(
+          `http://localhost:8080/api/Notificationdelete/${id}`
+        );
         alert('Notification deleted successfully!');
         fetchNotifications(); // Refresh list after deletion
       } catch (error) {
@@ -200,7 +204,7 @@ const Notification = () => {
                         onClick={() => handleEdit(notification)}
                         className="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-blue-700"
                       >
-                      Update
+                        Update
                       </button>
                     )}
                     <button

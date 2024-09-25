@@ -31,7 +31,7 @@ const {
   getMarquees,
   getMarqueeById,
   updateMarquee,
-  deleteMarquee
+  deleteMarquee,
 } = require('../controllers/marqueeControllers');
 
 const notifyController = require('../controllers/notifyController');
@@ -220,7 +220,6 @@ router.get('/marquee', getMarquees);
 router.get('/marquee/:id', getMarqueeById);
 router.put('/marquee/:id', updateMarquee);
 router.delete('/marquee/:id', deleteMarquee);
-
 
 // router.post('/marquee', saveMarquee);
 // router.get('/marquee-data/:id', marqueeGetData);

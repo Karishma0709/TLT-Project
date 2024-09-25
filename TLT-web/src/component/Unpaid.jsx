@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Unpaid = () => {
   const [unpaidFiles, setUnpaidFiles] = useState([]);
@@ -10,15 +10,21 @@ const Unpaid = () => {
 
   const fetchUnpaidFiles = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/getUnpaidUpload");
+      const result = await axios.get(
+        'http://localhost:8080/api/getUnpaidUpload'
+      );
       setUnpaidFiles(result.data.data);
     } catch (error) {
-      console.error("Error fetching unpaid files:", error);
+      console.error('Error fetching unpaid files:', error);
     }
   };
 
   const showPdf = (pdf) => {
-    window.open(`http://localhost:5054/api/UnpaidFiles/${pdf}`, "_blank", "noreferrer");
+    window.open(
+      `http://localhost:5054/api/UnpaidFiles/${pdf}`,
+      '_blank',
+      'noreferrer',
+    );
   };
 
   return (
@@ -35,7 +41,10 @@ const Unpaid = () => {
           </thead>
           <tbody className="text-gray-700">
             {unpaidFiles.map((file, index) => (
-              <tr key={index} className="hover:bg-gray-100 border-b border-gray-200">
+              <tr
+                key={index}
+                className="hover:bg-gray-100 border-b border-gray-200"
+              >
                 <td className="py-3 px-5">{index + 1}</td>
                 <td className="py-3 px-5">{file.title}</td>
                 <td className="py-3 px-5">
