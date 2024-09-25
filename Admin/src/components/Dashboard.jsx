@@ -38,7 +38,7 @@ const Dashboard = () => {
 
         {/* Recent activity */}
         <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4">Recent activities</h2>
+          <h2 className="text-xl font-semibold mb-4">Recent Activities</h2>
           <div className="bg-white shadow-lg rounded-lg p-6">
             <ul>
               <li className="py-2 border-b border-gray-200">
@@ -50,11 +50,11 @@ const Dashboard = () => {
                 notification.
               </li>
               <li className="py-2 border-b border-gray-200">
-                <span className="font-semibold">Michael lee</span> completed an
+                <span className="font-semibold">Michael Lee</span> completed an
                 order.
               </li>
               <li className="py-2">
-                <span className="font-semibold">Sarah connor</span> registered a
+                <span className="font-semibold">Sarah Connor</span> registered a
                 new account.
               </li>
             </ul>
