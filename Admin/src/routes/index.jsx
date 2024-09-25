@@ -17,6 +17,7 @@ import FastTrackForm from '../components/FastTrackForm';
 import SyllabusUpload from '../components/SyllabusUpload';
 import JetFormDetails from '../components/JetFormDetails';
 import PreviousYearForm from '../components/PreviousYearForm';
+import Header from '../components/Header';
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '',
+        path: 'Login',
         element: <Login />,
       },
       {
@@ -36,8 +37,12 @@ export const router = createBrowserRouter([
         element: <Sidebar />,
         children: [
           {
-            path: 'dashboardcards',
+            path: '',
             element: <Dashboard />,
+          },
+          {
+            path: '',
+            element: <Header />,
           },
           {
             path: 'user',
