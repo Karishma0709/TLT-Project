@@ -10,12 +10,14 @@ const Notification = () => {
   const [updatedText, setUpdatedText] = useState('');
   const [updatedUrl, setUpdatedUrl] = useState('');
 
-  // Load notifications on component mount
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Adjust the number of items per page as needed
+
   useEffect(() => {
     fetchNotifications();
   }, []);
 
-  // Fetch all notifications
   const fetchNotifications = async () => {
     try {
       const response = await axios({
@@ -28,7 +30,6 @@ const Notification = () => {
     }
   };
 
-  // Handle new notification submission
   const SubmitImage = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -44,21 +45,19 @@ const Notification = () => {
       });
       if (result.data.status === 'ok') {
         alert('Uploaded Successfully !!!');
-        fetchNotifications(); // Refresh list after upload
+        fetchNotifications();
       }
     } catch (error) {
       console.error('Error uploading notification:', error);
     }
   };
 
-  // Handle edit notification
   const handleEdit = (notification) => {
     setEditId(notification._id);
     setUpdatedText(notification.notificationText);
     setUpdatedUrl(notification.url);
   };
 
-  // Handle update notification
   const updateNotification = async (id) => {
     const updatedNotification = {
       notificationText: updatedText,
@@ -71,14 +70,13 @@ const Notification = () => {
         updatedNotification
       );
       alert('Updated Successfully !!!');
-      fetchNotifications(); // Refresh list after update
+      fetchNotifications();
       resetEdit();
     } catch (error) {
       console.error('Error updating notification:', error);
     }
   };
 
-  // Delete notification
   const deleteNotifydata = async (id) => {
     const confirmDelete = window.confirm(
       'Are you sure you want to delete this notification?'
@@ -89,19 +87,34 @@ const Notification = () => {
           `http://localhost:8080/api/Notificationdelete/${id}`
         );
         alert('Notification deleted successfully!');
-        fetchNotifications(); // Refresh list after deletion
+        fetchNotifications();
       } catch (error) {
         console.error('Error deleting notification:', error);
       }
     }
   };
 
-  // Reset edit state
   const resetEdit = () => {
     setEditId(null);
     setUpdatedText('');
     setUpdatedUrl('');
   };
+
+  // Calculate the current notifications to display
+  const indexOfLastNotification = currentPage * itemsPerPage;
+  const indexOfFirstNotification = indexOfLastNotification - itemsPerPage;
+  const currentNotifications = notifications.slice(
+    indexOfFirstNotification,
+    indexOfLastNotification
+  );
+
+  // Change page handler
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Total pages calculation
+  const totalPages = Math.ceil(notifications.length / itemsPerPage);
 
   return (
     <>
@@ -160,13 +173,15 @@ const Notification = () => {
             </tr>
           </thead>
           <tbody>
-            {notifications.length > 0 ? (
-              notifications.map((notification, index) => (
+            {currentNotifications.length > 0 ? (
+              currentNotifications.map((notification, index) => (
                 <tr
                   key={notification._id}
                   className="text-center hover:bg-gray-100"
                 >
-                  <td className="border border-gray-800 p-2">{index + 1}</td>
+                  <td className="border border-gray-800 p-2">
+                    {indexOfFirstNotification + index + 1}
+                  </td>
                   <td className="border border-gray-800 p-2">
                     {editId === notification._id ? (
                       <input
@@ -228,6 +243,23 @@ const Notification = () => {
             )}
           </tbody>
         </table>
+
+        {/* Pagination Controls */}
+        <div className="mt-4 flex justify-center">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`mx-1 px-3 py-1 border rounded-lg ${
+                currentPage === index + 1
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200'
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
