@@ -94,12 +94,20 @@ const RegistrationForm = () => {
           headers: { 'Content-Type': 'multipart/form-data' },
         }
       );
+
       console.log(response.data);
-      if (response.status === 201) {
-        alert('Form submitted successfully');
+
+      // Check if the response data is a URL
+      const redirectUrl = response.data.redirectUrl || response.data;
+      if (typeof redirectUrl === 'string' && redirectUrl.startsWith('http')) {
+        window.location.href = redirectUrl; // Redirect to the URL
+      } else {
+        console.error('Redirect URL not found or not valid:', redirectUrl);
+        toast.error('Redirect URL not found or invalid.'); // Inform the user
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error:', error.message);
+      toast.error('An error occurred during submission. Please try again.'); // Display error to the user
     }
   };
 

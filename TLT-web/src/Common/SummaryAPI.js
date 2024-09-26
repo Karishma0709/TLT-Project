@@ -6,6 +6,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/fastTrackForm`,
     method: 'post',
   },
+  fastTrackFormpay: {
+    url: `${backendDomain}/api/FastTrackpaystatus`,
+    method: 'post',
+  },
   empowermentForm: {
     url: `${backendDomain}/api/empowermentForm`,
     method: 'post',
