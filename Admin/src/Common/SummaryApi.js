@@ -97,6 +97,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/Edelete/:id`,
     method: 'delete',
   },
+  empowermentFormPay: {
+    url: `${backendDomain}/api/paymentstatus`,
+    method: 'post',
+  },
   FastTractFormAdmin: {
     url: `${backendDomain}/api/getFastTrackForm`,
     method: 'get',

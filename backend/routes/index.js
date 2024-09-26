@@ -166,6 +166,8 @@ router.post(
   ]),
   empowermentController.createEmpowerment
 );
+
+router.post('/paymentstatus', empowermentController.paymentStatus);
 router.get('/getempowermentForm', empowermentController.getempowerment);
 router.put('/Eupdate/:id', empowermentController.Update);
 router.delete('/Edelete/:id', empowermentController.Edelete);
