@@ -89,6 +89,7 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
+const { updateMpcjProduct, deleteMpcjProduct, getAllMpcjProducts, createMpcjProduct } = require('../controllers/addMpcjProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -134,6 +135,10 @@ router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 router.get('/getTotalTpmCount', getTotalTpmCount);
 
+
+
+
+
 // JET form routes
 router.post(
   '/createJetForm',
@@ -156,6 +161,13 @@ router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 router.get('/getTotalMPCJform', getTotalMPCJform);
 // router.post('/MpcjPhonepay', MpcjPhonepay);
 router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
+
+// Route to create a new product
+router.post('/createMpcjProduct', createMpcjProduct);
+router.get('/getAllMpcjProducts', getAllMpcjProducts);
+router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
+router.put('/updateMpcjProduct/:id', updateMpcjProduct);
+
 
 
 // PY paper PDF upload routers

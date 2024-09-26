@@ -151,6 +151,13 @@ const Sidebar = () => {
                   <FaRegFilePdf />
                   <span>Update Quiz Questions</span>
                 </Link>
+                <Link
+                  to="addMpcjProduct"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaRegFilePdf />
+                  <span>Add Mpcj Product</span>
+                </Link>
               </div>
             )}
           </div>

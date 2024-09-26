@@ -118,6 +118,23 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+<<<<<<< HEAD
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
+    method: 'post',
+  },
+  getMPCJFormDetails: {
+    url: `${backendDomain}/api/getMPCJFormDetails`,
+    method: 'get',
+  },
+  updateMPCJFormDetails: {
+    url: `${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method: 'put',
+  },
+  deleteMPCJFormDetails: {
+    url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method: 'delete',
+=======
   Syllabus: {
     url: `${backendDomain}/api/getSyllabusUpload`,
     method: 'get',
@@ -133,6 +150,7 @@ const SummaryApi = {
   Marquee: {
     url: `${backendDomain}/api/marquee`,
     method: 'get',
+>>>>>>> 055f07309573962b74b24250276a1fc3fcfbf1ea
   },
   JetForm: {
     url: `${backendDomain}/api/createJetForm`,
