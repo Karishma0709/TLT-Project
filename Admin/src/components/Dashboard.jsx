@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaUsers, FaRocket, FaFileAlt, FaRegClipboard, FaPaperPlane, FaClipboardCheck } from 'react-icons/fa';
+import { FaFileAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [empowermentCount, setEmpowermentCount] = useState(0);
@@ -11,7 +12,8 @@ const Dashboard = () => {
   const [tpmCount, setTpmCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Fetch EmpowermentForm count
+  const navigate = useNavigate();
+
   const fetchEmpowermentCount = async () => {
     try {
       const response = await axios.get(
@@ -23,7 +25,6 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch FastTrackForm count
   const fetchFastTrackCount = async () => {
     try {
       const response = await axios.get(
@@ -35,7 +36,6 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch JetForm count
   const fetchJetCount = async () => {
     try {
       const response = await axios.get(
@@ -47,7 +47,6 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch MPCJForm count
   const fetchMPCJCount = async () => {
     try {
       const response = await axios.get(
@@ -59,7 +58,6 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch PyPapers count
   const fetchPyPapersCount = async () => {
     try {
       const response = await axios.get(
@@ -73,14 +71,15 @@ const Dashboard = () => {
 
   const fetchTpmCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getTotalTpmCount');
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalTpmCount'
+      );
       setTpmCount(response.data.totalForms);
     } catch (error) {
       console.error('Error fetching TPM count:', error);
     }
   };
 
-  // Fetch all form counts on component mount
   useEffect(() => {
     setLoading(true);
     Promise.all([
@@ -95,66 +94,55 @@ const Dashboard = () => {
       .catch(() => setLoading(false));
   }, []);
 
- return (
+  const cardsData = [
+    {
+      title: 'Total Empowerment Forms',
+      count: empowermentCount,
+      route: '/dashboard/EmpowermentAdmin',
+    },
+    {
+      title: 'Total FastTrack Forms',
+      count: fastTrackCount,
+      route: '/dashboard/FastTrackForm',
+    },
+    {
+      title: 'Total Jet Forms',
+      count: jetCount,
+      route: '/dashboard/jetformdetail',
+    },
+    {
+      title: 'Total MPCJ Forms',
+      count: MPCJCount,
+      route: '/dashboard/mpcj-form',
+    },
+    {
+      title: 'Total Py Papers',
+      count: pyPapersCount,
+      route: '/dashboard/py-paper',
+    },
+    { title: 'Total TPM Forms', count: tpmCount, route: '/dashboard/tpm-form' },
+  ];
+
+  return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
       {loading ? (
         <p>Loading form data...</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Card for Empowerment Forms */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaUsers className="text-blue-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total Empowerment Forms</h3>
-              <p className="text-4xl font-bold text-blue-600">{empowermentCount}</p>
+          {cardsData.map((card, index) => (
+            <div
+              key={index}
+              className="p-6 bg-white shadow-lg rounded-3xl flex items-center hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+              onClick={() => navigate(card.route)} // Navigate on click
+            >
+              <FaFileAlt className="text-blue-900 text-4xl mr-4" />
+              <div>
+                <h3 className="text-lg  font-bold">{card.title}</h3>
+                <p className="text-4xl font-bold text-red-500">{card.count}</p>
+              </div>
             </div>
-          </div>
-
-          {/* Card for FastTrack Forms */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaRocket className="text-green-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total FastTrack Forms</h3>
-              <p className="text-4xl font-bold text-green-600">{fastTrackCount}</p>
-            </div>
-          </div>
-
-          {/* Card for Jet Forms */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaFileAlt className="text-green-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total Jet Forms</h3>
-              <p className="text-4xl font-bold text-green-600">{jetCount}</p>
-            </div>
-          </div>
-
-          {/* Card for MPCJ Forms */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaRegClipboard className="text-green-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total MPCJ Forms</h3>
-              <p className="text-4xl font-bold text-green-600">{MPCJCount}</p>
-            </div>
-          </div>
-
-          {/* Card for PyPapers */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaPaperPlane className="text-green-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total Py Papers</h3>
-              <p className="text-4xl font-bold text-green-600">{pyPapersCount}</p>
-            </div>
-          </div>
-
-          {/* Card for TPM Forms */}
-          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
-            <FaClipboardCheck className="text-green-600 text-4xl mr-4" />
-            <div>
-              <h3 className="text-lg font-semibold">Total TPM Forms</h3>
-              <p className="text-4xl font-bold text-green-600">{tpmCount}</p>
-            </div>
-          </div>
+          ))}
         </div>
       )}
     </div>
