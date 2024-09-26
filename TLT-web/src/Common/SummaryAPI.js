@@ -130,6 +130,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee`,
     method: 'get',
   },
+  JetForm: {
+    url: `${backendDomain}/api/createJetForm`,
+    method: 'post',
+  },
 };
 
 export default SummaryApi;

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
 
 const JetFormDetails = () => {
   const [formData, setFormData] = useState([]);
@@ -17,7 +18,10 @@ const JetFormDetails = () => {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/api/getJetForms");
+      const result = await axios({
+        url:SummaryApi.JetFormGet.url,
+        method: SummaryApi.JetFormGet.method
+      });
       setFormData(result.data.jetForms);
     } catch (error) {
       toast.error('Error fetching data.');

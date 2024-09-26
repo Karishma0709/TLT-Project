@@ -146,5 +146,9 @@ const SummaryApi = {
     url: `${backendDomain}/api/deleteTpmFormDetails/:id`,
     method: 'delete',
   },
+  JetFormGet: {
+    url: `${backendDomain}/api/getJetForms`,
+    method: 'get',
+  },
 };
 export default SummaryApi;
