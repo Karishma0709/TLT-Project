@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';  // Importing the logout icon
+import Logo from "../assets/TLTlogo.png"
 
 const Header = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Header = () => {
     <header className="bg-gray-800 p-4 flex justify-between items-center shadow-md">
       {/* Left Side: Logo */}
       <div className="flex items-center">
-        <img src="/path-to-logo/logo.png" alt="Logo" className="h-10 w-10" />
+        <img src={Logo} alt="Logo" className="h-10 w-10" />
         
       </div>
 
