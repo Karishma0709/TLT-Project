@@ -134,6 +134,10 @@ const SummaryApi = {
     method: 'GET',
     baseUrl: 'http://localhost:5054', // Define your base URL here
   },
+  SyllabusdataUploads: {
+    url: `${backendDomain}/api/SyllabusUpload`,
+    method: 'POST',
+  },
   TpmData: {
     url: `${backendDomain}/api/getTpmFormDetails`,
     method: 'get',
