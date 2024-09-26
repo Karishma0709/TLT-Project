@@ -149,9 +149,22 @@ const Edelete = async (req, res) => {
   }
 };
 
+
+// Get Total Form Count
+const getTotalEmpowermentForms = async (req, res) => {
+  try {
+    const totalForms = await ESchema.countDocuments();
+    res.send({ status: 'ok', totalForms: totalForms });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: error.message });
+  }
+};
+
 module.exports = {
   createEmpowerment,
   getempowerment,
+  getTotalEmpowermentForms,
   Update,
   Edelete,
 };

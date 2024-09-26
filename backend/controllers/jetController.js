@@ -89,10 +89,22 @@ const updateJetForm = async (req, res) => {
   }
 };
 
+const getTotalJetForms = async (req, res) => {
+  try {
+    const totalForms = await JetForm.countDocuments();
+    res.status(200).json({ totalForms });
+  } catch (error) {
+    console.error('Error fetching total form count:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
 
 module.exports = {
   createJetForm,
   getJetForms,
   deleteJetForm,
   updateJetForm,
+  getTotalJetForms
 };
