@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Headings from "../utiliti/heading/Heading";
+import QuizApp from "../QuizApp";
 
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState(2); // Set initial active tab (0: Foundation, 1: Fast-Track, 2: Crash Course)
@@ -135,12 +136,12 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="text-justify">
-              <Headings heading={"h4"} style={"font-bold"}>
-                Traditional methods to achieve great Heights/ Building a Gurukul
-                to embrace the Judiciary Students
+        
+            <div className="text-center" >
+              <Headings heading={"h3"}  style={"font-bold"}>
+              Quiz of the day
               </Headings>
-              <div className="mt-5">
+              <div className="mt-5 invisible">
                 At TLT Judicial Academy, we are proud to be an emerging
                 institute dedicated to nurturing aspiring judiciary
                 professionals. We envision our academy as a modern-day gurukul,
@@ -163,12 +164,7 @@ const AboutUs = () => {
                 material.
               </div>
               </div>
-                <a
-                  href="#"
-                  className="inline-block bg-primary text-white py-2 px-6 font-bold rounded"
-                >
-                  Chat with Us
-                </a>
+               <QuizApp/>
                 
               </div>
             </div>
