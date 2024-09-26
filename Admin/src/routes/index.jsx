@@ -18,6 +18,8 @@ import SyllabusUpload from '../components/SyllabusUpload';
 import JetFormDetails from '../components/JetFormDetails';
 import PreviousYearForm from '../components/PreviousYearForm';
 import Header from '../components/Header';
+import Quiz from '../components/Quiz';
+import QuizUserForm from '../components/QuizUserForm';
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +77,14 @@ export const router = createBrowserRouter([
           {
             path: 'Prevyearpaperpdf',
             element: <Prevyearpaperpdf />,
+          },
+          {
+            path:"quiz-questions",
+            element:<Quiz/>
+          },
+          {
+            path:"quiz-user",
+            element:<QuizUserForm/>
           },
           {
             path: 'Unpaid',
