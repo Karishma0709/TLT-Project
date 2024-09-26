@@ -10,6 +10,7 @@ const {
   getTpmFormDetails,
   updateTpmFormDetails,
   deleteTpmFormDetails,
+  getTotalTpmCount, 
 } = require('../controllers/tpmController');
 
 const {
@@ -17,6 +18,7 @@ const {
   getMPCJFormDetails,
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
+  getTotalMPCJform
 } = require('../controllers/mpcjOfflineController');
 
 const userSignUpController = require('../controllers/userSingUp');
@@ -47,12 +49,14 @@ const {
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
+  getTotalFastTrackForms
 } = require('../controllers/fastractFormController');
 const {
   createJetForm,
   getJetForms,
   deleteJetForm,
   updateJetForm,
+  getTotalJetForms
 } = require('../controllers/jetController');
 const {
   createSyllabusUpload,
@@ -65,6 +69,7 @@ const {
   getAllPyPapers,
   updatePyPapersDetail,
   deletePyPapersDetail,
+  getTotalPyPapersCount
 } = require('../controllers/pyPaperController');
 
 const {
@@ -73,6 +78,8 @@ const {
   updateUnpaidFile,
   deleteUnpaidFile,
 } = require('../controllers/unpaidProductController');
+
+const {getQuiz,updateQuiz, createUser, fetchAllUser} = require("../controllers/quizController")
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -109,12 +116,15 @@ router.post('/createPyPapersDetail', createPyPapersDetail);
 router.get('/getAllPyPapers', getAllPyPapers);
 router.put('/updatePyPapersDetail/:id', updatePyPapersDetail);
 router.delete('/deletePyPapersDetail/:id', deletePyPapersDetail);
+router.get('/getTotalPyPapersCount', getTotalPyPapersCount);
 
 // TPM routes
 router.post('/createTpmFormDetails', createTpmFormDetails);
 router.get('/getTpmFormDetails', getTpmFormDetails);
 router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
+router.get('/getTotalTpmCount', getTotalTpmCount);
+
 
 // JET form routes
 router.post(
@@ -128,12 +138,15 @@ router.post(
 router.get('/getJetForms', getJetForms);
 router.put('/updateJetForm/:id', updateJetForm);
 router.delete('/deleteJetForm/:id', deleteJetForm);
+router.get('/getTotalJetForms', getTotalJetForms);
 
 // MPCJ Routes
 router.post('/createMPCJFormDetails', createMPCJFormDetails);
 router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
+router.get('/getTotalMPCJform', getTotalMPCJform);
+
 // PY paper PDF upload routers
 router.post(
   '/createPyPaperPDFupload',
@@ -171,6 +184,7 @@ router.post('/paymentstatus', empowermentController.paymentStatus);
 router.get('/getempowermentForm', empowermentController.getempowerment);
 router.put('/Eupdate/:id', empowermentController.Update);
 router.delete('/Edelete/:id', empowermentController.Edelete);
+router.get('/getTotalEmpowermentForms', empowermentController.getTotalEmpowermentForms);
 
 // Fast Track Routes
 router.post(
@@ -185,6 +199,7 @@ router.post(
 router.get('/getfastTrackForm', getFastTrackForm);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
+router.get('/getTotalFastTrackForms', getTotalFastTrackForms);
 
 /// SyllabusUpload Routes
 router.post(
@@ -237,5 +252,12 @@ router.post(
 router.get('/getnotifies', notifyController.getNotifications);
 router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
 router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
+
+// Quiz routes
+router.get("/quiz",getQuiz)
+router.put("/quiz",updateQuiz)
+
+router.post("/quizUser",createUser)
+router.get("/quizUser",fetchAllUser)
 
 module.exports = router;

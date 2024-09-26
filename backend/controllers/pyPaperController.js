@@ -66,9 +66,22 @@ const deletePyPapersDetail = async (req, res) => {
   }
 };
 
+
+// Get total paper count
+const getTotalPyPapersCount = async (req, res) => {
+  try {
+    const totalForms = await PyPapersDetails.countDocuments();
+    res.status(200).json({ totalForms });
+  } catch (error) {
+    console.error("Error fetching total pyPaper count:", error);
+    res.status(500).json({ error: "Error fetching total pyPaper count" });
+  }
+};
+
 module.exports = {
   createPyPapersDetail,
   getAllPyPapers,
   updatePyPapersDetail,
-  deletePyPapersDetail
+  deletePyPapersDetail,
+  getTotalPyPapersCount
 };

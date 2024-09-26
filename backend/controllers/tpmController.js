@@ -77,9 +77,23 @@ const deleteTpmFormDetails = async (req, res) => {
   }
 };
 
+// Get total TPM form count
+const getTotalTpmCount = async (req, res) => {
+  console.log('Received request to get total TPM form count');
+
+  try {
+    const count = await TpmFormDetails.countDocuments();
+    res.status(200).send({ totalForms: count });
+  } catch (error) {
+    console.error('Error getting total TPM form count:', error);
+    res.status(400).send({ message: 'Error getting total TPM form count', error });
+  }
+};
+
 module.exports = {
   createTpmFormDetails,
   getTpmFormDetails,
   updateTpmFormDetails,
   deleteTpmFormDetails,
+  getTotalTpmCount, // Export the new count controller
 };

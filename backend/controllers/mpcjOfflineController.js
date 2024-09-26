@@ -77,9 +77,22 @@ const deleteMPCJFormDetails = async (req, res) => {
   }
 };
 
+// 
+const getTotalMPCJform = async (req, res) => {
+  try {
+    const totalForms = await MPCJFormDetails.countDocuments();
+    res.status(200).send({ totalForms }); 
+  } catch (error) {
+    console.error('Error retrieving MPCJ form count:', error);
+    res.status(400).send({ message: 'Error retrieving MPCJ form count', error });
+  }
+};
+
+
 module.exports = {
   createMPCJFormDetails,
   getMPCJFormDetails,
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
+  getTotalMPCJform
 };

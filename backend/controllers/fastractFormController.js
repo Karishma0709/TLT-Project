@@ -135,10 +135,20 @@ const updateFastTrackForm = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+const getTotalFastTrackForms = async (req, res) => {
+  try {
+    const totalForms = await FastTrackForm.countDocuments();
+    res.status(200).json({ totalForms });
+  } catch (error) {
+    console.error('Error fetching total form count:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 module.exports = {
   FastTrackFormDetails,
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
+  getTotalFastTrackForms
 };

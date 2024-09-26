@@ -1,66 +1,162 @@
-// Dashboard.js
-import React from 'react';
-import Header from './Header'; // Import the Header component
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { FaUsers, FaRocket, FaFileAlt, FaRegClipboard, FaPaperPlane, FaClipboardCheck } from 'react-icons/fa';
 
 const Dashboard = () => {
-  return (
-    <div>
-      {/* Dashboard content */}
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Admin Dashboard haiiii</h1>
+  const [empowermentCount, setEmpowermentCount] = useState(0);
+  const [fastTrackCount, setFastTrackCount] = useState(0);
+  const [jetCount, setJetCount] = useState(0);
+  const [MPCJCount, setMPCJCount] = useState(0);
+  const [pyPapersCount, setPyPapersCount] = useState(0);
+  const [tpmCount, setTpmCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-        {/* Grid for the summary cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {/* Users count card */}
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h2 className="text-lg font-semibold">Total Users</h2>
-            <p className="text-3xl font-bold text-red-500 mt-3">120</p>
+  // Fetch EmpowermentForm count
+  const fetchEmpowermentCount = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalEmpowermentForms'
+      );
+      setEmpowermentCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching EmpowermentForm count:', error);
+    }
+  };
+
+  // Fetch FastTrackForm count
+  const fetchFastTrackCount = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalFastTrackForms'
+      );
+      setFastTrackCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching FastTrackForm count:', error);
+    }
+  };
+
+  // Fetch JetForm count
+  const fetchJetCount = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalJetForms'
+      );
+      setJetCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching JetForm count:', error);
+    }
+  };
+
+  // Fetch MPCJForm count
+  const fetchMPCJCount = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalMPCJform'
+      );
+      setMPCJCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching MPCJForm count:', error);
+    }
+  };
+
+  // Fetch PyPapers count
+  const fetchPyPapersCount = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8080/api/getTotalPyPapersCount'
+      );
+      setPyPapersCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching PyPapers count:', error);
+    }
+  };
+
+  const fetchTpmCount = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/getTotalTpmCount');
+      setTpmCount(response.data.totalForms);
+    } catch (error) {
+      console.error('Error fetching TPM count:', error);
+    }
+  };
+
+  // Fetch all form counts on component mount
+  useEffect(() => {
+    setLoading(true);
+    Promise.all([
+      fetchEmpowermentCount(),
+      fetchFastTrackCount(),
+      fetchJetCount(),
+      fetchMPCJCount(),
+      fetchPyPapersCount(),
+      fetchTpmCount(),
+    ])
+      .then(() => setLoading(false))
+      .catch(() => setLoading(false));
+  }, []);
+
+ return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
+      {loading ? (
+        <p>Loading form data...</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Card for Empowerment Forms */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaUsers className="text-blue-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total Empowerment Forms</h3>
+              <p className="text-4xl font-bold text-blue-600">{empowermentCount}</p>
+            </div>
           </div>
 
-          {/* Notifications count card */}
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h2 className="text-lg font-semibold">Total Notifications</h2>
-            <p className="text-3xl font-bold text-blue-500 mt-3">45</p>
+          {/* Card for FastTrack Forms */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaRocket className="text-green-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total FastTrack Forms</h3>
+              <p className="text-4xl font-bold text-green-600">{fastTrackCount}</p>
+            </div>
           </div>
 
-          {/* Forms count card */}
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h2 className="text-lg font-semibold">Total Forms</h2>
-            <p className="text-3xl font-bold text-green-500 mt-3">80</p>
+          {/* Card for Jet Forms */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaFileAlt className="text-green-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total Jet Forms</h3>
+              <p className="text-4xl font-bold text-green-600">{jetCount}</p>
+            </div>
           </div>
 
-          {/* Orders count card */}
-          <div className="bg-white shadow-lg rounded-lg p-5">
-            <h2 className="text-lg font-semibold">Total Orders</h2>
-            <p className="text-3xl font-bold text-yellow-500 mt-3">32</p>
+          {/* Card for MPCJ Forms */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaRegClipboard className="text-green-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total MPCJ Forms</h3>
+              <p className="text-4xl font-bold text-green-600">{MPCJCount}</p>
+            </div>
+          </div>
+
+          {/* Card for PyPapers */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaPaperPlane className="text-green-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total Py Papers</h3>
+              <p className="text-4xl font-bold text-green-600">{pyPapersCount}</p>
+            </div>
+          </div>
+
+          {/* Card for TPM Forms */}
+          <div className="p-6 bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow duration-300">
+            <FaClipboardCheck className="text-green-600 text-4xl mr-4" />
+            <div>
+              <h3 className="text-lg font-semibold">Total TPM Forms</h3>
+              <p className="text-4xl font-bold text-green-600">{tpmCount}</p>
+            </div>
           </div>
         </div>
-
-        {/* Recent activity */}
-        <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4">Recent Activities</h2>
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <ul>
-              <li className="py-2 border-b border-gray-200">
-                <span className="font-semibold">John Doe</span> added a new
-                form.
-              </li>
-              <li className="py-2 border-b border-gray-200">
-                <span className="font-semibold">Jane Smith</span> updated a
-                notification.
-              </li>
-              <li className="py-2 border-b border-gray-200">
-                <span className="font-semibold">Michael Lee</span> completed an
-                order.
-              </li>
-              <li className="py-2">
-                <span className="font-semibold">Sarah Connor</span> registered a
-                new account.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
