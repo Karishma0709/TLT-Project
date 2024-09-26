@@ -1,6 +1,7 @@
 const FastTrackForm = require('../models/FastTrackForm');
 const axios = require('axios');
 const crypto = require('crypto'); // Make sure to import crypto
+const Backend_Url = process.env.BACKEND_URL;
 
 const generateTransctionID = () => {
   const timestamp = Date.now();
@@ -55,7 +56,8 @@ const FastTrackFormDetails = async (req, res) => {
       merchantTransactionId: generateTransctionID(),
       merchantUserId: 'M22U3BAWIN1EZ_1.json',
       amount: 10000,
-      redirectUrl: 'http://localhost:8080/api/FastTrackpaystatus',
+      redirectUrl: `${Backend_Url}/api/FastTrackpaystatus`,
+
       redirectMode: 'REDIRECT',
       mobileNumber: '9999999999',
       paymentInstrument: { type: 'PAY_PAGE' },

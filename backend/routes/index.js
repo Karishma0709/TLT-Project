@@ -19,6 +19,9 @@ const {
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
   getTotalMPCJform,
+  MpcjPhonepay,
+  paymentStatus,
+  mpcjpaymentStatus,
 } = require('../controllers/mpcjOfflineController');
 
 const userSignUpController = require('../controllers/userSingUp');
@@ -46,6 +49,7 @@ const {
 } = require('../controllers/PrevYearPaperPDFUploadController');
 const {
   FastTrackFormDetails,
+  FastTrackpayStatus,
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
@@ -150,6 +154,9 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 router.get('/getTotalMPCJform', getTotalMPCJform);
+// router.post('/MpcjPhonepay', MpcjPhonepay);
+router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
+
 
 // PY paper PDF upload routers
 router.post(
@@ -202,7 +209,7 @@ router.post(
   ]),
   FastTrackFormDetails
 );
-
+router.post('/FastTrackpaystatus', FastTrackpayStatus);
 router.get('/getfastTrackForm', getFastTrackForm);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
