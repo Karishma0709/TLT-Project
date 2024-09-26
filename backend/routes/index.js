@@ -10,7 +10,7 @@ const {
   getTpmFormDetails,
   updateTpmFormDetails,
   deleteTpmFormDetails,
-  getTotalTpmCount, 
+  getTotalTpmCount,
 } = require('../controllers/tpmController');
 
 const {
@@ -18,7 +18,7 @@ const {
   getMPCJFormDetails,
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
-  getTotalMPCJform
+  getTotalMPCJform,
 } = require('../controllers/mpcjOfflineController');
 
 const userSignUpController = require('../controllers/userSingUp');
@@ -49,14 +49,14 @@ const {
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
-  getTotalFastTrackForms
+  getTotalFastTrackForms,
 } = require('../controllers/fastractFormController');
 const {
   createJetForm,
   getJetForms,
   deleteJetForm,
   updateJetForm,
-  getTotalJetForms
+  getTotalJetForms,
 } = require('../controllers/jetController');
 const {
   createSyllabusUpload,
@@ -69,7 +69,7 @@ const {
   getAllPyPapers,
   updatePyPapersDetail,
   deletePyPapersDetail,
-  getTotalPyPapersCount
+  getTotalPyPapersCount,
 } = require('../controllers/pyPaperController');
 
 const {
@@ -79,7 +79,12 @@ const {
   deleteUnpaidFile,
 } = require('../controllers/unpaidProductController');
 
-const {getQuiz,updateQuiz, createUser, fetchAllUser} = require("../controllers/quizController")
+const {
+  getQuiz,
+  updateQuiz,
+  createUser,
+  fetchAllUser,
+} = require('../controllers/quizController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -124,7 +129,6 @@ router.get('/getTpmFormDetails', getTpmFormDetails);
 router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 router.get('/getTotalTpmCount', getTotalTpmCount);
-
 
 // JET form routes
 router.post(
@@ -184,7 +188,10 @@ router.post('/paymentstatus', empowermentController.paymentStatus);
 router.get('/getempowermentForm', empowermentController.getempowerment);
 router.put('/Eupdate/:id', empowermentController.Update);
 router.delete('/Edelete/:id', empowermentController.Edelete);
-router.get('/getTotalEmpowermentForms', empowermentController.getTotalEmpowermentForms);
+router.get(
+  '/getTotalEmpowermentForms',
+  empowermentController.getTotalEmpowermentForms
+);
 
 // Fast Track Routes
 router.post(
@@ -254,10 +261,10 @@ router.delete('/Notificationdelete/:id', notifyController.Notificationdelete);
 router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
 
 // Quiz routes
-router.get("/quiz",getQuiz)
-router.put("/quiz",updateQuiz)
+router.get('/quiz', getQuiz);
+router.put('/quiz', updateQuiz);
 
-router.post("/quizUser",createUser)
-router.get("/quizUser",fetchAllUser)
+router.post('/quizUser', createUser);
+router.get('/quizUser', fetchAllUser);
 
 module.exports = router;

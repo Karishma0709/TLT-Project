@@ -1,26 +1,26 @@
-import React from "react";
-import cardImage1 from "../../assets/productImage3.jpg";
-import cardImage2 from "../../assets/productImage4.jpg";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import cardImage1 from '../../assets/productImage3.jpg';
+import cardImage2 from '../../assets/productImage4.jpg';
+import { NavLink } from 'react-router-dom';
 
 const products = [
   {
     id: 1,
-    name: "Translation Practice Material MPCJ & CGCJ",
-    href: "MpcjproductCard",
+    name: 'Translation Practice Material MPCJ & CGCJ',
+    href: 'MpcjproductCard',
     imageSrc: cardImage1,
     imageAlt: "Front of men's Basic Tee in black.",
-    subName: "Translation Material",
-    price: "Know More",
+    subName: 'Translation Material',
+    price: 'Know More',
   },
   {
     id: 2,
-    name: "MPCJ offline mock test series",
-    href: "MockTestCard",
+    name: 'MPCJ offline mock test series',
+    href: 'MockTestCard',
     imageSrc: cardImage2,
     imageAlt: "Front of men's Basic Tee in black.",
-    subName: "Test Material",
-    price: "Know More",
+    subName: 'Test Material',
+    price: 'Know More',
   },
 ];
 

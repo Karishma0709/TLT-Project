@@ -1,14 +1,13 @@
-import React from 'react'
-import StudyEssentials from './StudyEssentials'
-import MpcjproductCard from './MpcjproductCard'
+import React from 'react';
+import StudyEssentials from './StudyEssentials';
+import MpcjproductCard from './MpcjproductCard';
 
 const StudyCards = () => {
   return (
-    < >
-    <StudyEssentials/>
- 
+    <>
+      <StudyEssentials />
     </>
-  )
-}
+  );
+};
 
-export default StudyCards
+export default StudyCards;

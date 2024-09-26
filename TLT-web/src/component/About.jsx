@@ -7,8 +7,8 @@ const About = () => {
   return (
     <>
       <div className="my-5">
-        <div className="flex flex-row w-full md:justify-between banner2 bg-cover">
-          <div className="w-full flex lg:mb-0 banner2 bg-contain bg-bottom"></div>
+        <div className="flex flex-row w-full banner2  h-full bg-cover">
+          <div className="w-full h-full flex lg:mb-0 banner2 bg-contain backdrop-blur-sm bg-bottom "></div>
         </div>
       </div>
 
