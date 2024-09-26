@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import SummaryApi from '../Common/SummaryApi';
 
 const UpdateMarquee = () => {
   const [marquees, setMarquees] = useState([]);
@@ -10,7 +11,10 @@ const UpdateMarquee = () => {
 
   const fetchMarquees = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/marquee');
+      const response = await axios({
+        url:SummaryApi.MarqueGet.url,
+        method:SummaryApi.MarqueGet.method
+      });
       if (response.status === 200) {
         setMarquees(response.data);
       } else {
@@ -29,7 +33,10 @@ const UpdateMarquee = () => {
   const handleCreateMarquee = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/marquee', { text: newMarqueeText });
+      const response = await axios({
+        url:SummaryApi.Allmarquee.url,
+        method: SummaryApi.AllmpcjData.method
+      }, { text: newMarqueeText });
       if (response.status === 201) {
         toast.success('Marquee created successfully!');
         setNewMarqueeText('');
@@ -59,7 +66,11 @@ const UpdateMarquee = () => {
       return;
     }
     try {
-      const response = await axios.put(`http://localhost:8080/api/marquee/${id}`, { text: editMarqueeText });
+      const response = await axios({
+        url: `${SummaryApi.updateMarquee.url}/${id}`, 
+        method: SummaryApi.updateMarquee.method,    
+        data: { text: editMarqueeText },             
+      });
       if (response.status === 200) {
         toast.success('Marquee updated successfully!');
         setEditMarqueeId(null);
@@ -79,7 +90,10 @@ const UpdateMarquee = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await axios.delete(`http://localhost:8080/api/marquee/${id}`);
+      const response = await axios({
+        url: `${SummaryApi.deleteMarquee.url}/${id}`, // Dynamic URL using SummaryApi
+        method: SummaryApi.deleteMarquee.method, 
+      });
       if (response.status === 200) {
         toast.success('Marquee deleted successfully!');
         fetchMarquees();

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import SummaryApi from '../Common/SummaryAPI';
 
 const MarqueeUI = () => {
   const [marqueeData, setMarqueeData] = useState('');
 
   const fetchAllData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/marquee', {
-        method: 'GET',
+      const response = await fetch(SummaryApi.Marquee.url, {
+        method: SummaryApi.Marquee.method,
         credentials: 'include',
       });
 
