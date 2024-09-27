@@ -969,7 +969,7 @@ const EmpowermentBatch = () => {
           <div className="space-y-5">
             <div className="sm:flex items-center">
               <label className="block text-left font-bold text-lg sm:w-1/4">
-                Choose picture:
+                Choose Picture:
               </label>
               <input
                 type="file"
