@@ -1,4 +1,13 @@
 const FastTrackForm = require('../models/FastTrackForm');
+const axios = require('axios');
+const crypto = require('crypto'); // Make sure to import crypto
+
+const generateTransctionID = () => {
+  const timestamp = Date.now();
+  const randomNum = Math.floor(Math.random() * 1000000);
+  const merchantPrefix = 'T';
+  return `${merchantPrefix} ${timestamp} ${randomNum}`;
+};
 
 const FastTrackFormDetails = async (req, res) => {
   try {
@@ -41,6 +50,44 @@ const FastTrackFormDetails = async (req, res) => {
     const picture = req.files['picture'][0].path;
     const aadharCard = req.files['aadharCard'][0].path;
 
+    const data = {
+      merchantId: 'M22U3BAWIN1EZ',
+      merchantTransactionId: generateTransctionID(),
+      merchantUserId: 'M22U3BAWIN1EZ_1.json',
+      amount: 10000,
+      redirectUrl: 'http://localhost:8080/api/FastTrackpaystatus',
+      redirectMode: 'REDIRECT',
+      mobileNumber: '9999999999',
+      paymentInstrument: { type: 'PAY_PAGE' },
+    };
+
+    const payload = JSON.stringify(data);
+    const payloadMain = Buffer.from(payload).toString('base64');
+    const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
+    const KeyIndex = 1;
+
+    const stringToHash = `${payloadMain}/pg/v1/pay${key}`;
+    const sha256 = crypto
+      .createHash('sha256')
+      .update(stringToHash)
+      .digest('hex');
+    const checksum = `${sha256}###${KeyIndex}`;
+
+    const options = {
+      method: 'POST',
+      url: 'https://api.phonepe.com/apis/hermes/pg/v1/pay',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-VERIFY': checksum,
+      },
+      data: { request: payloadMain },
+    };
+
+    const response = await axios.request(options);
+    console.log(response.data);
+
+    // Save the form data
     const newFastTrackForm = new FastTrackForm({
       picture,
       name,
@@ -72,12 +119,59 @@ const FastTrackFormDetails = async (req, res) => {
     });
 
     await newFastTrackForm.save();
-    res
-      .status(201)
-      .json({ message: 'Form created successfully!', form: newFastTrackForm });
+
+    // If the payment initiation is successful, send the redirect URL
+    if (response.data.success) {
+      return res
+        .status(200)
+        .send(response.data.data.instrumentResponse.redirectInfo.url);
+    } else {
+      return res.status(500).json({ error: 'Payment initiation failed' });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message });
+    if (!res.headersSent) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+};
+
+const FastTrackpayStatus = async (req, res) => {
+  const merchantTransactionId = req.body.transactionId; // Fix: Use req.body
+  const merchantId = req.body.merchantId;
+  const KeyIndex = 1;
+  const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
+  const String =
+    `/pg/v1/FastTrackpaystatus/${merchantId}/${merchantTransactionId}` + key;
+  const sha256 = crypto.createHash('sha256').update(String).digest('hex'); // Fix: Use 'digest'
+  const checksum = sha256 + '###' + KeyIndex;
+
+  // const URL = `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`;
+
+  const URL = `https://api.phonepe.com/apis/hermes/pg/v1/FastTrackpaystatus/${merchantId}/${merchantTransactionId}`;
+
+  const options = {
+    method: 'GET',
+    url: URL,
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-VERIFY': checksum,
+      'X-MERCHANT-ID': merchantId,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    res.status(200).json(response.data); // Send the response back to client
+  } catch (error) {
+    console.error(
+      'Payment status error:',
+      error.response ? error.response.data : error.message
+    );
+    res
+      .status(500)
+      .json({ status: 'Payment status error', error: error.message });
   }
 };
 
@@ -147,8 +241,9 @@ const getTotalFastTrackForms = async (req, res) => {
 
 module.exports = {
   FastTrackFormDetails,
+  FastTrackpayStatus,
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
-  getTotalFastTrackForms
+  getTotalFastTrackForms,
 };

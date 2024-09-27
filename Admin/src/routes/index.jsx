@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'Login',
+        path: '',
         element: <Login />,
       },
       {
@@ -39,11 +39,11 @@ export const router = createBrowserRouter([
         element: <Sidebar />,
         children: [
           {
-            path: '',
+            path: 'dashboardcards',
             element: <Dashboard />,
           },
           {
-            path: '',
+            path: 'header',
             element: <Header />,
           },
           {

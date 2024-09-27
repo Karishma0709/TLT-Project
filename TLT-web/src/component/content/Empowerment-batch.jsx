@@ -41,6 +41,9 @@ const EmpowermentBatch = () => {
 
     const formData = new FormData();
 
+    // Append form data (as before)
+    formData.append('name', data.name);
+    formData.append('placeOfBirth', data.placeOfBirth);
     formData.append('name', data.name);
     formData.append('placeOfBirth', data.placeOfBirth);
     formData.append('dateOfBirth', data.dateOfBirth);
@@ -65,38 +68,70 @@ const EmpowermentBatch = () => {
     formData.append('amountPaid', data.feesPaid.amountPaid);
     formData.append('oldStudentOfShubhamSir', data.oldStudentOfShubhamSir);
     formData.append('institution', data.institution);
+
+    // Add all other fields...
+
     if (photo) formData.append('photo', photo);
     if (aadharCard) formData.append('aadharCard', aadharCard);
-    console.log(formData.get('fieldName'));
+
     try {
       const response = await fetch(
         'http://localhost:8080/api/empowermentForm',
         {
           method: 'POST',
-
           body: formData,
         }
       );
 
+      // Check if response is OK
       if (!response.ok) {
-        const errorData = await response.json(); // Get error details from the response
-        console.error('Error details:', errorData); // Log detailed error message
+        const errorText = await response.text(); // Get the response as text
+        console.error('Error details:', errorText);
         throw new Error('Network response was not ok');
       }
 
-      const result = await response.json();
+      // Check content type for response
+      const contentType = response.headers.get('content-type');
+      let result;
+
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json(); // Parse as JSON if it is JSON
+      } else {
+        const textResponse = await response.text(); // Otherwise, read as text
+        console.log('Received non-JSON response:', textResponse);
+        // If the response is a URL, redirect to it
+        window.location.href = textResponse; // Use the text response for redirection
+        return; // Exit the function
+      }
+
       console.log('Success:', result);
+
+      // Handle the JSON result if needed
+      if (result || result.redirectUrl) {
+        window.location.href = result.redirectUrl; // Ensure the correct key is used
+      } else {
+        console.error('Redirect URL not found in response:', result);
+      }
     } catch (error) {
-      console.error('Error:', error.message); // Log error message
+      console.error('Error:', error.message);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    // Ensure only single values are set
+    if (Array.isArray(value)) {
+      setData((prev) => ({
+        ...prev,
+        [name]: value[0], // Take the first value if it’s an array
+      }));
+    } else {
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleRadioChange = (e) => {
