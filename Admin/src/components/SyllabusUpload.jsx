@@ -33,7 +33,10 @@ const SyllabusUpload = () => {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:8080/api/SyllabusUpload', formData, {
+      await axios({
+        url: SummaryApi.SyllabusdataUploads.url,
+        method: SummaryApi.SyllabusdataUploads.method,
+        data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       fetchSyllabus();
