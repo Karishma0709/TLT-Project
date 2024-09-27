@@ -114,6 +114,22 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
+    method: 'post',
+  },
+  getMPCJFormDetails: {
+    url: `${backendDomain}/api/getMPCJFormDetails`,
+    method: 'get',
+  },
+  updateMPCJFormDetails: {
+    url: `${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method: 'put',
+  },
+  deleteMPCJFormDetails: {
+    url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method: 'delete',
+  },
 };
 
 export default SummaryApi;

@@ -20,6 +20,7 @@ import PreviousYearForm from '../components/PreviousYearForm';
 import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
+import AddMpcjProduct from '../components/AddMpcjProduct';
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
           {
             path: 'jetformdetail',
             element: <JetFormDetails />,
+          },
+          {
+            path: 'addMpcjProduct',
+            element: <AddMpcjProduct />,
           },
         ],
       },
