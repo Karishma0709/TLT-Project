@@ -114,6 +114,14 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+  Notification:{
+    url: `${backendDomain}/api/getnotifies`,
+    method: 'get',
+  },
+  Marquee:{
+    url: `${backendDomain}/api/marquee`,
+    method: 'get',
+  }
 };
 
 export default SummaryApi;

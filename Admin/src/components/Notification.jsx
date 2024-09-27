@@ -65,9 +65,13 @@ const Notification = () => {
     };
 
     try {
-      await axios.put(
-        `http://localhost:8080/api/Notificationupdate/${id}`,
-        updatedNotification
+      const apiUrl= SummaryApi.notifiesUpdate.url.replace(':id', id);
+      await axios(
+        {
+          url:apiUrl,
+          method:SummaryApi.notifiesUpdate.method,
+          data:updatedNotification
+        }
       );
       alert('Updated Successfully !!!');
       fetchNotifications();
@@ -83,11 +87,18 @@ const Notification = () => {
     );
     if (confirmDelete) {
       try {
-        await axios.delete(
-          `http://localhost:8080/api/Notificationdelete/${id}`
-        );
+        const apiUrl = SummaryApi.notifiesDelete.url.replace(':id', id);
+        const result = await axios({
+        url: apiUrl,
+        method: SummaryApi.notifiesDelete.method,
+      });
+
+      if (result.status === 200) {
         alert('Notification deleted successfully!');
         fetchNotifications();
+      } else {
+        console.error('Error deleting notification');
+      }
       } catch (error) {
         console.error('Error deleting notification:', error);
       }

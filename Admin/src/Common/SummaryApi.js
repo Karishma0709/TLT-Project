@@ -28,13 +28,21 @@ const SummaryApi = {
     url: `${backendDomain}/api/tmp-data`,
     method: 'get',
   },
+  MarqueGet:{
+    url: `${backendDomain}/api/marquee`,
+    method: 'get'
+  },
   Allmarquee: {
     url: `${backendDomain}/api/marquee`,
     method: 'post',
   },
   updateMarquee: {
-    url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
+    url: `${backendDomain}/api/marquee`,
     method: 'put',
+  },
+  deleteMarquee: {
+    url: `${backendDomain}/api/marquee`,
+    method: 'delete',
   },
   PyPaperPDF: {
     url: `${backendDomain}/api/PyPaperPDF`,
