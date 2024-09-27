@@ -122,6 +122,14 @@ const SummaryApi = {
     baseUrl: `${backendDomain}/api/SyllabusUploadFiles`, // Base URL for PDF files
     method: 'GET',
   },
+  Notification: {
+    url: `${backendDomain}/api/getnotifies`,
+    method: 'get',
+  },
+  Marquee: {
+    url: `${backendDomain}/api/marquee`,
+    method: 'get',
+  },
 };
 
 export default SummaryApi;

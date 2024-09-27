@@ -97,6 +97,10 @@ const EmpowermentBatch = () => {
     }
   };
 
+
+
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 

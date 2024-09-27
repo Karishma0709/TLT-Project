@@ -19,6 +19,9 @@ const {
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
   getTotalMPCJform,
+  MpcjPhonepay,
+  paymentStatus,
+  mpcjpaymentStatus,
 } = require('../controllers/mpcjOfflineController');
 
 const userSignUpController = require('../controllers/userSingUp');
@@ -151,6 +154,9 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 router.get('/getTotalMPCJform', getTotalMPCJform);
+// router.post('/MpcjPhonepay', MpcjPhonepay);
+router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
+
 
 // PY paper PDF upload routers
 router.post(

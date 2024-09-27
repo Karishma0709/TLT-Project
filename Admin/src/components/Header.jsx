@@ -12,7 +12,7 @@ const Header = () => {
     localStorage.removeItem('authToken'); // or sessionStorage.removeItem('authToken');
 
     // Redirect to the login page after logout
-    navigate('/Login');
+    navigate('/');
   };
 
   return (
