@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
-import productCards from "../data/productCards";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const TPMForm = () => {
+const TPMForm = ({ selectedProduct }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
     contact: "",
     purchasedProduct: "",
   });
+
+  useEffect(() => {
+    // Pre-fill the purchasedProduct field with the selected product details
+    if (selectedProduct) {
+      setData((prevData) => ({
+        ...prevData,
+        purchasedProduct: `${selectedProduct.title} ${selectedProduct.price}`,
+      }));
+    }
+  }, [selectedProduct]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -124,23 +133,16 @@ const TPMForm = () => {
                   htmlFor="TPM"
                   className="block mb-2 text-sm font-medium text-gray-500"
                 >
-                  Purchased Product
+                  
                 </label>
-                <select
-                  id="TPM"
+                <input
+                  type="text"
                   name="purchasedProduct"
                   value={data.purchasedProduct}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
-                  required
-                >
-                  <option value="" disabled>Select Product</option>
-                  {productCards.map((item, index) => (
-                    <option key={index} value={`${item.title} ${item.price}`}>
-                      {item.title} {item.price}
-                    </option>
-                  ))}
-                </select>
+                  readOnly
+                />
                 <div className="underline"></div>
               </div>
             </div>
@@ -150,7 +152,7 @@ const TPMForm = () => {
                 type="submit"
                 className="relative inline-block text-white bg-gradient-to-r p-4 px-14 from-red-700 to-red-400 hover:from-red-400 hover:to-red-700 font-semibold py-2 rounded-full transition-ease-out" 
               >
-                Submit
+                Pay {selectedProduct.price}
               </button>
             </div>
           </form>
