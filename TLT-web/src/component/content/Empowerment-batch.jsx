@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Registration from './Registration';
 import axios from 'axios';
+import SummaryApi from '../../Common/SummaryAPI';
 
 const EmpowermentBatch = () => {
   const [selectedState, setSelectedState] = useState('');
@@ -41,9 +42,7 @@ const EmpowermentBatch = () => {
 
     const formData = new FormData();
 
-    // Append form data (as before)
-    formData.append('name', data.name);
-    formData.append('placeOfBirth', data.placeOfBirth);
+    // Append form data (ensure no duplicates)
     formData.append('name', data.name);
     formData.append('placeOfBirth', data.placeOfBirth);
     formData.append('dateOfBirth', data.dateOfBirth);
@@ -53,10 +52,8 @@ const EmpowermentBatch = () => {
     formData.append('qualification', data.qualification);
     formData.append('collegeUniversity', data.collegeUniversity);
     formData.append('pursuingLLB', data.pursuingLLB ? 'yes' : 'no');
-    // Ensure value is set
     formData.append('yearOfPassing', data.yearOfPassing);
     formData.append('Batch', data.Batch);
-
     formData.append('email', data.email);
     formData.append('fatherName', data.fatherName);
     formData.append('motherName', data.motherName);
@@ -67,60 +64,43 @@ const EmpowermentBatch = () => {
     formData.append('onlineUPI', data.feesPaid.onlineUPI);
     formData.append('amountPaid', data.feesPaid.amountPaid);
     formData.append('oldStudentOfShubhamSir', data.oldStudentOfShubhamSir);
-    formData.append('institution', data.institution);
-
-    // Add all other fields...
 
     if (photo) formData.append('photo', photo);
     if (aadharCard) formData.append('aadharCard', aadharCard);
 
     try {
-      const response = await fetch(
-        'http://localhost:8080/api/empowermentForm',
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
+      const response = await axios({
+        url: SummaryApi.empowermentForm.url,
+        method: SummaryApi.empowermentForm.method,
+        data: formData,
+      });
 
-      // Check if response is OK
-      if (!response.ok) {
-        const errorText = await response.text(); // Get the response as text
-        console.error('Error details:', errorText);
-        throw new Error('Network response was not ok');
-      }
+      // Log the response for debugging
+      console.log('Response data:', response.data);
 
-      // Check content type for response
-      const contentType = response.headers.get('content-type');
-      let result;
-
-      if (contentType && contentType.includes('application/json')) {
-        result = await response.json(); // Parse as JSON if it is JSON
+      // Check if response is a URL or contains a redirectUrl
+      if (typeof response.data === 'string') {
+        // If it's a direct URL, redirect to it
+        window.location.href = response.data;
+      } else if (response.data.redirectUrl) {
+        // If it's an object with a redirectUrl, use that
+        window.location.href = response.data.redirectUrl;
       } else {
-        const textResponse = await response.text(); // Otherwise, read as text
-        console.log('Received non-JSON response:', textResponse);
-        // If the response is a URL, redirect to it
-        window.location.href = textResponse; // Use the text response for redirection
-        return; // Exit the function
-      }
-
-      console.log('Success:', result);
-
-      // Handle the JSON result if needed
-      if (result || result.redirectUrl) {
-        window.location.href = result.redirectUrl; // Ensure the correct key is used
-      } else {
-        console.error('Redirect URL not found in response:', result);
+        console.error('Redirect URL not found in response:', response.data);
       }
     } catch (error) {
       console.error('Error:', error.message);
+      if (error.response) {
+        // This block is where you can access the server's response
+        console.error('Server response:', error.response.data);
+      }
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Ensure only single values are set
+    // Ensure only single values are set in this
     if (Array.isArray(value)) {
       setData((prev) => ({
         ...prev,
@@ -989,7 +969,7 @@ const EmpowermentBatch = () => {
           <div className="space-y-5">
             <div className="sm:flex items-center">
               <label className="block text-left font-bold text-lg sm:w-1/4">
-                Choose picture:
+                Choose Picture:
               </label>
               <input
                 type="file"
