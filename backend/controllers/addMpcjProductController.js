@@ -1,4 +1,4 @@
-const Product = require('../models/addMpcjProductDetails'); // Model for products
+const Product = require('../models/addMpcjProduct'); // Model for products
 
 // Create a new product
 const createMpcjProduct = async (req, res) => {
