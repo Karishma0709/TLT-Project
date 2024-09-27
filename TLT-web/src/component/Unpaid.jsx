@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SummaryApi from '../Common/SummaryAPI';
 
 const Unpaid = () => {
   const [unpaidFiles, setUnpaidFiles] = useState([]);
@@ -10,9 +11,10 @@ const Unpaid = () => {
 
   const fetchUnpaidFiles = async () => {
     try {
-      const result = await axios.get(
-        'http://localhost:8080/api/getUnpaidUpload'
-      );
+      const result = await axios({
+        url: SummaryApi.getUnpaid.url,
+        method: SummaryApi.getUnpaid.method,
+      });
       setUnpaidFiles(result.data.data);
     } catch (error) {
       console.error('Error fetching unpaid files:', error);
@@ -23,7 +25,7 @@ const Unpaid = () => {
     window.open(
       `http://localhost:5054/api/UnpaidFiles/${pdf}`,
       '_blank',
-      'noreferrer',
+      'noreferrer'
     );
   };
 

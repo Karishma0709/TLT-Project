@@ -106,6 +106,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/getpydata`,
     method: 'get',
   },
+  getUnpaid: {
+    url: `${backendDomain}/api/getUnpaidUpload`,
+    method: 'get',
+  },
   UnpaidPDF: {
     url: `${backendDomain}/api/unpaidUpdate`,
     method: 'put',
@@ -114,6 +118,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+<<<<<<< HEAD
   createMPCJFormDetails: {
     url: `${backendDomain}/api/createMPCJFormDetails`,
     method: 'post',
@@ -129,6 +134,23 @@ const SummaryApi = {
   deleteMPCJFormDetails: {
     url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
     method: 'delete',
+=======
+  Syllabus: {
+    url: `${backendDomain}/api/getSyllabusUpload`,
+    method: 'get',
+  },
+  Syllabuspdf: {
+    baseUrl: `${backendDomain}/api/SyllabusUploadFiles`, // Base URL for PDF files
+    method: 'GET',
+  },
+  Notification: {
+    url: `${backendDomain}/api/getnotifies`,
+    method: 'get',
+  },
+  Marquee: {
+    url: `${backendDomain}/api/marquee`,
+    method: 'get',
+>>>>>>> 055f07309573962b74b24250276a1fc3fcfbf1ea
   },
 };
 

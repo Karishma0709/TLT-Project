@@ -1,531 +1,251 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SummaryApi from '../Common/SummaryApi';
-import { Link } from 'react-router-dom'; // For navigation to update page
-
+import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Ensure you import the icons
 
 const FastTrackForm = () => {
-  const [fastTrackdata, setFastTrackData] = useState([]); // Initialize with an empty array
+  const [fastTrackData, setFastTrackData] = useState([]);
   const [editData, setEditData] = useState({});
-  const [editMode, setEditMode] = useState(null); // Track which row is being edited
+  const [editMode, setEditMode] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await axios(SummaryApi.FastTractFormAdmin);
+        setFastTrackData(result.data.fastTrackFormData || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setFastTrackData([]);
+      }
+    };
     getData();
   }, []);
 
-  const getData = async () => {
-    try {
-      const result = await axios({
-        url: SummaryApi.FastTractFormAdmin.url,
-        method: SummaryApi.FastTractFormAdmin.method,
-      });
-      console.log('API Response:', result);
-      console.log('Full API Response:', result.data);
-      console.log('Data Property:', result.data.fastTrackFormData);
-      if (Array.isArray(result.data.fastTrackFormData)) {
-        setFastTrackData(result.data.fastTrackFormData);
-      } else {
-        console.error('Unexpected data format:', result.data.fastTrackFormData);
-        setFastTrackData([]); // Set to empty array if data format is unexpected
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setFastTrackData([]); // Set to empty array on error
-    }
-  };
-
-  // Delete form data
-  const deleteEdata = async (id) => {
-    const apiUrl = SummaryApi.FastTractFormAdminDelete.url.replace(':id', id);
+  const deleteData = async (id) => {
     try {
       await axios({
-        url: apiUrl,
-        method: SummaryApi.FastTractFormAdminDelete.method,
-        data: editData[id],
+        ...SummaryApi.FastTractFormAdminDelete,
+        url: SummaryApi.FastTractFormAdminDelete.url.replace(':id', id),
       });
-      getData();
+      setFastTrackData(fastTrackData.filter((data) => data._id !== id));
     } catch (error) {
       console.error('Error deleting form:', error);
     }
   };
 
-  // Update form data
   const handleChange = (e, id) => {
-    setEditData({
-      ...editData,
-      [id]: { ...editData[id], [e.target.name]: e.target.value },
-    });
+    const { name, value } = e.target;
+    setEditData((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], [name]: value },
+    }));
   };
 
-  const UpdateEdata = async (id) => {
-    const apiUrl = SummaryApi.FastTractFormAdminUpdate.url.replace(':id', id);
-
+  const updateData = async (id) => {
     try {
-      const updateuser = await axios({
-        url: apiUrl,
-        method: SummaryApi.FastTractFormAdminUpdate.method,
+      await axios({
+        ...SummaryApi.FastTractFormAdminUpdate,
+        url: SummaryApi.FastTractFormAdminUpdate.url.replace(':id', id),
         data: editData[id],
       });
-      setEditMode(null); // Exit edit mode after updating
-      getData(); // Fetch updated data
+      setEditMode(null);
+      setFastTrackData((prevData) =>
+        prevData.map((item) => (item._id === id ? editData[id] : item))
+      );
+      setEditData({}); // Reset editData
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error('Error updating form:', error);
     }
   };
 
   const toggleEditMode = (id) => {
-    setEditMode(id); // Enter edit mode for the specific row
-    setEditData({ [id]: fastTrackdata.find((data) => data._id === id) });
+    setEditMode(id);
+    const selectedData = fastTrackData.find((data) => data._id === id);
+    setEditData({ [id]: selectedData });
   };
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentForms = fastTrackData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(fastTrackData.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Fast-Track Form Data</h1>
-      <div>
-        {fastTrackdata.length === 0 ? (
-          <p className="text-gray-500">No data available</p>
-        ) : (
-          <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
-            <thead className="shadow-md rounded-lg border-b border-gray-200">
-              <tr className="bg-gray-800 text-white">
-                <th className="py-2 px-4 text-left">S.no</th>
-                <th className="py-2 px-4 text-left">Picture</th>
-                <th className="py-2 px-4 text-left">Name</th>
-                <th className="py-2 px-4 text-left">Place of Birth</th>
-                <th className="py-2 px-4 text-left">Date of Birth</th>
-                <th className="py-2 px-4 text-left">Full Address</th>
-                <th className="py-2 px-4 text-left">State</th>
-                <th className="py-2 px-4 text-left">Pin Code</th>
-                <th className="py-2 px-4 text-left">Qualification</th>
-                <th className="py-2 px-4 text-left">College/University</th>
-                <th className="py-2 px-4 text-left">Pursuing LL.B</th>
-                <th className="py-2 px-4 text-left">Year of Passing</th>
-                <th className="py-2 px-4 text-left">Email</th>
-                <th className="py-2 px-4 text-left">Father's Name</th>
-                <th className="py-2 px-4 text-left">Mother's Name</th>
-                <th className="py-2 px-4 text-left">Permanent Address</th>
-                <th className="py-2 px-4 text-left">Permanent State</th>
-                <th className="py-2 px-4 text-left">Permanent City</th>
-                <th className="py-2 px-4 text-left">Aadhar Card</th>
-                <th className="py-2 px-4 text-left">Fees Paid</th>
-                <th className="py-2 px-4 text-left">Amount Paid</th>
-                <th className="py-2 px-4 text-left">Prelims</th>
-                <th className="py-2 px-4 text-left">Mains</th>
-                <th className="py-2 px-4 text-left">Targeted State</th>
-                <th className="py-2 px-4 text-left">Score</th>
-                <th className="py-2 px-4 text-left">Year</th>
-                <th className="py-2 px-4 text-left">
-                  Old Student of Shubham Sir
+      {fastTrackData.length === 0 ? (
+        <p className="text-gray-500">No data available</p>
+      ) : (
+        <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              {[
+                'S.no',
+                'Picture',
+                'Name',
+                'Place of Birth',
+                'Date of Birth',
+                'Full Address',
+                'State',
+                'Pin Code',
+                'Qualification',
+                'College/University',
+                'Pursuing LL.B',
+                'Year of Passing',
+                'Email',
+                "Father's Name",
+                "Mother's Name",
+                'Permanent Address',
+                'Permanent State',
+                'Permanent City',
+                'Aadhar Card',
+                'Fees Paid',
+                'Amount Paid',
+                'Prelims',
+                'Mains',
+                'Targeted State',
+                'Score',
+                'Year',
+                'Old Student',
+                'Institution',
+                'Actions',
+              ].map((heading, i) => (
+                <th key={i} className="py-2 px-4 text-left">
+                  {heading}
                 </th>
-                <th className="py-2 px-4 text-left">Institution</th>
-                <th className="py-2 px-4 text-left">Actions</th>
-              </tr> 
-            </thead>
-            <tbody>
-              {fastTrackdata.map((data, index) => (
-                <tr
-                  className={`border-b border-gray-200 ${
-                    index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                  } hover:bg-gray-100`}
-                  key={data._id}
-                >
-                  <td className="py-2 px-4 text-gray-600">{index + 1}</td>
-                  <td className="py-2 px-4">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="picture"
-                        value={editData[data._id]?.picture || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      <img
-                        src={data.picture}
-                        alt="User's Picture"
-                        onError={(e) => console.log('Image failed to load:', e)}
-                        className="w-24 h-24 object-cover"
-                      />
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="name"
-                        value={editData[data._id]?.name || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.name
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="placeOfBirth"
-                        value={editData[data._id]?.placeOfBirth || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.placeOfBirth
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="date"
-                        name="dateOfBirth"
-                        value={editData[data._id]?.dateOfBirth || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      new Date(data.dateOfBirth).toLocaleDateString()
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="fullAddress"
-                        value={editData[data._id]?.fullAddress || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.fullAddress
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="state"
-                        value={editData[data._id]?.state || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.state
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="pinCode"
-                        value={editData[data._id]?.pinCode || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.pinCode
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="qualification"
-                        value={editData[data._id]?.qualification || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.qualification
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="collegeUniversity"
-                        value={editData[data._id]?.collegeUniversity || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.collegeUniversity
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="pursuingLLB"
-                        value={editData[data._id]?.pursuingLLB || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.pursuingLLB
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="yearOfPassing"
-                        value={editData[data._id]?.yearOfPassing || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.yearOfPassing
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="email"
-                        value={editData[data._id]?.email || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.email
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="fatherName"
-                        value={editData[data._id]?.fatherName || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.fatherName
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="motherName"
-                        value={editData[data._id]?.motherName || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.motherName
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="permanentAddress"
-                        value={editData[data._id]?.permanentAddress || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.permanentAddress
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="permanentState"
-                        value={editData[data._id]?.permanentState || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.permanentState
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="permanentCity"
-                        value={editData[data._id]?.permanentCity || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.permanentCity
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4">
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {currentForms.map((data, index) => (
+              <tr
+                key={data._id}
+                className={`border-b border-gray-200 ${
+                  index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                }`}
+              >
+                <td className="py-2 px-4">{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                <td className="py-2 px-4">
+                  {editMode === data._id ? (
+                    <input
+                      type="text"
+                      name="picture"
+                      value={editData[data._id]?.picture || ''}
+                      onChange={(e) => handleChange(e, data._id)}
+                      className="w-full p-2 border rounded"
+                    />
+                  ) : (
                     <img
-                      src={data.aadharCard}
-                      alt="Aadhar Card"
-                      onError={(e) => console.log('Image failed to load:', e)}
+                      src={data.picture}
+                      alt="User"
                       className="w-24 h-24 object-cover"
                     />
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
-                    {typeof data.feesPaid === 'object'
-                      ? JSON.stringify(data.feesPaid)
-                      : data.feesPaid}
-                  </td>
-                  <td className="py-2 px-4 text-gray-600">
+                  )}
+                </td>
+                {[
+                  'name',
+                  'placeOfBirth',
+                  'dateOfBirth',
+                  'fullAddress',
+                  'state',
+                  'pinCode',
+                  'qualification',
+                  'collegeUniversity',
+                  'pursuingLLB',
+                  'yearOfPassing',
+                  'email',
+                  'fatherName',
+                  'motherName',
+                  'permanentAddress',
+                  'permanentState',
+                  'permanentCity',
+                  'aadharCard',
+                  'feesPaid',
+                  'amountPaid',
+                  'prelims',
+                  'mains',
+                  'targetedstate',
+                  'score',
+                  'year',
+                  'oldStudentOfShubhamSir',
+                  'institution',
+                ].map((field, i) => (
+                  <td key={i} className="py-2 px-4">
                     {editMode === data._id ? (
                       <input
-                        type="text"
-                        name="amountPaid"
-                        value={editData[data._id]?.amountPaid || ''}
+                        type={field === 'dateOfBirth' ? 'date' : 'text'}
+                        name={field}
+                        value={editData[data._id]?.[field] || ''}
                         onChange={(e) => handleChange(e, data._id)}
                         className="w-full p-2 border rounded"
                       />
+                    ) : field === 'dateOfBirth' ? (
+                      new Date(data[field]).toLocaleDateString()
                     ) : (
-                      data.amountPaid
+                      data[field]
                     )}
                   </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="prelims"
-                        value={editData[data._id]?.prelims || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.prelims
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="mains"
-                        value={editData[data._id]?.mains || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.mains
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="targetedstate"
-                        value={editData[data._id]?.targetedstate || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.targetedstate
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="score"
-                        value={editData[data._id]?.score || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.score
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="year"
-                        value={editData[data._id]?.year || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.year
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="oldStudentOfShubhamSir"
-                        value={editData[data._id]?.oldStudentOfShubhamSir || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.oldStudentOfShubhamSir
-                    )}
-                  </td>
-
-                  <td className="py-2 px-4 text-gray-600">
-                    {editMode === data._id ? (
-                      <input
-                        type="text"
-                        name="institution"
-                        value={editData[data._id]?.institution || ''}
-                        onChange={(e) => handleChange(e, data._id)}
-                        className="w-full p-2 border rounded"
-                      />
-                    ) : (
-                      data.institution
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-center flex justify-center space-x-2">
-                    {editMode === data._id ? (
+                ))}
+                <td className="py-2 px-4">
+                  {editMode === data._id ? (
+                    <>
                       <button
-                        onClick={() => UpdateEdata(data._id)}
-                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                        onClick={() => updateData(data._id)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
                       >
                         Save
                       </button>
-                    ) : (
+                      <button
+                        onClick={() => {
+                          setEditMode(null);
+                          setEditData({});
+                        }}
+                        className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
                       <button
                         onClick={() => toggleEditMode(data._id)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="px-3 py-1 rounded flex items-center"
                       >
-                        Update
+                        <FaEdit className="text-blue-500 hover:text-blue-800" />
                       </button>
-                    )}
-                    <button
-                      onClick={() => deleteEdata(data._id)}
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+                      <button
+                        onClick={() => deleteData(data._id)}
+                        className="px-3 py-1 rounded flex items-center"
+                      >
+                        <FaTrashAlt className="text-red-500 hover:text-red-700" />
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {/* Pagination */}
+      <div className="flex justify-center space-x-2 mt-4">
+        {[...Array(totalPages)].map((_, pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber + 1)}
+            className={`px-3 py-1 rounded ${currentPage === pageNumber + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+          >
+            {pageNumber + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
 };
 
 export default FastTrackForm;
-
-

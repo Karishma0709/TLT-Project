@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
 
 const SyllabusUpload = () => {
   const [title, setTitle] = useState('');
@@ -14,7 +15,10 @@ const SyllabusUpload = () => {
 
   const fetchSyllabus = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getSyllabusUpload');
+      const response = await axios({
+        url: SummaryApi.Syllabus.url,
+        method: SummaryApi.Syllabus.method,
+      });
       setSyllabusList(response.data.data);
     } catch (error) {
       console.error('Error fetching syllabuses:', error);
@@ -29,7 +33,10 @@ const SyllabusUpload = () => {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:8080/api/SyllabusUpload', formData, {
+      await axios({
+        url: SummaryApi.SyllabusdataUploads.url,
+        method: SummaryApi.SyllabusdataUploads.method,
+        data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       fetchSyllabus();
@@ -47,7 +54,7 @@ const SyllabusUpload = () => {
       return;
     }
 
-    const apiUrl = `http://localhost:8080/api/updateSyllabusById/${id}`;
+    const apiUrl = SummaryApi.SyllabusUpdate.url.replace(':id', id);
     const formData = new FormData();
     formData.append('title', updatedTitle);
     if (file) {
@@ -68,7 +75,7 @@ const SyllabusUpload = () => {
 
   const deleteSyllabus = async (id) => {
     if (window.confirm('Are you sure you want to delete this syllabus?')) {
-      const apiUrl = `http://localhost:8080/api/deleteSyllabusById/${id}`;
+      const apiUrl = SummaryApi.SyllabusDelete.url.replace(':id', id);
       try {
         await axios.delete(apiUrl);
         fetchSyllabus();
@@ -88,7 +95,10 @@ const SyllabusUpload = () => {
 
   const indexOfLastSyllabus = currentPage * itemsPerPage;
   const indexOfFirstSyllabus = indexOfLastSyllabus - itemsPerPage;
-  const currentSyllabuses = syllabusList.slice(indexOfFirstSyllabus, indexOfLastSyllabus);
+  const currentSyllabuses = syllabusList.slice(
+    indexOfFirstSyllabus,
+    indexOfLastSyllabus
+  );
   const totalPages = Math.ceil(syllabusList.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
@@ -99,8 +109,13 @@ const SyllabusUpload = () => {
 
   return (
     <div className="mx-auto p-5">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md max-w-md mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">Upload PDF</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-md max-w-md mx-auto"
+      >
+        <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">
+          Upload PDF
+        </h1>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <input
           type="text"
@@ -108,7 +123,9 @@ const SyllabusUpload = () => {
           placeholder="Title"
           value={editId ? updatedTitle : title}
           required
-          onChange={(e) => (editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value))}
+          onChange={(e) =>
+            editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value)
+          }
         />
         <input
           type="file"
@@ -117,14 +134,19 @@ const SyllabusUpload = () => {
           onChange={(e) => setFile(e.target.files[0])}
         />
         <div className="flex justify-center">
-          <button className="bg-[#1F2937] text-white p-2 rounded hover:bg-gray-800 w-full" type="submit">
+          <button
+            className="bg-[#1F2937] text-white p-2 rounded hover:bg-gray-800 w-full"
+            type="submit"
+          >
             {editId ? 'Update' : 'Submit'}
           </button>
         </div>
       </form>
 
       <div className="mt-10">
-        <h2 className="text-xl font-bold mb-4 text-[#1F2937]">Uploaded Syllabus List</h2>
+        <h2 className="text-xl font-bold mb-4 text-[#1F2937]">
+          Uploaded Syllabus List
+        </h2>
         <table className="w-full table-auto border-collapse border border-[#1F2937]">
           <thead>
             <tr className="bg-[#1F2937] text-white">
@@ -137,7 +159,9 @@ const SyllabusUpload = () => {
           <tbody>
             {currentSyllabuses.map((syllabus, index) => (
               <tr key={syllabus._id} className="text-center">
-                <td className="border border-[#1F2937] p-2">{index + 1 + indexOfFirstSyllabus}</td>
+                <td className="border border-[#1F2937] p-2">
+                  {index + 1 + indexOfFirstSyllabus}
+                </td>
                 <td className="border border-[#1F2937] p-2">
                   {editId === syllabus._id ? (
                     <input
@@ -197,7 +221,11 @@ const SyllabusUpload = () => {
             <button
               key={index}
               onClick={() => handlePageChange(index + 1)}
-              className={`mx-1 px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-gray-800 text-white' : 'bg-gray-200'}`}
+              className={`mx-1 px-4 py-2 rounded ${
+                currentPage === index + 1
+                  ? 'bg-gray-800 text-white'
+                  : 'bg-gray-200'
+              }`}
             >
               {index + 1}
             </button>

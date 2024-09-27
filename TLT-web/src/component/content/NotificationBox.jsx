@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import SummaryApi from '../../Common/SummaryAPI';
 
 const NotificationBox = () => {
   const marqueeRef = useRef(null);
@@ -13,7 +14,10 @@ const NotificationBox = () => {
 
   const getPdf = async () => {
     try {
-      const result = await axios.get('http://localhost:8080/api/getnotifies');
+      const result = await axios({
+        url:SummaryApi.Notification.url,
+        method:SummaryApi.Notification.method
+      });
       setNotifay(result.data.data);
     } catch (err) {
       console.error(err);
@@ -36,7 +40,7 @@ const NotificationBox = () => {
   };
 
   return (
-    <div className=" text-black p-4 overflow-hidden text-center">
+    <div className=" text-black p-4 h-[40vh] lg:h-[90vh] overflow-hidden text-center">
       <h2 className="text-3xl font-bold my-5 text-center">
         Latest <span className="text-primary">Notifications</span>
       </h2>
