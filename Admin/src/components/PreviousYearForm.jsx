@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons for edit and delete
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 const PreviousYearForm = () => {
   const [allPapers, setAllPapers] = useState([]);
   const [editData, setEditData] = useState({});
   const [editMode, setEditMode] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Pagination state
-  const itemsPerPage = 10; // Number of papers per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchAllPapers();
@@ -30,8 +30,12 @@ const PreviousYearForm = () => {
     }
   };
 
-  // Delete paper data
+  // Delete paper data with confirmation
   const deletePaper = async (id) => {
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this paper?'
+    );
+    if (!confirmDelete) return; // Exit if user cancels
     try {
       await axios.delete(
         `http://localhost:8080/api/deletePyPapersDetail/${id}`
@@ -42,15 +46,12 @@ const PreviousYearForm = () => {
     }
   };
 
-  // Update paper data
-  const handleChange = (e, id) => {
-    setEditData({
-      ...editData,
-      [id]: { ...editData[id], [e.target.name]: e.target.value },
-    });
-  };
-
+  // Update paper data with confirmation
   const updatePaper = async (id) => {
+    const confirmUpdate = window.confirm(
+      'Are you sure you want to save the changes?'
+    );
+    if (!confirmUpdate) return; // Exit if user cancels
     try {
       await axios.put(
         `http://localhost:8080/api/updatePyPapersDetail/${id}`,
@@ -63,24 +64,24 @@ const PreviousYearForm = () => {
     }
   };
 
+  const handleChange = (e, id) => {
+    setEditData({
+      ...editData,
+      [id]: { ...editData[id], [e.target.name]: e.target.value },
+    });
+  };
+
   const toggleEditMode = (id) => {
     setEditMode(id);
     setEditData({ [id]: allPapers.find((paper) => paper._id === id) });
   };
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentPapers = allPapers.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(allPapers.length / itemsPerPage);
 
-  const goToNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
-
-  const goToPrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="p-6">
@@ -174,15 +175,15 @@ const PreviousYearForm = () => {
                         <>
                           <button
                             onClick={() => toggleEditMode(paper._id)}
-                            className=" px-3 py-1 rounded hover:bg-blue-700 flex items-center"
+                            className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaEdit className="text-blue-500" /> 
+                            <FaEdit className="text-blue-500 hover:text-blue-800" /> 
                           </button>
                           <button
                             onClick={() => deletePaper(paper._id)}
-                            className=" text-white px-3 py-1 rounded hover:bg-red-700 flex items-center"
+                            className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaTrashAlt className="text-red-500" /> 
+                            <FaTrashAlt className="text-red-500 hover:text-red-700" /> 
                           </button>
                         </>
                       )}
@@ -194,21 +195,19 @@ const PreviousYearForm = () => {
 
             {/* Pagination Controls */}
             <div className="flex justify-center mt-4">
-              <button
-                onClick={goToPrevPage}
-                disabled={currentPage === 1}
-                className="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300 mr-2"
-              >
-                Prev
-              </button>
-              <span className="px-3 py-1">{`Page ${currentPage} of ${totalPages}`}</span>
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-                className="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300 ml-2"
-              >
-                Next
-              </button>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handlePageChange(i + 1)}
+                  className={`mx-1 px-3 py-1 border rounded ${
+                    currentPage === i + 1
+                      ? 'bg-blue-900 text-white'
+                      : 'bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
             </div>
           </>
         )}

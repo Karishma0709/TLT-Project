@@ -6,13 +6,18 @@ const PrevYearPaperUpload = () => {
   const [file, setFile] = useState(null);
   const [paperList, setPaperList] = useState([]);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(''); // New state for success messages
   const [editId, setEditId] = useState(null);
   const [updatedTitle, setUpdatedTitle] = useState('');
+  const [currentPage, setCurrentPage] = useState(1); // Pagination state
+  const [totalPages, setTotalPages] = useState(1); // Total pages state
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Items per page
 
-  const fetchPapers = async () => {
+  const fetchPapers = async (page = 1) => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getPyPaperPDFupload');
+      const response = await axios.get(`http://localhost:8080/api/getPyPaperPDFupload?page=${page}&limit=${itemsPerPage}`);
       setPaperList(response.data.data);
+      setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage)); // Calculate total pages
     } catch (error) {
       console.error('Error fetching previous year papers:', error);
       setError('Error fetching previous year papers');
@@ -31,7 +36,8 @@ const PrevYearPaperUpload = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      fetchPapers();
+      fetchPapers(currentPage);
+      setSuccess('Successfully uploaded previous year paper!'); // Success message
       setTitle('');
       setFile(null);
     } catch (error) {
@@ -59,8 +65,9 @@ const PrevYearPaperUpload = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      fetchPapers();
+      fetchPapers(currentPage);
       resetEdit();
+      setSuccess('Successfully updated previous year paper!'); // Success message
     } catch (error) {
       console.error('Error updating previous year paper:', error);
       setError('Error updating previous year paper');
@@ -71,7 +78,8 @@ const PrevYearPaperUpload = () => {
     const apiUrl = `http://localhost:8080/api/deletePyPaperPDFupload/${id}`;
     try {
       await axios.delete(apiUrl);
-      fetchPapers();
+      fetchPapers(currentPage);
+      setSuccess('Successfully deleted previous year paper!'); // Success message
     } catch (error) {
       console.error('Error deleting previous year paper:', error);
       setError('Error deleting previous year paper');
@@ -82,6 +90,11 @@ const PrevYearPaperUpload = () => {
     setEditId(null);
     setUpdatedTitle('');
     setFile(null);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    fetchPapers(page);
   };
 
   useEffect(() => {
@@ -113,6 +126,9 @@ const PrevYearPaperUpload = () => {
         </div>
       </form>
 
+      {success && <p className="text-green-500">{success}</p>} {/* Success alert */}
+      {error && <p className="text-red-500">{error}</p>} {/* Error alert */}
+
       <div className="mt-10">
         <h2 className="text-xl font-bold mb-4 text-[#1F2937]">Uploaded Previous Year Papers</h2>
         <table className="w-full table-auto border-collapse border border-[#1F2937]">
@@ -127,7 +143,7 @@ const PrevYearPaperUpload = () => {
           <tbody>
             {paperList.map((paper, index) => (
               <tr key={paper._id} className="text-center">
-                <td className="border border-[#1F2937] p-2">{index + 1}</td>
+                <td className="border border-[#1F2937] p-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                 <td className="border border-[#1F2937] p-2">
                   {editId === paper._id ? (
                     <input
@@ -172,8 +188,23 @@ const PrevYearPaperUpload = () => {
             ))}
           </tbody>
         </table>
+
+        {/* Pagination Controls */}
+        <div className="mt-4">
+          <span>Page {currentPage} of {totalPages}</span>
+          <div className="flex gap-2 mt-2">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => handlePageChange(index + 1)}
+                className={`py-1 px-3 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };
