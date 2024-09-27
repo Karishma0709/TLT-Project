@@ -1,23 +1,65 @@
 const MPCJFormDetails = require('../models/mpcjOfflineMT');
+const axios = require('axios');
+const crypto = require('crypto');
 
-// Save MPCJ form details
+// Generate a unique transaction ID
+const generateTransactionID = () => {
+  return `MPCJ_${Date.now()}`;
+};
+
+// Save MPCJ form details and initiate payment
 const createMPCJFormDetails = async (req, res) => {
   const { name, email, contact, purchasedProduct } = req.body;
   console.log('Received request to save MPCJ form details:', req.body);
 
+  const data = {
+    merchantId: 'M22U3BAWIN1EZ',
+    merchantTransactionId: generateTransactionID(),
+    merchantUserId: 'M22U3BAWIN1EZ_1.json',
+    amount: 4999*100, // Set the amount based on the selected product
+    redirectUrl: 'http://localhost:8080/api/mpcjpaymentStatus',
+    redirectMode: 'REDIRECT',
+    mobileNumber: contact,
+    paymentInstrument: { type: 'PAY_PAGE' },
+  };
+
+  const payload = JSON.stringify(data);
+  const payloadMain = Buffer.from(payload).toString('base64');
+  const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
+  const KeyIndex = 1;
+
+  const stringToHash = `${payloadMain}/pg/v1/pay${key}`;
+  const sha256 = crypto.createHash('sha256').update(stringToHash).digest('hex');
+  const checksum = `${sha256}###${KeyIndex}`;
+
+  const options = {
+    method: 'POST',
+    url: 'https://api.phonepe.com/apis/hermes/pg/v1/pay',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-VERIFY': checksum,
+    },
+    data: { request: payloadMain },
+  };
+
   try {
+    const response = await axios.request(options);
+    console.log(response.data);
+
+    // Save to the database after successful payment initiation
     const newMPCJFormDetails = new MPCJFormDetails({
       name,
       email,
       contact,
       purchasedProduct,
     });
-
     await newMPCJFormDetails.save();
-    res.status(201).send({ message: 'MPCJ form details saved successfully' });
+
+    return res.status(200).send(response.data.data.instrumentResponse.redirectInfo.url);
   } catch (error) {
-    console.error('Error saving MPCJ form details:', error);
-    res.status(400).send({ message: 'Error saving MPCJ form details', error });
+    console.error('Payment gateway error:', error.response ? error.response.data : error.message);
+    return res.status(500).json({ status: 'Payment gateway error', error: error.message });
   }
 };
 
@@ -30,7 +72,7 @@ const getMPCJFormDetails = async (req, res) => {
     res.status(200).send(mpcjFormDetails);
   } catch (error) {
     console.error('Error retrieving MPCJ form details:', error);
-    res.status(400).send({ message: 'Error retrieving MPCJ form details', error });
+    res.status(500).send({ message: 'Error retrieving MPCJ form details', error });
   }
 };
 
@@ -77,22 +119,54 @@ const deleteMPCJFormDetails = async (req, res) => {
   }
 };
 
-// 
+// Get total number of MPCJ forms
 const getTotalMPCJform = async (req, res) => {
   try {
     const totalForms = await MPCJFormDetails.countDocuments();
-    res.status(200).send({ totalForms }); 
+    res.status(200).send({ totalForms });
   } catch (error) {
     console.error('Error retrieving MPCJ form count:', error);
     res.status(400).send({ message: 'Error retrieving MPCJ form count', error });
   }
 };
 
+// Payment status checking
+const mpcjpaymentStatus = async (req, res) => {
+  const { transactionId, merchantId } = req.body; // Ensure transactionId and merchantId are passed correctly
+  const KeyIndex = 1;
+  const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
+  const stringToHash = `/pg/v1/mpcjpaymentStatus/${merchantId}/${transactionId}${key}`;
+  const sha256 = crypto.createHash('sha256').update(stringToHash).digest('hex');
+  const checksum = `${sha256}###${KeyIndex}`;
 
+  const URL = `https://api.phonepe.com/apis/hermes/pg/v1/mpcjpaymentStatus/${merchantId}/${transactionId}`;
+
+  const options = {
+    method: 'GET',
+    url: URL,
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-VERIFY': checksum,
+      'X-MERCHANT-ID': merchantId,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Payment status error:', error.response ? error.response.data : error.message);
+    res.status(500).json({ status: 'Payment status error', error: error.message });
+  }
+};
+
+// Export the functions to use in routes
 module.exports = {
   createMPCJFormDetails,
   getMPCJFormDetails,
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
-  getTotalMPCJform
+  getTotalMPCJform,
+  mpcjpaymentStatus
 };

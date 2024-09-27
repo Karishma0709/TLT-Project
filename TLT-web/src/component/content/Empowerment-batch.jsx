@@ -83,6 +83,10 @@ const EmpowermentBatch = () => {
         }
       );
 
+
+
+
+
       // Check if response is OK
       if (!response.ok) {
         const errorText = await response.text(); // Get the response as text
@@ -116,6 +120,10 @@ const EmpowermentBatch = () => {
       console.error('Error:', error.message);
     }
   };
+
+
+
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
