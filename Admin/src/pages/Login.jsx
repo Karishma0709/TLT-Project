@@ -45,7 +45,7 @@ const Login = () => {
       if (dataApi.success) {
         toast.success(dataApi.message);
         alert('User successfully logged in!');
-        navigate('/dashboard');
+        navigate('/dashboard/dashboardcards');
         // fetchUserDetails();
         fetchUserDetails();
       } else if (dataApi.error) {
