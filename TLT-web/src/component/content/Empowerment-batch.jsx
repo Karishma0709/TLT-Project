@@ -100,7 +100,7 @@ const EmpowermentBatch = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Ensure only single values are set
+    // Ensure only single values are set in this
     if (Array.isArray(value)) {
       setData((prev) => ({
         ...prev,
