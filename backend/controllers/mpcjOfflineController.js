@@ -1,6 +1,7 @@
 const MPCJFormDetails = require('../models/mpcjOfflineMT');
 const axios = require('axios');
 const crypto = require('crypto');
+const BACKEND_URL = process.env.BACKEND_URL
 
 // Generate a unique transaction ID
 const generateTransactionID = () => {
@@ -17,7 +18,7 @@ const createMPCJFormDetails = async (req, res) => {
     merchantTransactionId: generateTransactionID(),
     merchantUserId: 'M22U3BAWIN1EZ_1.json',
     amount: 4999*100, // Set the amount based on the selected product
-    redirectUrl: 'http://localhost:8080/api/mpcjpaymentStatus',
+    redirectUrl: `${BACKEND_URL}/api/mpcjpaymentStatus`,
     redirectMode: 'REDIRECT',
     mobileNumber: contact,
     paymentInstrument: { type: 'PAY_PAGE' },
