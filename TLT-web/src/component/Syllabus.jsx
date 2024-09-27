@@ -1,7 +1,8 @@
-import React from "react";
-import Headings from "./utiliti/heading/Heading";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React from 'react';
+import Headings from './utiliti/heading/Heading';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import SummaryApi from '../Common/SummaryAPI';
 
 const Syllabus = () => {
   const [syllabus, setSyllabus] = useState(null);
@@ -10,21 +11,23 @@ const Syllabus = () => {
   }, []);
 
   const getPdf = async () => {
-    const result = await axios.get("http://localhost:8080/api/getSyllabusUpload"); //backend
+    const result = await axios({
+      url: SummaryApi.Syllabus.url,
+      method: SummaryApi.Syllabus.method,
+    }); //backend
     console.log(result.data.data);
     setSyllabus(result.data.data);
   };
 
   const showPdf = (pdf) => {
-    window.open(
-      `http://localhost:5054/api/SyllabusUploadFiles/${pdf}`,
-      "_blank",
-      "noreferrer"
-    );
+    const pdfBaseUrl = SummaryApi.Syllabuspdf.baseUrl; // Get the base URL for PDF files
+    const url = `${pdfBaseUrl}/${pdf}`; // Construct the full URL
+    window.open(url, '_blank', 'noreferrer');
   };
+
   return (
     <div className="px-5 md:px-20 py-8">
-      <Headings heading={"h2"} style="text-center">
+      <Headings heading={'h2'} style="text-center">
         Sylla<span className="text-primary">bus</span>
       </Headings>
       <div className="overflow-x-auto">
@@ -38,7 +41,7 @@ const Syllabus = () => {
           </thead>
           <tbody className="text-gray-700">
             {syllabus == null
-              ? ""
+              ? ''
               : syllabus.map((data, index) => (
                   <tr
                     key={index}

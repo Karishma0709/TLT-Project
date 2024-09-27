@@ -114,6 +114,14 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+  Syllabus: {
+    url: `${backendDomain}/api/getSyllabusUpload`,
+    method: 'get',
+  },
+  Syllabuspdf: {
+    baseUrl: `${backendDomain}/api/SyllabusUploadFiles`, // Base URL for PDF files
+    method: 'GET',
+  },
 };
 
 export default SummaryApi;
