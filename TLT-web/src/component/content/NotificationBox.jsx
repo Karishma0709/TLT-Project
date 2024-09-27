@@ -36,7 +36,7 @@ const NotificationBox = () => {
   };
 
   return (
-    <div className=" text-black p-4 overflow-hidden">
+    <div className=" text-black p-4 overflow-hidden text-center">
       <h2 className="text-3xl font-bold my-5 text-center">
         Latest <span className="text-primary">Notifications</span>
       </h2>
@@ -60,7 +60,7 @@ const NotificationBox = () => {
               <li className="text-center">No notifications available.</li>
             ) : (
               notifay.map((notification, index) => (
-                <li key={index} className="mb-6 text-primary font-bold">
+                <li key={index} className="mb-6 text-primary font-bold text-center">
                   <span>
                     {notification.notificationText}
                     <a

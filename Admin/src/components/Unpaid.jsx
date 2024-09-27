@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FaEdit, FaTrash } from 'react-icons/fa'; // Importing icons
 
 const UnpaidUpload = () => {
   const [title, setTitle] = useState('');
@@ -8,6 +9,8 @@ const UnpaidUpload = () => {
   const [error, setError] = useState('');
   const [editId, setEditId] = useState(null);
   const [updatedTitle, setUpdatedTitle] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Items per page for pagination
 
   const fetchUnpaidFiles = async () => {
     try {
@@ -84,6 +87,15 @@ const UnpaidUpload = () => {
     setFile(null);
   };
 
+  // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = unpaidList.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(unpaidList.length / itemsPerPage);
+
   useEffect(() => {
     fetchUnpaidFiles();
   }, []);
@@ -125,9 +137,9 @@ const UnpaidUpload = () => {
             </tr>
           </thead>
           <tbody>
-            {unpaidList.map((unpaid, index) => (
+            {currentItems.map((unpaid, index) => (
               <tr key={unpaid._id} className="text-center">
-                <td className="border border-[#1F2937] p-2">{index + 1}</td>
+                <td className="border border-[#1F2937] p-2">{indexOfFirstItem + index + 1}</td>
                 <td className="border border-[#1F2937] p-2">
                   {editId === unpaid._id ? (
                     <input
@@ -141,7 +153,7 @@ const UnpaidUpload = () => {
                   )}
                 </td>
                 <td className="border border-[#1F2937] p-2">{unpaid.pdf}</td>
-                <td className="border border-[#1F2937] p-2">
+                <td className="border border-[#1F2937] p-2 flex justify-center space-x-2">
                   {editId === unpaid._id ? (
                     <>
                       <button className="bg-green-500 text-white p-1 rounded mr-2" onClick={() => updateUnpaidFile(unpaid._id)}>
@@ -154,16 +166,18 @@ const UnpaidUpload = () => {
                   ) : (
                     <>
                       <button
-                        className="bg-blue-500 text-white p-1 rounded mr-2"
+                        className="p-1 rounded mr-2 flex items-center"
                         onClick={() => {
                           setEditId(unpaid._id);
                           setUpdatedTitle(unpaid.title);
                         }}
                       >
-                        Update
+                        <FaEdit className="text-blue-500" />
+                   
                       </button>
-                      <button className="bg-red-500 text-white p-1 rounded" onClick={() => deleteUnpaidFile(unpaid._id)}>
-                        Delete
+                      <button className=" p-1 rounded flex items-center" onClick={() => deleteUnpaidFile(unpaid._id)}>
+                        <FaTrash className="text-red-500" />
+                 
                       </button>
                     </>
                   )}
@@ -172,6 +186,21 @@ const UnpaidUpload = () => {
             ))}
           </tbody>
         </table>
+        
+        {/* Pagination */}
+        <div className="flex justify-center mt-4">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+            <button
+              key={pageNumber}
+              className={`px-3 py-1 mx-1 border border-gray-300 rounded ${
+                currentPage === pageNumber ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+              }`}
+              onClick={() => handlePageChange(pageNumber)}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
       {error && <p className="text-red-500">{error}</p>}
     </div>
