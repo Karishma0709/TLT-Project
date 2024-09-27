@@ -3,6 +3,7 @@ import axios from 'axios';
 import { State, City } from 'country-state-city';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SummaryApi from '../../Common/SummaryAPI';
 
 const RegistrationForm = () => {
   const [states, setStates] = useState([]);
@@ -87,13 +88,11 @@ const RegistrationForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/fastTrackForm',
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        }
-      );
+      const response = await axios({
+        url: SummaryApi.fastTrackForm.url,
+        method: SummaryApi.fastTrackForm.method,
+        data: formData,
+      });
 
       console.log(response.data);
 

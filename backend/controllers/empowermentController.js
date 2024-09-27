@@ -3,7 +3,7 @@ require('../models/empowerment');
 const axios = require('axios');
 const crypto = require('crypto'); // Make sure to import crypto
 const ESchema = mongoose.model('empowermentFormDetails');
-
+const Backend_Url = process.env.BACKEND_URL;
 const generateTransctionID = () => {
   const timestamp = Date.now();
   const randomNum = Math.floor(Math.random() * 1000000);
@@ -82,7 +82,7 @@ const createEmpowerment = async (req, res) => {
     merchantTransactionId: generateTransctionID(),
     merchantUserId: 'M22U3BAWIN1EZ_1.json',
     amount: 10000,
-    redirectUrl: 'http://localhost:8080/api/paymentstatus',
+    redirectUrl: `${Backend_Url}/api/paymentstatus`,
     redirectMode: 'REDIRECT',
     mobileNumber: '9999999999',
     paymentInstrument: { type: 'PAY_PAGE' },

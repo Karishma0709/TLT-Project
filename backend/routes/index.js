@@ -49,6 +49,7 @@ const {
 } = require('../controllers/PrevYearPaperPDFUploadController');
 const {
   FastTrackFormDetails,
+  FastTrackpayStatus,
   getFastTrackForm,
   deleteFastTrackForm,
   updateFastTrackForm,
@@ -208,7 +209,7 @@ router.post(
   ]),
   FastTrackFormDetails
 );
-
+router.post('/FastTrackpaystatus', FastTrackpayStatus);
 router.get('/getfastTrackForm', getFastTrackForm);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
