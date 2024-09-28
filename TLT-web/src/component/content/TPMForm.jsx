@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-<<<<<<< HEAD
 import SummaryApi from "../../Common/SummaryAPI";
-=======
-// import SummaryApi from '../Common/SummaryApi';
->>>>>>> 85035ec36efecbf94c9ffee68646dc22429da3b6
 
 const TPMForm = ({ selectedProduct }) => {
   const [data, setData] = useState({
