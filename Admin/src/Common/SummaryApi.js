@@ -182,6 +182,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+  
 
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
@@ -236,5 +237,6 @@ const SummaryApi = {
     url: `${backendDomain}/api/getTotalTpmCount`,
     method: 'get',
   },
+
 };
 export default SummaryApi;
