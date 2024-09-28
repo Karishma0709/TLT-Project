@@ -166,10 +166,28 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
-  JetFormGet: {
-    url: `${backendDomain}/api/getJetForms`,
+  
+  JetFormDelete: {
+    url: `${backendDomain}/api/deleteJetForm/:id`,
+    method: 'delete',
+  },
+  JetFormUpdate: {
+    url: `${backendDomain}/api/updateJetForm/:id`,
+    method: 'put',
+  },
+  GetAllPyPapers: {
+    url: `${backendDomain}/api/getAllPyPapers`,
     method: 'get',
   },
+  DeletePyPapersDetail: {
+    url: `${backendDomain}/api/deletePyPapersDetail/:id`,
+    method: 'delete',
+  },
+  UpdatePyPapersDetail: {
+    url: `${backendDomain}/api/updatePyPapersDetail/:id`,
+    method: 'put',
+  },
+  
 
 // Get dashboard count 
 
