@@ -138,6 +138,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  QuizPut: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'put',
+  },
+  QuizGet: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'get',
+  },
+  QuizDetailsGet: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'get',
+  },
   TpmData: {
     url: `${backendDomain}/api/getTpmFormDetails`,
     method: 'get',
@@ -154,9 +166,62 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
+<<<<<<< HEAD
   createMpcjProduct: {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+=======
+  
+  JetFormDelete: {
+    url: `${backendDomain}/api/deleteJetForm/:id`,
+    method: 'delete',
+  },
+  JetFormUpdate: {
+    url: `${backendDomain}/api/updateJetForm/:id`,
+    method: 'put',
+  },
+  GetAllPyPapers: {
+    url: `${backendDomain}/api/getAllPyPapers`,
+    method: 'get',
+  },
+  DeletePyPapersDetail: {
+    url: `${backendDomain}/api/deletePyPapersDetail/:id`,
+    method: 'delete',
+  },
+  UpdatePyPapersDetail: {
+    url: `${backendDomain}/api/updatePyPapersDetail/:id`,
+    method: 'put',
+  },
+  
+
+// Get dashboard count 
+
+  GetTotalEmpowermentForms: {
+    url: `${backendDomain}/api/getTotalEmpowermentForms`,
+    method: 'get',
+  },
+  GetTotalFastTrackForms: {
+    url: `${backendDomain}/api/getTotalFastTrackForms`,
+    method: 'get',
+  },
+  GetTotalJetForms: {
+    url: `${backendDomain}/api/getTotalJetForms`,
+    method: 'get',
+  },
+  GetTotalMPCJform: {
+    url: `${backendDomain}/api/getTotalMPCJform`,
+    method: 'get',
+  },
+  GetTotalPyPapersCount: {
+    url: `${backendDomain}/api/getTotalPyPapersCount`,
+    method: 'get',
+  },
+  GetTotalTpmCount: {
+    url: `${backendDomain}/api/getTotalTpmCount`,
+    method: 'get',
+  },
+
+>>>>>>> 85035ec36efecbf94c9ffee68646dc22429da3b6
 };
 export default SummaryApi;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { navItems } from '../data/navItem';
+import { Link } from 'react-router-dom';
 
 const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,9 +76,9 @@ const Hamburger = () => {
             <ul>
               {navItems.map((item) => (
                 <li key={item.name} className="mb-2">
-                  <a href={item.href} className="text-gray-700 hover:bg-red-500 hover:text-white block px-4 py-2 rounded">
+                  <Link to={item.href} className="text-gray-700 hover:bg-red-500 hover:text-white block px-4 py-2 rounded">
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

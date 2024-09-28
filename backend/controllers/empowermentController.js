@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 require('../models/empowerment');
 const axios = require('axios');
-const crypto = require('crypto'); // Make sure to import crypto
+const crypto = require('crypto');
 const ESchema = mongoose.model('empowermentFormDetails');
 const Backend_Url = process.env.BACKEND_URL;
+
 const generateTransctionID = () => {
   const timestamp = Date.now();
   const randomNum = Math.floor(Math.random() * 1000000);
@@ -13,25 +14,16 @@ const generateTransctionID = () => {
 
 const createEmpowerment = async (req, res) => {
   console.log(req.body, req.files);
+  
   const requiredFields = [
-    'name',
-    'placeOfBirth',
-    'dateOfBirth',
-    'fullAddress',
-    'state',
-    'pinCode',
-    'qualification',
-    'collegeUniversity',
-    'pursuingLLB',
-    'yearOfPassing',
-    'email',
-    'fatherName',
-    'motherName',
-    'permanentAddress',
-    'permanentState',
-    'permanentCity',
-    'institution',
+    'name', 'placeOfBirth', 'dateOfBirth', 'fullAddress',
+    'state', 'pinCode', 'qualification', 'collegeUniversity',
+    'pursuingLLB', 'yearOfPassing', 'email', 'fatherName',
+    'motherName', 'permanentAddress', 'permanentState',
+    'permanentCity', 'oldStudentOfShubhamSir', 'institution', 
+    'feesPaid', 'amountPaid', 'Batch'  // Include 'Batch' here
   ];
+  
 
   // Check for missing fields
   for (const field of requiredFields) {
@@ -42,9 +34,7 @@ const createEmpowerment = async (req, res) => {
 
   // Check if files are present
   if (!req.files || !req.files.photo || !req.files.aadharCard) {
-    return res
-      .status(400)
-      .json({ status: 'Both photo and aadharCard are required.' });
+    return res.status(400).json({ status: 'Both photo and aadharCard are required.' });
   }
 
   // Extract and process form data
@@ -58,7 +48,6 @@ const createEmpowerment = async (req, res) => {
     qualification,
     collegeUniversity,
     pursuingLLB,
-    Batch,
     yearOfPassing,
     email,
     fatherName,
@@ -67,16 +56,17 @@ const createEmpowerment = async (req, res) => {
     permanentState,
     permanentCity,
     oldStudentOfShubhamSir,
-    feesPaid = {},
+    feesPaid, // This should be a string according to your schema
+    amountPaid, // Ensure this is a number
     institution,
+    Batch
   } = req.body;
 
   // Access uploaded files
   const photo = req.files.photo[0].filename;
   const aadharCard = req.files.aadharCard[0].filename;
 
-  const { amountPaid = 0, onlineUPI = false } = feesPaid;
-
+  // Prepare payment data
   const data = {
     merchantId: 'M22U3BAWIN1EZ',
     merchantTransactionId: generateTransctionID(),
@@ -101,7 +91,7 @@ const createEmpowerment = async (req, res) => {
     method: 'POST',
     url: 'https://api.phonepe.com/apis/hermes/pg/v1/pay',
     headers: {
-      accept: 'application/json', // Change this line
+      accept: 'application/json',
       'Content-Type': 'application/json',
       'X-VERIFY': checksum,
     },
@@ -114,38 +104,32 @@ const createEmpowerment = async (req, res) => {
 
     // Save to the database after successful payment initiation
     await ESchema.create({
-      name: Array.isArray(name) ? name.join(', ') : name,
+      name,
       photo,
       aadharCard,
-      placeOfBirth: Array.isArray(placeOfBirth)
-        ? placeOfBirth.join(', ')
-        : placeOfBirth,
-
-      dateOfBirth,
+      placeOfBirth,
+      dateOfBirth, // Ensure it's a date object
       fullAddress,
       state,
       pinCode,
       qualification,
       collegeUniversity,
-      pursuingLLB: pursuingLLB === 'true' ? 'yes' : 'no',
-      Batch,
+      pursuingLLB, // This should be 'yes' or 'no'
+      yearOfPassing, // Ensure this is a number
+      Batch, // Assuming this is required based on your schema
       email,
       fatherName,
       motherName,
-      yearOfPassing,
       permanentAddress,
       permanentState,
       permanentCity,
-      oldStudentOfShubhamSir: oldStudentOfShubhamSir === 'true' ? 'yes' : 'no',
-      feesPaid: { amountPaid, onlineUPI: onlineUPI === 'true' },
-      institution: Array.isArray(institution)
-        ? institution.join(', ')
-        : institution,
+      oldStudentOfShubhamSir, // This should be 'yes' or 'no'
+      feesPaid, // Ensure this matches the schema
+      amountPaid, // Ensure this is a number
+      institution,
     });
-    // return res.redirect(response.data.data.instrumentResponse.redirectInfo.url);
-    return res
-      .status(200)
-      .send(response.data.data.instrumentResponse.redirectInfo.url);
+
+    return res.status(200).send(response.data.data.instrumentResponse.redirectInfo.url);
   } catch (error) {
     console.error(
       'Payment gateway error:',
@@ -157,17 +141,19 @@ const createEmpowerment = async (req, res) => {
   }
 };
 
+// The rest of the controller methods should also be updated to match the schema as necessary.
+
 const paymentStatus = async (req, res) => {
   const merchantTransactionId = req.body.transactionId; // Fix: Use req.body
   const merchantId = req.body.merchantId;
   const KeyIndex = 1;
   const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
   const String =
-    `/pg/v1/paymentstatus/${merchantId}/${merchantTransactionId}` + key;
+   ` /pg/v1/paymentstatus/${merchantId}/${merchantTransactionId} `+ key;
   const sha256 = crypto.createHash('sha256').update(String).digest('hex'); // Fix: Use 'digest'
   const checksum = sha256 + '###' + KeyIndex;
 
-  // const URL = `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId}`;
+  // const URL = https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId};
 
   const URL = `https://api.phonepe.com/apis/hermes/pg/v1/paymentstatus/${merchantId}/${merchantTransactionId}`;
 
@@ -242,7 +228,7 @@ const Edelete = async (req, res) => {
 const getTotalEmpowermentForms = async (req, res) => {
   try {
     const totalForms = await ESchema.countDocuments();
-    res.send({ status: 'ok', totalForms: totalForms });
+    res.send({ status: 'ok', totalForms });
   } catch (error) {
     console.error(error);
     res.status(500).json({ status: error.message });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
 
 const PreviousYearForm = () => {
   const [allPapers, setAllPapers] = useState([]);
@@ -15,8 +16,11 @@ const PreviousYearForm = () => {
 
   const fetchAllPapers = async () => {
     try {
-      const result = await axios.get(
-        'http://localhost:8080/api/getAllPyPapers'
+      const result = await axios(
+      {
+        url: SummaryApi.GetAllPyPapers.url,
+        method:SummaryApi.GetAllPyPapers.method
+      }
       );
       if (Array.isArray(result.data.data)) {
         setAllPapers(result.data.data);
@@ -37,8 +41,11 @@ const PreviousYearForm = () => {
     );
     if (!confirmDelete) return; // Exit if user cancels
     try {
-      await axios.delete(
-        `http://localhost:8080/api/deletePyPapersDetail/${id}`
+      await axios(
+       {
+        url:SummaryApi.DeletePyPapersDetail.url.replace(":id",id),
+        method:SummaryApi.DeletePyPapersDetail.method
+       }
       );
       fetchAllPapers();
     } catch (error) {
@@ -53,9 +60,10 @@ const PreviousYearForm = () => {
     );
     if (!confirmUpdate) return; // Exit if user cancels
     try {
-      await axios.put(
-        `http://localhost:8080/api/updatePyPapersDetail/${id}`,
-        editData[id]
+      await axios(
+        {url:SummaryApi.UpdatePyPapersDetail.url.replace(":id",id),
+          method:SummaryApi.UpdatePyPapersDetail.method,
+        data:editData[id]}
       );
       setEditMode(null);
       fetchAllPapers();

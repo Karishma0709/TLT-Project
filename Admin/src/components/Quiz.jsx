@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect } from "react";
+import SummaryApi from "../Common/SummaryApi";
 
 const Quiz = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +28,7 @@ const Quiz = () => {
     async function getData() {
       try {
         setIsLoading(true);
-        const data = await fetch("http://localhost:8080/api/quiz");
+        const data = await fetch(SummaryApi.QuizGet.url);
         const dataJson = await data.json();
         console.log("dataJson==>", dataJson.data);
         setData(dataJson.data);
@@ -76,8 +77,8 @@ const Quiz = () => {
         question: question,
       };
       console.log("bodyy==>",body)
-      let responseData = await fetch("http://localhost:8080/api/quiz", {
-        method: "PUT",
+      let responseData = await fetch(SummaryApi.QuizPut.url, {
+        method: SummaryApi.QuizPut.method,
         body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
@@ -204,7 +205,7 @@ function ShowCardToUpdate({
       />
       <Flex direction={"column"} justifyContent={"center"} m={5} mt={3}>
         {answers.map((answer, index) => (
-          <>
+          <div key={index}>
             <Text fontWeight={"semibold"} mt={4} m={1}>{`Option ${
               index + 1
             }`}</Text>
@@ -219,7 +220,7 @@ function ShowCardToUpdate({
                 setAnswers(data);
               }}
             />
-          </>
+          </div>
         ))}
       </Flex>
       <Flex fontWeight={"semibold"} p={2} borderRadius={"2px"} direction={"column"}>
