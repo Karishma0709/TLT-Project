@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/notifiesfiles', express.static('notifiesfiles'));
 app.use('/files', express.static('files'));
 app.use('/SyllabusUploadFiles', express.static('SyllabusUploadFiles'));
+app.use('/prevYearPDFuploadUpload', express.static('prevYearPDFuploadUpload'));
 
 app.get('/', (req, res) => {
   res.send('Server is running!');

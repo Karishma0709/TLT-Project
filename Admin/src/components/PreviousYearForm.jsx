@@ -93,7 +93,9 @@ const PreviousYearForm = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Previous Year Paper Details</h1>
+      <h1 className="text-2xl font-semibold mb-4">
+        Previous Year Paper Details
+      </h1>
       <div>
         {allPapers.length === 0 ? (
           <p className="text-gray-500">No data available</p>
@@ -185,13 +187,13 @@ const PreviousYearForm = () => {
                             onClick={() => toggleEditMode(paper._id)}
                             className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaEdit className="text-blue-500 hover:text-blue-800" /> 
+                            <FaEdit className="text-blue-500 hover:text-blue-800" />
                           </button>
                           <button
                             onClick={() => deletePaper(paper._id)}
                             className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaTrashAlt className="text-red-500 hover:text-red-700" /> 
+                            <FaTrashAlt className="text-red-500 hover:text-red-700" />
                           </button>
                         </>
                       )}

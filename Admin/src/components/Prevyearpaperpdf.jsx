@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SummaryApi from '../Common/SummaryApi';
 
 const PrevYearPaperUpload = () => {
   const [title, setTitle] = useState('');
+  const [pdf, setpdf] = useState(null);
   const [file, setFile] = useState(null);
   const [paperList, setPaperList] = useState([]);
   const [error, setError] = useState('');
@@ -15,7 +17,9 @@ const PrevYearPaperUpload = () => {
 
   const fetchPapers = async (page = 1) => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/getPyPaperPDFupload?page=${page}&limit=${itemsPerPage}`);
+      const response = await axios.get(
+        `http://localhost:8080/api/getPyPaperPDFupload?page=${page}&limit=${itemsPerPage}`
+      );
       setPaperList(response.data.data);
       setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage)); // Calculate total pages
     } catch (error) {
@@ -27,18 +31,21 @@ const PrevYearPaperUpload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('file', file);
+    formData.append('Papertitle', title);
+    formData.append('paperimage', file);
+    formData.append('pdf', pdf);
 
     try {
-      await axios.post('http://localhost:8080/api/createPyPaperPDFupload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      await axios({
+        url: SummaryApi.PyPaperPDFUploads.url,
+        method: SummaryApi.PyPaperPDFUploads.method,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       fetchPapers(currentPage);
       setSuccess('Successfully uploaded previous year paper!'); // Success message
       setTitle('');
+      setpdf(null);
       setFile(null);
     } catch (error) {
       console.error('Error uploading previous year paper:', error);
@@ -52,11 +59,13 @@ const PrevYearPaperUpload = () => {
       return;
     }
 
-    const apiUrl = `http://localhost:8080/api/updatePyPaperPDFupload/${id}`;
+    const apiUrl = SummaryApi.PyPaperPDFUpdate.url.replace(':id', id);
+
     const formData = new FormData();
-    formData.append('title', updatedTitle);
-    if (file) {
-      formData.append('file', file);
+    formData.append('paperimage', updatedTitle);
+    if ((file, pdf)) {
+      formData.append('paperimage', file);
+      formData.append('pdf', pdf);
     }
 
     try {
@@ -75,7 +84,8 @@ const PrevYearPaperUpload = () => {
   };
 
   const deletePaper = async (id) => {
-    const apiUrl = `http://localhost:8080/api/deletePyPaperPDFupload/${id}`;
+    const apiUrl = SummaryApi.PyPaperPDFDelete.url.replace(':id', id);
+
     try {
       await axios.delete(apiUrl);
       fetchPapers(currentPage);
@@ -90,6 +100,7 @@ const PrevYearPaperUpload = () => {
     setEditId(null);
     setUpdatedTitle('');
     setFile(null);
+    setpdf(null);
   };
 
   const handlePageChange = (page) => {
@@ -103,34 +114,56 @@ const PrevYearPaperUpload = () => {
 
   return (
     <div className="mx-auto p-5">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md max-w-md mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">Upload Previous Year Paper (PDF)</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-md max-w-md mx-auto"
+      >
+        <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">
+          Upload Previous Year Paper (PDF)
+        </h1>
         <input
           type="text"
           className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
           placeholder="Title"
           value={editId ? updatedTitle : title}
           required
-          onChange={(e) => (editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value))}
+          name="Papertitle"
+          onChange={(e) =>
+            editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value)
+          }
         />
         <input
           type="file"
+          name="paperimage"
           className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
-          accept="application/pdf"
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <div className="flex justify-center">
-          <button className="bg-[#1F2937] text-white p-2 rounded hover:bg-gray-800 w-full" type="submit">
+        <input
+          type="file"
+          name="pdf"
+          className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
+          accept="application/pdf"
+          onChange={(e) => setpdf(e.target.files[0])}
+        />
+        <div
+          className="flex 
+        justify-center"
+        >
+          <button
+            className="bg-[#1F2937] text-white p-2 rounded hover:bg-gray-800 w-full"
+            type="submit"
+          >
             {editId ? 'Update' : 'Submit'}
           </button>
         </div>
       </form>
-
-      {success && <p className="text-green-500">{success}</p>} {/* Success alert */}
+      {success && <p className="text-green-500">{success}</p>}{' '}
+      {/* Success alert */}
       {error && <p className="text-red-500">{error}</p>} {/* Error alert */}
-
       <div className="mt-10">
-        <h2 className="text-xl font-bold mb-4 text-[#1F2937]">Uploaded Previous Year Papers</h2>
+        <h2 className="text-xl font-bold mb-4 text-[#1F2937]">
+          Uploaded Previous Year Papers
+        </h2>
         <table className="w-full table-auto border-collapse border border-[#1F2937]">
           <thead>
             <tr className="bg-[#1F2937] text-white">
@@ -143,7 +176,9 @@ const PrevYearPaperUpload = () => {
           <tbody>
             {paperList.map((paper, index) => (
               <tr key={paper._id} className="text-center">
-                <td className="border border-[#1F2937] p-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                <td className="border border-[#1F2937] p-2">
+                  {(currentPage - 1) * itemsPerPage + index + 1}
+                </td>
                 <td className="border border-[#1F2937] p-2">
                   {editId === paper._id ? (
                     <input
@@ -160,10 +195,16 @@ const PrevYearPaperUpload = () => {
                 <td className="border border-[#1F2937] p-2">
                   {editId === paper._id ? (
                     <>
-                      <button className="bg-green-500 text-white p-1 rounded mr-2" onClick={() => updatePaper(paper._id)}>
+                      <button
+                        className="bg-green-500 text-white p-1 rounded mr-2"
+                        onClick={() => updatePaper(paper._id)}
+                      >
                         Save
                       </button>
-                      <button className="bg-gray-500 text-white p-1 rounded" onClick={resetEdit}>
+                      <button
+                        className="bg-gray-500 text-white p-1 rounded"
+                        onClick={resetEdit}
+                      >
                         Cancel
                       </button>
                     </>
@@ -178,7 +219,10 @@ const PrevYearPaperUpload = () => {
                       >
                         Update
                       </button>
-                      <button className="bg-red-500 text-white p-1 rounded" onClick={() => deletePaper(paper._id)}>
+                      <button
+                        className="bg-red-500 text-white p-1 rounded"
+                        onClick={() => deletePaper(paper._id)}
+                      >
                         Delete
                       </button>
                     </>
@@ -191,13 +235,19 @@ const PrevYearPaperUpload = () => {
 
         {/* Pagination Controls */}
         <div className="mt-4">
-          <span>Page {currentPage} of {totalPages}</span>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
           <div className="flex gap-2 mt-2">
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index + 1}
                 onClick={() => handlePageChange(index + 1)}
-                className={`py-1 px-3 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                className={`py-1 px-3 rounded ${
+                  currentPage === index + 1
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-200'
+                }`}
               >
                 {index + 1}
               </button>
