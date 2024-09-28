@@ -86,14 +86,13 @@ const empowermentFormSchema = new Schema(
       required: true,
     },
     feesPaid: {
-      amountPaid: {
-        type: Number,
-        required: true,
-      },
-      onlineUPI: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      enum: ["yes"],
+      required: true,
+    },
+    amountPaid: {
+      type: Number,
+      required: true,
     },
     institution: {
       type: String,

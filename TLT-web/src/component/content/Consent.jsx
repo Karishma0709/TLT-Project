@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import SummaryApi from "../../Common/SummaryAPI";
 
 
 
@@ -24,10 +25,13 @@ const Consent = ({ formData = {}, files = {}, handleChange }) => {
       formDataToSend.append('adhaarPhoto', files.adhaarPhoto);
   
       // Make the POST request to your backend
-      const response = await axios.post('http://localhost:8080/api/createJetForm', formDataToSend, {
+      const response = await axios( {
+        url:SummaryApi.JetForm.url,
+        method: SummaryApi.JetForm.method,
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        data:formDataToSend
       });
   
       if (response.status === 201) {

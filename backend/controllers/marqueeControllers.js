@@ -1,5 +1,5 @@
 // controllers/marqueeControllers.js
-const Marquee = require('../models/Marquee');
+const Marquee = require('../models/marquee');
 
 // Create a new marquee
 const createMarquee = async (req, res) => {

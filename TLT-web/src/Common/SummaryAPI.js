@@ -118,6 +118,22 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
+    method: 'post',
+  },
+  getMPCJFormDetails: {
+    url: `${backendDomain}/api/getMPCJFormDetails`,
+    method: 'get',
+  },
+  updateMPCJFormDetails: {
+    url: `${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method: 'put',
+  },
+  deleteMPCJFormDetails: {
+    url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method: 'delete',
+  },
   Syllabus: {
     url: `${backendDomain}/api/getSyllabusUpload`,
     method: 'get',
@@ -137,6 +153,30 @@ const SummaryApi = {
   getPyPaperPDFupload: {
     url: `${backendDomain}/api/getPyPaperPDFupload`,
     method: 'get',
+  },
+  JetForm: {
+    url: `${backendDomain}/api/createJetForm`,
+    method: 'post',
+  },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
+  getAllMpcjProducts: {
+    url: `${backendDomain}/api/getAllMpcjProducts`,
+    method: 'get',
+  },
+  deleteMpcjProduct: {
+    url: `${backendDomain}/api/deleteMpcjProduct/:id`,
+    method: 'delete',
+  },
+  updateMpcjProduct: {
+    url: `${backendDomain}/api/updateMpcjProduct/:id`,
+    method: 'put',
+  },
+  createTpmFormDetails: {
+    url: `${backendDomain}/api/createTpmFormDetails`,
+    method: 'post',
   },
 };
 
