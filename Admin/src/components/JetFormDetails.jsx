@@ -30,7 +30,11 @@ const JetFormDetails = () => {
 
   const deleteForm = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/deleteJetForm/${id}`);
+      const urldata=SummaryApi.JetFormDelete.url.replace(":id",id)
+      await axios({
+        url:urldata,
+        method: SummaryApi.JetFormDelete.method
+      });
       toast.success('Form deleted successfully.');
       fetchData();
     } catch (error) {
@@ -47,7 +51,10 @@ const JetFormDetails = () => {
 
   const updateForm = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/api/updateJetForm/${id}`, editData[id]);
+      await axios({
+        url:SummaryApi.JetFormUpdate.url.replace(":id",id),
+        method:SummaryApi.JetFormUpdate.method,
+        data:editData[id]});
       toast.success('Form updated successfully.');
       setEditMode(null);
       fetchData();

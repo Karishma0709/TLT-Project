@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaFileAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import SummaryApi from '../Common/SummaryApi';
 
 const Dashboard = () => {
   const [empowermentCount, setEmpowermentCount] = useState(0);
@@ -16,8 +17,11 @@ const Dashboard = () => {
 
   const fetchEmpowermentCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalEmpowermentForms'
+      const response = await axios(
+        {
+          url:SummaryApi.GetTotalEmpowermentForms.url,
+          method:SummaryApi.GetTotalEmpowermentForms.method
+        }
       );
       setEmpowermentCount(response.data.totalForms);
     } catch (error) {
@@ -27,8 +31,10 @@ const Dashboard = () => {
 
   const fetchFastTrackCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalFastTrackForms'
+      const response = await axios(
+{       url:SummaryApi.GetTotalFastTrackForms.url,
+  method:SummaryApi.GetTotalFastTrackForms.method
+}
       );
       setFastTrackCount(response.data.totalForms);
     } catch (error) {
@@ -38,8 +44,11 @@ const Dashboard = () => {
 
   const fetchJetCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalJetForms'
+      const response = await axios(
+   {
+    url:SummaryApi.GetTotalJetForms.url,
+    method:SummaryApi.GetTotalJetForms.method
+   }
       );
       setJetCount(response.data.totalForms);
     } catch (error) {
@@ -49,8 +58,11 @@ const Dashboard = () => {
 
   const fetchMPCJCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalMPCJform'
+      const response = await axios(
+     {
+      url:SummaryApi.GetTotalMPCJform.url,
+      method:SummaryApi.GetTotalMPCJform.method
+     }
       );
       setMPCJCount(response.data.totalForms);
     } catch (error) {
@@ -60,8 +72,11 @@ const Dashboard = () => {
 
   const fetchPyPapersCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalPyPapersCount'
+      const response = await axios(
+{
+  url:SummaryApi.GetTotalPyPapersCount.url,
+  method:SummaryApi.GetTotalPyPapersCount.method
+}
       );
       setPyPapersCount(response.data.totalForms);
     } catch (error) {
@@ -71,8 +86,11 @@ const Dashboard = () => {
 
   const fetchTpmCount = async () => {
     try {
-      const response = await axios.get(
-        'http://localhost:8080/api/getTotalTpmCount'
+      const response = await axios(
+     {
+      url:SummaryApi.GetTotalTpmCount.url,
+      method:SummaryApi.GetTotalTpmCount.method
+     }
       );
       setTpmCount(response.data.totalForms);
     } catch (error) {

@@ -1,6 +1,7 @@
 import { useToast } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import SummaryApi from '../Common/SummaryApi'
 
 const QuizUserForm = () => {
     const [data,setData] = useState([])
@@ -9,7 +10,7 @@ const QuizUserForm = () => {
     useEffect(()=>{
         async function getData(){
             try{
-                let data = await fetch("http://localhost:8080/api/quizUser")
+                let data = await fetch(SummaryApi.QuizDetailsGet.url)
                 let dataJson = await data.json()
                 setData(dataJson.data)
                 console.log("dataJson==>",dataJson)
