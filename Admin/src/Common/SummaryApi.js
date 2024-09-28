@@ -204,6 +204,12 @@ const SummaryApi = {
     url: `${backendDomain}/api/updatePyPapersDetail/:id`,
     method: 'put',
   },
+  
+  // mpcj 
+  GetMPCJFormDetails: {
+url:'${backendDomain}/api/getMPCJFormDetails',
+method:'get'
+  },
 
   // Get dashboard count
 
