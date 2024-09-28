@@ -138,6 +138,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  PyPaperPDFUploads: {
+    url: `${backendDomain}/api/createPyPaperPDFupload`,
+    method: 'POST',
+  },
+  PyPaperPDFUpdate: {
+    url: `${backendDomain}/api/updatePyPaperPDFupload/:id`,
+    method: 'put',
+  },
+  PyPaperPDFDelete: {
+    url: `${backendDomain}/api/deletePyPaperPDFupload/:id`,
+    method: 'delete',
+  },
   QuizPut: {
     url: `${backendDomain}/api/quiz`,
     method: 'put',
@@ -166,7 +178,15 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
+<<<<<<< HEAD
   
+=======
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
+
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
     method: 'delete',
@@ -187,10 +207,16 @@ const SummaryApi = {
     url: `${backendDomain}/api/updatePyPapersDetail/:id`,
     method: 'put',
   },
+<<<<<<< HEAD
   
   
   // Get dashboard count 
   
+=======
+
+  // Get dashboard count
+
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
   GetTotalEmpowermentForms: {
     url: `${backendDomain}/api/getTotalEmpowermentForms`,
     method: 'get',
@@ -215,6 +241,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/getTotalTpmCount`,
     method: 'get',
   },
+<<<<<<< HEAD
   createTpmFormDetails: {
     url: `${backendDomain}/api/createTpmFormDetails`,
     method: 'post',
@@ -236,5 +263,7 @@ const SummaryApi = {
     method: 'post',
   },
 
+=======
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
 };
 export default SummaryApi;

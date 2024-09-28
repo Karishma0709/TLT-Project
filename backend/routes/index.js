@@ -87,7 +87,14 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
+<<<<<<< HEAD
 const {  createMpcjProduct, getAllMpcjProducts, editMpcjProduct, deleteMpcjProduct } = require('../controllers/addMpcjProductController');
+=======
+const {
+  createMpcjProduct,
+  getAllMpcjProducts,
+} = require('../controllers/addMpcjProductController');
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -133,10 +140,6 @@ router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 router.get('/getTotalTpmCount', getTotalTpmCount);
 
-
-
-
-
 // JET form routes
 router.post(
   '/createJetForm',
@@ -163,16 +166,31 @@ router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 // Route to create a new product
 router.post('/createMpcjProduct', createMpcjProduct);
 router.get('/getAllMpcjProducts', getAllMpcjProducts);
+<<<<<<< HEAD
 router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct); // Corrected path
 router.put('/editMpcjProduct/:id', editMpcjProduct); // Corrected path
 
+=======
+// router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
+// router.put('/updateMpcjProduct/:id', updateMpcjProduct);
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
 
 // PY paper PDF upload routers
+// router.post(
+//   '/createPyPaperPDFupload',
+//   prevYearPDFuploadUpload.single(['paperimage', 'pdf']),
+//   createPyPaperPDFupload
+// );
+
 router.post(
   '/createPyPaperPDFupload',
-  prevYearPDFuploadUpload.single('paperimage'),
+  prevYearPDFuploadUpload.fields([
+    { name: 'paperimage', maxCount: 1 },
+    { name: 'pdf', maxCount: 1 },
+  ]),
   createPyPaperPDFupload
 );
+
 router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
 router.put('/updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
 router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);
