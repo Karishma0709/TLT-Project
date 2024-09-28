@@ -8,5 +8,5 @@ const productSchema = new mongoose.Schema({
   buy: { type: String, default: 'Buy Now' }
 });
 
-const addMpcjProductDetails = mongoose.model('addMpcjProductDetails', productSchema);
-module.exports = addMpcjProductDetails;
+const addMpcjProduct = mongoose.model('addMpcjProduct', productSchema);
+module.exports = addMpcjProduct;
