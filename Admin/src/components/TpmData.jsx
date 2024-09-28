@@ -111,10 +111,14 @@ const TpmData = () => {
               <tbody>
                 {currentItems.map((data, index) => (
                   <tr
-                    className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
+                    className={`border-b border-gray-200 ${
+                      index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    } hover:bg-gray-100`}
                     key={data._id}
                   >
-                    <td className="py-2 px-4">{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                    <td className="py-2 px-4">
+                      {index + 1 + (currentPage - 1) * itemsPerPage}
+                    </td>
                     <td className="py-2 px-4">
                       {editMode === data._id ? (
                         <input
@@ -167,7 +171,9 @@ const TpmData = () => {
                         data.purchasedProduct
                       )}
                     </td>
-                    <td className="py-2 px-4">{moment(data.createdAt).format('YYYY-MM-DD')}</td>
+                    <td className="py-2 px-4">
+                      {moment(data.createdAt).format('YYYY-MM-DD')}
+                    </td>
                     <td className="py-2 px-4 flex gap-2">
                       {editMode === data._id ? (
                         <>
@@ -216,7 +222,9 @@ const TpmData = () => {
               </button>
               <button
                 disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
                 className="bg-gray-300 px-3 py-1 rounded disabled:opacity-50"
               >
                 Next

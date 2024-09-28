@@ -138,6 +138,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  PyPaperPDFUploads: {
+    url: `${backendDomain}/api/createPyPaperPDFupload`,
+    method: 'POST',
+  },
+  PyPaperPDFUpdate: {
+    url: `${backendDomain}/api/updatePyPaperPDFupload/:id`,
+    method: 'put',
+  },
+  PyPaperPDFDelete: {
+    url: `${backendDomain}/api/deletePyPaperPDFupload/:id`,
+    method: 'delete',
+  },
   QuizPut: {
     url: `${backendDomain}/api/quiz`,
     method: 'put',
@@ -170,7 +182,11 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
     method: 'delete',
@@ -191,9 +207,8 @@ const SummaryApi = {
     url: `${backendDomain}/api/updatePyPapersDetail/:id`,
     method: 'put',
   },
-  
 
-// Get dashboard count 
+  // Get dashboard count
 
   GetTotalEmpowermentForms: {
     url: `${backendDomain}/api/getTotalEmpowermentForms`,

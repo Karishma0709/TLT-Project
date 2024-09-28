@@ -150,6 +150,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee`,
     method: 'get',
   },
+  getPyPaperPDFupload: {
+    url: `${backendDomain}/api/getPyPaperPDFupload`,
+    method: 'get',
+  },
   JetForm: {
     url: `${backendDomain}/api/createJetForm`,
     method: 'post',
@@ -173,8 +177,7 @@ const SummaryApi = {
   createTpmFormDetails: {
     url: `${backendDomain}/api/createTpmFormDetails`,
     method: 'post',
-  }
-
+  },
 };
 
 export default SummaryApi;

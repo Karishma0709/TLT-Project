@@ -5,7 +5,9 @@ const createPyPapersDetail = async (req, res) => {
   const { number, email, name } = req.body;
 
   if (!name || !email || !number) {
-    return res.status(400).json({ error: "Name, email, and number are required fields." });
+    return res
+      .status(400)
+      .json({ error: 'Name, email, and number are required fields.' });
   }
 
   try {
@@ -13,8 +15,8 @@ const createPyPapersDetail = async (req, res) => {
     await pyPapersDetail.save();
     res.status(201).json(pyPapersDetail);
   } catch (error) {
-    console.error("Error saving pyPaper details:", error);
-    res.status(500).json({ error: "Error saving pyPaper details" });
+    console.error('Error saving pyPaper details:', error);
+    res.status(500).json({ error: 'Error saving pyPaper details' });
   }
 };
 
@@ -24,8 +26,8 @@ const getAllPyPapers = async (req, res) => {
     const papers = await PyPapersDetails.find();
     res.status(200).json({ success: true, data: papers });
   } catch (error) {
-    console.error("Error fetching pyPaper details:", error);
-    res.status(500).json({ error: "Error fetching pyPaper details" });
+    console.error('Error fetching pyPaper details:', error);
+    res.status(500).json({ error: 'Error fetching pyPaper details' });
   }
 };
 
@@ -41,12 +43,12 @@ const updatePyPapersDetail = async (req, res) => {
       { new: true }
     );
     if (!updatedPaper) {
-      return res.status(404).json({ error: "Paper not found" });
+      return res.status(404).json({ error: 'Paper not found' });
     }
     res.status(200).json(updatedPaper);
   } catch (error) {
-    console.error("Error updating pyPaper details:", error);
-    res.status(500).json({ error: "Error updating pyPaper details" });
+    console.error('Error updating pyPaper details:', error);
+    res.status(500).json({ error: 'Error updating pyPaper details' });
   }
 };
 
@@ -57,15 +59,14 @@ const deletePyPapersDetail = async (req, res) => {
   try {
     const deletedPaper = await PyPapersDetails.findByIdAndDelete(id);
     if (!deletedPaper) {
-      return res.status(404).json({ error: "Paper not found" });
+      return res.status(404).json({ error: 'Paper not found' });
     }
-    res.status(200).json({ message: "Paper deleted successfully" });
+    res.status(200).json({ message: 'Paper deleted successfully' });
   } catch (error) {
-    console.error("Error deleting pyPaper details:", error);
-    res.status(500).json({ error: "Error deleting pyPaper details" });
+    console.error('Error deleting pyPaper details:', error);
+    res.status(500).json({ error: 'Error deleting pyPaper details' });
   }
 };
-
 
 // Get total paper count
 const getTotalPyPapersCount = async (req, res) => {
@@ -73,8 +74,8 @@ const getTotalPyPapersCount = async (req, res) => {
     const totalForms = await PyPapersDetails.countDocuments();
     res.status(200).json({ totalForms });
   } catch (error) {
-    console.error("Error fetching total pyPaper count:", error);
-    res.status(500).json({ error: "Error fetching total pyPaper count" });
+    console.error('Error fetching total pyPaper count:', error);
+    res.status(500).json({ error: 'Error fetching total pyPaper count' });
   }
 };
 
@@ -83,5 +84,5 @@ module.exports = {
   getAllPyPapers,
   updatePyPapersDetail,
   deletePyPapersDetail,
-  getTotalPyPapersCount
+  getTotalPyPapersCount,
 };
