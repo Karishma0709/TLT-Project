@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import SummaryApi from '../Common/SummaryApi';
+import SummaryApi from "../../Common/SummaryAPI";
 
 const TPMForm = ({ selectedProduct }) => {
   const [data, setData] = useState({
@@ -17,7 +17,7 @@ const TPMForm = ({ selectedProduct }) => {
     if (selectedProduct) {
       setData((prevData) => ({
         ...prevData,
-        purchasedProduct: `${selectedProduct.title} ${selectedProduct.price}`,
+        purchasedProduct: `${selectedProduct.title} ₹${selectedProduct.price}`,
       }));
     }
   }, [selectedProduct]);
@@ -38,8 +38,8 @@ const TPMForm = ({ selectedProduct }) => {
 
     if (valid) {
       try {
-        const response = await fetch("http://localhost:8080/api/createTpmFormDetails", {
-          method: "POST",
+        const response = await fetch(SummaryApi.createTpmFormDetails.url, {
+          method: SummaryApi.createTpmFormDetails.method,
           headers: {
             "Content-Type": "application/json",
           },
@@ -58,7 +58,6 @@ const TPMForm = ({ selectedProduct }) => {
           contact: "",
           purchasedProduct: "",
         });
-
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
         toast.error("There was a problem submitting the form. Please try again.");
@@ -77,6 +76,7 @@ const TPMForm = ({ selectedProduct }) => {
             <span className="text-red-500"> Today!</span>
           </h2>
           <form onSubmit={handleSubmit}>
+            {/* Name input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -94,6 +94,7 @@ const TPMForm = ({ selectedProduct }) => {
               </div>
             </div>
 
+            {/* Email input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -111,6 +112,7 @@ const TPMForm = ({ selectedProduct }) => {
               </div>
             </div>
 
+            {/* Contact input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -128,14 +130,9 @@ const TPMForm = ({ selectedProduct }) => {
               </div>
             </div>
 
+            {/* Purchased product input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
-                <label
-                  htmlFor="TPM"
-                  className="block mb-2 text-sm font-medium text-gray-500"
-                >
-                  
-                </label>
                 <input
                   type="text"
                   name="purchasedProduct"
@@ -148,12 +145,13 @@ const TPMForm = ({ selectedProduct }) => {
               </div>
             </div>
 
+            {/* Submit button */}
             <div className="form-row submit-btn flex justify-center gap-3">
               <button
                 type="submit"
                 className="relative inline-block text-white bg-gradient-to-r p-4 px-14 from-red-700 to-red-400 hover:from-red-400 hover:to-red-700 font-semibold py-2 rounded-full transition-ease-out" 
               >
-                Pay {selectedProduct.price}
+                Pay ₹{selectedProduct.price}
               </button>
             </div>
           </form>

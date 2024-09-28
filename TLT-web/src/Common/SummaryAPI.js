@@ -154,6 +154,27 @@ const SummaryApi = {
     url: `${backendDomain}/api/createJetForm`,
     method: 'post',
   },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
+  getAllMpcjProducts: {
+    url: `${backendDomain}/api/getAllMpcjProducts`,
+    method: 'get',
+  },
+  deleteMpcjProduct: {
+    url: `${backendDomain}/api/deleteMpcjProduct/:id`,
+    method: 'delete',
+  },
+  updateMpcjProduct: {
+    url: `${backendDomain}/api/updateMpcjProduct/:id`,
+    method: 'put',
+  },
+  createTpmFormDetails: {
+    url: `${backendDomain}/api/createTpmFormDetails`,
+    method: 'post',
+  }
+
 };
 
 export default SummaryApi;
