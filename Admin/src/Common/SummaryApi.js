@@ -166,12 +166,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
-<<<<<<< HEAD
   createMpcjProduct: {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
-=======
   
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
@@ -222,6 +220,5 @@ const SummaryApi = {
     method: 'get',
   },
 
->>>>>>> 85035ec36efecbf94c9ffee68646dc22429da3b6
 };
 export default SummaryApi;
