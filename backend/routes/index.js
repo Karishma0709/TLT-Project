@@ -157,13 +157,22 @@ router.get('/getTotalMPCJform', getTotalMPCJform);
 // router.post('/MpcjPhonepay', MpcjPhonepay);
 router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 
-
 // PY paper PDF upload routers
+// router.post(
+//   '/createPyPaperPDFupload',
+//   prevYearPDFuploadUpload.single(['paperimage', 'pdf']),
+//   createPyPaperPDFupload
+// );
+
 router.post(
   '/createPyPaperPDFupload',
-  prevYearPDFuploadUpload.single('paperimage'),
+  prevYearPDFuploadUpload.fields([
+    { name: 'paperimage', maxCount: 1 },
+    { name: 'pdf', maxCount: 1 },
+  ]),
   createPyPaperPDFupload
 );
+
 router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
 router.put('/  updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
 router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);

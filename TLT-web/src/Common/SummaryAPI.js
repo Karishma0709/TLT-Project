@@ -134,6 +134,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee`,
     method: 'get',
   },
+  getPyPaperPDFupload: {
+    url: `${backendDomain}/api/getPyPaperPDFupload`,
+    method: 'get',
+  },
 };
 
 export default SummaryApi;

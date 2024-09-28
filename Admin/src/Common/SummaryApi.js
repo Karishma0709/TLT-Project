@@ -138,6 +138,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  PyPaperPDFUploads: {
+    url: `${backendDomain}/api/createPyPaperPDFupload`,
+    method: 'POST',
+  },
+  PyPaperPDFUpdate: {
+    url: `${backendDomain}/api/updatePyPaperPDFupload/:id`,
+    method: 'put',
+  },
+  PyPaperPDFDelete: {
+    url: `${backendDomain}/api/deletePyPaperPDFupload/:id`,
+    method: 'delete',
+  },
   TpmData: {
     url: `${backendDomain}/api/getTpmFormDetails`,
     method: 'get',
