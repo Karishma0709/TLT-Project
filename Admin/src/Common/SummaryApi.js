@@ -166,10 +166,6 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
-  createMpcjProduct: {
-    url: `${backendDomain}/api/createMpcjProduct`,
-    method: 'post',
-  },
   
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
@@ -192,9 +188,9 @@ const SummaryApi = {
     method: 'put',
   },
   
-
-// Get dashboard count 
-
+  
+  // Get dashboard count 
+  
   GetTotalEmpowermentForms: {
     url: `${backendDomain}/api/getTotalEmpowermentForms`,
     method: 'get',
@@ -218,6 +214,26 @@ const SummaryApi = {
   GetTotalTpmCount: {
     url: `${backendDomain}/api/getTotalTpmCount`,
     method: 'get',
+  },
+  createTpmFormDetails: {
+    url: `${backendDomain}/api/createTpmFormDetails`,
+    method: 'post',
+  },
+  getAllMpcjProducts: {
+    url: `${backendDomain}/api/getAllMpcjProducts`,
+    method: 'get',
+  },
+  editMpcjProduct: {
+    url: `${backendDomain}/api/editMpcjProduct`, // Base URL
+    method: 'put',
+  },
+  deleteMpcjProduct: {
+    url: `${backendDomain}/api/deleteMpcjProduct`, // Base URL
+    method: 'delete',
+  },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
   },
 
 };
