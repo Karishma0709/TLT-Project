@@ -104,7 +104,7 @@ const createEmpowerment = async (req, res) => {
 
     // Save to the database after successful payment initiation
     await ESchema.create({
-      name: Array.isArray(name) ? name.join(', ') : name,
+      name,
       photo,
       aadharCard,
       placeOfBirth,
@@ -144,11 +144,52 @@ const createEmpowerment = async (req, res) => {
 // The rest of the controller methods should also be updated to match the schema as necessary.
 
 const paymentStatus = async (req, res) => {
-  // Existing code unchanged...
+  const merchantTransactionId = req.body.transactionId; // Fix: Use req.body
+  const merchantId = req.body.merchantId;
+  const KeyIndex = 1;
+  const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
+  const String =
+   ` /pg/v1/paymentstatus/${merchantId}/${merchantTransactionId} `+ key;
+  const sha256 = crypto.createHash('sha256').update(String).digest('hex'); // Fix: Use 'digest'
+  const checksum = sha256 + '###' + KeyIndex;
+
+  // const URL = https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${merchantTransactionId};
+
+  const URL = `https://api.phonepe.com/apis/hermes/pg/v1/paymentstatus/${merchantId}/${merchantTransactionId}`;
+
+  const options = {
+    method: 'GET',
+    url: URL,
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-VERIFY': checksum,
+      'X-MERCHANT-ID': merchantId,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    res.status(200).json(response.data); // Send the response back to client
+  } catch (error) {
+    console.error(
+      'Payment status error:',
+      error.response ? error.response.data : error.message
+    );
+    res
+      .status(500)
+      .json({ status: 'Payment status error', error: error.message });
+  }
 };
 
 const getempowerment = async (req, res) => {
-  // Existing code unchanged...
+  try {
+    const data = await ESchema.find({});
+    res.send({ status: 'ok', data });
+  } catch (error) {
+    console.error(error);
+    res.json({ status: error.message });
+  }
 };
 
 const Update = async (req, res) => {
