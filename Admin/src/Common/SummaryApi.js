@@ -1,7 +1,7 @@
 import TpmData from '../components/TpmData';
 
-const backendDomain = "https://tlt-project-6ivu.onrender.com";
-// const backendDomain = 'http://localhost:8080';
+// const backendDomain = "https://tlt-project-6ivu.onrender.com";
+const backendDomain = 'http://localhost:8080';
 
 const SummaryApi = {
   signUp: {
@@ -138,6 +138,18 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  QuizPut: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'put',
+  },
+  QuizGet: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'get',
+  },
+  QuizDetailsGet: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'get',
+  },
   TpmData: {
     url: `${backendDomain}/api/getTpmFormDetails`,
     method: 'get',
@@ -154,5 +166,37 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
+  JetFormGet: {
+    url: `${backendDomain}/api/getJetForms`,
+    method: 'get',
+  },
+
+// Get dashboard count 
+
+  GetTotalEmpowermentForms: {
+    url: `${backendDomain}/api/getTotalEmpowermentForms`,
+    method: 'get',
+  },
+  GetTotalFastTrackForms: {
+    url: `${backendDomain}/api/getTotalFastTrackForms`,
+    method: 'get',
+  },
+  GetTotalJetForms: {
+    url: `${backendDomain}/api/getTotalJetForms`,
+    method: 'get',
+  },
+  GetTotalMPCJform: {
+    url: `${backendDomain}/api/getTotalMPCJform`,
+    method: 'get',
+  },
+  GetTotalPyPapersCount: {
+    url: `${backendDomain}/api/getTotalPyPapersCount`,
+    method: 'get',
+  },
+  GetTotalTpmCount: {
+    url: `${backendDomain}/api/getTotalTpmCount`,
+    method: 'get',
+  },
+
 };
 export default SummaryApi;
