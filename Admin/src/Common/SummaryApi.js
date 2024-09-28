@@ -192,6 +192,11 @@ const SummaryApi = {
     method: 'put',
   },
   
+  // mpcj 
+  GetMPCJFormDetails: {
+url:'${backendDomain}/api/getMPCJFormDetails',
+method:'get'
+  },
 
 // Get dashboard count 
 
