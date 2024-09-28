@@ -8,7 +8,7 @@ import {
   FaCog,
   FaBell,
   FaExclamationTriangle,
-  FaTachometerAlt, 
+  FaTachometerAlt,
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Link, Outlet } from 'react-router-dom';
@@ -18,13 +18,31 @@ const Sidebar = () => {
   // State for managing dropdowns
   const [isFormsDropdownOpen, setIsFormsDropdownOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
+  const [isMockTestDropdownOpen, setIsMockTestDropdownOpen] = useState(false);
+
+  // Handle dropdown toggles
+  const toggleFormsDropdown = () => {
+    setIsFormsDropdownOpen((prev) => !prev);
+    setIsProductDropdownOpen(false); // Close Product dropdown
+    setIsMockTestDropdownOpen(false); // Close Mock Test dropdown
+  };
+
+  const toggleProductDropdown = () => {
+    setIsProductDropdownOpen((prev) => !prev);
+    setIsFormsDropdownOpen(false); // Close Forms dropdown
+    setIsMockTestDropdownOpen(false); // Close Mock Test dropdown
+  };
+
+  const toggleMockTestDropdown = () => {
+    setIsMockTestDropdownOpen((prev) => !prev);
+    setIsFormsDropdownOpen(false); // Close Forms dropdown
+    setIsProductDropdownOpen(false); // Close Product dropdown
+  };
 
   return (
     <div className="min-h-screen md:flex hidden bg-gray-100">
       {/* Sidebar */}
       <aside className="bg-red-600 w-64 customShadow text-white">
-        {' '}
-        {/* Fixed width */}
         {/* Profile Section */}
         <div className="h-40 flex flex-col items-center justify-center bg-red-700 border-b border-red-500">
           <div className="text-6xl cursor-pointer relative flex justify-center mb-2">
@@ -42,10 +60,11 @@ const Sidebar = () => {
             <FaTachometerAlt />
             <span>Dashboard</span>
           </Link>
+
           {/* Forms Dropdown */}
           <div>
             <div
-              onClick={() => setIsFormsDropdownOpen(!isFormsDropdownOpen)}
+              onClick={toggleFormsDropdown}
               className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
             >
               <span className="flex items-center space-x-2">
@@ -112,7 +131,7 @@ const Sidebar = () => {
           {/* Product Upload Dropdown */}
           <div>
             <div
-              onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+              onClick={toggleProductDropdown}
               className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
             >
               <span className="flex items-center space-x-2">
@@ -145,13 +164,6 @@ const Sidebar = () => {
                   <span>Previous Year Paper Pdf</span>
                 </Link>
                 <Link
-                  to="quiz-questions"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaRegFilePdf />
-                  <span>Update Quiz Questions</span>
-                </Link>
-                <Link
                   to="addMpcjProduct"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
@@ -162,33 +174,72 @@ const Sidebar = () => {
             )}
           </div>
 
+          {/* Mock Test Dropdown */}
+          <div>
+            <div
+              onClick={toggleMockTestDropdown}
+              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
+            >
+              <span className="flex items-center space-x-2">
+                <FaFileAlt />
+                <span>Mock Test</span>
+              </span>
+              {isMockTestDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
+            </div>
+            {isMockTestDropdownOpen && (
+              <div className="ml-4 mt-2 space-y-2">
+                <Link
+                  to="mock-test-results"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Mock Test Results</span>
+                </Link>
+                <Link
+                  to="mock-test-settings"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaCog />
+                  <span>Mock Test Settings</span>
+                </Link>
+              </div>
+            )}
+          </div>
+
           {/* Other links */}
+          <Link
+            to="quiz-questions"
+            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+          >
+            <FaRegFilePdf />
+            <span>Update Daily Quiz</span>
+          </Link>
           <Link
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
-            <FaExclamationTriangle/>
-            <span>Alerts</span>
+            <FaRegFilePdf />
+            <span>Update Headline</span>
           </Link>
           <Link
             to="notification"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaBell />
-            <span>Notification</span>
+            <span>Notifications</span>
           </Link>
           <Link
-            to="info-marquee"
+            to="error-report"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
-            <FaCog />
-            <span>Setting</span>
+            <FaExclamationTriangle />
+            <span>Error Report</span>
           </Link>
         </nav>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-grow p-6 bg-gray-50">
+      {/* Outlet for rendering nested routes */}
+      <main className="flex-grow">
         <Header />
         <Outlet />
       </main>

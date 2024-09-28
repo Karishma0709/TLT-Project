@@ -182,11 +182,8 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
-<<<<<<< HEAD
   
-=======
 
->>>>>>> bee962e9ca24dc6bae080f96ac2fbf6883e28059
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
     method: 'delete',
