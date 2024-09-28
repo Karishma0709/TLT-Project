@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons for edit and delete
+import SummaryApi from '../Common/SummaryApi';
 
 const MpcjData = () => {
   const [mpcjData, setMpcjData] = useState([]);
@@ -17,7 +18,10 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-      const result = await axios.get('http://localhost:8080/api/getMPCJFormDetails');
+      const result = await axios({
+        url:SummaryApi.GetMPCJFormDetails.url,
+        method:SummaryApi.GetMPCJFormDetails.method
+      });
       console.log('API Response:', result.data);
 
       if (Array.isArray(result.data)) {

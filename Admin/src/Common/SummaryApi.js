@@ -183,6 +183,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+  
 
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
@@ -205,9 +206,14 @@ const SummaryApi = {
     method: 'put',
   },
   
+
   
-  // Get dashboard count 
   
+  // mpcj 
+  GetMPCJFormDetails: {
+url:'${backendDomain}/api/getMPCJFormDetails',
+method:'get'
+  },
 
   // Get dashboard count
 
