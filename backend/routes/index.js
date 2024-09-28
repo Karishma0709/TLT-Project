@@ -19,8 +19,6 @@ const {
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
   getTotalMPCJform,
-  MpcjPhonepay,
-  paymentStatus,
   mpcjpaymentStatus,
 } = require('../controllers/mpcjOfflineController');
 
@@ -89,7 +87,7 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
-const { updateMpcjProduct, deleteMpcjProduct, getAllMpcjProducts, createMpcjProduct } = require('../controllers/addMpcjProductController');
+const {  createMpcjProduct, getAllMpcjProducts } = require('../controllers/addMpcjProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -165,8 +163,8 @@ router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 // Route to create a new product
 router.post('/createMpcjProduct', createMpcjProduct);
 router.get('/getAllMpcjProducts', getAllMpcjProducts);
-router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
-router.put('/updateMpcjProduct/:id', updateMpcjProduct);
+// router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
+// router.put('/updateMpcjProduct/:id', updateMpcjProduct);
 
 
 
@@ -177,7 +175,7 @@ router.post(
   createPyPaperPDFupload
 );
 router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
-router.put('/  updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
+router.put('/updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
 router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);
 
 ////////empowermentForm

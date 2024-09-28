@@ -154,5 +154,9 @@ const SummaryApi = {
     url: `${backendDomain}/api/getJetForms`,
     method: 'get',
   },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
 };
 export default SummaryApi;

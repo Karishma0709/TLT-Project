@@ -1,9 +1,18 @@
 const Product = require('../models/addMpcjProduct'); // Model for products
 
-// Create a new product
+// Create a new product (POST)
 const createMpcjProduct = async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    // Create a new product from request body data
+    const newProduct = new Product({
+      img: req.body.img,
+      title: req.body.title,
+      price: req.body.price,
+      description: req.body.description,
+      buy: req.body.buy || 'Buy Now', // Default value if buy is not provided
+    });
+
+    // Save the new product to MongoDB
     await newProduct.save();
     res.status(201).json({ message: 'Product created successfully' });
   } catch (error) {
@@ -11,9 +20,10 @@ const createMpcjProduct = async (req, res) => {
   }
 };
 
-// Get all products
+// Get all products (GET)
 const getAllMpcjProducts = async (req, res) => {
   try {
+    // Fetch all products from MongoDB
     const products = await Product.find();
     res.status(200).json(products);
   } catch (error) {
@@ -21,30 +31,7 @@ const getAllMpcjProducts = async (req, res) => {
   }
 };
 
-// Delete a product
-const deleteMpcjProduct = async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Product deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting product', error });
-  }
-};
-
-// Update a product
-const updateMpcjProduct = async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json({ message: 'Product updated successfully', product: updatedProduct });
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating product', error });
-  }
-};
-
-
 module.exports = {
-    createMpcjProduct,
-    getAllMpcjProducts,
-    deleteMpcjProduct,
-    updateMpcjProduct
-  };
+  createMpcjProduct,
+  getAllMpcjProducts,
+};
