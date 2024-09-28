@@ -353,60 +353,57 @@ const JetFormDetails = () => {
                   </a>
                 )}
               </td>
-              <td className="p-3">{moment(form.createdAt).format('LL')}</td>
-         
-              <td className="p-3 flex space-x-2">
-                {editMode === form._id ? (
-                  <>
-                    <button
-                            onClick={() => updatePaper(form._id)}
-                            className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
-                          >
-                            Save
-                          </button>
-                          <button
-                            onClick={() => setEditMode(null)}
-                            className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700"
-                          >
-                            Cancel
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button
-                            onClick={() => toggleEditMode(form._id)}
-                            className="px-3 py-1 rounded flex items-center"
-                          >
-                            <FaEdit className="text-blue-500 hover:text-blue-800" /> 
-                          </button>
-                          <button
-                            onClick={() => deletePaper(form._id)}
-                            className="px-3 py-1 rounded flex items-center"
-                          >
-                            <FaTrashAlt className="text-red-500 hover:text-red-700" /> 
-                          </button>
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+             {/* Created date */}
+             <td className="p-3">{moment(form.createdAt).format('YYYY-MM-DD')}</td>
 
-      {/* Pagination */}
-      <div className="flex justify-center space-x-2 mt-4">
-        {[...Array(totalPages)].map((_, pageNumber) => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber + 1)}
-            className={`px-3 py-1 rounded ${currentPage === pageNumber + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
-          >
-            {pageNumber + 1}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+{/* Actions */}
+<td className="p-3">
+{editMode === form._id ? (
+  <div>
+    <button
+       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
+      onClick={() => updateForm(form._id)}
+    >
+      Save
+    </button>
+    <button
+      onClick={() => setEditMode(null)}
+      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700 ml-2"
+    >
+      Cancel
+    </button>
+  </div>
+) : (
+    <button className="text-blue-500 hover:text-blue-700" onClick={() => toggleEditMode(form._id)}>
+      <FaEdit />
+    </button>
+  )}
+  <button
+    className="text-red-500 hover:text-red-700 ml-4"
+    onClick={() => deleteForm(form._id)}
+  >
+    <FaTrashAlt />
+  </button>
+</td>
+</tr>
+))}
+</tbody>
+</table>
+
+{/* Pagination */}
+<div className="flex justify-center mt-4">
+{Array.from({ length: totalPages }, (_, index) => (
+<button
+key={index}
+className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-gray-800 text-white' : 'bg-gray-300'}`}
+onClick={() => handlePageChange(index + 1)}
+>
+{index + 1}
+</button>
+))}
+</div>
+</div>
+);
 };
 
 export default JetFormDetails;
