@@ -87,10 +87,8 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
-const {
-  createMpcjProduct,
-  getAllMpcjProducts,
-} = require('../controllers/addMpcjProductController');
+const {  createMpcjProduct, getAllMpcjProducts, editMpcjProduct, deleteMpcjProduct } = require('../controllers/addMpcjProductController');
+
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -162,6 +160,9 @@ router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 // Route to create a new product
 router.post('/createMpcjProduct', createMpcjProduct);
 router.get('/getAllMpcjProducts', getAllMpcjProducts);
+router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct); // Corrected path
+router.put('/editMpcjProduct/:id', editMpcjProduct); // Corrected path
+
 // router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
 // router.put('/updateMpcjProduct/:id', updateMpcjProduct);
 

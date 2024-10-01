@@ -182,7 +182,6 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
-
   JetFormDelete: {
     url: `${backendDomain}/api/deleteJetForm/:id`,
     method: 'delete',
@@ -202,6 +201,12 @@ const SummaryApi = {
   UpdatePyPapersDetail: {
     url: `${backendDomain}/api/updatePyPapersDetail/:id`,
     method: 'put',
+  },
+
+  // mpcj
+  GetMPCJFormDetails: {
+    url: '${backendDomain}/api/getMPCJFormDetails',
+    method: 'get',
   },
 
   // Get dashboard count
@@ -230,5 +235,26 @@ const SummaryApi = {
     url: `${backendDomain}/api/getTotalTpmCount`,
     method: 'get',
   },
+  createTpmFormDetails: {
+    url: `${backendDomain}/api/createTpmFormDetails`,
+    method: 'post',
+  },
+  getAllMpcjProducts: {
+    url: `${backendDomain}/api/getAllMpcjProducts`,
+    method: 'get',
+  },
+  editMpcjProduct: {
+    url: `${backendDomain}/api/editMpcjProduct`, // Base URL
+    method: 'put',
+  },
+  deleteMpcjProduct: {
+    url: `${backendDomain}/api/deleteMpcjProduct`, // Base URL
+    method: 'delete',
+  },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
+
 };
 export default SummaryApi;
