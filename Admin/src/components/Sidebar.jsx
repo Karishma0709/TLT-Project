@@ -8,7 +8,7 @@ import {
   FaCog,
   FaBell,
   FaExclamationTriangle,
-  FaTachometerAlt, 
+  FaTachometerAlt,
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Link, Outlet } from 'react-router-dom';
@@ -167,7 +167,7 @@ const Sidebar = () => {
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
-            <FaExclamationTriangle/>
+            <FaExclamationTriangle />
             <span>Alerts</span>
           </Link>
           <Link
@@ -178,11 +178,11 @@ const Sidebar = () => {
             <span>Notification</span>
           </Link>
           <Link
-            to="info-marquee"
+            to="asminRegi"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaCog />
-            <span>Setting</span>
+            <span>AsminRegi</span>
           </Link>
         </nav>
       </aside>
