@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SummaryApi from '../Common/SummaryApi';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Ensure you import the icons
+import * as XLSX from 'xlsx';
+
 
 const FastTrackForm = () => {
   const [fastTrackData, setFastTrackData] = useState([]);
@@ -74,9 +76,27 @@ const FastTrackForm = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Export to Excel function
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(fastTrackData); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Fast Track Data'); // Add worksheet to workbook
+    XLSX.writeFile(workbook, 'fastTrack_data.xlsx'); // Trigger the file download
+  };
+
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Fast-Track Form Data</h1>
+
+  {/* Export to Excel Button */}
+  <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       {fastTrackData.length === 0 ? (
         <p className="text-gray-500">No data available</p>
       ) : (

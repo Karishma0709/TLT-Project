@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons for edit and delete
 import SummaryApi from '../Common/SummaryApi';
+import * as XLSX from 'xlsx';
 
 const MpcjData = () => {
   const [mpcjData, setMpcjData] = useState([]);
@@ -18,12 +19,9 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-      const result = await axios({
-        url:SummaryApi.GetMPCJFormDetails.url,
-        method:SummaryApi.GetMPCJFormDetails.method
-      });
+      const result = await axios.get(`http://localhost:8080/api/getMPCJFormDetails`);
       console.log('API Response:', result.data);
-
+  
       if (Array.isArray(result.data)) {
         setMpcjData(result.data); // Set the fetched array directly
       } else {
@@ -35,6 +33,7 @@ const MpcjData = () => {
       setMpcjData([]); // Set an empty array in case of error
     }
   };
+  
 
   // Delete data with confirmation
   const deleteData = async (id) => {
@@ -87,9 +86,24 @@ const MpcjData = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+ // Export to Excel function
+ const exportToExcel = () => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(mpcjData); // Convert data to worksheet
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'MPCJ Form Data'); // Add worksheet to workbook
+  XLSX.writeFile(workbook, 'mpcj_data.xlsx'); // Trigger the file download
+};
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">MPCJ Data</h2>
+      {/* Export to Excel Button */}
+ <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
       <div>
         {mpcjData.length === 0 ? (
           <p className="text-gray-500">No data available</p>

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import SummaryApi from '../Common/SummaryApi';
+import * as XLSX from 'xlsx';
+
 
 const JetFormDetails = () => {
   const [formData, setFormData] = useState([]);
@@ -76,9 +78,27 @@ const JetFormDetails = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+
+  // Export to Excel function
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(formData); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Jet Form Data'); // Add worksheet to workbook
+    XLSX.writeFile(workbook, 'jetform_data.xlsx'); // Trigger the file download
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Jet Forms</h2>
+
+ {/* Export to Excel Button */}
+ <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       <table className="min-w-full border-collapse bg-white">
         <thead>
         <tr className="bg-gray-800 text-white">

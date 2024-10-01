@@ -98,13 +98,7 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
-                <Link
-                  to="quiz-user"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Quiz User Detail</span>
-                </Link>
+               
               </div>
             )}
           </div>
@@ -144,13 +138,13 @@ const Sidebar = () => {
                   <FaRegFilePdf />
                   <span>Previous Year Paper Pdf</span>
                 </Link>
-                <Link
+                {/* <Link
                   to="quiz-questions"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
                   <FaRegFilePdf />
                   <span>Update Quiz Questions</span>
-                </Link>
+                </Link> */}
                 <Link
                   to="addMpcjProduct"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
@@ -163,6 +157,13 @@ const Sidebar = () => {
           </div>
 
           {/* Other links */}
+          <Link
+                  to="quiz-questions"
+                             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+                >
+                  <FaRegFilePdf />
+                  <span>Update Quiz Questions</span>
+                </Link>
           <Link
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
