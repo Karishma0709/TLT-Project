@@ -20,7 +20,7 @@ const Header = () => {
       {/* Left Side: Logo */}
       <div className="flex items-center">
         <img src={Logo} alt="Logo" className="h-12 w-9 mr-3 rounded-full" />
-        <h1 className="text-3xl underline font-bold text-gray-800">TLT <span className="text-red-500">Judicial </span>Acedamy</h1>
+        <h1 className="text-3xl underline font-bold text-gray-800">TLT <span className="text-red-500">Judicial </span>Academy</h1>
       </div>
 
       {/* Right Side: Logout Icon */}
