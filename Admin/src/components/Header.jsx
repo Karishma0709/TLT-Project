@@ -1,250 +1,37 @@
-import React, { useState } from 'react';
-import {
-  FaUserCircle,
-  FaFileAlt,
-  FaFileUpload,
-  FaRegFilePdf,
-  FaList,
-  FaCog,
-  FaBell,
-  FaExclamationTriangle,
-  FaTachometerAlt,
-} from 'react-icons/fa';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { Link, Outlet } from 'react-router-dom';
-import Header from './Header';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi'; // Importing the logout icon
+import Logo from '../assets/TLTlogo.png';
 
-const Sidebar = () => {
-  // State for managing dropdowns
-  const [isFormsDropdownOpen, setIsFormsDropdownOpen] = useState(false);
-  const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
-  const [isMockTestDropdownOpen, setIsMockTestDropdownOpen] = useState(false);
+const Header = () => {
+  const navigate = useNavigate();
 
-  // Handle dropdown toggles
-  const toggleFormsDropdown = () => {
-    setIsFormsDropdownOpen((prev) => !prev);
-    setIsProductDropdownOpen(false); // Close Product dropdown
-    setIsMockTestDropdownOpen(false); // Close Mock Test dropdown
-  };
+  // Logout logic
+  const handleLogout = () => {
+    // Clear authentication data
+    localStorage.removeItem('authToken'); // or sessionStorage.removeItem('authToken');
 
-  const toggleProductDropdown = () => {
-    setIsProductDropdownOpen((prev) => !prev);
-    setIsFormsDropdownOpen(false); // Close Forms dropdown
-    setIsMockTestDropdownOpen(false); // Close Mock Test dropdown
-  };
-
-  const toggleMockTestDropdown = () => {
-    setIsMockTestDropdownOpen((prev) => !prev);
-    setIsFormsDropdownOpen(false); // Close Forms dropdown
-    setIsProductDropdownOpen(false); // Close Product dropdown
+    // Redirect to the login page after logout
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen md:flex hidden bg-gray-100">
-      {/* Sidebar */}
-      <aside className="bg-red-600 w-64 customShadow text-white">
-        {/* Profile Section */}
-        <div className="h-40 flex flex-col items-center justify-center bg-red-700 border-b border-red-500">
-          <div className="text-6xl cursor-pointer relative flex justify-center mb-2">
-            <FaUserCircle className="rounded-full bg-white p-1 text-red-700" />
-          </div>
-          <p className="capitalize text-lg font-semibold">Admin</p>
-          <p className="text-xs text-gray-200">Administrator</p>
-        </div>
-        {/* Navigation */}
-        <nav className="p-4 space-y-2">
-          <Link
-            to="dashboardcards"
-            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-          >
-            <FaTachometerAlt />
-            <span>Dashboard</span>
-          </Link>
+    <header className="bg-gray-100 p-4 flex justify-between items-center shadow-md">
+      {/* Left Side: Logo */}
+      <div className="flex items-center">
+        <img src={Logo} alt="Logo" className="h-12 w-9 mr-3 rounded-full" />
+        <h1 className="text-3xl underline font-bold text-gray-800">TLT <span className="text-red-500">Judicial </span>Acedamy</h1>
+      </div>
 
-          {/* Forms Dropdown */}
-          <div>
-            <div
-              onClick={toggleFormsDropdown}
-              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
-            >
-              <span className="flex items-center space-x-2">
-                <FaFileAlt />
-                <span>Forms</span>
-              </span>
-              {isFormsDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
-            </div>
-            {isFormsDropdownOpen && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link
-                  to="py-paper"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Previous Year Paper</span>
-                </Link>
-                <Link
-                  to="mpcj-form"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>MPCJ Form</span>
-                </Link>
-                <Link
-                  to="FastTrackForm"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>FastTrack Form Data</span>
-                </Link>
-                <Link
-                  to="EmpowermentAdmin"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Empowerment Admin</span>
-                </Link>
-                <Link
-                  to="tpm-form"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>TPM Form</span>
-                </Link>
-                <Link
-                  to="jetformdetail"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Jet Form Details</span>
-                </Link>
-                <Link
-                  to="quiz-user"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Quiz User Detail</span>
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Product Upload Dropdown */}
-          <div>
-            <div
-              onClick={toggleProductDropdown}
-              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
-            >
-              <span className="flex items-center space-x-2">
-                <FaFileUpload />
-                <span>Product Upload</span>
-              </span>
-              {isProductDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
-            </div>
-            {isProductDropdownOpen && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link
-                  to="SyllabusUpload"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileUpload />
-                  <span>Upload Syllabus</span>
-                </Link>
-                <Link
-                  to="Unpaid"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaList />
-                  <span>Unpaid Products</span>
-                </Link>
-                <Link
-                  to="Prevyearpaperpdf"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaRegFilePdf />
-                  <span>Previous Year Paper Pdf</span>
-                </Link>
-                <Link
-                  to="addMpcjProduct"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaRegFilePdf />
-                  <span>Add Mpcj Product</span>
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Mock Test Dropdown */}
-          <div>
-            <div
-              onClick={toggleMockTestDropdown}
-              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
-            >
-              <span className="flex items-center space-x-2">
-                <FaFileAlt />
-                <span>Mock Test</span>
-              </span>
-              {isMockTestDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
-            </div>
-            {isMockTestDropdownOpen && (
-              <div className="ml-4 mt-2 space-y-2">
-                <Link
-                  to="mock-test-results"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Mock Test Results</span>
-                </Link>
-                <Link
-                  to="mock-test-settings"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaCog />
-                  <span>Mock Test Settings</span>
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Other links */}
-          <Link
-            to="quiz-questions"
-            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-          >
-            <FaRegFilePdf />
-            <span>Update Daily Quiz</span>
-          </Link>
-          <Link
-            to="update-headline"
-            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-          >
-            <FaRegFilePdf />
-            <span>Update Headline</span>
-          </Link>
-          <Link
-            to="notification"
-            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-          >
-            <FaBell />
-            <span>Notifications</span>
-          </Link>
-          <Link
-            to="error-report"
-            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-          >
-            <FaExclamationTriangle />
-            <span>Error Report</span>
-          </Link>
-        </nav>
-      </aside>
-
-      {/* Outlet for rendering nested routes */}
-      <main className="flex-grow">
-        <Header />
-        <Outlet />
-      </main>
-    </div>
+      {/* Right Side: Logout Icon */}
+      <div
+        className="flex items-center cursor-pointer text-gray-700 hover:text-red-600 transition-all duration-200"
+        onClick={handleLogout}
+      >
+        <FiLogOut className="text-3xl" />
+      </div>
+    </header>
   );
 };
 
-export default Sidebar;
+export default Header;
