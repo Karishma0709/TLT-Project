@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import SummaryApi from '../Common/SummaryApi';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import * as XLSX from 'xlsx';
 
 const TpmData = () => {
   const [tpmData, setTpmData] = useState([]);
@@ -88,9 +89,26 @@ const TpmData = () => {
   const currentItems = tpmData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(tpmData.length / itemsPerPage);
 
+ // Export to Excel function
+ const exportToExcel = () => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(tpmData); // Convert data to worksheet
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'TPM Form Data'); // Add worksheet to workbook
+  XLSX.writeFile(workbook, 'TPM_data.xlsx'); // Trigger the file download
+};
+
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">TPM Data</h2>
+      {/* Export to Excel Button */}
+ <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       <div>
         {tpmData.length === 0 ? (
           <p className="text-gray-500">No data available</p>
