@@ -60,7 +60,6 @@ const PYpaperform = ({ onFormSubmit }) => {
         if (!response.ok) {
           throw new Error('Failed to submit the form');
         }
-
         const result = await response.json();
         console.log('Form submitted successfully: ', result);
 
