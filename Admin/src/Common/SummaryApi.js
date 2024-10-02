@@ -335,6 +335,25 @@ const SummaryApi = {
     url:`${backendDomain}/api/updateMPCJFormDetails/:id`,
     method:'put'
   },
+  
+
+  // upaid 
+  GetUnpaidUpload:{
+    url:`${backendDomain}/api/getUnpaidUpload`,
+    method:'get'
+  },
+  UnpaidUpload:{
+    url:`${backendDomain}/api/UnpaidUpload`,
+    method:'post'
+  },
+  UpdateUnpaidById:{
+    url:`${backendDomain}/api/updateUnpaidById/:id`,
+    method:'put'
+  },
+  DeleteUnpaidById:{
+    url:`${backendDomain}/api/deleteUnpaidById/:id`,
+    method:'delete'
+  },
 
 };
 export default SummaryApi;
