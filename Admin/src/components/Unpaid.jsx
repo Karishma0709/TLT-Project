@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importing icons
+import SummaryApi from '../Common/SummaryApi';
 
 const UnpaidUpload = () => {
   const [title, setTitle] = useState('');
@@ -14,7 +15,10 @@ const UnpaidUpload = () => {
 
   const fetchUnpaidFiles = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/getUnpaidUpload');
+      const response = await axios({
+        url:SummaryApi.GetUnpaidUpload.url,
+        method:SummaryApi.GetUnpaidUpload.method
+      });
       setUnpaidList(response.data.data);
     } catch (error) {
       console.error('Error fetching unpaid files:', error);
@@ -29,46 +33,47 @@ const UnpaidUpload = () => {
     formData.append('file', file);
 
     try {
-      await axios.post('http://localhost:8080/api/UnpaidUpload', formData, {
+      await axios.post(SummaryApi.UnpaidUpload.url, formData, { // Using SummaryApi for the POST request
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      fetchUnpaidFiles();
+      fetchUnpaidFiles(); // Refresh the unpaid list after uploading
       setTitle('');
       setFile(null);
-    } catch (error) {
+    }  catch (error) {
       console.error('Error uploading unpaid file:', error);
       setError('Error uploading unpaid file');
     }
   };
 
   const updateUnpaidFile = async (id) => {
-    if (!updatedTitle) {
-      setError('Title is required for update');
-      return;
-    }
+  if (!updatedTitle) {
+    setError('Title is required for update');
+    return;
+  }
 
-    const apiUrl = `http://localhost:8080/api/updateUnpaidById/${id}`;
-    const formData = new FormData();
-    formData.append('title', updatedTitle);
-    if (file) {
-      formData.append('file', file);
-    }
+  const apiUrl = SummaryApi.UpdateUnpaidById.url.replace(':id', id); // Replace ID in the URL
+  const formData = new FormData();
+  formData.append('title', updatedTitle);
+  if (file) {
+    formData.append('file', file);
+  }
 
-    try {
-      await axios.put(apiUrl, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      fetchUnpaidFiles();
-      resetEdit();
-    } catch (error) {
-      console.error('Error updating unpaid file:', error);
-      setError('Error updating unpaid file');
-    }
-  };
+  try {
+    await axios.put(apiUrl, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    fetchUnpaidFiles(); // Refresh the unpaid list after updating
+    resetEdit();
+  } catch (error) {
+    console.error('Error updating unpaid file:', error);
+    setError('Error updating unpaid file');
+  }
+};
+
 
   const deleteUnpaidFile = async (id) => {
     const apiUrl = `http://localhost:8080/api/deleteUnpaidById/${id}`;

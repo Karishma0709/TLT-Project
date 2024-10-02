@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
-import SummaryApi from '../../Common/SummaryAPI';
+
 import axios from 'axios';
+import SummaryApi from '../Common/SummaryAPI';
 const SyllabusModel = ({ onFormSubmit }) => {
   const [data, setData] = useState({
     name: '',

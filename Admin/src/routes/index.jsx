@@ -21,11 +21,8 @@ import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
-<<<<<<< HEAD
-=======
 import UnpaidModal from '../components/Unpaidmodel';
 import Syllabusmodel from '../components/Syllabusmodel';
->>>>>>> 48fca2f3d2dc37b96c0ec4a9ff53243db237e180
 import EnquiryAdd from '../components/EnquiryAdd';
 import EnquiryList from '../components/EnquiryList';
 

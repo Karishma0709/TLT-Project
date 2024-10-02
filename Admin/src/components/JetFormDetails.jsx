@@ -6,6 +6,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import SummaryApi from '../Common/SummaryApi';
 import * as XLSX from 'xlsx';
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 const JetFormDetails = () => {
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState({});
