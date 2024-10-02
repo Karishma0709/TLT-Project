@@ -7,6 +7,7 @@ import SummaryApi from '../Common/SummaryApi';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import * as XLSX from 'xlsx';
 
+
 const TpmData = () => {
   const [tpmData, setTpmData] = useState([]);
   const [editData, setEditData] = useState({});

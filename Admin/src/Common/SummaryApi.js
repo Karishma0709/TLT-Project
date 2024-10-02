@@ -261,5 +261,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+
+
 };
 export default SummaryApi;
