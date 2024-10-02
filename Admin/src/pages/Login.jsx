@@ -95,7 +95,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handlePasswordToggle}
-                className="absolute inset-y-0 right-0 flex items-center px-3 mb-2 text-gray-500"
+                className="absolute inset-y-0 right-0 flex items-center px-3  text-gray-500"
               >
                 {showPassword ? (
                   <FaEyeSlash className="h-5 w-5" aria-hidden="true" />
@@ -103,12 +103,12 @@ const Login = () => {
                   <FaEye className="h-5 w-5" aria-hidden="true" />
                 )}
               </button>
-              <Link
+              {/* <Link
                 to="/forgotpassword"
                 className="block w-fit ml-auto mt-2 text-red-600 hover:underline"
               >
                 Forgot Password ?
-              </Link>
+              </Link> */}
             </div>
 
             <button
@@ -118,14 +118,14 @@ const Login = () => {
               Login
             </button>
           </form>
-          <div className="mt-4 text-center">
+          {/* <div className="mt-4 text-center">
             <p className="text-sm">
               Don't have an account?
               <Link to="/sign-up" className="hover:underline text-red-500">
                 Sign Up
               </Link>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

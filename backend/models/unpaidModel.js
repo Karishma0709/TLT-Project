@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const pyPapersDetailsSchema = new mongoose.Schema(
+const unpaidmodelSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
@@ -9,8 +9,8 @@ const pyPapersDetailsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const PyPapersDetails = mongoose.model(
-  'PyPapersDetails',
-  pyPapersDetailsSchema
+const UnpaidModelDetails = mongoose.model(
+  'UnpaidModelDetails',
+  unpaidmodelSchema
 );
-module.exports = PyPapersDetails;
+module.exports = UnpaidModelDetails;

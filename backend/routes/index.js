@@ -82,6 +82,14 @@ const {
 } = require('../controllers/unpaidProductController');
 
 const {
+  createUnpaidModel,
+  getAllUnpaidModel,
+  updateUnpaidModel,
+  deleteUnpaidModel,
+  getTotalUnpaidModel,
+} = require('../controllers/unpaidmodelcontroller');
+
+const {
   getQuiz,
   updateQuiz,
   createUser,
@@ -99,7 +107,7 @@ router.use('/files', express.static('files'));
 router.use('/notifiesfiles', express.static('files'));
 router.use('/empowermentForm', express.static('files'));
 router.use('/fastTrackForm', express.static('files'));
-router.use('/jetForm', express.static('files'));
+// router.use('/jetForm', express.static('files'));
 
 // Multer storage configurations
 const multerStorage = (directory) =>
@@ -124,12 +132,20 @@ const unpaidProductUpload = multer({
   storage: multerStorage('./unpaidProductUploadFiles'),
 });
 
-// Previous paper routes
+// Previous paper model routes
 router.post('/createPyPapersDetail', createPyPapersDetail);
 router.get('/getAllPyPapers', getAllPyPapers);
 router.put('/updatePyPapersDetail/:id', updatePyPapersDetail);
 router.delete('/deletePyPapersDetail/:id', deletePyPapersDetail);
 router.get('/getTotalPyPapersCount', getTotalPyPapersCount);
+
+// unpaid model form routes
+
+router.post('/createUnpaidModel', createUnpaidModel);
+router.get('/getAllUnpaidModel', getAllUnpaidModel);
+router.put('/updateUnpaidModel/:id', updateUnpaidModel);
+router.delete('/deleteUnpaidModel/:id', deleteUnpaidModel);
+router.get('/getTotalUnpaidModel', getTotalUnpaidModel);
 
 // TPM routes
 router.post('/createTpmFormDetails', createTpmFormDetails);

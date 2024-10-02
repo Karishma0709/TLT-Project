@@ -44,6 +44,10 @@ export const router = createBrowserRouter([
             path: 'dashboardcards',
             element: <Dashboard />,
           },
+<<<<<<< HEAD
+=======
+       
+>>>>>>> d788d9b6e46f33f0f6b0db422d73d3436c3ee203
           {
             path: 'header',
             element: <Header />,
