@@ -13,7 +13,7 @@ const AddMpcjProduct = () => {
   const [products, setProducts] = useState([]); // State to hold the list of products
   const [editingProductId, setEditingProductId] = useState(null); // State for the product being edited
 
-  // Fetch all products when component mounts
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {

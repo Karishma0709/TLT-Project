@@ -21,7 +21,7 @@ import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
-import AsminRegi from '../components/AsminRegi';
+
 
 export const router = createBrowserRouter([
   {
@@ -44,10 +44,7 @@ export const router = createBrowserRouter([
             path: 'dashboardcards',
             element: <Dashboard />,
           },
-          {
-            path: 'asminRegi',
-            element: <AsminRegi />,
-          },
+       
           {
             path: 'header',
             element: <Header />,

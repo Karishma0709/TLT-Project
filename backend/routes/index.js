@@ -286,7 +286,7 @@ router.get('/registerUser', allRegisterUser);
 //Maquee Routes
 router.post('/marquee', createMarquee);
 router.get('/marquee', getMarquees);
-router.get('/marquee/:id', getMarqueeById);
+// router.get('/marquee/:id', getMarqueeById);
 router.put('/marquee/:id', updateMarquee);
 router.delete('/marquee/:id', deleteMarquee);
 
