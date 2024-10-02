@@ -265,9 +265,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
-<<<<<<< HEAD
    
-=======
   createEnquiryDetails: {
     url: `${backendDomain}/api/createEnquiryDetails`,
     method: 'post',
@@ -288,7 +286,6 @@ const SummaryApi = {
   },
 
 
->>>>>>> 30f0c9b406b4cbc0af386764d4b77f85d75aab16
 
   // mpcj 
   GetMPCJFormDetails:{

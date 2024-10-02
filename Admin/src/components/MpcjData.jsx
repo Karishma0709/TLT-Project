@@ -18,18 +18,12 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-<<<<<<< HEAD
       const result = await axios({
         url:SummaryApi.GetMPCJFormDetails.url,
         method:SummaryApi.GetMPCJFormDetails.method
       });
       console.log('API Response:', result.data);
   
-=======
-      const result = await axios.get(
-        `http://localhost:8080/api/getMPCJFormDetails`
-      );
->>>>>>> 30f0c9b406b4cbc0af386764d4b77f85d75aab16
       if (Array.isArray(result.data)) {
         setMpcjData(result.data);
       } else {
@@ -45,17 +39,11 @@ const MpcjData = () => {
   const deleteData = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       try {
-<<<<<<< HEAD
         const urldata = SummaryApi.DeleteMPCJFormDetails.url.replace(':id', id);
              await axios({
               url: urldata,
               method: SummaryApi.DeleteMPCJFormDetails.method,
             });
-=======
-        await axios.delete(
-          `http://localhost:8080/api/deleteMPCJFormDetails/${id}`
-        );
->>>>>>> 30f0c9b406b4cbc0af386764d4b77f85d75aab16
         toast.success('Data deleted successfully!');
         fetchAllData();
       } catch (error) {
@@ -75,7 +63,6 @@ const MpcjData = () => {
   const updateData = async (id) => {
     if (window.confirm('Are you sure you want to update this entry?')) {
       try {
-<<<<<<< HEAD
         await axios({
           url: SummaryApi.UpdateMPCJFormDetails.url.replace(':id', id),
           method: SummaryApi.UpdateMPCJFormDetails.method,
@@ -84,14 +71,6 @@ const MpcjData = () => {
         toast
         setEditMode(null); // Exit edit mode after updating
         fetchAllData(); // Fetch updated data
-=======
-        await axios.put(
-          `http://localhost:8080/api/updateMPCJFormDetails/${id}`,
-          editData[id]
-        );
-        setEditMode(null);
-        fetchAllData();
->>>>>>> 30f0c9b406b4cbc0af386764d4b77f85d75aab16
         toast.success('Data updated successfully!');
       } catch (error) {
         console.error('Error updating data:', error);
