@@ -91,7 +91,7 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className="md:my-20 my-5" id="about">
+    <section className="md:pb-14 my-5" id="about">
       <div className="container mx-auto px-5 md:px-20 mb-10 md:mb-20">
         <div className="md:mb-16 mb-7">
           <Headings heading={"h5"} style={"text-shadow"}>
@@ -102,7 +102,7 @@ const AboutUs = () => {
           </Headings>
         </div>
         <div className="w-full flex flex-col lg:flex-row gap-10">
-          <div className="w-full lg:w-2/3">
+          <div className="w-full lg:w-1/2">
             <div className="">
               <div className="flex flex-wrap justify-center lg:justify-start mb-6">
                 <div className="menu flex flex-wrap gap-6 md:gap-6">
@@ -137,36 +137,12 @@ const AboutUs = () => {
           </div>
           <div className="w-full lg:w-1/2">
         
-            <div className="text-center" >
+            <div className="text-center pt-72 md:pt-56 lg:pt-5" >
               <Headings heading={"h3"}  style={"font-bold"}>
               Quiz of the day
               </Headings>
-              <div className="mt-5 invisible">
-                At TLT Judicial Academy, we are proud to be an emerging
-                institute dedicated to nurturing aspiring judiciary
-                professionals. We envision our academy as a modern-day gurukul,
-                where judiciary aspirants are embraced with innovative learning
-                methods, unparalleled mentorship, and meticulously curated study
-                material.
-              </div>
-              <div className="mt-7">
-              <div className="lg:hidden block">
-              <Headings heading={"h4"} style={"font-bold"}>
-                Traditional methods to achieve great Heights/ Building a Gurukul
-                to embrace the Judiciary Students
-              </Headings>
-              <div className="my-5">
-                At TLT Judicial Academy, we are proud to be an emerging
-                institute dedicated to nurturing aspiring judiciary
-                professionals. We envision our academy as a modern-day gurukul,
-                where judiciary aspirants are embraced with innovative learning
-                methods, unparalleled mentorship, and meticulously curated study
-                material.
-              </div>
-              </div>
-               <QuizApp/>
-                
-              </div>
+              
+              <QuizApp/>
             </div>
           </div>
         </div>
