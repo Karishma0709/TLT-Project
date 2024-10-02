@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import SummaryApi from '../Common/SummaryApi';
+import SummaryApi from '../Common/SummaryApi'; // Import the API routes
 
 const UpdateMarquee = () => {
   const [marquees, setMarquees] = useState([]);
@@ -9,16 +9,17 @@ const UpdateMarquee = () => {
   const [editMarqueeId, setEditMarqueeId] = useState(null);
   const [editMarqueeText, setEditMarqueeText] = useState('');
 
+  // Fetch all marquees from the backend
   const fetchMarquees = async () => {
     try {
       const response = await axios({
-        url:SummaryApi.MarqueGet.url,
-        method:SummaryApi.MarqueGet.method
+        url: SummaryApi.Getmarquee.url,
+        method: SummaryApi.Getmarquee.method,
       });
       if (response.status === 200) {
         setMarquees(response.data);
       } else {
-        toast.error(response.data.message);
+        toast.error('Failed to fetch marquees');
       }
     } catch (error) {
       toast.error('Error fetching marquees');
@@ -27,20 +28,26 @@ const UpdateMarquee = () => {
   };
 
   useEffect(() => {
-    fetchMarquees();
+    fetchMarquees(); // Fetch marquees when the component mounts
   }, []);
 
+  // Create a new marquee
   const handleCreateMarquee = async (e) => {
     e.preventDefault();
+    if (!newMarqueeText.trim()) {
+      toast.error('Marquee text cannot be empty');
+      return;
+    }
     try {
       const response = await axios({
-        url:SummaryApi.Allmarquee.url,
-        method: SummaryApi.AllmpcjData.method
-      }, { text: newMarqueeText });
+        url: SummaryApi.Allmarquee.url,
+        method: SummaryApi.Allmarquee.method,
+        data: { text: newMarqueeText },
+      });
       if (response.status === 201) {
         toast.success('Marquee created successfully!');
-        setNewMarqueeText('');
-        fetchMarquees();
+        setNewMarqueeText(''); // Reset input field
+        fetchMarquees(); // Refresh marquee list
       } else {
         toast.error('Failed to create marquee');
       }
@@ -50,16 +57,19 @@ const UpdateMarquee = () => {
     }
   };
 
+  // Edit an existing marquee
   const handleEditClick = (marquee) => {
     setEditMarqueeId(marquee._id);
     setEditMarqueeText(marquee.text);
   };
 
+  // Cancel editing
   const handleCancelEdit = () => {
     setEditMarqueeId(null);
     setEditMarqueeText('');
   };
 
+  // Update an existing marquee
   const handleUpdateMarquee = async (id) => {
     if (!editMarqueeText.trim()) {
       toast.error('Marquee text cannot be empty');
@@ -67,15 +77,15 @@ const UpdateMarquee = () => {
     }
     try {
       const response = await axios({
-        url: `${SummaryApi.updateMarquee.url}/${id}`, 
-        method: SummaryApi.updateMarquee.method,    
-        data: { text: editMarqueeText },             
+        url: `${SummaryApi.updateMarquee.url.replace(':id', id)}`,
+        method: SummaryApi.updateMarquee.method,
+        data: { text: editMarqueeText },
       });
       if (response.status === 200) {
         toast.success('Marquee updated successfully!');
         setEditMarqueeId(null);
         setEditMarqueeText('');
-        fetchMarquees();
+        fetchMarquees(); // Refresh marquee list
       } else {
         toast.error('Failed to update marquee');
       }
@@ -85,20 +95,21 @@ const UpdateMarquee = () => {
     }
   };
 
+  // Delete a marquee
   const handleDeleteMarquee = async (id) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this marquee?');
     if (!confirmDelete) return;
 
     try {
       const response = await axios({
-        url: `${SummaryApi.deleteMarquee.url}/${id}`, // Dynamic URL using SummaryApi
-        method: SummaryApi.deleteMarquee.method, 
+        url: `${SummaryApi.DeleteMarquee.url.replace(':id', id)}`,
+        method: SummaryApi.DeleteMarquee.method,
       });
       if (response.status === 200) {
         toast.success('Marquee deleted successfully!');
-        fetchMarquees();
+        fetchMarquees(); // Refresh marquee list
       } else {
-        toast.error(response.data.message);
+        toast.error('Failed to delete marquee');
       }
     } catch (error) {
       toast.error('Error deleting marquee');

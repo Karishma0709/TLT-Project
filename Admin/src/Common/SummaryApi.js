@@ -1,5 +1,3 @@
-import TpmData from '../components/TpmData';
-
 // const backendDomain = "https://tlt-project-6ivu.onrender.com";
 const backendDomain = 'http://localhost:8080';
 
@@ -32,9 +30,17 @@ const SummaryApi = {
     url: `${backendDomain}/api/marquee`,
     method: 'post',
   },
+  Getmarquee: {
+    url: `${backendDomain}/api/marquee`,
+    method: 'get',
+  },
   updateMarquee: {
-    url: `${backendDomain}/api/marquee-data/66b751ebc085bfafb981a879`,
+    url: `${backendDomain}/api/marquee/:id`,
     method: 'put',
+  },
+  DeleteMarquee: {
+    url: `${backendDomain}/api/marquee/:id`,
+    method: 'delete',
   },
   PyPaperPDF: {
     url: `${backendDomain}/api/PyPaperPDF`,
@@ -273,6 +279,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/getTotalEnquiryCount`,
     method: 'get',
   },
+
 
 
 

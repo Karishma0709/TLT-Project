@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true, // Added required validation for password
     },
+    role: {
+      type: String,
+     default: 'admin', 
+    },
   },
   {
     timestamps: true,

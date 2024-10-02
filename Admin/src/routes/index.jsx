@@ -25,6 +25,7 @@ import AsminRegi from '../components/AsminRegi';
 import EnquiryAdd from '../components/EnquiryAdd';
 import EnquiryList from '../components/EnquiryList';
 
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -46,10 +47,7 @@ export const router = createBrowserRouter([
             path: 'dashboardcards',
             element: <Dashboard />,
           },
-          {
-            path: 'asminRegi',
-            element: <AsminRegi />,
-          },
+       
           {
             path: 'header',
             element: <Header />,
