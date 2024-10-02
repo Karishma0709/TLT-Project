@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
+<<<<<<< HEAD
 
+=======
+import SummaryApi from '../Common/SummaryAPI';
+>>>>>>> bb90eae0730624ad81d16b8a7afa2f695d309b16
 import axios from 'axios';
 import SummaryApi from '../Common/SummaryAPI';
 const SyllabusModel = ({ onFormSubmit }) => {

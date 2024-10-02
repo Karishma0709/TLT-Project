@@ -88,8 +88,7 @@ const EmpowermentBatch = () => {
         method: SummaryApi.empowermentForm.method,
         data: formData,
       });
-      // const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
-      // console.log(response.data);
+      
 
       console.log(response.data);
 

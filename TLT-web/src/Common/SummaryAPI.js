@@ -203,6 +203,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/quiz`,
     method: 'get',
   },
+  quizUser: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'get',
+  },
 
 };
 
