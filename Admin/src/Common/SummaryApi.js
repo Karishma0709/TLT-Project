@@ -144,6 +144,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  GetPyPaperPDFupload: {
+    url: `${backendDomain}/api/getPyPaperPDFupload`,
+    method: 'get',
+  },
   PyPaperPDFUploads: {
     url: `${backendDomain}/api/createPyPaperPDFupload`,
     method: 'POST',
@@ -261,7 +265,21 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+   
 
+  // mpcj 
+  GetMPCJFormDetails:{
+    url:`${backendDomain}/api/getMPCJFormDetails`,
+    method:'get'
+  },
+  DeleteMPCJFormDetails:{
+    url:`${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method:'delete'
+  },
+  UpdateMPCJFormDetails:{
+    url:`${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method:'put'
+  },
 
 };
 export default SummaryApi;

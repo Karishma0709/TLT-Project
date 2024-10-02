@@ -17,9 +17,15 @@ const PrevYearPaperUpload = () => {
 
   const fetchPapers = async (page = 1) => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/getPyPaperPDFupload?page=${page}&limit=${itemsPerPage}`
-      );
+  
+      const urldata = `${SummaryApi.GetPyPaperPDFupload.url}?page=${page}&limit=${itemsPerPage}`;
+      
+      const response = await axios({
+        url: urldata,
+        method: SummaryApi.GetPyPaperPDFupload.method, 
+      });
+  
+      // Set the fetched data into your state
       setPaperList(response.data.data);
       setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage)); // Calculate total pages
     } catch (error) {
@@ -27,7 +33,6 @@ const PrevYearPaperUpload = () => {
       setError('Error fetching previous year papers');
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();

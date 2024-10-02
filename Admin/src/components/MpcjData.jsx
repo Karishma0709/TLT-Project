@@ -19,7 +19,10 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-      const result = await axios.get(`http://localhost:8080/api/getMPCJFormDetails`);
+      const result = await axios({
+        url:SummaryApi.GetMPCJFormDetails.url,
+        method:SummaryApi.GetMPCJFormDetails.method
+      });
       console.log('API Response:', result.data);
   
       if (Array.isArray(result.data)) {
@@ -39,7 +42,11 @@ const MpcjData = () => {
   const deleteData = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       try {
-        await axios.delete(`http://localhost:8080/api/deleteMPCJFormDetails/${id}`);
+        const urldata = SummaryApi.DeleteMPCJFormDetails.url.replace(':id', id);
+             await axios({
+              url: urldata,
+              method: SummaryApi.DeleteMPCJFormDetails.method,
+            });
         toast.success('Data deleted successfully!');
         fetchAllData(); // Refresh data after deletion
       } catch (error) {
@@ -61,7 +68,12 @@ const MpcjData = () => {
   const updateData = async (id) => {
     if (window.confirm('Are you sure you want to update this entry?')) {
       try {
-        await axios.put(`http://localhost:8080/api/updateMPCJFormDetails/${id}`, editData[id]);
+        await axios({
+          url: SummaryApi.UpdateMPCJFormDetails.url.replace(':id', id),
+          method: SummaryApi.UpdateMPCJFormDetails.method,
+          data: editData[id],
+        });
+        toast
         setEditMode(null); // Exit edit mode after updating
         fetchAllData(); // Fetch updated data
         toast.success('Data updated successfully!');
