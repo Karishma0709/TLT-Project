@@ -3,7 +3,7 @@ import axios from 'axios';
 import SummaryApi from '../Common/SummaryApi';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Ensure you import the icons
 import * as XLSX from 'xlsx';
-
+const baseUrl=import.meta.env.VITE_BACKEND_URL
 
 const FastTrackForm = () => {
   const [fastTrackData, setFastTrackData] = useState([]);
@@ -106,6 +106,7 @@ const FastTrackForm = () => {
               {[
                 'S.no',
                 'Picture',
+                'Aadhar Card',
                 'Name',
                 'Place of Birth',
                 'Date of Birth',
@@ -122,7 +123,7 @@ const FastTrackForm = () => {
                 'Permanent Address',
                 'Permanent State',
                 'Permanent City',
-                'Aadhar Card',
+               
                 'Fees Paid',
                 'Amount Paid',
                 'Prelims',
@@ -160,7 +161,24 @@ const FastTrackForm = () => {
                     />
                   ) : (
                     <img
-                      src={`http://localhost:8080/files/${data.picture}`}
+                      src={`${baseUrl}/${data.picture}`}
+                      alt="User"
+                      className="w-24 h-24 object-cover"
+                    />
+                  )}
+                </td>
+                <td className="py-2 px-4">
+                  {editMode === data._id ? (
+                    <input
+                      type="file"
+                      name="aadharCard"
+                      value={editData[data._id]?.aadharCard || ''}
+                      onChange={(e) => handleChange(e, data._id)}
+                      className="w-full p-2 border rounded"
+                    />
+                  ) : (
+                    <img
+                      src={`${baseUrl}/${data.aadharCard}`}
                       alt="User"
                       className="w-24 h-24 object-cover"
                     />
@@ -183,7 +201,6 @@ const FastTrackForm = () => {
                   'permanentAddress',
                   'permanentState',
                   'permanentCity',
-                  'aadharCard',
                   'feesPaid',
                   'amountPaid',
                   'prelims',

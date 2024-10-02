@@ -5,7 +5,7 @@ import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import SummaryApi from '../Common/SummaryApi';
 import * as XLSX from 'xlsx';
-const baseUrl = import.meta.env.REACT_APP_BASE_URL;
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 const JetFormDetails = () => {
   const [formData, setFormData] = useState([]);
   const [editData, setEditData] = useState({});
@@ -370,11 +370,11 @@ const JetFormDetails = () => {
               <td className="p-3">
                 <img
                   className="w-[100px] h-[100px]"
-                  src={`http://localhost:8080/jetFormfiles/${form.photo}`}
+                  src={`${baseUrl}/${form.photo}`}
                 />
                 {form.photo && (
                   <a
-                    href={`http://localhost:8080/${form.photo}`}
+                    href={`${baseUrl}/${form.photo}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -383,9 +383,13 @@ const JetFormDetails = () => {
                 )}
               </td>
               <td className="p-3">
+              <img
+                  className="w-[100px] h-[100px]"
+                  src={`${baseUrl}/${form.adhaarPhoto}`}
+                />
                 {form.adhaarPhoto && (
                   <a
-                    href={`http://localhost:8080/${form.adhaarPhoto}`}
+                    href={`${baseUrl}/${form.adhaarPhoto}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
