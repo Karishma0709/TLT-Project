@@ -174,10 +174,23 @@ const SummaryApi = {
     url: `${backendDomain}/api/updateMpcjProduct/:id`,
     method: 'put',
   },
-  createTpmFormDetails: {
-    url: `${backendDomain}/api/createTpmFormDetails`,
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
     method: 'post',
   },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  quiz: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'get',
+  },
+
 };
 
 export default SummaryApi;

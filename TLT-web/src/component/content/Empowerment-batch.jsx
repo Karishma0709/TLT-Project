@@ -85,12 +85,12 @@ const EmpowermentBatch = () => {
     });
 
     try {
-      // const response = await axios({
-      //   url: SummaryApi.empowermentForm.url,
-      //   method: SummaryApi.empowermentForm.method,
-      //   data: formData,
-      // });
-      const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
+      const response = await axios({
+        url: SummaryApi.empowermentForm.url,
+        method: SummaryApi.empowermentForm.method,
+        data: formData,
+      });
+      
       console.log(response.data);
 
 
