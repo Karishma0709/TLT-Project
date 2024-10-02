@@ -24,6 +24,12 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use('/notifiesfiles', express.static('notifiesfiles'));
 app.use('/files', express.static('files'));
+app.use('/jetFormfiles', express.static('jetFormfiles'));
+app.use(
+  '/unpaidProductUploadFiles',
+  express.static('unpaidProductUploadFiles')
+);
+
 app.use('/SyllabusUploadFiles', express.static('SyllabusUploadFiles'));
 app.use('/prevYearPDFuploadUpload', express.static('prevYearPDFuploadUpload'));
 

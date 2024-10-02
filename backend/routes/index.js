@@ -87,8 +87,12 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
-const {  createMpcjProduct, getAllMpcjProducts, editMpcjProduct, deleteMpcjProduct } = require('../controllers/addMpcjProductController');
-
+const {
+  createMpcjProduct,
+  getAllMpcjProducts,
+  editMpcjProduct,
+  deleteMpcjProduct,
+} = require('../controllers/addMpcjProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));
@@ -266,7 +270,7 @@ router.get('/registerUser', allRegisterUser);
 //Maquee Routes
 router.post('/marquee', createMarquee);
 router.get('/marquee', getMarquees);
-router.get('/marquee/:id', getMarqueeById);
+// router.get('/marquee/:id', getMarqueeById);
 router.put('/marquee/:id', updateMarquee);
 router.delete('/marquee/:id', deleteMarquee);
 

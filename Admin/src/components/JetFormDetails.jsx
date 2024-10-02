@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import SummaryApi from '../Common/SummaryApi';
+import * as XLSX from 'xlsx';
+
 
 const JetFormDetails = () => {
   const [formData, setFormData] = useState([]);
@@ -19,8 +21,8 @@ const JetFormDetails = () => {
   const fetchData = async () => {
     try {
       const result = await axios({
-        url:SummaryApi.JetFormGet.url,
-        method: SummaryApi.JetFormGet.method
+        url: SummaryApi.JetFormGet.url,
+        method: SummaryApi.JetFormGet.method,
       });
       setFormData(result.data.jetForms);
     } catch (error) {
@@ -30,10 +32,10 @@ const JetFormDetails = () => {
 
   const deleteForm = async (id) => {
     try {
-      const urldata=SummaryApi.JetFormDelete.url.replace(":id",id)
+      const urldata = SummaryApi.JetFormDelete.url.replace(':id', id);
       await axios({
-        url:urldata,
-        method: SummaryApi.JetFormDelete.method
+        url: urldata,
+        method: SummaryApi.JetFormDelete.method,
       });
       toast.success('Form deleted successfully.');
       fetchData();
@@ -52,9 +54,10 @@ const JetFormDetails = () => {
   const updateForm = async (id) => {
     try {
       await axios({
-        url:SummaryApi.JetFormUpdate.url.replace(":id",id),
-        method:SummaryApi.JetFormUpdate.method,
-        data:editData[id]});
+        url: SummaryApi.JetFormUpdate.url.replace(':id', id),
+        method: SummaryApi.JetFormUpdate.method,
+        data: editData[id],
+      });
       toast.success('Form updated successfully.');
       setEditMode(null);
       fetchData();
@@ -76,12 +79,30 @@ const JetFormDetails = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+
+  // Export to Excel function
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(formData); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Jet Form Data'); // Add worksheet to workbook
+    XLSX.writeFile(workbook, 'jetform_data.xlsx'); // Trigger the file download
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Jet Forms</h2>
+
+ {/* Export to Excel Button */}
+ <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       <table className="min-w-full border-collapse bg-white">
         <thead>
-        <tr className="bg-gray-800 text-white">
+          <tr className="bg-gray-800 text-white">
             <th className="p-3 text-left">S.No.</th>
             <th className="p-3 text-left">Name</th>
             <th className="p-3 text-left">Email</th>
@@ -108,9 +129,11 @@ const JetFormDetails = () => {
           </tr>
         </thead>
         <tbody>
-
           {formData.map((form, index) => (
-            <tr key={form._id} className="border-b border-gray-200 hover:bg-gray-100">
+            <tr
+              key={form._id}
+              className="border-b border-gray-200 hover:bg-gray-100"
+            >
               <td className="p-3">{index + 1}</td>
               <td className="p-3">
                 {editMode === form._id ? (
@@ -347,70 +370,91 @@ const JetFormDetails = () => {
                 )}
               </td>
               <td className="p-3">
+                <img
+                  className="w-[100px] h-[100px]"
+                  src={`http://localhost:8080/jetFormfiles/${form.photo}`}
+                />
                 {form.photo && (
-                  <a href={`http://localhost:8080/${form.photo}`} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`http://localhost:8080/${form.photo}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     View Photo
                   </a>
                 )}
               </td>
               <td className="p-3">
                 {form.adhaarPhoto && (
-                  <a href={`http://localhost:8080/${form.adhaarPhoto}`} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`http://localhost:8080/${form.adhaarPhoto}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     View Aadhaar Photo
                   </a>
                 )}
               </td>
-             {/* Created date */}
-             <td className="p-3">{moment(form.createdAt).format('YYYY-MM-DD')}</td>
+              {/* Created date */}
+              <td className="p-3">
+                {moment(form.createdAt).format('YYYY-MM-DD')}
+              </td>
 
-{/* Actions */}
-<td className="p-3">
-{editMode === form._id ? (
-  <div>
-    <button
-       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
-      onClick={() => updateForm(form._id)}
-    >
-      Save
-    </button>
-    <button
-      onClick={() => setEditMode(null)}
-      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700 ml-2"
-    >
-      Cancel
-    </button>
-  </div>
-) : (
-    <button className="text-blue-500 hover:text-blue-700" onClick={() => toggleEditMode(form._id)}>
-      <FaEdit />
-    </button>
-  )}
-  <button
-    className="text-red-500 hover:text-red-700 ml-4"
-    onClick={() => deleteForm(form._id)}
-  >
-    <FaTrashAlt />
-  </button>
-</td>
-</tr>
-))}
-</tbody>
-</table>
+              {/* Actions */}
+              <td className="p-3">
+                {editMode === form._id ? (
+                  <div>
+                    <button
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
+                      onClick={() => updateForm(form._id)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditMode(null)}
+                      className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-700 ml-2"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="text-blue-500 hover:text-blue-700"
+                    onClick={() => toggleEditMode(form._id)}
+                  >
+                    <FaEdit />
+                  </button>
+                )}
+                <button
+                  className="text-red-500 hover:text-red-700 ml-4"
+                  onClick={() => deleteForm(form._id)}
+                >
+                  <FaTrashAlt />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-{/* Pagination */}
-<div className="flex justify-center mt-4">
-{Array.from({ length: totalPages }, (_, index) => (
-<button
-key={index}
-className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-gray-800 text-white' : 'bg-gray-300'}`}
-onClick={() => handlePageChange(index + 1)}
->
-{index + 1}
-</button>
-))}
-</div>
-</div>
-);
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            className={`mx-1 px-3 py-1 rounded ${
+              currentPage === index + 1
+                ? 'bg-gray-800 text-white'
+                : 'bg-gray-300'
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default JetFormDetails;
