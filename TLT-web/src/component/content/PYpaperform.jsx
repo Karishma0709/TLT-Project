@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
+import SummaryApi from '../../Common/SummaryAPI';
+import axios from 'axios';
 
 const PYpaperform = ({ onFormSubmit }) => {
   const [data, setData] = useState({
@@ -7,11 +9,9 @@ const PYpaperform = ({ onFormSubmit }) => {
     email: '',
     number: '',
   });
-
   const [nameAlert, setNameAlert] = useState(false);
   const [emailAlert, setEmailAlert] = useState(false);
   const [numAlert, setNumAlert] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({
@@ -46,16 +46,14 @@ const PYpaperform = ({ onFormSubmit }) => {
 
     if (valid) {
       try {
-        const response = await fetch(
-          'http://localhost:8080/api/createPyPapersDetail',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }
-        );
+        const response = await axios({
+          url: SummaryApi.createPyPapersDetail.url,
+          method: SummaryApi.createPyPapersDetail.method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: JSON.stringify(data),
+        });
 
         if (!response.ok) {
           throw new Error('Failed to submit the form');

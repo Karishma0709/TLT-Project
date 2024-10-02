@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import SummaryApi from '../Common/SummaryAPI';
+
 import {
   Button,
   Flex,
@@ -32,7 +34,7 @@ const QuizApp = () => {
   useEffect(()=>{
     async function getQuizData(){
       try{
-        const data = await fetch("http://localhost:8080/api/quiz")
+        const data = await fetch(SummaryApi.quiz.url)
         const dataJson = await data.json()
         let array =[...dataJson.data]
         shuffleArray(array)

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
+import SummaryApi from '../../Common/SummaryAPI';
+import axios from 'axios';
 
 const UnpaidModal = ({ onFormSubmit }) => {
   const [data, setData] = useState({
@@ -7,7 +9,6 @@ const UnpaidModal = ({ onFormSubmit }) => {
     email: '',
     number: '',
   });
-
   const [nameAlert, setNameAlert] = useState(false);
   const [emailAlert, setEmailAlert] = useState(false);
   const [numAlert, setNumAlert] = useState(false);
@@ -46,16 +47,14 @@ const UnpaidModal = ({ onFormSubmit }) => {
 
     if (valid) {
       try {
-        const response = await fetch(
-          'http://localhost:8080/api/createPyPapersDetail',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }
-        );
+        const response = await axios({
+          url: SummaryApi.createUnpaidModel.url,
+          method: SummaryApi.createUnpaidModel.method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: JSON.stringify(data),
+        });
 
         if (!response.ok) {
           throw new Error('Failed to submit the form');

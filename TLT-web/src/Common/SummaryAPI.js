@@ -106,6 +106,19 @@ const SummaryApi = {
     url: `${backendDomain}/api/getpydata`,
     method: 'get',
   },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createUnpaidModel: {
+    url: `${backendDomain}/api/createUnpaidModel`,
+    method: 'post',
+  },
+  createSyllabusModel: {
+    url: `${backendDomain}/api/createSyllabusModel`,
+    method: 'post',
+  },
+
   getUnpaid: {
     url: `${backendDomain}/api/getUnpaidUpload`,
     method: 'get',
@@ -174,10 +187,23 @@ const SummaryApi = {
     url: `${backendDomain}/api/updateMpcjProduct/:id`,
     method: 'put',
   },
-  createTpmFormDetails: {
-    url: `${backendDomain}/api/createTpmFormDetails`,
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
     method: 'post',
   },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  quiz: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'get',
+  },
+
 };
 
 export default SummaryApi;

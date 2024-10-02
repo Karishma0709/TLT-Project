@@ -71,9 +71,8 @@ const EmpowermentBatch = () => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
-    console.log(data,files)
+    console.log(data, files);
     e.preventDefault();
     const formData = new FormData();
 
@@ -83,16 +82,16 @@ const EmpowermentBatch = () => {
         formData.append(key, files[key]);
       }
     });
-
     try {
-      // const response = await axios({
-      //   url: SummaryApi.empowermentForm.url,
-      //   method: SummaryApi.empowermentForm.method,
-      //   data: formData,
-      // });
-      const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
-      console.log(response.data);
+      const response = await axios({
+        url: SummaryApi.empowermentForm.url,
+        method: SummaryApi.empowermentForm.method,
+        data: formData,
+      });
+      // const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
+      // console.log(response.data);
 
+      console.log(response.data);
 
       const redirectUrl = response.data.redirectUrl || response.data;
       if (typeof redirectUrl === 'string' && redirectUrl.startsWith('http')) {
@@ -545,86 +544,86 @@ const EmpowermentBatch = () => {
             </div>
 
             <div>
-            <h2 className="text-white bg-red-500 text-center text-3xl py-3 px-4 sm:px-10">
-              Fees Paid (First Installment)
-            </h2>
-          </div>
-          <div className="sm:flex justify-between items-center">
-            <label className="flex text-left font-bold text-lg sm:w-1/6">
-              Online / UPI:
-              <input
-                type="radio"
-                name="feesPaid"
-                value="yes"
-                onChange={handleInput}
-                className="mx-2 mt-1"
-              />{' '}
-            </label>
-          </div>
-
-          <div className="sm:flex items-center">
-            <label
-              htmlFor="amount-paid"
-              className="block text-left font-bold text-lg  sm:w-1/4"
-            >
-              Amount Paid:
-            </label>
-            <input
-              type="number"
-              name="amountPaid"
-              id="amount-paid"
-              value={data.amountPaid}
-              onChange={handleInput}
-              className="border rounded w-full p-2"
-            />
-          </div>
-
-          <div className="sm:flex items-center">
-            <label className="block text-left font-bold text-lg  sm:w-1/6">
-              Old Student of Shubham Sir:
-            </label>
-            <div className="flex space-x-4 sm:ml-8">
-              <label>
+              <h2 className="text-white bg-red-500 text-center text-3xl py-3 px-4 sm:px-10">
+                Fees Paid (First Installment)
+              </h2>
+            </div>
+            <div className="sm:flex justify-between items-center">
+              <label className="flex text-left font-bold text-lg sm:w-1/6">
+                Online / UPI:
                 <input
                   type="radio"
-                  name="oldStudentOfShubhamSir"
+                  name="feesPaid"
                   value="yes"
-                  autoComplete="off"
                   onChange={handleInput}
-                  className="mr-2"
+                  className="mx-2 mt-1"
                 />{' '}
-                Yes
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="oldStudentOfShubhamSir"
-                  value="no"
-                  autoComplete="off"
-                  onChange={handleInput}
-                  className="mr-2"
-                />{' '}
-                No
               </label>
             </div>
-          </div>
 
-          <div className="sm:flex items-center">
-            <label
-              htmlFor="institution"
-              className="block text-left font-bold text-lg sm:w-1/4"
-            >
-              Institution:
-            </label>
-            <input
-              type="text"
-              name="institution"
-              id="institution"
-              onChange={handleInput}
-              value={data.institution}
-              className="border rounded w-full p-2"
-            />
-          </div>
+            <div className="sm:flex items-center">
+              <label
+                htmlFor="amount-paid"
+                className="block text-left font-bold text-lg  sm:w-1/4"
+              >
+                Amount Paid:
+              </label>
+              <input
+                type="number"
+                name="amountPaid"
+                id="amount-paid"
+                value={data.amountPaid}
+                onChange={handleInput}
+                className="border rounded w-full p-2"
+              />
+            </div>
+
+            <div className="sm:flex items-center">
+              <label className="block text-left font-bold text-lg  sm:w-1/6">
+                Old Student of Shubham Sir:
+              </label>
+              <div className="flex space-x-4 sm:ml-8">
+                <label>
+                  <input
+                    type="radio"
+                    name="oldStudentOfShubhamSir"
+                    value="yes"
+                    autoComplete="off"
+                    onChange={handleInput}
+                    className="mr-2"
+                  />{' '}
+                  Yes
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="oldStudentOfShubhamSir"
+                    value="no"
+                    autoComplete="off"
+                    onChange={handleInput}
+                    className="mr-2"
+                  />{' '}
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div className="sm:flex items-center">
+              <label
+                htmlFor="institution"
+                className="block text-left font-bold text-lg sm:w-1/4"
+              >
+                Institution:
+              </label>
+              <input
+                type="text"
+                name="institution"
+                id="institution"
+                onChange={handleInput}
+                value={data.institution}
+                className="border rounded w-full p-2"
+              />
+            </div>
 
             <div className="flex justify-center mt-6">
               <button
