@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SummaryApi from '../Common/SummaryAPI';
+import UnpaidModal from './UnpaidModal';
+const backendDomain = import.meta.env.VITE_BACKEND_URL;
 
 const Unpaid = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [unpaidFiles, setUnpaidFiles] = useState([]);
+  const [selectedPdf, setSelectedPdf] = useState(null); // State for the selected PDF
 
   useEffect(() => {
     fetchUnpaidFiles();
@@ -16,18 +20,41 @@ const Unpaid = () => {
         method: SummaryApi.getUnpaid.method,
       });
       setUnpaidFiles(result.data.data);
+      console.log(result.data.data);
     } catch (error) {
       console.error('Error fetching unpaid files:', error);
     }
   };
 
-  const showPdf = (pdf) => {
-    window.open(
-      `http://localhost:5054/api/UnpaidFiles/${pdf}`,
-      '_blank',
-      'noreferrer'
-    );
+  const handleBuyNowClick = (pdf) => {
+    setSelectedPdf(pdf); // Set the selected PDF
+    setIsModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const triggerDownload = (pdf) => {
+    if (pdf) {
+      const link = document.createElement('a');
+      link.href = `${backendDomain}/unpaidProductUploadFiles/${pdf}`;
+      link.download = pdf;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      console.error('No PDF file available to download.');
+    }
+  };
+
+  // const showPdf = (pdf) => {
+  //   window.open(
+  //     `http://localhost:5054/api/UnpaidFiles/${pdf}`,
+  //     '_blank',
+  //     'noreferrer'
+  //   );
+  // };
 
   return (
     <div className="px-5 md:px-20 py-8">
@@ -51,14 +78,33 @@ const Unpaid = () => {
                 <td className="py-3 px-5">{file.title}</td>
                 <td className="py-3 px-5">
                   <button
-                    className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600"
-                    onClick={() => showPdf(file.pdf)}
+                    className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"
+                    onClick={() => handleBuyNowClick(file.pdf)}
                   >
                     View
                   </button>
                 </td>
               </tr>
             ))}
+
+            {isModalOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
+                <div className="bg-white p-3 rounded-lg w-96 bg-opacity-100">
+                  <button
+                    className="absolute text-3xl font-bold text-black"
+                    onClick={handleCloseModal}
+                  >
+                    X
+                  </button>
+                  <UnpaidModal
+                    onFormSubmit={() => {
+                      triggerDownload(selectedPdf); // Trigger the download when the form is submitted
+                      handleCloseModal(); // Close the modal
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </tbody>
         </table>
       </div>

@@ -20,7 +20,6 @@ async function createPyPaperPDFupload(req, res) {
         message: 'File upload failed. Check field names.',
       });
     }
-
     await Pypschema.create({ Papertitle, paperimage, pdf });
     return res
       .status(200)

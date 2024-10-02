@@ -7,6 +7,10 @@ const empowermentFormSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: Number,
+      default: 3,
+    },
     aadharCard: {
       type: String,
       required: true,
@@ -87,7 +91,7 @@ const empowermentFormSchema = new Schema(
     },
     feesPaid: {
       type: String,
-      enum: ["yes"],
+      enum: ['yes'],
       required: true,
     },
     amountPaid: {

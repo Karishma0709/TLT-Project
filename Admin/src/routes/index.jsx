@@ -21,6 +21,7 @@ import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
+import AsminRegi from '../components/AsminRegi';
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'dashboardcards',
-            element: <Dashboard/>,
+            element: <Dashboard />,
+          },
+          {
+            path: 'asminRegi',
+            element: <AsminRegi />,
           },
           {
             path: 'header',
@@ -80,12 +85,12 @@ export const router = createBrowserRouter([
             element: <Prevyearpaperpdf />,
           },
           {
-            path:"quiz-questions",
-            element:<Quiz/>
+            path: 'quiz-questions',
+            element: <Quiz />,
           },
           {
-            path:"quiz-user",
-            element:<QuizUserForm/>
+            path: 'quiz-user',
+            element: <QuizUserForm />,
           },
           {
             path: 'Unpaid',

@@ -87,8 +87,12 @@ const {
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
-const {  createMpcjProduct, getAllMpcjProducts, editMpcjProduct, deleteMpcjProduct } = require('../controllers/addMpcjProductController');
-
+const {
+  createMpcjProduct,
+  getAllMpcjProducts,
+  editMpcjProduct,
+  deleteMpcjProduct,
+} = require('../controllers/addMpcjProductController');
 
 // Static file setup
 router.use('/files', express.static('files'));

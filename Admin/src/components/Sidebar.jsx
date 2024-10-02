@@ -8,7 +8,7 @@ import {
   FaCog,
   FaBell,
   FaExclamationTriangle,
-  FaTachometerAlt, 
+  FaTachometerAlt,
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Link, Outlet } from 'react-router-dom';
@@ -98,13 +98,7 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
-                <Link
-                  to="quiz-user"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
-                >
-                  <FaFileAlt />
-                  <span>Quiz User Detail</span>
-                </Link>
+               
               </div>
             )}
           </div>
@@ -144,13 +138,13 @@ const Sidebar = () => {
                   <FaRegFilePdf />
                   <span>Previous Year Paper Pdf</span>
                 </Link>
-                <Link
+                {/* <Link
                   to="quiz-questions"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
                   <FaRegFilePdf />
                   <span>Update Quiz Questions</span>
-                </Link>
+                </Link> */}
                 <Link
                   to="addMpcjProduct"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
@@ -164,10 +158,17 @@ const Sidebar = () => {
 
           {/* Other links */}
           <Link
+                  to="quiz-questions"
+                             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+                >
+                  <FaRegFilePdf />
+                  <span>Update Quiz Questions</span>
+                </Link>
+          <Link
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
-            <FaExclamationTriangle/>
+            <FaExclamationTriangle />
             <span>Alerts</span>
           </Link>
           <Link
@@ -178,11 +179,11 @@ const Sidebar = () => {
             <span>Notification</span>
           </Link>
           <Link
-            to="info-marquee"
+            to="asminRegi"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaCog />
-            <span>Setting</span>
+            <span>AsminRegi</span>
           </Link>
         </nav>
       </aside>
