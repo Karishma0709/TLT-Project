@@ -19,21 +19,12 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-<<<<<<< HEAD
-      const result = await axios(
-       {
-        url:SummaryApi.GetMPCJFormDetails.url,
-        method:SummaryApi.GetMPCJFormDetails.method
-       }
-      );
-=======
       const result = await axios({
         url:SummaryApi.GetMPCJFormDetails.url,
         method:SummaryApi.GetMPCJFormDetails.method
       });
       console.log('API Response:', result.data);
   
->>>>>>> 48fca2f3d2dc37b96c0ec4a9ff53243db237e180
       if (Array.isArray(result.data)) {
         setMpcjData(result.data);
       } else {
