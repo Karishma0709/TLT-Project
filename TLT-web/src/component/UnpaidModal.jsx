@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'tailwindcss/tailwind.css';
-import SummaryApi from '../../Common/SummaryAPI';
+import SummaryApi from '../Common/SummaryAPI';
 import axios from 'axios';
 
 const UnpaidModal = ({ onFormSubmit }) => {
