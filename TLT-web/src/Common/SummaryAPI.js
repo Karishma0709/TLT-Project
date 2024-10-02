@@ -106,6 +106,19 @@ const SummaryApi = {
     url: `${backendDomain}/api/getpydata`,
     method: 'get',
   },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createUnpaidModel: {
+    url: `${backendDomain}/api/createUnpaidModel`,
+    method: 'post',
+  },
+  createSyllabusModel: {
+    url: `${backendDomain}/api/createSyllabusModel`,
+    method: 'post',
+  },
+
   getUnpaid: {
     url: `${backendDomain}/api/getUnpaidUpload`,
     method: 'get',

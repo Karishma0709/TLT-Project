@@ -4,7 +4,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import SummaryApi from '../Common/SummaryApi';
 import * as XLSX from 'xlsx';
 
-const PreviousYearForm = () => {
+const Syllabusmodel = () => {
   const [allPapers, setAllPapers] = useState([]);
   const [editData, setEditData] = useState({});
   const [editMode, setEditMode] = useState(null);
@@ -16,8 +16,8 @@ const PreviousYearForm = () => {
   const fetchAllPapers = async () => {
     try {
       const result = await axios({
-        url: SummaryApi.GetAllPyPapers.url,
-        method: SummaryApi.GetAllPyPapers.method,
+        url: SummaryApi.GetAllSyllabusModel.url,
+        method: SummaryApi.GetAllSyllabusModel.method,
       });
       if (Array.isArray(result.data.data)) {
         setAllPapers(result.data.data);
@@ -39,8 +39,8 @@ const PreviousYearForm = () => {
     if (!confirmDelete) return; // Exit if user cancels
     try {
       await axios({
-        url: SummaryApi.DeletePyPapersDetail.url.replace(':id', id),
-        method: SummaryApi.DeletePyPapersDetail.method,
+        url: SummaryApi.DeleteSyllabusModel.url.replace(':id', id),
+        method: SummaryApi.DeleteSyllabusModel.method,
       });
       fetchAllPapers();
     } catch (error) {
@@ -55,8 +55,8 @@ const PreviousYearForm = () => {
     if (!confirmUpdate) return; // Exit if user cancels
     try {
       await axios({
-        url: SummaryApi.UpdatePyPapersDetail.url.replace(':id', id),
-        method: SummaryApi.UpdatePyPapersDetail.method,
+        url: SummaryApi.UpdateSyllabusModel.url.replace(':id', id),
+        method: SummaryApi.UpdateSyllabusModel.method,
         data: editData[id],
       });
       setEditMode(null);
@@ -240,4 +240,4 @@ const PreviousYearForm = () => {
   );
 };
 
-export default PreviousYearForm;
+export default Syllabusmodel;

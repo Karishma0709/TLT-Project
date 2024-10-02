@@ -208,7 +208,41 @@ const SummaryApi = {
     url: `${backendDomain}/api/updatePyPapersDetail/:id`,
     method: 'put',
   },
+  //unpaid model
 
+  GetAllUnpaidModel: {
+    url: `${backendDomain}/api/getAllUnpaidModel`,
+    method: 'get',
+  },
+  DeleteUnpaidModel: {
+    url: `${backendDomain}/api/deleteUnpaidModel/:id`,
+    method: 'delete',
+  },
+  UpdateUnpaidModel: {
+    url: `${backendDomain}/api/updateUnpaidModel/:id`,
+    method: 'put',
+  },
+
+  //syllabus model
+
+  GetAllSyllabusModel: {
+    url: `${backendDomain}/api/getAllSyllabusModel`,
+    method: 'get',
+  },
+  DeleteSyllabusModel: {
+    url: `${backendDomain}/api/deleteSyllabusModel/:id`,
+    method: 'delete',
+  },
+  UpdateSyllabusModel: {
+    url: `${backendDomain}/api/updateSyllabusModel/:id`,
+    method: 'put',
+  },
+  ////
+
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
   // mpcj
   GetMPCJFormDetails: {
     url: '${backendDomain}/api/getMPCJFormDetails',

@@ -90,6 +90,14 @@ const {
 } = require('../controllers/unpaidmodelcontroller');
 
 const {
+  createSyllabusModel,
+  getAllSyllabusModel,
+  updateSyllabusModel,
+  deleteSyllabusModel,
+  getTotalSyllabusModel,
+} = require('../controllers/Syllabusmodelcontroller');
+
+const {
   getQuiz,
   updateQuiz,
   createUser,
@@ -146,6 +154,14 @@ router.get('/getAllUnpaidModel', getAllUnpaidModel);
 router.put('/updateUnpaidModel/:id', updateUnpaidModel);
 router.delete('/deleteUnpaidModel/:id', deleteUnpaidModel);
 router.get('/getTotalUnpaidModel', getTotalUnpaidModel);
+
+// Syllabus model form routes
+
+router.post('/createSyllabusModel', createSyllabusModel);
+router.get('/getAllSyllabusModel', getAllSyllabusModel);
+router.put('/updateSyllabusModel/:id', updateSyllabusModel);
+router.delete('/deleteSyllabusModel/:id', deleteSyllabusModel);
+router.get('/getTotalSyllabusModel', getTotalSyllabusModel);
 
 // TPM routes
 router.post('/createTpmFormDetails', createTpmFormDetails);

@@ -64,6 +64,22 @@ const Sidebar = () => {
                   <span>Previous Year Paper</span>
                 </Link>
                 <Link
+                  to="UnpaidModal"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Unpaid model</span>
+                </Link>
+
+                <Link
+                  to="Syllabusmodel"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Syllabus model</span>
+                </Link>
+
+                <Link
                   to="mpcj-form"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
@@ -98,7 +114,6 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
-               
               </div>
             )}
           </div>
@@ -158,12 +173,12 @@ const Sidebar = () => {
 
           {/* Other links */}
           <Link
-                  to="quiz-questions"
-                             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
-                >
-                  <FaRegFilePdf />
-                  <span>Update Quiz Questions</span>
-                </Link>
+            to="quiz-questions"
+            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+          >
+            <FaRegFilePdf />
+            <span>Update Quiz Questions</span>
+          </Link>
           <Link
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"

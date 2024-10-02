@@ -21,7 +21,8 @@ import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
-
+import UnpaidModal from '../components/Unpaidmodel';
+import Syllabusmodel from '../components/Syllabusmodel';
 
 export const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
             path: 'dashboardcards',
             element: <Dashboard />,
           },
-       
+
           {
             path: 'header',
             element: <Header />,
@@ -84,6 +85,14 @@ export const router = createBrowserRouter([
           {
             path: 'quiz-questions',
             element: <Quiz />,
+          },
+          {
+            path: 'UnpaidModal',
+            element: <UnpaidModal />,
+          },
+          {
+            path: 'Syllabusmodel',
+            element: <Syllabusmodel />,
           },
           {
             path: 'quiz-user',
