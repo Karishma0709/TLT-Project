@@ -144,6 +144,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/SyllabusUpload`,
     method: 'POST',
   },
+  GetPyPaperPDFupload: {
+    url: `${backendDomain}/api/getPyPaperPDFupload`,
+    method: 'get',
+  },
   PyPaperPDFUploads: {
     url: `${backendDomain}/api/createPyPaperPDFupload`,
     method: 'POST',
@@ -295,5 +299,41 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+   
+  createEnquiryDetails: {
+    url: `${backendDomain}/api/createEnquiryDetails`,
+    method: 'post',
+  },
+  getEnquiryDetails: {
+    url: `${backendDomain}/api/getEnquiryDetails`,
+    method: 'get',
+  },
+  updateEnquiryDetails: {
+    url: `${backendDomain}/api/updateEnquiryDetails/:id`,
+    method: 'put',
+  },  deleteEnquiryDetails: {
+    url: `${backendDomain}/api/deleteEnquiryDetails/:id`,
+    method: 'delete',
+  },  getTotalEnquiryCount: {
+    url: `${backendDomain}/api/getTotalEnquiryCount`,
+    method: 'get',
+  },
+
+
+
+  // mpcj 
+  GetMPCJFormDetails:{
+    url:`${backendDomain}/api/getMPCJFormDetails`,
+    method:'get'
+  },
+  DeleteMPCJFormDetails:{
+    url:`${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method:'delete'
+  },
+  UpdateMPCJFormDetails:{
+    url:`${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method:'put'
+  },
+
 };
 export default SummaryApi;

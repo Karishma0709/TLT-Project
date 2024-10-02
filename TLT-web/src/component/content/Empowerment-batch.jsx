@@ -71,17 +71,6 @@ const EmpowermentBatch = () => {
     }));
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error('Error submitting form:', error);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     console.log(data, files);
     e.preventDefault();
@@ -101,6 +90,9 @@ const EmpowermentBatch = () => {
       });
       // const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
       // console.log(response.data);
+
+      console.log(response.data);
+
       const redirectUrl = response.data.redirectUrl || response.data;
       if (typeof redirectUrl === 'string' && redirectUrl.startsWith('http')) {
         window.location.href = redirectUrl; // Redirect if the response contains a valid URL

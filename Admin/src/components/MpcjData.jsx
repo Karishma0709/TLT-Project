@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Importing icons for edit and delete
-import SummaryApi from '../Common/SummaryApi';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import * as XLSX from 'xlsx';
 
 const MpcjData = () => {
   const [mpcjData, setMpcjData] = useState([]);
   const [editData, setEditData] = useState({});
-  const [editMode, setEditMode] = useState(null); // Track which row is being edited
-  const [currentPage, setCurrentPage] = useState(1); // Pagination state
-  const itemsPerPage = 10; // Number of items per page
+  const [editMode, setEditMode] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchAllData();
@@ -19,29 +18,34 @@ const MpcjData = () => {
 
   const fetchAllData = async () => {
     try {
-      const result = await axios.get(`http://localhost:8080/api/getMPCJFormDetails`);
+      const result = await axios({
+        url:SummaryApi.GetMPCJFormDetails.url,
+        method:SummaryApi.GetMPCJFormDetails.method
+      });
       console.log('API Response:', result.data);
   
       if (Array.isArray(result.data)) {
-        setMpcjData(result.data); // Set the fetched array directly
+        setMpcjData(result.data);
       } else {
         console.error('Unexpected data format:', result.data);
-        setMpcjData([]); // Handle unexpected data format
+        setMpcjData([]);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
-      setMpcjData([]); // Set an empty array in case of error
+      setMpcjData([]);
     }
   };
-  
 
-  // Delete data with confirmation
   const deleteData = async (id) => {
     if (window.confirm('Are you sure you want to delete this entry?')) {
       try {
-        await axios.delete(`http://localhost:8080/api/deleteMPCJFormDetails/${id}`);
+        const urldata = SummaryApi.DeleteMPCJFormDetails.url.replace(':id', id);
+             await axios({
+              url: urldata,
+              method: SummaryApi.DeleteMPCJFormDetails.method,
+            });
         toast.success('Data deleted successfully!');
-        fetchAllData(); // Refresh data after deletion
+        fetchAllData();
       } catch (error) {
         console.error('Error deleting data:', error);
         toast.error('Error deleting data.');
@@ -49,7 +53,6 @@ const MpcjData = () => {
     }
   };
 
-  // Handle input change for editing
   const handleChange = (e, id) => {
     setEditData({
       ...editData,
@@ -57,11 +60,15 @@ const MpcjData = () => {
     });
   };
 
-  // Update data with confirmation
   const updateData = async (id) => {
     if (window.confirm('Are you sure you want to update this entry?')) {
       try {
-        await axios.put(`http://localhost:8080/api/updateMPCJFormDetails/${id}`, editData[id]);
+        await axios({
+          url: SummaryApi.UpdateMPCJFormDetails.url.replace(':id', id),
+          method: SummaryApi.UpdateMPCJFormDetails.method,
+          data: editData[id],
+        });
+        toast
         setEditMode(null); // Exit edit mode after updating
         fetchAllData(); // Fetch updated data
         toast.success('Data updated successfully!');
@@ -72,13 +79,11 @@ const MpcjData = () => {
     }
   };
 
-  // Toggle edit mode
   const toggleEditMode = (id) => {
-    setEditMode(id); // Enter edit mode for the specific row
+    setEditMode(id);
     setEditData({ [id]: mpcjData.find((data) => data._id === id) });
   };
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = mpcjData.slice(indexOfFirstItem, indexOfLastItem);
@@ -86,19 +91,29 @@ const MpcjData = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
- // Export to Excel function
- const exportToExcel = () => {
-  const workbook = XLSX.utils.book_new();
-  const worksheet = XLSX.utils.json_to_sheet(mpcjData); // Convert data to worksheet
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'MPCJ Form Data'); // Add worksheet to workbook
-  XLSX.writeFile(workbook, 'mpcj_data.xlsx'); // Trigger the file download
-};
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(mpcjData);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'MPCJ Form Data');
+    XLSX.writeFile(workbook, 'mpcj_data.xlsx');
+  };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">MPCJ Data</h2>
-      {/* Export to Excel Button */}
- <button
+      <button
         onClick={exportToExcel}
         className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
       >
@@ -123,10 +138,14 @@ const MpcjData = () => {
               <tbody>
                 {currentData.map((data, index) => (
                   <tr
-                    className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
+                    className={`border-b border-gray-200 ${
+                      index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    } hover:bg-gray-100`}
                     key={data._id}
                   >
-                    <td className="py-2 px-4 text-gray-600">{indexOfFirstItem + index + 1}</td>
+                    <td className="py-2 px-4 text-gray-600">
+                      {indexOfFirstItem + index + 1}
+                    </td>
                     <td className="py-2 px-4 text-gray-600">
                       {editMode === data._id ? (
                         <input
@@ -208,16 +227,42 @@ const MpcjData = () => {
             </table>
 
             {/* Pagination controls */}
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex justify-center gap-2">
+              <button
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg ${
+                  currentPage === 1
+                    ? 'bg-gray-300 text-gray-500'
+                    : 'bg-gray-200 text-gray-800 hover:bg-gray-400'
+                }`}
+              >
+                Previous
+              </button>
               {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i}
-                  className={`px-4 py-2 mx-1 rounded-lg ${currentPage === i + 1 ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}
+                  className={`px-4 py-2 mx-1 rounded-lg ${
+                    currentPage === i + 1
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-200 text-gray-800 hover:bg-gray-400'
+                  }`}
                   onClick={() => handlePageChange(i + 1)}
                 >
                   {i + 1}
                 </button>
               ))}
+              <button
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-lg ${
+                  currentPage === totalPages
+                    ? 'bg-gray-300 text-gray-500'
+                    : 'bg-gray-200 text-gray-800 hover:bg-gray-400'
+                }`}
+              >
+                Next
+              </button>
             </div>
           </>
         )}

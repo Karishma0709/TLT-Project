@@ -152,7 +152,7 @@ const FastTrackForm = () => {
                 <td className="py-2 px-4">
                   {editMode === data._id ? (
                     <input
-                      type="text"
+                      type="file"
                       name="picture"
                       value={editData[data._id]?.picture || ''}
                       onChange={(e) => handleChange(e, data._id)}
@@ -160,7 +160,7 @@ const FastTrackForm = () => {
                     />
                   ) : (
                     <img
-                      src={data.picture}
+                      src={`http://localhost:8080/files/${data.picture}`}
                       alt="User"
                       className="w-24 h-24 object-cover"
                     />

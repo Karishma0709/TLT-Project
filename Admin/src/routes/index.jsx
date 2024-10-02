@@ -23,6 +23,8 @@ import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
 import UnpaidModal from '../components/Unpaidmodel';
 import Syllabusmodel from '../components/Syllabusmodel';
+import EnquiryAdd from '../components/EnquiryAdd';
+import EnquiryList from '../components/EnquiryList';
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +123,14 @@ export const router = createBrowserRouter([
           {
             path: 'addMpcjProduct',
             element: <AddMpcjProduct />,
+          },
+          {
+            path: 'addEnquiry',
+            element: <EnquiryAdd />,
+          },
+          {
+            path: 'enquiryList',
+            element: <EnquiryList />,
           },
         ],
       },
