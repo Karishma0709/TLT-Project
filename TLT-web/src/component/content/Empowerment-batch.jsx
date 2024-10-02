@@ -72,17 +72,6 @@ const EmpowermentBatch = () => {
   };
 
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  
-  //   try {
-  //     const response = await axios.post('http://localhost:8080/api/empowermentForm', formData);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error('Error submitting form:', error);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     console.log(data,files)
     e.preventDefault();

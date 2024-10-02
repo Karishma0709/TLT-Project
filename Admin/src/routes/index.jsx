@@ -22,6 +22,8 @@ import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
 import AddMpcjProduct from '../components/AddMpcjProduct';
 import AsminRegi from '../components/AsminRegi';
+import EnquiryAdd from '../components/EnquiryAdd';
+import EnquiryList from '../components/EnquiryList';
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +117,14 @@ export const router = createBrowserRouter([
           {
             path: 'addMpcjProduct',
             element: <AddMpcjProduct />,
+          },
+          {
+            path: 'addEnquiry',
+            element: <EnquiryAdd />,
+          },
+          {
+            path: 'enquiryList',
+            element: <EnquiryList />,
           },
         ],
       },

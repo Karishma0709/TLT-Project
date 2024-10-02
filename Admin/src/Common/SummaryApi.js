@@ -255,6 +255,26 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+  createEnquiryDetails: {
+    url: `${backendDomain}/api/createEnquiryDetails`,
+    method: 'post',
+  },
+  getEnquiryDetails: {
+    url: `${backendDomain}/api/getEnquiryDetails`,
+    method: 'get',
+  },
+  updateEnquiryDetails: {
+    url: `${backendDomain}/api/updateEnquiryDetails/:id`,
+    method: 'put',
+  },  deleteEnquiryDetails: {
+    url: `${backendDomain}/api/deleteEnquiryDetails/:id`,
+    method: 'delete',
+  },  getTotalEnquiryCount: {
+    url: `${backendDomain}/api/getTotalEnquiryCount`,
+    method: 'get',
+  },
+
+
 
 };
 export default SummaryApi;
