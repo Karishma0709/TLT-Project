@@ -206,7 +206,7 @@ const Sidebar = () => {
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaRegFilePdf />
-            <FaQuestionCircle />
+         
             <span>Update Quiz Questions</span>
           </Link>
           <Link
