@@ -265,7 +265,30 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
+<<<<<<< HEAD
    
+=======
+  createEnquiryDetails: {
+    url: `${backendDomain}/api/createEnquiryDetails`,
+    method: 'post',
+  },
+  getEnquiryDetails: {
+    url: `${backendDomain}/api/getEnquiryDetails`,
+    method: 'get',
+  },
+  updateEnquiryDetails: {
+    url: `${backendDomain}/api/updateEnquiryDetails/:id`,
+    method: 'put',
+  },  deleteEnquiryDetails: {
+    url: `${backendDomain}/api/deleteEnquiryDetails/:id`,
+    method: 'delete',
+  },  getTotalEnquiryCount: {
+    url: `${backendDomain}/api/getTotalEnquiryCount`,
+    method: 'get',
+  },
+
+
+>>>>>>> 30f0c9b406b4cbc0af386764d4b77f85d75aab16
 
   // mpcj 
   GetMPCJFormDetails:{

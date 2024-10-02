@@ -28,6 +28,7 @@ const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
+const enquiryControllers =require('../controllers/enquiryControllers')
 
 const {
   createMarquee,
@@ -154,6 +155,14 @@ router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 router.get('/getTotalTpmCount', getTotalTpmCount);
 
+//Enquiry routes
+router.post('/createEnquiryDetails',enquiryControllers.createEnquiryDetails)
+router.get('/getEnquiryDetails',enquiryControllers.getEnquiryDetails)
+router.put('/updateEnquiryDetails/:id',enquiryControllers.updateEnquiryDetails)
+router.delete('/deleteEnquiryDetails/:id',enquiryControllers.deleteEnquiryDetails)
+router.get('/getTotalEnquiryCount',enquiryControllers.getTotalEnquiryCount)
+
+
 // JET form routes
 router.post(
   '/createJetForm',
@@ -174,7 +183,6 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 router.get('/getTotalMPCJform', getTotalMPCJform);
-// router.post('/MpcjPhonepay', MpcjPhonepay);
 router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 
 // Route to create a new product
@@ -183,15 +191,6 @@ router.get('/getAllMpcjProducts', getAllMpcjProducts);
 router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct); // Corrected path
 router.put('/editMpcjProduct/:id', editMpcjProduct); // Corrected path
 
-// router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct);
-// router.put('/updateMpcjProduct/:id', updateMpcjProduct);
-
-// PY paper PDF upload routers
-// router.post(
-//   '/createPyPaperPDFupload',
-//   prevYearPDFuploadUpload.single(['paperimage', 'pdf']),
-//   createPyPaperPDFupload
-// );
 
 router.post(
   '/createPyPaperPDFupload',
@@ -290,10 +289,7 @@ router.get('/marquee', getMarquees);
 router.put('/marquee/:id', updateMarquee);
 router.delete('/marquee/:id', deleteMarquee);
 
-// router.post('/marquee', saveMarquee);
-// router.get('/marquee-data/:id', marqueeGetData);
-// router.put('/marquee-data/:id', marqueeUpdate);
-// router.delete('/marquee-delete/:id', marqueeDelete);
+
 
 // Notification routes
 router.post(
