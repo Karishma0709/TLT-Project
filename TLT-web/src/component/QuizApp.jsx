@@ -295,8 +295,8 @@ function InfoUI({ formData, setFormData, setShowUiOf ,quizData,score}) {
   async function postUserData(){
     console.log("formData==>",formData)
     try{
-      let result = await fetch("http://localhost:8080/api/quizUser",{
-        method:"POST",
+      let result = await fetch(SummaryApi.quizUser.url,{
+        method:SummaryApi.quizUser.method,
         headers:{
           "Content-Type" :"application/json"
         },

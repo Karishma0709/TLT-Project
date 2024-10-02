@@ -214,9 +214,7 @@ const SummaryApi = {
   },
   //unpaid model
 
-<<<<<<< HEAD
  
-=======
   GetAllUnpaidModel: {
     url: `${backendDomain}/api/getAllUnpaidModel`,
     method: 'get',
@@ -256,7 +254,6 @@ const SummaryApi = {
     method: 'get',
   },
 
->>>>>>> 48fca2f3d2dc37b96c0ec4a9ff53243db237e180
   // Get dashboard count
 
   GetTotalEmpowermentForms: {
