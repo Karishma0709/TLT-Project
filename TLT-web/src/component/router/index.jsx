@@ -32,7 +32,6 @@ import SignUp from "../../pages/SignUp";
 import Unpaid from "../Unpaid";
 import Syllabus from "../Syllabus";
 import { RegisterUser } from "../../pages/RegisterUser";
-import LeaderBoard from "../LeaderBoard";
 import QuizApp from "../QuizApp";
 
 
@@ -129,10 +128,7 @@ export const router = createBrowserRouter([
         path: "forgotpassword",
         element: <ForgotPassword/>,
      },
-     {
-      path: "leaderboard",
-      element: <LeaderBoard/>,
-   },
+   
   //  {
   //   path:"quiz",
   //   element:<QuizApp/>

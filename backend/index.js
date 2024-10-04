@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const router = require('./routes');
 const ADMIN_URL = process.env.ADMIN_URL;
 const FRONTEND_URL = process.env.FRONTEND_URL;
+const STUDENTPANEL_URL=process.env.STUDENTPANEL_URL
 
 const app = express();
 
@@ -24,7 +25,11 @@ const app = express();
 // Middleware to allow CORS
 app.use(
   cors({
+<<<<<<< HEAD
     origin: [ `${FRONTEND_URL}`,`${ADMIN_URL}`,], // Allow your frontend and admin URLs
+=======
+    origin: [`${ADMIN_URL}`, `${FRONTEND_URL}`,`${STUDENTPANEL_URL}`], // Allow your frontend and admin URLs
+>>>>>>> 13ba678f74efa4d3709c8215a4727796df600c4d
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // Enable credentials (if you need to send cookies or authentication headers)
   })

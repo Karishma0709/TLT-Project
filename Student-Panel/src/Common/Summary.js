@@ -1,13 +1,13 @@
-// const backendDomain = 'http://localhost:8080';
-const backendDomain = "https://tlt-project-6ivu.onrender.com";
+const backendDomain = 'http://localhost:8080';
+// const backendDomain = "https://tlt-project-6ivu.onrender.com";
 
 const SummaryApi = {
   signUp: {
-    url: `${backendDomain}/api/signUp`,
+    url: `${backendDomain}/api/createStudent`,
     method: 'post',
   },
-  signIn: {
-    url: `${backendDomain}/api/signIn`,
+  logIn: {
+    url: `${backendDomain}/api/login`,
     method: 'post',
   },
 };

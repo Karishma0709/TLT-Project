@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import Login from '../Pages/Login';
 import SignUp from '../Pages/SingUp';
-import Sidebar from '../components/Sidebar';
+import Sidebar from "../Components/Sidebar"
+import LeaderBoard from '../Components/LeaderBoard';
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +11,7 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '',
+        path: '/',
         element: <Login />,
       },
       {
@@ -18,8 +19,14 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: 'Sidebar',
+        path: 'sidebar',
         element: <Sidebar />,
+        children: [
+          {
+            path: 'leaderboard',
+            element: <LeaderBoard />,
+          },
+        ]
       },
     ],
   },
