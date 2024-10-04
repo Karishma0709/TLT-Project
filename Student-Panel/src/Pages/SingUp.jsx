@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-// import loginIcon from '../assets/signup-icon.webp'; // Ensure the path is correct
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Ensure this import is correct
-import SummaryApi from '../Common/Summary';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,60 +32,45 @@ const SignUp = () => {
       return;
     }
 
-    if (!data.email || !data.password || !data.name || !data.confirmPassword) {
+    if (!data.email || !data.password || !data.name || !data.confirmPassword || !data.batch) {
       toast.error('All fields are required!');
       return;
     }
 
     try {
-      const response = await fetch(SummaryApi.signUp.url, {
-        method: SummaryApi.signUp.method,
+      const response = await fetch('http://localhost:8080/api/createStudent', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
-      console.log('API response:', result); // Log the response for debugging
-      if (response.ok && result.success) {
-        toast.success(result.message);
-        navigate('/');
-      } else {
-        toast.error(result.message || 'Sign Up failed!');
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(errorMessage.message || 'Failed to create student');
       }
+
+      const result = await response.json();
+      toast.success(result.message);
+      navigate('/');
     } catch (error) {
       console.error('Error:', error);
       toast.error('An error occurred during Sign Up!');
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
   return (
-    <section
-      id="signup"
-      className="flex items-center justify-center min-h-screen bg-gray-100"
-    >
+    <section className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="container max-w-md mx-auto p-4">
         <div className="bg-white p-5 rounded-lg shadow-lg mx-auto flex flex-col items-center">
           <div className="w-24 h-24 relative overflow-hidden rounded-full mb-4">
-            {/* <img src={loginIcon} className="h-full w-full object-cover" alt="Sign Up Icon" /> */}
             <label className="flex flex-col items-center bg-opacity-80 bg-slate-200 py-2 cursor-pointer text-center rounded-md">
               <span className="text-xs">Upload photo</span>
               <input type="file" className="hidden" />
             </label>
           </div>
-          <form
-            className="w-full flex flex-col space-y-4"
-            onSubmit={handleSubmit}
-          >
+          <form className="w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
             <div className="w-full">
               <label className="block text-gray-700">Name :</label>
               <input
@@ -133,7 +116,7 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                onClick={togglePasswordVisibility}
+                onClick={() => setShowPassword(!showPassword)}
                 className="absolute inset-y-0 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
                 {showPassword ? (
@@ -155,7 +138,7 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                onClick={toggleConfirmPasswordVisibility}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute inset-y-0 right-0 flex items-center px-3 mt-6 text-gray-500"
               >
                 {showConfirmPassword ? (

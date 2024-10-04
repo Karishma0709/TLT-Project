@@ -111,6 +111,19 @@ const {
   deleteMpcjProduct,
 } = require('../controllers/addMpcjProductController');
 
+//Student import link
+const signUpController =require("../controllers/student/signUpController")
+
+
+
+
+
+
+
+
+
+
+
 // Static file setup
 router.use('/files', express.static('files'));
 router.use('/notifiesfiles', express.static('files'));
@@ -323,5 +336,34 @@ router.put('/quiz', updateQuiz);
 
 router.post('/quizUser', createUser);
 router.get('/quizUser', fetchAllUser);
+
+
+
+
+// Routes for Student Panel
+
+router.post('/createStudent', signUpController.createStudent);
+router.get('/getStudents', signUpController.getStudents);
+router.get('/getStudentById/:id', signUpController.getStudentById);
+router.put('/updateStudent/:id', signUpController.updateStudent);
+router.delete('/deleteStudent/:id', signUpController.deleteStudent);
+
+//student login routes
+
+router.post('/login', signUpController.loginStudent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
