@@ -5,7 +5,7 @@ import {
   FaTachometerAlt,
 } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
-
+import StudentHeader from '../Components/StudentHeader'
 
 
 
@@ -51,6 +51,7 @@ const Sidebar = () => {
       <div className="flex-grow">
       
         <main className="p-4">
+          <StudentHeader/>
           <Outlet />
         </main>
       </div>
