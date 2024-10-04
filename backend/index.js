@@ -24,7 +24,7 @@ const app = express();
 // Middleware to allow CORS
 app.use(
   cors({
-    origin: [`${ADMIN_URL}`, `${FRONTEND_URL}`], // Allow your frontend and admin URLs
+    origin: [ `${FRONTEND_URL}`,`${ADMIN_URL}`,], // Allow your frontend and admin URLs
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // Enable credentials (if you need to send cookies or authentication headers)
   })

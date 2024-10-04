@@ -22,7 +22,8 @@ const Unpaid = () => {
       setUnpaidFiles(result.data.data);
       console.log(result.data.data);
     } catch (error) {
-      console.error('Error fetching unpaid files:', error);
+      // console.error('Error fetching unpaid files:', error);
+      console.log("error", error)
     }
   };
 

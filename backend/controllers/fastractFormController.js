@@ -186,6 +186,17 @@ const getFastTrackForm = async (req, res) => {
     res.status(500).json({ error: 'Internal server error.' });
   }
 };
+// get is by id 
+const getFastTrackData= async (req, res) => {
+  const { id } = req.params;
+  try {
+    const fastTrackData = await FastTrackForm.findById(id);
+    console.log("fastTrackData",fastTrackData)
+    res.status(200).json({ fastTrackData });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
 
 // Delete FastTrackForm Controller
 const deleteFastTrackForm = async (req, res) => {
@@ -248,4 +259,6 @@ module.exports = {
   deleteFastTrackForm,
   updateFastTrackForm,
   getTotalFastTrackForms,
+  getFastTrackData,
+  
 };

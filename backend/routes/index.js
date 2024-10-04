@@ -53,6 +53,7 @@ const {
   deleteFastTrackForm,
   updateFastTrackForm,
   getTotalFastTrackForms,
+  getFastTrackData,
 } = require('../controllers/fastractFormController');
 const {
   createJetForm,
@@ -264,6 +265,7 @@ router.post(
 );
 router.post('/FastTrackpaystatus', FastTrackpayStatus);
 router.get('/getfastTrackForm', getFastTrackForm);
+router.get('/getfastTrackForm/:id', getFastTrackData);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
 router.get('/getTotalFastTrackForms', getTotalFastTrackForms);

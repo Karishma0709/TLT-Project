@@ -111,6 +111,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/getFastTrackForm`,
     method: 'get',
   },
+  FastTractFormStudent: {
+    url: `${backendDomain}/api/getFastTrackForm/:id`,
+    method: 'get',
+  },
   fastTrackFormpay: {
     url: `${backendDomain}/api/FastTrackpaystatus`,
     method: 'post',

@@ -25,6 +25,8 @@ import UnpaidModal from '../components/Unpaidmodel';
 import Syllabusmodel from '../components/Syllabusmodel';
 import EnquiryAdd from '../components/EnquiryAdd';
 import EnquiryList from '../components/EnquiryList';
+import ProfilePage from '../components/StudentProfile';
+import StudentProfile from '../components/StudentProfile';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,7 @@ export const router = createBrowserRouter([
         path: 'sign-up',
         element: <SignUp />,
       },
+      
       {
         path: 'dashboard',
         element: <Sidebar />,
@@ -46,6 +49,10 @@ export const router = createBrowserRouter([
           {
             path: 'dashboardcards',
             element: <Dashboard />,
+          },
+          {
+            path: ':id',
+            element: <StudentProfile/>,
           },
 
           {
@@ -112,7 +119,8 @@ export const router = createBrowserRouter([
             path: 'FastTrackForm',
             element: <FastTrackForm />,
           },
-          {
+          
+          {                                      
             path: 'SyllabusUpload',
             element: <SyllabusUpload />,
           },
