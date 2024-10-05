@@ -207,7 +207,6 @@ const SummaryApi = {
     url: `${backendDomain}/api/quizUser`,
     method: 'get',
   },
-
 };
 
 export default SummaryApi;

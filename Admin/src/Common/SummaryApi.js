@@ -218,7 +218,6 @@ const SummaryApi = {
   },
   //unpaid model
 
- 
   GetAllUnpaidModel: {
     url: `${backendDomain}/api/getAllUnpaidModel`,
     method: 'get',
@@ -304,7 +303,7 @@ const SummaryApi = {
     url: `${backendDomain}/api/createMpcjProduct`,
     method: 'post',
   },
-   
+
   createEnquiryDetails: {
     url: `${backendDomain}/api/createEnquiryDetails`,
     method: 'post',
@@ -316,48 +315,46 @@ const SummaryApi = {
   updateEnquiryDetails: {
     url: `${backendDomain}/api/updateEnquiryDetails/:id`,
     method: 'put',
-  },  deleteEnquiryDetails: {
+  },
+  deleteEnquiryDetails: {
     url: `${backendDomain}/api/deleteEnquiryDetails/:id`,
     method: 'delete',
-  },  getTotalEnquiryCount: {
+  },
+  getTotalEnquiryCount: {
     url: `${backendDomain}/api/getTotalEnquiryCount`,
     method: 'get',
   },
 
-
-
-  // mpcj 
-  GetMPCJFormDetails:{
-    url:`${backendDomain}/api/getMPCJFormDetails`,
-    method:'get'
+  // mpcj
+  GetMPCJFormDetails: {
+    url: `${backendDomain}/api/getMPCJFormDetails`,
+    method: 'get',
   },
-  DeleteMPCJFormDetails:{
-    url:`${backendDomain}/api/deleteMPCJFormDetails/:id`,
-    method:'delete'
+  DeleteMPCJFormDetails: {
+    url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method: 'delete',
   },
-  UpdateMPCJFormDetails:{
-    url:`${backendDomain}/api/updateMPCJFormDetails/:id`,
-    method:'put'
-  },
-  
-
-  // upaid 
-  GetUnpaidUpload:{
-    url:`${backendDomain}/api/getUnpaidUpload`,
-    method:'get'
-  },
-  UnpaidUpload:{
-    url:`${backendDomain}/api/UnpaidUpload`,
-    method:'post'
-  },
-  UpdateUnpaidById:{
-    url:`${backendDomain}/api/updateUnpaidById/:id`,
-    method:'put'
-  },
-  DeleteUnpaidById:{
-    url:`${backendDomain}/api/deleteUnpaidById/:id`,
-    method:'delete'
+  UpdateMPCJFormDetails: {
+    url: `${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method: 'put',
   },
 
+  // upaid
+  GetUnpaidUpload: {
+    url: `${backendDomain}/api/getUnpaidUpload`,
+    method: 'get',
+  },
+  UnpaidUpload: {
+    url: `${backendDomain}/api/UnpaidUpload`,
+    method: 'post',
+  },
+  UpdateUnpaidById: {
+    url: `${backendDomain}/api/updateUnpaidById/:id`,
+    method: 'put',
+  },
+  DeleteUnpaidById: {
+    url: `${backendDomain}/api/deleteUnpaidById/:id`,
+    method: 'delete',
+  },
 };
 export default SummaryApi;

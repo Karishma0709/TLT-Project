@@ -27,6 +27,8 @@ import EnquiryAdd from '../components/EnquiryAdd';
 import EnquiryList from '../components/EnquiryList';
 import ProfilePage from '../components/StudentProfile';
 import StudentProfile from '../components/StudentProfile';
+import LeaderBoard from '../components/LeaderBoard';
+import LeaderboardUpload from '../components/LeaderboardUpload';
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +43,7 @@ export const router = createBrowserRouter([
         path: 'sign-up',
         element: <SignUp />,
       },
-      
+
       {
         path: 'dashboard',
         element: <Sidebar />,
@@ -52,7 +54,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ':id',
-            element: <StudentProfile/>,
+            element: <StudentProfile />,
           },
 
           {
@@ -119,8 +121,8 @@ export const router = createBrowserRouter([
             path: 'FastTrackForm',
             element: <FastTrackForm />,
           },
-          
-          {                                      
+
+          {
             path: 'SyllabusUpload',
             element: <SyllabusUpload />,
           },
@@ -139,6 +141,14 @@ export const router = createBrowserRouter([
           {
             path: 'enquiryList',
             element: <EnquiryList />,
+          },
+          {
+            path: 'LeaderBoard',
+            element: <LeaderBoard />,
+          },
+          {
+            path: 'LeaderboardUpload',
+            element: <LeaderboardUpload />,
           },
         ],
       },

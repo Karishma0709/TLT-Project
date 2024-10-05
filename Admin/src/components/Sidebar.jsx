@@ -121,6 +121,41 @@ const Sidebar = () => {
               </div>
             )}
           </div>
+          {/*  */}
+
+          {/* Leader Board */}
+          <div>
+            <div
+              onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
+            >
+              <span className="flex items-center space-x-2">
+                <FaRegFilePdf />
+                <span>Leader Board</span>
+              </span>
+              {isProductDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
+            </div>
+            {isProductDropdownOpen && (
+              <div className="ml-4 mt-2 space-y-2">
+                <Link
+                  to="leaderboard"
+                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+                >
+                  <FaRegFilePdf />
+
+                  <span>Leader Board</span>
+                </Link>
+                <Link
+                  to="LeaderboardUpload"
+                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+                >
+                  <FaFileUpload />
+
+                  <span>Upload Leader Board</span>
+                </Link>
+              </div>
+            )}
+          </div>
 
           {/* Product Upload Dropdown */}
           <div>
@@ -206,7 +241,7 @@ const Sidebar = () => {
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaRegFilePdf />
-         
+
             <span>Update Quiz Questions</span>
           </Link>
           <Link
