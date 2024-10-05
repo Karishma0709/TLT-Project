@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import * as xlsx from 'xlsx';
+import axios from 'axios';
 import { FaMedal, FaClipboardList, FaComment } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
 
 const LeaderboardUpload = () => {
   const [excelData, setexcelData] = useState([]);
@@ -13,6 +15,19 @@ const LeaderboardUpload = () => {
     const exceljson = xlsx.utils.sheet_to_json(excelsheet);
     console.log(exceljson);
     setexcelData(exceljson);
+    storeData(exceljson); // Call the function to store data
+  };
+
+  const storeData = async (data) => {
+    try {
+      await axios({
+        url: SummaryApi.postleaderBoard.url,
+        method: SummaryApi.postleaderBoard.method,
+        data: data,
+      });
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
   };
 
   const getBadgeIcon = (badge) => {
@@ -27,16 +42,24 @@ const LeaderboardUpload = () => {
         return null;
     }
   };
+
   return (
     <>
-      <div className="flex items-start flex-col">
-        <label className="font-bold text-2xl mb-5">Upload Excel Here</label>
+      <div className="flex items-start flex-row">
+        <div className="flex items-start flex-col me-2">
+          <label className="font-bold text-2xl mb-5">Upload Excel Here</label>
 
-        <input
-          type="file"
-          className="bg-green-500 text-white font-bold p-2 w-56 rounded-sm"
-          onChange={(e) => readExcel(e)}
-        />
+          <input
+            type="file"
+            className="bg-green-500 text-white font-bold p-2 w-56 rounded-md"
+            onChange={(e) => readExcel(e)}
+          />
+        </div>
+        <select className=" bg-red-500 text-white p-1 mb-2 rounded-md w-32">
+          <option value="disabled">Select Betch</option>
+          <option value="Betch 1">Empoverment Betch</option>
+          <option value="Betch 2">Fast Track Betch</option>
+        </select>
       </div>
 
       <div className="leaderboard-container max-w-5xl mx-auto mt-8 bg-gray-50 rounded-lg shadow-lg border border-red-500">
@@ -46,7 +69,7 @@ const LeaderboardUpload = () => {
 
         <table className="w-full text-left">
           <thead>
-            <tr className=" bg-red-500 text-white transition-all hover:shadow-md">
+            <tr className="bg-red-500 text-white transition-all hover:shadow-md">
               <th className="py-4 px-4 border-b border-red-300">Name</th>
               <th className="py-4 px-4 border-b border-red-300">Badge</th>
               <th className="py-4 px-4 border-b border-red-300">

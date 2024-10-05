@@ -1,41 +1,33 @@
-// src/components/LeaderBoard.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMedal, FaClipboardList, FaComment } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
+import axios from 'axios';
 
 const LeaderBoard = () => {
-  // Sample student data
-  const students = [
-    {
-      name: 'John Doe',
-      saturdayMainsTest: 85,
-      mcq: 90,
-      groupDiscussion: 88,
-      judgmentWriting: 75,
-      translation: 80,
-      score: 418,
-      badge: 'Gold',
-    },
-    {
-      name: 'Jane Smith',
-      saturdayMainsTest: 78,
-      mcq: 85,
-      groupDiscussion: 92,
-      judgmentWriting: 88,
-      translation: 84,
-      score: 427,
-      badge: 'Silver',
-    },
-    {
-      name: 'Alice Johnson',
-      saturdayMainsTest: 70,
-      mcq: 75,
-      groupDiscussion: 80,
-      judgmentWriting: 68,
-      translation: 77,
-      score: 370,
-      badge: 'Bronze',
-    },
-  ];
+  const [sortedData, setSortedData] = useState([]);
+
+  useEffect(() => {
+    fetchLeaderboard();
+  }, []);
+
+  const fetchLeaderboard = async () => {
+    try {
+      const result = await axios({
+        url: SummaryApi.GetleaderBoard.url,
+        method: SummaryApi.GetleaderBoard.method,
+      });
+      if (Array.isArray(result.data.data)) {
+        const sorted = result.data.data.sort((a, b) => a.score - b.score);
+        setSortedData(sorted);
+      } else {
+        console.error('Unexpected data format:', result.data.data);
+        setSortedData([]);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setSortedData([]);
+    }
+  };
 
   const getBadgeIcon = (badge) => {
     switch (badge) {
@@ -58,7 +50,7 @@ const LeaderBoard = () => {
 
       <table className="w-full text-left">
         <thead>
-          <tr className=" bg-red-500 text-white transition-all hover:shadow-md">
+          <tr className="bg-red-500 text-white transition-all hover:shadow-md">
             <th className="py-4 px-4 border-b border-red-300">Name</th>
             <th className="py-4 px-4 border-b border-red-300">Badge</th>
             <th className="py-4 px-4 border-b border-red-300">
@@ -76,7 +68,7 @@ const LeaderBoard = () => {
           </tr>
         </thead>
         <tbody>
-          {students.map((student, index) => (
+          {sortedData.map((student, index) => (
             <tr
               key={index}
               className={`${
@@ -84,15 +76,13 @@ const LeaderBoard = () => {
               } hover:bg-red-200 transition-colors`}
             >
               <td className="py-4 px-4 text-navy-900 font-semibold">
-                {student.name}
+                {student.OrderDate}
               </td>
               <td className="py-4 px-4 text-navy-900 flex items-center">
                 {getBadgeIcon(student.badge)}
-                <span className="ml-2 font-semibold">{student.badge}</span>
+                <span className="ml-2 font-semibold">{student.Manager}</span>
               </td>
-              <td className="py-4 px-4 text-navy-800">
-                {student.saturdayMainsTest}
-              </td>
+              <td className="py-4 px-4 text-navy-800">{student.SalesMan}</td>
               <td className="py-4 px-4 text-navy-800">{student.mcq}</td>
               <td className="py-4 px-4 text-navy-800">
                 {student.groupDiscussion}

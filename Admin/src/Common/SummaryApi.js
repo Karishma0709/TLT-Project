@@ -356,5 +356,14 @@ const SummaryApi = {
     url: `${backendDomain}/api/deleteUnpaidById/:id`,
     method: 'delete',
   },
+  //
+  GetleaderBoard: {
+    url: `${backendDomain}/api/getstudentsexcel`,
+    method: 'get',
+  },
+  postleaderBoard: {
+    url: `${backendDomain}/api/studentsexcel`,
+    method: 'post',
+  },
 };
 export default SummaryApi;
