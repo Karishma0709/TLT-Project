@@ -151,9 +151,9 @@ const EmpowermentBatch = () => {
                   <option value="" disabled>
                     Select Batch
                   </option>
-                  <option value="Batch A">Batch A</option>
-                  <option value="Batch B">Batch B</option>
-                  <option value="Batch C">Batch C</option>
+                  <option value="Batch 1">Batch 1</option>
+                  <option value="Batch 2">Batch 2</option>
+                  <option value="Batch 3">Batch 3</option>
                 </select>
               </div>
             </div>
