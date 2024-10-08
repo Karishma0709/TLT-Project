@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import SummaryApi from '../Common/SummaryApi';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import * as XLSX from 'xlsx';
+
 
 const TpmData = () => {
   const [tpmData, setTpmData] = useState([]);
@@ -88,9 +90,26 @@ const TpmData = () => {
   const currentItems = tpmData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(tpmData.length / itemsPerPage);
 
+ // Export to Excel function
+ const exportToExcel = () => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(tpmData); // Convert data to worksheet
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'TPM Form Data'); // Add worksheet to workbook
+  XLSX.writeFile(workbook, 'TPM_data.xlsx'); // Trigger the file download
+};
+
+
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">TPM Data</h2>
+      {/* Export to Excel Button */}
+ <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       <div>
         {tpmData.length === 0 ? (
           <p className="text-gray-500">No data available</p>
@@ -111,10 +130,14 @@ const TpmData = () => {
               <tbody>
                 {currentItems.map((data, index) => (
                   <tr
-                    className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
+                    className={`border-b border-gray-200 ${
+                      index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                    } hover:bg-gray-100`}
                     key={data._id}
                   >
-                    <td className="py-2 px-4">{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                    <td className="py-2 px-4">
+                      {index + 1 + (currentPage - 1) * itemsPerPage}
+                    </td>
                     <td className="py-2 px-4">
                       {editMode === data._id ? (
                         <input
@@ -167,7 +190,9 @@ const TpmData = () => {
                         data.purchasedProduct
                       )}
                     </td>
-                    <td className="py-2 px-4">{moment(data.createdAt).format('YYYY-MM-DD')}</td>
+                    <td className="py-2 px-4">
+                      {moment(data.createdAt).format('YYYY-MM-DD')}
+                    </td>
                     <td className="py-2 px-4 flex gap-2">
                       {editMode === data._id ? (
                         <>
@@ -216,7 +241,9 @@ const TpmData = () => {
               </button>
               <button
                 disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
                 className="bg-gray-300 px-3 py-1 rounded disabled:opacity-50"
               >
                 Next

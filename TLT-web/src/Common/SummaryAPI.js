@@ -106,6 +106,23 @@ const SummaryApi = {
     url: `${backendDomain}/api/getpydata`,
     method: 'get',
   },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createUnpaidModel: {
+    url: `${backendDomain}/api/createUnpaidModel`,
+    method: 'post',
+  },
+  createSyllabusModel: {
+    url: `${backendDomain}/api/createSyllabusModel`,
+    method: 'post',
+  },
+
+  getUnpaid: {
+    url: `${backendDomain}/api/getUnpaidUpload`,
+    method: 'get',
+  },
   UnpaidPDF: {
     url: `${backendDomain}/api/unpaidUpdate`,
     method: 'put',
@@ -114,14 +131,82 @@ const SummaryApi = {
     url: `${backendDomain}/api/unpaidDelete`,
     method: 'delete',
   },
-  Notification:{
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
+    method: 'post',
+  },
+  getMPCJFormDetails: {
+    url: `${backendDomain}/api/getMPCJFormDetails`,
+    method: 'get',
+  },
+  updateMPCJFormDetails: {
+    url: `${backendDomain}/api/updateMPCJFormDetails/:id`,
+    method: 'put',
+  },
+  deleteMPCJFormDetails: {
+    url: `${backendDomain}/api/deleteMPCJFormDetails/:id`,
+    method: 'delete',
+  },
+  Syllabus: {
+    url: `${backendDomain}/api/getSyllabusUpload`,
+    method: 'get',
+  },
+  Syllabuspdf: {
+    baseUrl: `${backendDomain}/api/SyllabusUploadFiles`, // Base URL for PDF files
+    method: 'GET',
+  },
+  Notification: {
     url: `${backendDomain}/api/getnotifies`,
     method: 'get',
   },
-  Marquee:{
+  Marquee: {
     url: `${backendDomain}/api/marquee`,
     method: 'get',
-  }
+  },
+  getPyPaperPDFupload: {
+    url: `${backendDomain}/api/getPyPaperPDFupload`,
+    method: 'get',
+  },
+  JetForm: {
+    url: `${backendDomain}/api/createJetForm`,
+    method: 'post',
+  },
+  createMpcjProduct: {
+    url: `${backendDomain}/api/createMpcjProduct`,
+    method: 'post',
+  },
+  getAllMpcjProducts: {
+    url: `${backendDomain}/api/getAllMpcjProducts`,
+    method: 'get',
+  },
+  deleteMpcjProduct: {
+    url: `${backendDomain}/api/deleteMpcjProduct/:id`,
+    method: 'delete',
+  },
+  updateMpcjProduct: {
+    url: `${backendDomain}/api/updateMpcjProduct/:id`,
+    method: 'put',
+  },
+  createMPCJFormDetails: {
+    url: `${backendDomain}/api/createMPCJFormDetails`,
+    method: 'post',
+  },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  createPyPapersDetail: {
+    url: `${backendDomain}/api/createPyPapersDetail`,
+    method: 'post',
+  },
+  quiz: {
+    url: `${backendDomain}/api/quiz`,
+    method: 'get',
+  },
+  quizUser: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'get',
+  },
 };
 
 export default SummaryApi;

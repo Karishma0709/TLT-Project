@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import SummaryApi from '../Common/SummaryAPI';
+
 import {
   Button,
   Flex,
@@ -32,7 +34,7 @@ const QuizApp = () => {
   useEffect(()=>{
     async function getQuizData(){
       try{
-        const data = await fetch("http://localhost:8080/api/quiz")
+        const data = await fetch(SummaryApi.quiz.url)
         const dataJson = await data.json()
         let array =[...dataJson.data]
         shuffleArray(array)
@@ -293,8 +295,8 @@ function InfoUI({ formData, setFormData, setShowUiOf ,quizData,score}) {
   async function postUserData(){
     console.log("formData==>",formData)
     try{
-      let result = await fetch("http://localhost:8080/api/quizUser",{
-        method:"POST",
+      let result = await fetch(SummaryApi.quizUser.url,{
+        method:SummaryApi.quizUser.method,
         headers:{
           "Content-Type" :"application/json"
         },

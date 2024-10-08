@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FaRegUser } from "react-icons/fa";
-import { toast } from "react-toastify";
-import { useSelector, useDispatch } from "react-redux";
-import SummaryApi from "../Common/SummaryAPI";
-import { setUserDetails } from "../store/userSlice";
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { FaRegUser } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
+import SummaryApi from '../Common/SummaryAPI';
+import { setUserDetails } from '../store/userSlice';
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
@@ -14,15 +14,15 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await fetch(SummaryApi.logout.url, {
-        method: "GET",
-        credentials: "include",
+        method: 'GET',
+        credentials: 'include',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
 
       const data = await response.json();
@@ -30,13 +30,13 @@ const Navbar = () => {
       if (data.success) {
         toast.success(data.message);
         dispatch(setUserDetails(null)); // Clear user data
-        navigate("/login"); // Redirect to login after logout
+        navigate('/login'); // Redirect to login after logout
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error("An error occurred while logging out.");
-      console.error("Logout error:", error);
+      toast.error('An error occurred while logging out.');
+      console.error('Logout error:', error);
     }
   };
 
@@ -44,38 +44,41 @@ const Navbar = () => {
     <div className="bg-gray-100 bg-opacity-50 mx-14 my-3 hidden md:block rounded-md">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="flex space-x-4 ps-5 gap-4">
-          <NavLink className="text-red-500 font-semibold hover:text-red-700" to="/">
+          <NavLink
+            className="text-red-500 font-semibold hover:text-red-700"
+            to="/"
+          >
             Home
           </NavLink>
           <NavLink className="textWhite hover:text-red-700" to="/about">
             About
           </NavLink>
           <div className="relative z-10 group ">
-  <button className="textWhite hover:text-red-700 w-32 text-left">
-    Study Essentials
-  </button>
-  <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-    <NavLink
-      className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors group-hover:opacity-100  duration-300 ease-in-out font-semibold rounded-md"
-      to="/study-essentials"
-    >
-      Paid
-    </NavLink>
-    <NavLink
-      className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-      to="/unpaid-study-essentials"
-    >
-      Unpaid
-    </NavLink>
+            <button className="textWhite hover:text-red-700 w-32 text-left">
+              Study Essentials
+            </button>
+            <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors group-hover:opacity-100  duration-300 ease-in-out font-semibold rounded-md"
+                to="/study-essentials"
+              >
+                Paid
+              </NavLink>
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
+                to="/unpaid-study-essentials"
+              >
+                Unpaid
+              </NavLink>
 
-      <NavLink
-        className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md "  to="/syllabus"
-      >
-        Syllabus
-      </NavLink>
-
-  </div>
-</div>
+              <NavLink
+                className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md "
+                to="/syllabus"
+              >
+                Syllabus
+              </NavLink>
+            </div>
+          </div>
 
           <NavLink className="textWhite hover:text-red-700" to="/gallery">
             Gallery
@@ -96,7 +99,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
-                to="/leaderboard"
+                to=""
               >
                 Mini Mock
               </NavLink>

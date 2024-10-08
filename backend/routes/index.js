@@ -14,13 +14,16 @@ const {
 } = require('../controllers/tpmController');
 
 const {
+  createLeaderboard,
+  getAllLeaderboard,
+} = require('../controllers/LeaderBoardController');
+
+const {
   createMPCJFormDetails,
   getMPCJFormDetails,
   updateMPCJFormDetails,
   deleteMPCJFormDetails,
   getTotalMPCJform,
-  MpcjPhonepay,
-  paymentStatus,
   mpcjpaymentStatus,
 } = require('../controllers/mpcjOfflineController');
 
@@ -30,6 +33,7 @@ const userDetailsController = require('../controllers/userDetails');
 const authToken = require('../middleware/authToken');
 const userLogout = require('../controllers/userLogout');
 const allRegisterUser = require('../controllers/allRegisterUsers');
+const enquiryControllers = require('../controllers/enquiryControllers');
 
 const {
   createMarquee,
@@ -54,6 +58,7 @@ const {
   deleteFastTrackForm,
   updateFastTrackForm,
   getTotalFastTrackForms,
+  getFastTrackData,
 } = require('../controllers/fastractFormController');
 const {
   createJetForm,
@@ -84,18 +89,43 @@ const {
 } = require('../controllers/unpaidProductController');
 
 const {
+  createUnpaidModel,
+  getAllUnpaidModel,
+  updateUnpaidModel,
+  deleteUnpaidModel,
+  getTotalUnpaidModel,
+} = require('../controllers/unpaidmodelcontroller');
+
+const {
+  createSyllabusModel,
+  getAllSyllabusModel,
+  updateSyllabusModel,
+  deleteSyllabusModel,
+  getTotalSyllabusModel,
+} = require('../controllers/Syllabusmodelcontroller');
+
+const {
   getQuiz,
   updateQuiz,
   createUser,
   fetchAllUser,
 } = require('../controllers/quizController');
+const {
+  createMpcjProduct,
+  getAllMpcjProducts,
+  editMpcjProduct,
+  deleteMpcjProduct,
+} = require('../controllers/addMpcjProductController');
+
+//Student import link
+const signUpController = require('../controllers/student/signUpController');
 
 // Static file setup
 router.use('/files', express.static('files'));
 router.use('/notifiesfiles', express.static('files'));
 router.use('/empowermentForm', express.static('files'));
 router.use('/fastTrackForm', express.static('files'));
-router.use('/jetForm', express.static('files'));
+// router.use('/jetForm', express.static('files'));
 
 // Multer storage configurations
 const multerStorage = (directory) =>
@@ -120,12 +150,33 @@ const unpaidProductUpload = multer({
   storage: multerStorage('./unpaidProductUploadFiles'),
 });
 
-// Previous paper routes
+// Previous paper model routes
 router.post('/createPyPapersDetail', createPyPapersDetail);
 router.get('/getAllPyPapers', getAllPyPapers);
 router.put('/updatePyPapersDetail/:id', updatePyPapersDetail);
 router.delete('/deletePyPapersDetail/:id', deletePyPapersDetail);
 router.get('/getTotalPyPapersCount', getTotalPyPapersCount);
+
+// unpaid model form routes
+
+router.post('/createUnpaidModel', createUnpaidModel);
+router.get('/getAllUnpaidModel', getAllUnpaidModel);
+router.put('/updateUnpaidModel/:id', updateUnpaidModel);
+router.delete('/deleteUnpaidModel/:id', deleteUnpaidModel);
+router.get('/getTotalUnpaidModel', getTotalUnpaidModel);
+
+//LeaderBoard
+
+router.post('/studentsexcel', createLeaderboard);
+router.get('/getstudentsexcel', getAllLeaderboard);
+
+// Syllabus model form routes
+
+router.post('/createSyllabusModel', createSyllabusModel);
+router.get('/getAllSyllabusModel', getAllSyllabusModel);
+router.put('/updateSyllabusModel/:id', updateSyllabusModel);
+router.delete('/deleteSyllabusModel/:id', deleteSyllabusModel);
+router.get('/getTotalSyllabusModel', getTotalSyllabusModel);
 
 // TPM routes
 router.post('/createTpmFormDetails', createTpmFormDetails);
@@ -133,6 +184,19 @@ router.get('/getTpmFormDetails', getTpmFormDetails);
 router.put('/updateTpmFormDetails/:id', updateTpmFormDetails);
 router.delete('/deleteTpmFormDetails/:id', deleteTpmFormDetails);
 router.get('/getTotalTpmCount', getTotalTpmCount);
+
+//Enquiry routes
+router.post('/createEnquiryDetails', enquiryControllers.createEnquiryDetails);
+router.get('/getEnquiryDetails', enquiryControllers.getEnquiryDetails);
+router.put(
+  '/updateEnquiryDetails/:id',
+  enquiryControllers.updateEnquiryDetails
+);
+router.delete(
+  '/deleteEnquiryDetails/:id',
+  enquiryControllers.deleteEnquiryDetails
+);
+router.get('/getTotalEnquiryCount', enquiryControllers.getTotalEnquiryCount);
 
 // JET form routes
 router.post(
@@ -154,18 +218,25 @@ router.get('/getMPCJFormDetails', getMPCJFormDetails);
 router.put('/updateMPCJFormDetails/:id', updateMPCJFormDetails);
 router.delete('/deleteMPCJFormDetails/:id', deleteMPCJFormDetails);
 router.get('/getTotalMPCJform', getTotalMPCJform);
-// router.post('/MpcjPhonepay', MpcjPhonepay);
 router.post('/mpcjpaymentStatus', mpcjpaymentStatus);
 
+// Route to create a new product
+router.post('/createMpcjProduct', createMpcjProduct);
+router.get('/getAllMpcjProducts', getAllMpcjProducts);
+router.delete('/deleteMpcjProduct/:id', deleteMpcjProduct); // Corrected path
+router.put('/editMpcjProduct/:id', editMpcjProduct); // Corrected path
 
-// PY paper PDF upload routers
 router.post(
   '/createPyPaperPDFupload',
-  prevYearPDFuploadUpload.single('paperimage'),
+  prevYearPDFuploadUpload.fields([
+    { name: 'paperimage', maxCount: 1 },
+    { name: 'pdf', maxCount: 1 },
+  ]),
   createPyPaperPDFupload
 );
+
 router.get('/getPyPaperPDFupload', getPyPaperPDFupload);
-router.put('/  updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
+router.put('/updatePyPaperPDFupload/:id', updatePyPaperPDFupload);
 router.delete('/deletePyPaperPDFupload/:id', deletePyPaperPDFupload);
 
 ////////empowermentForm
@@ -211,6 +282,7 @@ router.post(
 );
 router.post('/FastTrackpaystatus', FastTrackpayStatus);
 router.get('/getfastTrackForm', getFastTrackForm);
+router.get('/getfastTrackForm/:id', getFastTrackData);
 router.put('/updateFastTrackForm/:id', updateFastTrackForm);
 router.delete('/deleteFastTrackForm/:id', deleteFastTrackForm);
 router.get('/getTotalFastTrackForms', getTotalFastTrackForms);
@@ -248,14 +320,9 @@ router.get('/registerUser', allRegisterUser);
 //Maquee Routes
 router.post('/marquee', createMarquee);
 router.get('/marquee', getMarquees);
-router.get('/marquee/:id', getMarqueeById);
+// router.get('/marquee/:id', getMarqueeById);
 router.put('/marquee/:id', updateMarquee);
 router.delete('/marquee/:id', deleteMarquee);
-
-// router.post('/marquee', saveMarquee);
-// router.get('/marquee-data/:id', marqueeGetData);
-// router.put('/marquee-data/:id', marqueeUpdate);
-// router.delete('/marquee-delete/:id', marqueeDelete);
 
 // Notification routes
 router.post(
@@ -273,5 +340,17 @@ router.put('/quiz', updateQuiz);
 
 router.post('/quizUser', createUser);
 router.get('/quizUser', fetchAllUser);
+
+// Routes for Student Panel
+
+router.post('/createStudent', signUpController.createStudent);
+router.get('/getStudents', signUpController.getStudents);
+router.get('/getStudentById/:id', signUpController.getStudentById);
+router.put('/updateStudent/:id', signUpController.updateStudent);
+router.delete('/deleteStudent/:id', signUpController.deleteStudent);
+
+//student login routes
+
+router.post('/login', signUpController.loginStudent);
 
 module.exports = router;

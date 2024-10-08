@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css";
-import productCards from "../data/productCards";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SummaryApi from "../../Common/SummaryAPI";
 
-const TPMForm = () => {
+const TPMForm = ({ selectedProduct }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
     contact: "",
     purchasedProduct: "",
   });
+
+  useEffect(() => {
+    // Pre-fill the purchasedProduct field with the selected product details
+    if (selectedProduct) {
+      setData((prevData) => ({
+        ...prevData,
+        purchasedProduct: `${selectedProduct.title} ₹${selectedProduct.price}`,
+      }));
+    }
+  }, [selectedProduct]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,8 +38,8 @@ const TPMForm = () => {
 
     if (valid) {
       try {
-        const response = await fetch("http://localhost:8080/api/createTpmFormDetails", {
-          method: "POST",
+        const response = await fetch(SummaryApi.createTpmFormDetails.url, {
+          method: SummaryApi.createTpmFormDetails.method,
           headers: {
             "Content-Type": "application/json",
           },
@@ -48,7 +58,6 @@ const TPMForm = () => {
           contact: "",
           purchasedProduct: "",
         });
-
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
         toast.error("There was a problem submitting the form. Please try again.");
@@ -67,6 +76,7 @@ const TPMForm = () => {
             <span className="text-red-500"> Today!</span>
           </h2>
           <form onSubmit={handleSubmit}>
+            {/* Name input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -84,6 +94,7 @@ const TPMForm = () => {
               </div>
             </div>
 
+            {/* Email input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -101,6 +112,7 @@ const TPMForm = () => {
               </div>
             </div>
 
+            {/* Contact input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
                 <input
@@ -118,39 +130,28 @@ const TPMForm = () => {
               </div>
             </div>
 
+            {/* Purchased product input */}
             <div className="form-row flex space-x-4 mb-6">
               <div className="input-data w-full relative">
-                <label
-                  htmlFor="TPM"
-                  className="block mb-2 text-sm font-medium text-gray-500"
-                >
-                  Purchased Product
-                </label>
-                <select
-                  id="TPM"
+                <input
+                  type="text"
                   name="purchasedProduct"
                   value={data.purchasedProduct}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
-                  required
-                >
-                  <option value="" disabled>Select Product</option>
-                  {productCards.map((item, index) => (
-                    <option key={index} value={`${item.title} ${item.price}`}>
-                      {item.title} {item.price}
-                    </option>
-                  ))}
-                </select>
+                  readOnly
+                />
                 <div className="underline"></div>
               </div>
             </div>
 
+            {/* Submit button */}
             <div className="form-row submit-btn flex justify-center gap-3">
               <button
                 type="submit"
                 className="relative inline-block text-white bg-gradient-to-r p-4 px-14 from-red-700 to-red-400 hover:from-red-400 hover:to-red-700 font-semibold py-2 rounded-full transition-ease-out" 
               >
-                Submit
+                Pay ₹{selectedProduct.price}
               </button>
             </div>
           </form>

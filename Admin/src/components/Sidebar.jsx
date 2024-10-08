@@ -8,7 +8,11 @@ import {
   FaCog,
   FaBell,
   FaExclamationTriangle,
-  FaTachometerAlt, 
+  FaTachometerAlt,
+  FaQuestionCircle,
+  FaBullhorn,
+  FaEnvelopeOpenText,
+  FaFolderOpen,
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Link, Outlet } from 'react-router-dom';
@@ -18,13 +22,12 @@ const Sidebar = () => {
   // State for managing dropdowns
   const [isFormsDropdownOpen, setIsFormsDropdownOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
+  const [isEnquiryDropdownOpen, setIsEnquiryDropdownOpen] = useState(false); // New state for Enquiry dropdown
 
   return (
     <div className="min-h-screen md:flex hidden bg-gray-100">
       {/* Sidebar */}
       <aside className="bg-red-600 w-64 customShadow text-white">
-        {' '}
-        {/* Fixed width */}
         {/* Profile Section */}
         <div className="h-40 flex flex-col items-center justify-center bg-red-700 border-b border-red-500">
           <div className="text-6xl cursor-pointer relative flex justify-center mb-2">
@@ -42,6 +45,7 @@ const Sidebar = () => {
             <FaTachometerAlt />
             <span>Dashboard</span>
           </Link>
+
           {/* Forms Dropdown */}
           <div>
             <div
@@ -60,14 +64,30 @@ const Sidebar = () => {
                   to="py-paper"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
-                  <FaFileAlt />
+                  <FaRegFilePdf />
                   <span>Previous Year Paper</span>
                 </Link>
+                <Link
+                  to="UnpaidModal"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Unpaid model</span>
+                </Link>
+
+                <Link
+                  to="Syllabusmodel"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Syllabus model</span>
+                </Link>
+
                 <Link
                   to="mpcj-form"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
-                  <FaFileAlt />
+                  <FaFolderOpen />
                   <span>MPCJ Form</span>
                 </Link>
                 <Link
@@ -81,7 +101,7 @@ const Sidebar = () => {
                   to="EmpowermentAdmin"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
-                  <FaFileAlt />
+                  <FaFolderOpen />
                   <span>Empowerment Admin</span>
                 </Link>
                 <Link
@@ -98,12 +118,40 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
+              </div>
+            )}
+          </div>
+          {/*  */}
+
+          {/* Leader Board */}
+          <div>
+            <div
+              onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
+            >
+              <span className="flex items-center space-x-2">
+                <FaRegFilePdf />
+                <span>Leader Board</span>
+              </span>
+              {isProductDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
+            </div>
+            {isProductDropdownOpen && (
+              <div className="ml-4 mt-2 space-y-2">
                 <Link
-                  to="quiz-user"
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                  to="leaderboard"
+                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
                 >
-                  <FaFileAlt />
-                  <span>Quiz User Detail</span>
+                  <FaRegFilePdf />
+
+                  <span>Leader Board</span>
+                </Link>
+                <Link
+                  to="LeaderboardUpload"
+                  className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+                >
+                  <FaFileUpload />
+
+                  <span>Upload Leader Board</span>
                 </Link>
               </div>
             )}
@@ -145,11 +193,43 @@ const Sidebar = () => {
                   <span>Previous Year Paper Pdf</span>
                 </Link>
                 <Link
-                  to="quiz-questions"
+                  to="addMpcjProduct"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
                   <FaRegFilePdf />
-                  <span>Update Quiz Questions</span>
+                  <span>Add Mpcj Product</span>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Enquiry Dropdown */}
+          <div>
+            <div
+              onClick={() => setIsEnquiryDropdownOpen(!isEnquiryDropdownOpen)}
+              className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
+            >
+              <span className="flex items-center space-x-2">
+                <FaEnvelopeOpenText />
+                <span>Enquiry Management</span>
+              </span>
+              {isEnquiryDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
+            </div>
+            {isEnquiryDropdownOpen && (
+              <div className="ml-4 mt-2 space-y-2">
+                <Link
+                  to="addEnquiry"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaQuestionCircle />
+                  <span>Add Enquiry</span>
+                </Link>
+                <Link
+                  to="enquiryList"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaList />
+                  <span>Enquiry List</span>
                 </Link>
               </div>
             )}
@@ -157,10 +237,18 @@ const Sidebar = () => {
 
           {/* Other links */}
           <Link
+            to="quiz-questions"
+            className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
+          >
+            <FaRegFilePdf />
+
+            <span>Update Quiz Questions</span>
+          </Link>
+          <Link
             to="update-headline"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
-            <FaExclamationTriangle/>
+            <FaBullhorn />
             <span>Alerts</span>
           </Link>
           <Link
@@ -171,20 +259,22 @@ const Sidebar = () => {
             <span>Notification</span>
           </Link>
           <Link
-            to="info-marquee"
+            to="adminRegi"
             className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
           >
             <FaCog />
-            <span>Setting</span>
+            <span>AdminRegi</span>
           </Link>
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow p-6 bg-gray-50">
+      <div className="flex-grow">
         <Header />
-        <Outlet />
-      </main>
+        <main className="p-4">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

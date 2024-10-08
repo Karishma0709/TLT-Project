@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import SummaryApi from '../Common/SummaryApi';
+import * as XLSX from 'xlsx';
 
 const PreviousYearForm = () => {
   const [allPapers, setAllPapers] = useState([]);
@@ -8,16 +10,15 @@ const PreviousYearForm = () => {
   const [editMode, setEditMode] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
   useEffect(() => {
     fetchAllPapers();
   }, []);
-
   const fetchAllPapers = async () => {
     try {
-      const result = await axios.get(
-        'http://localhost:8080/api/getAllPyPapers'
-      );
+      const result = await axios({
+        url: SummaryApi.GetAllPyPapers.url,
+        method: SummaryApi.GetAllPyPapers.method,
+      });
       if (Array.isArray(result.data.data)) {
         setAllPapers(result.data.data);
       } else {
@@ -37,15 +38,15 @@ const PreviousYearForm = () => {
     );
     if (!confirmDelete) return; // Exit if user cancels
     try {
-      await axios.delete(
-        `http://localhost:8080/api/deletePyPapersDetail/${id}`
-      );
+      await axios({
+        url: SummaryApi.DeletePyPapersDetail.url.replace(':id', id),
+        method: SummaryApi.DeletePyPapersDetail.method,
+      });
       fetchAllPapers();
     } catch (error) {
       console.error('Error deleting paper:', error);
     }
   };
-
   // Update paper data with confirmation
   const updatePaper = async (id) => {
     const confirmUpdate = window.confirm(
@@ -53,10 +54,11 @@ const PreviousYearForm = () => {
     );
     if (!confirmUpdate) return; // Exit if user cancels
     try {
-      await axios.put(
-        `http://localhost:8080/api/updatePyPapersDetail/${id}`,
-        editData[id]
-      );
+      await axios({
+        url: SummaryApi.UpdatePyPapersDetail.url.replace(':id', id),
+        method: SummaryApi.UpdatePyPapersDetail.method,
+        data: editData[id],
+      });
       setEditMode(null);
       fetchAllPapers();
     } catch (error) {
@@ -83,9 +85,31 @@ const PreviousYearForm = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Export to Excel function
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(allPapers); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      'Previous Year Paper Form Data'
+    ); // Add worksheet to workbook
+    XLSX.writeFile(workbook, 'previousYearPaper_data.xlsx'); // Trigger the file download
+  };
+
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Previous Year Paper Details</h1>
+      <h1 className="text-2xl font-semibold mb-4">
+        Previous Year Paper Details
+      </h1>
+      {/* Export to Excel Button */}
+      <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       <div>
         {allPapers.length === 0 ? (
           <p className="text-gray-500">No data available</p>
@@ -177,13 +201,13 @@ const PreviousYearForm = () => {
                             onClick={() => toggleEditMode(paper._id)}
                             className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaEdit className="text-blue-500 hover:text-blue-800" /> 
+                            <FaEdit className="text-blue-500 hover:text-blue-800" />
                           </button>
                           <button
                             onClick={() => deletePaper(paper._id)}
                             className="px-3 py-1 rounded flex items-center"
                           >
-                            <FaTrashAlt className="text-red-500 hover:text-red-700" /> 
+                            <FaTrashAlt className="text-red-500 hover:text-red-700" />
                           </button>
                         </>
                       )}

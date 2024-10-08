@@ -7,6 +7,10 @@ const empowermentFormSchema = new Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: Number,
+      default: 3,
+    },
     aadharCard: {
       type: String,
       required: true,
@@ -86,14 +90,13 @@ const empowermentFormSchema = new Schema(
       required: true,
     },
     feesPaid: {
-      amountPaid: {
-        type: Number,
-        required: true,
-      },
-      onlineUPI: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      enum: ['yes'],
+      required: true,
+    },
+    amountPaid: {
+      type: Number,
+      required: true,
     },
     institution: {
       type: String,

@@ -3,11 +3,11 @@ const backendDomain = 'http://localhost:8080';
 
 const SummaryApi = {
   signUp: {
-    url: `${backendDomain}/api/signUp`,
+    url: `${backendDomain}/api/createStudent`,
     method: 'post',
   },
-  signIn: {
-    url: `${backendDomain}/api/signIn`,
+  logIn: {
+    url: `${backendDomain}/api/login`,
     method: 'post',
   },
 };

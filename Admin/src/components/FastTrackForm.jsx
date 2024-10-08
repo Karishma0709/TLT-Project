@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SummaryApi from '../Common/SummaryApi';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Ensure you import the icons
+import { FaEdit, FaTrashAlt, FaUser } from 'react-icons/fa'; // Ensure you import the icons
+import * as XLSX from 'xlsx';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const FastTrackForm = () => {
   const [fastTrackData, setFastTrackData] = useState([]);
@@ -9,6 +13,7 @@ const FastTrackForm = () => {
   const [editMode, setEditMode] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const getData = async () => {
@@ -74,9 +79,31 @@ const FastTrackForm = () => {
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+  // Export to Excel function
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(fastTrackData); // Convert data to worksheet
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Fast Track Data'); // Add worksheet to workbook
+    XLSX.writeFile(workbook, 'fastTrack_data.xlsx'); // Trigger the file download
+  };
+
+  // Navigate to profile page
+  // const viewProfile = (id) => {
+  //   navigate(`/profile/${id}`); // Navigate to the profile page with the student's ID
+  // };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Fast-Track Form Data</h1>
+
+      {/* Export to Excel Button */}
+      <button
+        onClick={exportToExcel}
+        className="mb-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Export to Excel
+      </button>
+
       {fastTrackData.length === 0 ? (
         <p className="text-gray-500">No data available</p>
       ) : (
@@ -86,6 +113,7 @@ const FastTrackForm = () => {
               {[
                 'S.no',
                 'Picture',
+                'Aadhar Card',
                 'Name',
                 'Place of Birth',
                 'Date of Birth',
@@ -102,7 +130,6 @@ const FastTrackForm = () => {
                 'Permanent Address',
                 'Permanent State',
                 'Permanent City',
-                'Aadhar Card',
                 'Fees Paid',
                 'Amount Paid',
                 'Prelims',
@@ -128,19 +155,36 @@ const FastTrackForm = () => {
                   index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                 }`}
               >
-                <td className="py-2 px-4">{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                <td className="py-2 px-4">
+                  {index + 1 + (currentPage - 1) * itemsPerPage}
+                </td>
                 <td className="py-2 px-4">
                   {editMode === data._id ? (
                     <input
-                      type="text"
+                      type="file"
                       name="picture"
-                      value={editData[data._id]?.picture || ''}
                       onChange={(e) => handleChange(e, data._id)}
                       className="w-full p-2 border rounded"
                     />
                   ) : (
                     <img
-                      src={data.picture}
+                      src={`${baseUrl}/${data.picture}`}
+                      alt="User"
+                      className="w-24 h-24 object-cover"
+                    />
+                  )}
+                </td>
+                <td className="py-2 px-4">
+                  {editMode === data._id ? (
+                    <input
+                      type="file"
+                      name="aadharCard"
+                      onChange={(e) => handleChange(e, data._id)}
+                      className="w-full p-2 border rounded"
+                    />
+                  ) : (
+                    <img
+                      src={`${baseUrl}/${data.aadharCard}`}
                       alt="User"
                       className="w-24 h-24 object-cover"
                     />
@@ -163,7 +207,6 @@ const FastTrackForm = () => {
                   'permanentAddress',
                   'permanentState',
                   'permanentCity',
-                  'aadharCard',
                   'feesPaid',
                   'amountPaid',
                   'prelims',
@@ -221,8 +264,13 @@ const FastTrackForm = () => {
                         onClick={() => deleteData(data._id)}
                         className="px-3 py-1 rounded flex items-center"
                       >
-                        <FaTrashAlt className="text-red-500 hover:text-red-700" />
+                        <FaTrashAlt className="text-red-500 hover:text-red-800" />
                       </button>
+                      <Link to={`/dashboard/${data._id}`}>
+                        <button className="px-3 py-1 rounded flex items-center">
+                          <FaUser className="text-green-500 hover:text-green-800" />
+                        </button>
+                      </Link>
                     </>
                   )}
                 </td>
@@ -232,17 +280,35 @@ const FastTrackForm = () => {
         </table>
       )}
 
-      {/* Pagination */}
-      <div className="flex justify-center space-x-2 mt-4">
-        {[...Array(totalPages)].map((_, pageNumber) => (
+      {/* Pagination Controls */}
+      <div className="mt-4">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="mr-2 bg-gray-300 hover:bg-gray-400 text-white font-bold py-1 px-3 rounded"
+        >
+          Previous
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
           <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber + 1)}
-            className={`px-3 py-1 rounded ${currentPage === pageNumber + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`mr-2 ${
+              currentPage === index + 1
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-300 hover:bg-gray-400 text-black'
+            } font-bold py-1 px-3 rounded`}
           >
-            {pageNumber + 1}
+            {index + 1}
           </button>
         ))}
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="ml-2 bg-gray-300 hover:bg-gray-400 text-white font-bold py-1 px-3 rounded"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

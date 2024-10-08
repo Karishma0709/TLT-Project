@@ -34,8 +34,8 @@ const Login = () => {
     e.preventDefault();
     // Handle form submission logic here
     try {
-      const dataResponse = await fetch(SummaryApi.signIn.url, {
-        method: SummaryApi.signIn.method,
+      const dataResponse = await fetch(SummaryApi.logIn.url, {
+        method: SummaryApi.logIn.method,
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const Login = () => {
       if (dataApi.success) {
         toast.success(dataApi.message);
         alert('User successfully logged in!');
-        navigate('/dashboard');
+        navigate('/sidebar');
         // fetchUserDetails();
         fetchUserDetails();
       } else if (dataApi.error) {

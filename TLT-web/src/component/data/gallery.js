@@ -3,7 +3,7 @@ import img2 from "../../assets/gallery/img2.png";
 import img3 from "../../assets/gallery/img3.png";
 import img4 from "../../assets/gallery/img4.png";
 import img5 from "../../assets/gallery/img5.jpg";
-import img6 from "../../assets/gallery/img6.jpg";
+// import img6 from "../../a/ssets/gallery/img6.jpg";
 import img7 from "../../assets/gallery/img7.jpg";
 import img8 from "../../assets/gallery/img8.jpg";
 import img9 from "../../assets/gallery/img9.jpg";
@@ -34,7 +34,7 @@ const gallery = [
     { id: 3, url: img3 },
     { id: 4, url: img4 },
     { id: 5, url: img5 },
-    { id: 6, url: img6 },
+    // { id: 6, url: img6 },
     { id: 7, url: img7 },
     { id: 8, url: img8 },
     { id: 9, url: img9 },

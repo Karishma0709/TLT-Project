@@ -20,6 +20,15 @@ import PreviousYearForm from '../components/PreviousYearForm';
 import Header from '../components/Header';
 import Quiz from '../components/Quiz';
 import QuizUserForm from '../components/QuizUserForm';
+import AddMpcjProduct from '../components/AddMpcjProduct';
+import UnpaidModal from '../components/Unpaidmodel';
+import Syllabusmodel from '../components/Syllabusmodel';
+import EnquiryAdd from '../components/EnquiryAdd';
+import EnquiryList from '../components/EnquiryList';
+import ProfilePage from '../components/StudentProfile';
+import StudentProfile from '../components/StudentProfile';
+import LeaderBoard from '../components/LeaderBoard';
+import LeaderboardUpload from '../components/LeaderboardUpload';
 
 export const router = createBrowserRouter([
   {
@@ -34,14 +43,20 @@ export const router = createBrowserRouter([
         path: 'sign-up',
         element: <SignUp />,
       },
+
       {
         path: 'dashboard',
         element: <Sidebar />,
         children: [
           {
             path: 'dashboardcards',
-            element: <Dashboard/>,
+            element: <Dashboard />,
           },
+          {
+            path: ':id',
+            element: <StudentProfile />,
+          },
+
           {
             path: 'header',
             element: <Header />,
@@ -79,12 +94,20 @@ export const router = createBrowserRouter([
             element: <Prevyearpaperpdf />,
           },
           {
-            path:"quiz-questions",
-            element:<Quiz/>
+            path: 'quiz-questions',
+            element: <Quiz />,
           },
           {
-            path:"quiz-user",
-            element:<QuizUserForm/>
+            path: 'UnpaidModal',
+            element: <UnpaidModal />,
+          },
+          {
+            path: 'Syllabusmodel',
+            element: <Syllabusmodel />,
+          },
+          {
+            path: 'quiz-user',
+            element: <QuizUserForm />,
           },
           {
             path: 'Unpaid',
@@ -98,6 +121,7 @@ export const router = createBrowserRouter([
             path: 'FastTrackForm',
             element: <FastTrackForm />,
           },
+
           {
             path: 'SyllabusUpload',
             element: <SyllabusUpload />,
@@ -105,6 +129,26 @@ export const router = createBrowserRouter([
           {
             path: 'jetformdetail',
             element: <JetFormDetails />,
+          },
+          {
+            path: 'addMpcjProduct',
+            element: <AddMpcjProduct />,
+          },
+          {
+            path: 'addEnquiry',
+            element: <EnquiryAdd />,
+          },
+          {
+            path: 'enquiryList',
+            element: <EnquiryList />,
+          },
+          {
+            path: 'LeaderBoard',
+            element: <LeaderBoard />,
+          },
+          {
+            path: 'LeaderboardUpload',
+            element: <LeaderboardUpload />,
           },
         ],
       },
