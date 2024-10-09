@@ -76,7 +76,7 @@ const UnpaidUpload = () => {
 
 
   const deleteUnpaidFile = async (id) => {
-    const apiUrl = `http://localhost:8080/api/deleteUnpaidById/${id}`;
+    const apiUrl = `https://tlt-project-1-backend02.onrender.com/api/deleteUnpaidById/${id}`;
     try {
       await axios.delete(apiUrl);
       fetchUnpaidFiles();
