@@ -3,6 +3,8 @@ import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import SummaryApi from '../Common/Summary';
+
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,6 +12,7 @@ const SignUp = () => {
   const [data, setData] = useState({
     email: '',
     batch: '',
+    course: '',
     password: '',
     name: '',
     confirmPassword: '',
@@ -32,14 +35,15 @@ const SignUp = () => {
       return;
     }
 
-    if (!data.email || !data.password || !data.name || !data.confirmPassword || !data.batch) {
+    if (!data.email || !data.password || !data.name || !data.confirmPassword || !data.batch || !data.course) {
       toast.error('All fields are required!');
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/createStudent', {
-        method: 'POST',
+      const response = await fetch(SummaryApi.signUp.url, {
+        method: SummaryApi.signUp.method,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -84,14 +88,30 @@ const SignUp = () => {
             </div>
             <div className="w-full">
               <label className="block text-gray-700">Batch :</label>
-              <input
-                type="text"
+              <select
                 name="batch"
-                placeholder="Enter your batch"
                 value={data.batch}
                 onChange={handleOnChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
-              />
+              >
+                <option value="">Select Batch</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div className="w-full">
+              <label className="block text-gray-700">Course :</label>
+              <select
+                name="course"
+                value={data.course}
+                onChange={handleOnChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-500"
+              >
+                <option value="">Select Course</option>
+                <option value="Fast Track">Fast Track</option>
+                <option value="Empowerment">Empowerment</option>
+              </select>
             </div>
             <div className="w-full">
               <label className="block text-gray-700">Email :</label>

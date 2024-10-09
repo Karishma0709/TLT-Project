@@ -6,6 +6,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  course: {
+    type: String,
+    required: true,
+  },
   batch: {
     type: String,
     required: true,

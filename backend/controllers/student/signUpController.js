@@ -2,9 +2,9 @@ const StudentSignUp = require('../../models/student/signUp');
 const bcrypt = require('bcrypt');
 // Create new student (Sign Up)
 exports.createStudent = async (req, res) => {
-    const { name, batch, email, password, confirmPassword } = req.body;
+    const { name, batch,course, email, password, confirmPassword } = req.body;
   
-    if (!name || !batch || !email || !password || !confirmPassword) {
+    if (!name || !batch ||!course || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: 'All fields are required' });
     }
   
@@ -18,7 +18,7 @@ exports.createStudent = async (req, res) => {
         return res.status(400).json({ message: 'Email already exists' });
       }
   
-      const newStudent = new StudentSignUp({ name, batch, email, password });
+      const newStudent = new StudentSignUp({ name, batch,course, email, password });
       await newStudent.save();
   
       return res.status(201).json({ success: true, message: 'Sign Up successful', student: newStudent });
@@ -55,7 +55,7 @@ exports.createStudent = async (req, res) => {
     const { name, batch, email } = req.body;
   
     try {
-      const student = await StudentSignUp.findByIdAndUpdate(req.params.id, { name, batch, email }, { new: true });
+      const student = await StudentSignUp.findByIdAndUpdate(req.params.id, { name, batch,course, email }, { new: true });
       if (!student) {
         return res.status(404).json({ message: 'Student not found' });
       }
