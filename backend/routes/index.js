@@ -349,7 +349,6 @@ router.put('/updateStudent/:id', signUpController.updateStudent);
 router.delete('/deleteStudent/:id', signUpController.deleteStudent);
 
 //student login routes
-
 router.post('/login', signUpController.loginStudent);
 
 module.exports = router;

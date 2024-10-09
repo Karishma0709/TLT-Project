@@ -23,7 +23,7 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+},{timestamps:true});
 
 // Hash password before saving
 studentSchema.pre('save', async function (next) {

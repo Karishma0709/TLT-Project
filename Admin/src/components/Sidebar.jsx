@@ -120,6 +120,13 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
+                <Link
+                  to="studentList"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Student List</span>
+                </Link>
               </div>
             )}
           </div>

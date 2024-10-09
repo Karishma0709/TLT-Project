@@ -29,6 +29,7 @@ import ProfilePage from '../components/StudentProfile';
 import StudentProfile from '../components/StudentProfile';
 import LeaderBoard from '../components/LeaderBoard';
 import LeaderboardUpload from '../components/LeaderboardUpload';
+import StudentList from '../components/StudentList';
 
 export const router = createBrowserRouter([
   {
@@ -150,6 +151,10 @@ export const router = createBrowserRouter([
             path: 'LeaderboardUpload',
             element: <LeaderboardUpload />,
           },
+          {
+            path: 'studentList',
+            element: <StudentList />,
+          },
         ]
       },
       {
@@ -257,6 +262,10 @@ export const router = createBrowserRouter([
           {
             path: 'LeaderboardUpload',
             element: <LeaderboardUpload />,
+          },
+          {
+            path: 'studentList',
+            element: <StudentList />,
           },
         ]
       },

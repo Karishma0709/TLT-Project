@@ -52,7 +52,7 @@ exports.createStudent = async (req, res) => {
   
   // Update student
   exports.updateStudent = async (req, res) => {
-    const { name, batch, email } = req.body;
+    const { name, batch, email,course } = req.body;
   
     try {
       const student = await StudentSignUp.findByIdAndUpdate(req.params.id, { name, batch,course, email }, { new: true });
