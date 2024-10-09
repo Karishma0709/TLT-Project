@@ -207,6 +207,11 @@ const SummaryApi = {
     url: `${backendDomain}/api/quizUser`,
     method: 'get',
   },
+  CreatequizUser: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'post',
+  },
+ 
 };
 
 export default SummaryApi;

@@ -337,7 +337,6 @@ router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
 // Quiz routes
 router.get('/quiz', getQuiz);
 router.put('/quiz', updateQuiz);
-
 router.post('/quizUser', createUser);
 router.get('/quizUser', fetchAllUser);
 
