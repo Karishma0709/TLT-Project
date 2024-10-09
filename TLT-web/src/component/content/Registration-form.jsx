@@ -136,7 +136,7 @@ const RegistrationForm = () => {
               id="picture"
               autoComplete="off"
               onChange={handleFileChange}
-              className="border rounded w-full p-2"
+              className="border rounded w-full me-5 p-2"
             />
           </div>
           <div className="sm:flex sm:w-1/2 pl-2">
