@@ -84,7 +84,7 @@ const Syllabus = () => {
                         className="bg-primary text-white py-1 px-4 rounded hover:bg-red-700"
                         onClick={() => handleBuyNowClick(data.pdf)}
                       >
-                        Download PDF
+                        Download
                       </a>
                     </td>
                   </tr>

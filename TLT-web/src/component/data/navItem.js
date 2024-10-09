@@ -24,7 +24,7 @@ export const navItems = [
     ]
   },
   { 
-    name: 'Registered In', 
+    name: 'Register In', 
     href: '',
     subItems: [
       { name: 'Empowerment Batch', href: '/empowerment' },
