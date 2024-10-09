@@ -49,14 +49,14 @@ const Footer = () => {
                     </NavLink>
                   </li>
                 ))}
-                <li className="mb-2">
+                {/* <li className="mb-2">
                 <span className="text-red-500 text-xs">
                       <i className="fa-solid fa-arrow-right-long"></i>
                     </span>{" "}
                     <Link to="/admin-login">
                     Login
                     </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
             {/* Legal */}

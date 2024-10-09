@@ -1,5 +1,5 @@
-const backendDomain = "https://tlt-project-1-backend02.onrender.com";
-// const backendDomain = 'http://localhost:8080';
+// const backendDomain = "https://tlt-project-1-backend02.onrender.com";
+const backendDomain = 'http://localhost:8080';
 
 const SummaryApi = {
   signUp: {
@@ -363,6 +363,16 @@ const SummaryApi = {
   },
   postleaderBoard: {
     url: `${backendDomain}/api/studentsexcel`,
+    method: 'post',
+  },
+
+  //Subadmin controllers
+  signUp: {
+    url: `${backendDomain}/api/signUp`,
+    method: 'post',
+  },
+  signIn: {
+    url: `${backendDomain}/api/signIn`,
     method: 'post',
   },
 };

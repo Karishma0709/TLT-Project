@@ -42,13 +42,20 @@ const Login = () => {
       });
       const dataApi = await dataResponse.json();
 
-      if (dataApi.success) {
+      if (dataApi.success&& data.email==="adminTLT@gmail.com") {
         toast.success(dataApi.message);
         alert('User successfully logged in!');
         navigate('/dashboard/dashboardcards');
-        // fetchUserDetails();
         fetchUserDetails();
-      } else if (dataApi.error) {
+      } 
+      else if (dataApi.success&& data.email==="subadminTLT@gmail.com") {
+        toast.success(dataApi.message);
+        alert('User successfully logged in!');
+        navigate('/subAdminDashboard/dashboardcards');
+        fetchUserDetails();
+      } 
+      
+      else if (dataApi.error) {
         toast.error(dataApi.message);
         alert('User not registered', dataApi.message); // Display error alert
       }

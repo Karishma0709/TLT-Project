@@ -150,7 +150,115 @@ export const router = createBrowserRouter([
             path: 'LeaderboardUpload',
             element: <LeaderboardUpload />,
           },
-        ],
+        ]
+      },
+      {
+        path: 'subAdminDashboard',
+        element: <Sidebar />,
+        children: [
+          {
+            path: 'dashboardcards',
+            element: <Dashboard />,
+          },
+          {
+            path: ':id',
+            element: <StudentProfile />,
+          },
+
+          {
+            path: 'header',
+            element: <Header />,
+          },
+          {
+            path: 'user',
+            element: <User />,
+          },
+          {
+            path: 'py-paper',
+            element: <PreviousYearForm />,
+          },
+          {
+            path: 'mpcj-form',
+            element: <MpcjData />,
+          },
+          {
+            path: 'tpm-form',
+            element: <TpmData />,
+          },
+          {
+            path: 'info-marquee',
+            element: <InfoMarquee />,
+          },
+          {
+            path: 'notification',
+            element: <Notification />,
+          },
+          {
+            path: 'update-headline',
+            element: <UpdateMarquee />,
+          },
+          {
+            path: 'Prevyearpaperpdf',
+            element: <Prevyearpaperpdf />,
+          },
+          {
+            path: 'quiz-questions',
+            element: <Quiz />,
+          },
+          {
+            path: 'UnpaidModal',
+            element: <UnpaidModal />,
+          },
+          {
+            path: 'Syllabusmodel',
+            element: <Syllabusmodel />,
+          },
+          {
+            path: 'quiz-user',
+            element: <QuizUserForm />,
+          },
+          {
+            path: 'Unpaid',
+            element: <Unpaid />,
+          },
+          {
+            path: 'EmpowermentAdmin',
+            element: <EmpowermentAdmin />,
+          },
+          {
+            path: 'FastTrackForm',
+            element: <FastTrackForm />,
+          },
+
+          {
+            path: 'SyllabusUpload',
+            element: <SyllabusUpload />,
+          },
+          {
+            path: 'jetformdetail',
+            element: <JetFormDetails />,
+          },
+          {
+            path: 'addMpcjProduct',
+            element: <AddMpcjProduct />,
+          },
+          {
+            path: 'addEnquiry',
+            element: <EnquiryAdd />,
+          },
+          {
+            path: 'enquiryList',
+            element: <EnquiryList />,
+          },
+          {
+            path: 'LeaderBoard',
+            element: <LeaderBoard />,
+          },
+          {
+            path: 'LeaderboardUpload',
+            element: <LeaderboardUpload />,
+          },
+        ]
       },
     ],
   },
