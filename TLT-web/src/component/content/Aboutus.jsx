@@ -12,7 +12,7 @@ const AboutUs = () => {
         <div className="leading-loose space-y-2">
           <div className="flex items-center">
             <i className="fa-solid fa-arrow-right-long mr-2 text-red-500 text-xs"></i>
-            Comprehensive batch covering foundation subjects for all state
+            Comprehensive Batch covering foundation subjects for all state
             judicial services examination
           </div>
           <div className="flex items-center">
