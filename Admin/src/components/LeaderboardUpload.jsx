@@ -55,7 +55,7 @@ const LeaderboardUpload = () => {
             onChange={(e) => readExcel(e)}
           />
         </div>
-        <select className=" bg-red-500 text-white p-1 mb-2 rounded-md w-32">
+        <select className="bg-red-500 text-white p-1 mb-2 rounded-md w-32">
           <option value="disabled">Select Betch</option>
           <option value="Betch 1">Empoverment Betch</option>
           <option value="Betch 2">Fast Track Betch</option>

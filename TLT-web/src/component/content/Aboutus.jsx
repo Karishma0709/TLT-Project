@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Headings from "../utiliti/heading/Heading";
-import QuizApp from "../QuizApp";
+import React, { useState } from 'react';
+import Headings from '../utiliti/heading/Heading';
+import QuizApp from '../QuizApp';
 
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState(2); // Set initial active tab (0: Foundation, 1: Fast-Track, 2: Crash Course)
 
   const tabContent = [
     {
-      title: "Foundation Batch",
+      title: 'Foundation Batch',
       content: (
         <div className="leading-loose space-y-2">
           <div className="flex items-center">
@@ -35,7 +35,7 @@ const AboutUs = () => {
       ),
     },
     {
-      title: "Fast-Track Batch",
+      title: 'Fast-Track Batch',
       content: (
         <div className="leading-loose space-y-2">
           <div className="flex items-center">
@@ -62,7 +62,7 @@ const AboutUs = () => {
       ),
     },
     {
-      title: "Crash Course Batch",
+      title: 'Crash Course Batch',
       content: (
         <div className="leading-loose space-y-2">
           <div className="flex items-center">
@@ -94,11 +94,11 @@ const AboutUs = () => {
     <section className="md:pb-14 my-5" id="about">
       <div className="container mx-auto px-5 md:px-20 mb-10 md:mb-20">
         <div className="md:mb-16 mb-7">
-          <Headings heading={"h5"} style={"text-shadow"}>
+          <Headings heading={'h5'} style={'text-shadow'}>
             About Us
           </Headings>
-          <Headings heading={"h2"}>
-            Know Us <span className="text-shadow text-primary">Better</span>{" "}
+          <Headings heading={'h2'}>
+            Know Us <span className="text-shadow text-primary">Better</span>{' '}
           </Headings>
         </div>
         <div className="w-full flex flex-col lg:flex-row gap-10">
@@ -110,7 +110,7 @@ const AboutUs = () => {
                     <div
                       key={index}
                       className={`shadow-md cursor-pointer py-3 px-5 rounded font-bold ${
-                        activeTab === index ? "bg-primary text-white " : ""
+                        activeTab === index ? 'bg-primary text-white ' : ''
                       }`}
                       onClick={() => setActiveTab(index)}
                     >
@@ -125,8 +125,8 @@ const AboutUs = () => {
                     key={index}
                     className={`absolute top-0 left-0 w-full p-6 bg-white rounded transition-all duration-300 ease-in-out transform ${
                       activeTab === index
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-0 -translate-x-10"
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 -translate-x-10'
                     }`}
                   >
                     {tab.content}
@@ -136,13 +136,12 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2">
-        
-            <div className="text-center pt-72 md:pt-56 lg:pt-5" >
-              <Headings heading={"h3"}  style={"font-bold"}>
-              Quiz of the day
+            <div className="text-center pt-72 md:pt-56 lg:pt-5">
+              <Headings heading={'h3'} style={'font-bold'}>
+                Quiz of the day
               </Headings>
-              
-              <QuizApp/>
+
+              <QuizApp />
             </div>
           </div>
         </div>
