@@ -6,6 +6,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import moment from 'moment';
 import * as XLSX from 'xlsx';
 
+
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [editData, setEditData] = useState({});
