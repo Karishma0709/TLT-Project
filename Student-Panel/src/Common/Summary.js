@@ -10,6 +10,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/login`,
     method: 'post',
   },
+  GetleaderBoard: {
+    url: `${backendDomain}/api/getstudentsexcel`,
+    method: 'get',
+  },
 };
 
 export default SummaryApi;

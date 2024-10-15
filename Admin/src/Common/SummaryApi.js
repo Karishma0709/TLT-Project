@@ -365,5 +365,27 @@ const SummaryApi = {
     url: `${backendDomain}/api/studentsexcel`,
     method: 'post',
   },
+  getStudents: {
+    url: `${backendDomain}/api/getStudents`,
+    method: 'post',
+  },
+  getStudents: {
+    url: `${backendDomain}/api/getStudents`,
+    method: 'post',
+  },
+  getStudents: {
+    url: `${backendDomain}/api/getStudents`,
+    method: 'post',
+  },
+
+  //Subadmin controllers
+  signUp: {
+    url: `${backendDomain}/api/signUp`,
+    method: 'post',
+  },
+  signIn: {
+    url: `${backendDomain}/api/signIn`,
+    method: 'post',
+  },
 };
 export default SummaryApi;

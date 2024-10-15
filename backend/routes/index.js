@@ -337,7 +337,6 @@ router.put('/Notificationupdate/:id', notifyController.NotificationUpdate);
 // Quiz routes
 router.get('/quiz', getQuiz);
 router.put('/quiz', updateQuiz);
-
 router.post('/quizUser', createUser);
 router.get('/quizUser', fetchAllUser);
 
@@ -350,7 +349,6 @@ router.put('/updateStudent/:id', signUpController.updateStudent);
 router.delete('/deleteStudent/:id', signUpController.deleteStudent);
 
 //student login routes
-
 router.post('/login', signUpController.loginStudent);
 
 module.exports = router;

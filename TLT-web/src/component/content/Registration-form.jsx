@@ -13,6 +13,7 @@ const RegistrationForm = () => {
 
   const [data, setData] = useState({
     name: '',
+    batch:'',
     placeOfBirth: '',
     dateOfBirth: '',
     fullAddress: '',
@@ -120,8 +121,9 @@ const RegistrationForm = () => {
 
       <form onSubmit={handleSubmit} className="mt-5 ">
         <div className="space-y-6 sm:px-10 md:px-2 ">
-          {/* Other form fields */}
-          <div className="sm:flex items-center">
+        <div className="sm:flex items-center mb-4">
+        <div className="sm:flex sm:w-1/2 pr-2">
+         
             <label
               htmlFor="picture"
               className="block text-left font-bold text-lg  sm:w-1/4 md:w-1/4"
@@ -134,10 +136,33 @@ const RegistrationForm = () => {
               id="picture"
               autoComplete="off"
               onChange={handleFileChange}
-              className="border rounded w-full p-2"
+              className="border rounded w-full me-5 p-2"
             />
           </div>
-
+          <div className="sm:flex sm:w-1/2 pl-2">
+                <label
+                  htmlFor="Batch"
+                  className="block text-left font-bold text-lg sm:w-1/3"
+                >
+                  Batch:
+                </label>
+                <select
+                  className="form-control border rounded w-full p-2"
+                  name="batch"
+                  id="batch"
+                  onChange={handleInput}
+                  value={data.Batch}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Batch
+                  </option>
+                  <option value="Batch 1">Batch 1</option>
+                  <option value="Batch 2">Batch 2</option>
+                  <option value="Batch 3">Batch 3</option>
+                </select>
+              </div>
+              </div>
           <div className="sm:flex items-center">
             <label
               htmlFor="name"

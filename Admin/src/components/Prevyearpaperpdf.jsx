@@ -137,12 +137,15 @@ const PrevYearPaperUpload = () => {
             editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value)
           }
         />
+       <label className='font-semibold text-red-600' htmlFor="paperimage">Product Image : </label>
         <input
           type="file"
           name="paperimage"
           className="form-control border border-gray-300 rounded p-2 mb-3 w-full"
           onChange={(e) => setFile(e.target.files[0])}
         />
+
+<label className='font-semibold text-red-600' htmlFor="pdf">Product (in pdf)</label>
         <input
           type="file"
           name="pdf"

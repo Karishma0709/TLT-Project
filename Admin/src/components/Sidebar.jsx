@@ -22,7 +22,9 @@ const Sidebar = () => {
   // State for managing dropdowns
   const [isFormsDropdownOpen, setIsFormsDropdownOpen] = useState(false);
   const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
-  const [isEnquiryDropdownOpen, setIsEnquiryDropdownOpen] = useState(false); // New state for Enquiry dropdown
+  const [isEnquiryDropdownOpen, setIsEnquiryDropdownOpen] = useState(false); 
+  const [isLeaderboardDropdownOpen, setIsLeaderboardDropdownOpen] = useState(false); // New state for Leaderboard dropdown
+
 
   return (
     <div className="min-h-screen md:flex hidden bg-gray-100">
@@ -118,31 +120,37 @@ const Sidebar = () => {
                   <FaFileAlt />
                   <span>Jet Form Details</span>
                 </Link>
+                <Link
+                  to="studentList"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Student List</span>
+                </Link>
               </div>
             )}
           </div>
           {/*  */}
 
-          {/* Leader Board */}
-          <div>
+           {/* Leader Board Dropdown */}
+           <div>
             <div
-              onClick={() => setIsProductDropdownOpen(!isProductDropdownOpen)}
+              onClick={() => setIsLeaderboardDropdownOpen(!isLeaderboardDropdownOpen)} // Manage leaderboard dropdown
               className="flex justify-between items-center px-4 py-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-400 transition-all hover:shadow-md"
             >
               <span className="flex items-center space-x-2">
                 <FaRegFilePdf />
                 <span>Leader Board</span>
               </span>
-              {isProductDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
+              {isLeaderboardDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
             </div>
-            {isProductDropdownOpen && (
+            {isLeaderboardDropdownOpen && (
               <div className="ml-4 mt-2 space-y-2">
                 <Link
                   to="leaderboard"
                   className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
                 >
                   <FaRegFilePdf />
-
                   <span>Leader Board</span>
                 </Link>
                 <Link
@@ -150,12 +158,12 @@ const Sidebar = () => {
                   className="flex items-center space-x-2 px-4 py-2 bg-red-500 rounded-lg hover:bg-red-400 transition-all hover:shadow-md"
                 >
                   <FaFileUpload />
-
                   <span>Upload Leader Board</span>
                 </Link>
               </div>
             )}
           </div>
+
 
           {/* Product Upload Dropdown */}
           <div>

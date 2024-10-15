@@ -1,4 +1,4 @@
-// const backendDomain = "https://tlt-project-6ivu.onrender.com";
+// const backendDomain = "https://tlt-project-1-backend02.onrender.com";
 const backendDomain = 'http://localhost:8080';
 
 const SummaryApi = {
@@ -207,6 +207,11 @@ const SummaryApi = {
     url: `${backendDomain}/api/quizUser`,
     method: 'get',
   },
+  CreatequizUser: {
+    url: `${backendDomain}/api/quizUser`,
+    method: 'post',
+  },
+ 
 };
 
 export default SummaryApi;

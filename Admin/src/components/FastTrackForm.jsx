@@ -112,6 +112,7 @@ const FastTrackForm = () => {
             <tr>
               {[
                 'S.no',
+                'Batch',
                 'Picture',
                 'Aadhar Card',
                 'Name',
@@ -192,6 +193,7 @@ const FastTrackForm = () => {
                 </td>
                 {[
                   'name',
+                  'batch',
                   'placeOfBirth',
                   'dateOfBirth',
                   'fullAddress',

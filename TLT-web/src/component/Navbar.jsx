@@ -125,7 +125,7 @@ const Navbar = () => {
         <div className="relative flex space-x-4 items-center p-0 m-0 z-10">
           <div className="group relative">
             <button className="bg-primary text-white uppercase font-bold text-sm py-7 px-4 inline-block transition duration-300 ease-in-out hover:bg-red-600 m-0 rounded-e-md">
-              Registered In
+              Register In
             </button>
             <div className="absolute top-full mt-2 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
               <NavLink

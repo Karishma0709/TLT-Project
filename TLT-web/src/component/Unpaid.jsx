@@ -82,7 +82,7 @@ const Unpaid = () => {
                     className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"
                     onClick={() => handleBuyNowClick(file.pdf)}
                   >
-                    View
+             Download
                   </button>
                 </td>
               </tr>

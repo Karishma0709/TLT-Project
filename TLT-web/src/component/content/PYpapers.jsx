@@ -74,7 +74,7 @@ export const PYpapers = () => {
                     className="text-sm font-bold text-white bg-primary px-2 py-1 mt-1 rounded-sm"
                     onClick={() => handleBuyNowClick(item.pdf)} // Open modal for the selected PDF
                   >
-                    Fill Form to Download PDF
+                    Download
                   </button>
                 </div>
               ))}

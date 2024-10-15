@@ -22,6 +22,7 @@ const FastTrackFormDetails = async (req, res) => {
 
     const {
       name,
+      batch,
       placeOfBirth,
       dateOfBirth,
       fullAddress,
@@ -92,6 +93,7 @@ const FastTrackFormDetails = async (req, res) => {
     // Save the form data
     const newFastTrackForm = new FastTrackForm({
       picture,
+      batch,
       name,
       placeOfBirth,
       dateOfBirth,
