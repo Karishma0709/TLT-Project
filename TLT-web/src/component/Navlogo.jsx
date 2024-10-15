@@ -30,7 +30,7 @@ const navlogo = () => {
             </NavLink>
             
             <div className="gap-2 hidden sm:flex">
-              <a href="https://maps.app.goo.gl/fAcQ4mFsxkzvXXe28">
+              <a href="https://maps.app.goo.gl/fAcQ4mFsxkzvXXe28" target="_blank">
             <div className=""><i className="fa-solid fa-location-dot fa-xl text-3xl text-red-500"></i></div></a>
             <div className="font-semibold text-sm"> Location <br />Jyoti Cineplex,Bhopal </div>
               {/* <SocialMedia /> */}
