@@ -38,9 +38,9 @@ const PersonalInfo = ({ formData, handleChange }) => {
   };
 
   return (
-    <div className="flex row w-full h-full sm:pl-[120px] mb-10">
+    <div className="flex row w-full h-full sm:pl-[120px] mt-24 mb-10">
       <div className="w-full sm:w-[60%] p-4 pl-[0px]">
-        <h1 className="mt-6 text-3xl font-[800] mb-5 text-primary-marineBlue">
+        <h1 className="text-3xl font-bold mb-2 text-primary-marineBlue">
           Personal Details
         </h1>
         <div className="flex flex-col">
