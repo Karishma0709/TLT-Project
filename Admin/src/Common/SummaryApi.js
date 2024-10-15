@@ -373,9 +373,13 @@ const SummaryApi = {
     url: `${backendDomain}/api/getStudents`,
     method: 'post',
   },
-  getStudents: {
-    url: `${backendDomain}/api/getStudents`,
-    method: 'post',
+  updateStudent: {
+    url: `${backendDomain}/api/updateStudent/:id`,
+    method: 'put',
+  },
+  deleteStudent: {
+    url: `${backendDomain}/api/deleteStudent/:id`,
+    method: 'delete',
   },
 
   //Subadmin controllers
