@@ -114,7 +114,7 @@ const SyllabusUpload = () => {
         className="bg-white p-8 rounded shadow-md max-w-md mx-auto"
       >
         <h1 className="text-2xl font-bold mb-4 text-[#1F2937] text-center">
-          Upload PDF
+          Upload PDF's
         </h1>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <input
