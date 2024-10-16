@@ -40,17 +40,23 @@ const Navbar = () => {
     }
   };
 
+
+  const getNavLinkClass = ({ isActive }) =>
+    isActive
+      ? 'text-red-700 font-semibold' // Active state styles
+      : 'text-gray-600 hover:text-red-700 font-semibold'; // Default state styles
+
   return (
     <div className="bg-gray-100 bg-opacity-50 mx-14 my-3 hidden md:block rounded-md">
       <nav className="container mx-auto flex justify-between items-center">
         <div className="flex space-x-4 ps-5 gap-4">
           <NavLink
-            className="text-red-500 font-semibold hover:text-red-700"
+           className={getNavLinkClass}
             to="/"
           >
             Home
           </NavLink>
-          <NavLink className="textWhite hover:text-red-700" to="/about">
+          <NavLink className={getNavLinkClass} to="/about">
             About
           </NavLink>
           <div className="relative z-10 group ">
@@ -68,7 +74,7 @@ const Navbar = () => {
                 className="block px-4 py-2 text-gray-800 hover:bg-red-500 hover:text-white transition-colors duration-300 ease-in-out font-semibold rounded-md"
                 to="/unpaid-study-essentials"
               >
-                Unpaid
+              Exclusive Free Material
               </NavLink>
 
               <NavLink
@@ -80,7 +86,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <NavLink className="textWhite hover:text-red-700" to="/gallery">
+          <NavLink className={getNavLinkClass} to="/gallery">
             Gallery
           </NavLink>
           <NavLink className="textWhite hover:text-red-700" to="/previous-year">

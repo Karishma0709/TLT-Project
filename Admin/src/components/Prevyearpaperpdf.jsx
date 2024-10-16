@@ -17,14 +17,13 @@ const PrevYearPaperUpload = () => {
 
   const fetchPapers = async (page = 1) => {
     try {
-  
       const urldata = `${SummaryApi.GetPyPaperPDFupload.url}?page=${page}&limit=${itemsPerPage}`;
-      
+
       const response = await axios({
         url: urldata,
-        method: SummaryApi.GetPyPaperPDFupload.method, 
+        method: SummaryApi.GetPyPaperPDFupload.method,
       });
-  
+
       // Set the fetched data into your state
       setPaperList(response.data.data);
       setTotalPages(Math.ceil(response.data.totalCount / itemsPerPage)); // Calculate total pages
@@ -137,7 +136,9 @@ const PrevYearPaperUpload = () => {
             editId ? setUpdatedTitle(e.target.value) : setTitle(e.target.value)
           }
         />
-       <label className='font-semibold text-red-600' htmlFor="paperimage">Product Image : </label>
+        <label className="font-semibold text-red-600" htmlFor="paperimage">
+          Product Image :{' '}
+        </label>
         <input
           type="file"
           name="paperimage"
@@ -145,7 +146,9 @@ const PrevYearPaperUpload = () => {
           onChange={(e) => setFile(e.target.files[0])}
         />
 
-<label className='font-semibold text-red-600' htmlFor="pdf">Product (in pdf)</label>
+        <label className="font-semibold text-red-600" htmlFor="pdf">
+          Product (in pdf)
+        </label>
         <input
           type="file"
           name="pdf"
