@@ -73,12 +73,18 @@ const createLeaderboard = async (req, res) => {
 
 // Get all paper details
 const getAllLeaderboard = async (req, res) => {
+  const { batch, batchSection } = req.query;
+
   try {
-    const papers = await LeaderBoardSchema.find();
+    const query = {};
+    if (batch) query.batch = batch;
+    if (batchSection) query.batchSection = batchSection;
+
+    const papers = await LeaderBoardSchema.find(query); // Apply the query
     res.status(200).json({ success: true, data: papers });
   } catch (error) {
-    console.error('Error fetching pyPaper details:', error);
-    res.status(500).json({ error: 'Error fetching pyPaper details' });
+    console.error('Error fetching leaderboard details:', error);
+    res.status(500).json({ error: 'Error fetching leaderboard details' });
   }
 };
 

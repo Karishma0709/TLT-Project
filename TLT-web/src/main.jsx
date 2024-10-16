@@ -11,23 +11,23 @@
 //   <React.StrictMode>
 //   <Provider store={store} >
 //     <RouterProvider router={router} />
-//   <Provider/>  
+//   <Provider/>
 //   </React.StrictMode>
 // );
 
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./component/router/index.jsx";
+import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './component/router/index.jsx';
 import { Provider } from 'react-redux';
-import { store } from "./store/store.jsx";
+import { store } from './store/store.jsx';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
-    </Provider>  
+    </Provider>
   </React.StrictMode>
 );
