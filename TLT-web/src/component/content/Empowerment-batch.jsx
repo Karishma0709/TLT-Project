@@ -105,7 +105,7 @@ const EmpowermentBatch = () => {
   const batches = [
     { id: 1, name: 'Batch 01' },
     { id: 2, name: 'Batch 02' },
-    { id: 3, name: 'Batch 03' },
+    // { id: 3, name: 'Batch 03' },
   ];
 
   return (
