@@ -87,7 +87,7 @@ const createEmpowerment = async (req, res) => {
     merchantId: 'M22U3BAWIN1EZ',
     merchantTransactionId: generateTransctionID(),
     merchantUserId: 'M22U3BAWIN1EZ_1.json',
-    amount: 10000,
+    amount: req.body.amountPaid*100,
     redirectUrl: `${Backend_Url}/api/paymentstatus`,
     redirectMode: 'REDIRECT',
     mobileNumber: '9999999999',

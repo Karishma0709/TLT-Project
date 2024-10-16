@@ -19,9 +19,9 @@ const Educational = ({ formData, handleChange, files }) => {
   };
 
   return (
-    <div className="flex row w-full h-full sm:pl-[100px]">
+    <div className="flex row w-full h-full sm:pl-[100px] sm:mt-24  lg:mt-0 md:lg-0 mt-24 mb-10">
       <div className="w-full sm:w-[60%] p-4">
-        <h1 className="mt-10 text-3xl font-bold mb-10 text-primary-marineBlue">
+        <h1 className=" text-3xl font-bold mb-10 text-primary-marineBlue">
           Educational Details
         </h1>
         <div className="flex flex-col">

@@ -34,8 +34,8 @@ const SummaryApi = {
     url: `${backendDomain}/api/mpcjForm`,
     method: 'post',
   },
-  tpmForm: {
-    url: `${backendDomain}/api/tpmForm`,
+  createTpmFormDetails: {
+    url: `${backendDomain}/api/createTpmFormDetails`,
     method: 'post',
   },
   prepaper: {

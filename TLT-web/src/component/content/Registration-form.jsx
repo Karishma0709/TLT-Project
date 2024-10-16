@@ -151,7 +151,7 @@ const RegistrationForm = () => {
                   name="batch"
                   id="batch"
                   onChange={handleInput}
-                  value={data.Batch}
+                  value={data.batch}
                   required
                 >
                   <option value="" disabled>
