@@ -88,7 +88,6 @@ const EmpowermentBatch = () => {
         method: SummaryApi.empowermentForm.method,
         data: formData,
       });
-      
 
       console.log(response.data);
 
@@ -102,6 +101,12 @@ const EmpowermentBatch = () => {
       toast.error('An error occurred during submission. Please try again.');
     }
   };
+
+  const batches = [
+    { id: 1, name: 'Batch 01' },
+    { id: 2, name: 'Batch 02' },
+    { id: 3, name: 'Batch 03' },
+  ];
 
   return (
     <div className="">
@@ -133,7 +138,7 @@ const EmpowermentBatch = () => {
                 />
               </div>
 
-              <div className="sm:flex sm:w-1/2 pl-2">
+              <div className="sm:flex items-center">
                 <label
                   htmlFor="Batch"
                   className="block text-left font-bold text-lg sm:w-1/3"
@@ -151,9 +156,11 @@ const EmpowermentBatch = () => {
                   <option value="" disabled>
                     Select Batch
                   </option>
-                  <option value="Batch 1">Batch 1</option>
-                  <option value="Batch 2">Batch 2</option>
-                  <option value="Batch 3">Batch 3</option>
+                  {batches.map((batch) => (
+                    <option key={batch.id} value={batch.name}>
+                      {batch.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

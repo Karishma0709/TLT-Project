@@ -152,7 +152,7 @@ const StudentList = () => {
                     <td className="py-2 px-4 text-gray-600">
                       {editMode === student._id ? (
                         <input
-                          type="text"
+                          type="text"    
                           name="course"
                           value={editData[student._id]?.course || ''}
                           onChange={(e) => handleChange(e, student._id)}

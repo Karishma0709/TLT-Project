@@ -90,7 +90,7 @@ const EmpowermentForm = () => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Empowerment Form Data</h1>
-      
+
       {/* Export to Excel Button */}
       <button
         onClick={exportToExcel}
@@ -130,7 +130,7 @@ const EmpowermentForm = () => {
                 'Amount Paid',
                 'Old Student of Shubham Sir',
                 'Institution',
-                'Actions' // To include Edit and Delete actions
+                'Actions', // To include Edit and Delete actions
               ].map((heading, i) => (
                 <th key={i} className="py-2 px-4 text-left">
                   {heading}
@@ -142,9 +142,13 @@ const EmpowermentForm = () => {
             {currentForms.map((data, index) => (
               <tr
                 key={data._id}
-                className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
+                className={`border-b border-gray-200 ${
+                  index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                }`}
               >
-                <td className="py-2 px-4">{index + 1 + (currentPage - 1) * itemsPerPage}</td>
+                <td className="py-2 px-4">
+                  {index + 1 + (currentPage - 1) * itemsPerPage}
+                </td>
                 {[
                   'photo',
                   'Batch',
@@ -156,8 +160,8 @@ const EmpowermentForm = () => {
                   'pinCode',
                   'qualification',
                   'collegeUniversity',
-                  'pursuingLLB', 
-                  'yearOfPassing', 
+                  'pursuingLLB',
+                  'yearOfPassing',
                   'email',
                   'fatherName',
                   'motherName',
@@ -166,8 +170,8 @@ const EmpowermentForm = () => {
                   'permanentCity',
                   'aadharCard', // Ensure this key matches the data structure
                   'feesPaid',
-                  'amountPaid', 
-                  'oldStudentOfShubhamSir', 
+                  'amountPaid',
+                  'oldStudentOfShubhamSir',
                   'institution',
                 ].map((field, i) => (
                   <td key={i} className="py-2 px-4">
@@ -182,7 +186,11 @@ const EmpowermentForm = () => {
                       />
                     ) : field === 'photo' ? (
                       // Display the image for the 'Choose Picture' field
-                      <img src={data[field]} alt="Empowerment" className="w-16 h-16 object-cover" />
+                      <img
+                        src={data[field]}
+                        alt="Empowerment"
+                        className="w-16 h-16 object-cover"
+                      />
                     ) : (
                       // Display the field value normally
                       data[field]
@@ -237,7 +245,11 @@ const EmpowermentForm = () => {
           <button
             key={pageNumber}
             onClick={() => handlePageChange(pageNumber + 1)}
-            className={`px-3 py-1 rounded ${currentPage === pageNumber + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+            className={`px-3 py-1 rounded ${
+              currentPage === pageNumber + 1
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-300'
+            }`}
           >
             {pageNumber + 1}
           </button>

@@ -114,6 +114,13 @@ const Sidebar = () => {
                   <span>TPM Form</span>
                 </Link>
                 <Link
+                  to="quiz-user"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
+                >
+                  <FaFileAlt />
+                  <span>Quiz User Details</span>
+                </Link>
+                <Link
                   to="jetformdetail"
                   className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-red-400 transition-all hover:shadow-md text-white"
                 >
@@ -128,6 +135,7 @@ const Sidebar = () => {
                   <span>Student List</span>
                 </Link>
               </div>
+              
             )}
           </div>
           {/*  */}

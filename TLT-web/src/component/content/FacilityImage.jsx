@@ -1,7 +1,7 @@
-import React from "react";
-import court from "../../assets/court.jpg";
-import fc from "../../assets/fc-img.webp";
-import facility from "../../assets/facility.webp";
+import React from 'react';
+import court from '../../assets/court.jpg';
+import fc from '../../assets/fc-img.webp';
+import facility from '../../assets/facility.png';
 
 const FacilityImage = () => {
   return (

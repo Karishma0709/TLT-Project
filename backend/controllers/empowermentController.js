@@ -14,16 +14,30 @@ const generateTransctionID = () => {
 
 const createEmpowerment = async (req, res) => {
   console.log(req.body, req.files);
-  
+
   const requiredFields = [
-    'name', 'placeOfBirth', 'dateOfBirth', 'fullAddress',
-    'state', 'pinCode', 'qualification', 'collegeUniversity',
-    'pursuingLLB', 'yearOfPassing', 'email', 'fatherName',
-    'motherName', 'permanentAddress', 'permanentState',
-    'permanentCity', 'oldStudentOfShubhamSir', 'institution', 
-    'feesPaid', 'amountPaid', 'Batch'  // Include 'Batch' here
+    'name',
+    'placeOfBirth',
+    'dateOfBirth',
+    'fullAddress',
+    'state',
+    'pinCode',
+    'qualification',
+    'collegeUniversity',
+    'pursuingLLB',
+    'yearOfPassing',
+    'email',
+    'fatherName',
+    'motherName',
+    'permanentAddress',
+    'permanentState',
+    'permanentCity',
+    'oldStudentOfShubhamSir',
+    'institution',
+    'feesPaid',
+    'amountPaid',
+    'Batch', // Include 'Batch' here
   ];
-  
 
   // Check for missing fields
   for (const field of requiredFields) {
@@ -34,7 +48,9 @@ const createEmpowerment = async (req, res) => {
 
   // Check if files are present
   if (!req.files || !req.files.photo || !req.files.aadharCard) {
-    return res.status(400).json({ status: 'Both photo and aadharCard are required.' });
+    return res
+      .status(400)
+      .json({ status: 'Both photo and aadharCard are required.' });
   }
 
   // Extract and process form data
@@ -59,7 +75,7 @@ const createEmpowerment = async (req, res) => {
     feesPaid, // This should be a string according to your schema
     amountPaid, // Ensure this is a number
     institution,
-    Batch
+    Batch,
   } = req.body;
 
   // Access uploaded files
@@ -129,7 +145,9 @@ const createEmpowerment = async (req, res) => {
       institution,
     });
 
-    return res.status(200).send(response.data.data.instrumentResponse.redirectInfo.url);
+    return res
+      .status(200)
+      .send(response.data.data.instrumentResponse.redirectInfo.url);
   } catch (error) {
     console.error(
       'Payment gateway error:',
@@ -149,7 +167,7 @@ const paymentStatus = async (req, res) => {
   const KeyIndex = 1;
   const key = '9ab60f05-ecde-447b-b534-46b9db2d612a';
   const String =
-   ` /pg/v1/paymentstatus/${merchantId}/${merchantTransactionId} `+ key;
+    ` /pg/v1/paymentstatus/${merchantId}/${merchantTransactionId} ` + key;
   const sha256 = crypto.createHash('sha256').update(String).digest('hex'); // Fix: Use 'digest'
   const checksum = sha256 + '###' + KeyIndex;
 
@@ -162,6 +180,7 @@ const paymentStatus = async (req, res) => {
     url: URL,
     headers: {
       accept: 'application/json',
+
       'Content-Type': 'application/json',
       'X-VERIFY': checksum,
       'X-MERCHANT-ID': merchantId,
