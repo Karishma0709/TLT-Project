@@ -75,16 +75,21 @@ const UnpaidUpload = () => {
 };
 
 
-  const deleteUnpaidFile = async (id) => {
-    const apiUrl = `https://tlt-project-1-backend02.onrender.com/api/deleteUnpaidById/${id}`;
-    try {
-      await axios.delete(apiUrl);
-      fetchUnpaidFiles();
-    } catch (error) {
-      console.error('Error deleting unpaid file:', error);
-      setError('Error deleting unpaid file');
-    }
-  };
+const deleteUnpaidFile = async (id) => {
+  const apiUrl = SummaryApi.DeleteUnpaidById.url.replace(':id', id); // Replace the :id parameter in the URL
+  try {
+    await axios.delete(apiUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    fetchUnpaidFiles(); // Refresh the unpaid list after deleting
+  } catch (error) {
+    
+    setError('Error deleting unpaid file');
+  }
+};
+
 
   const resetEdit = () => {
     setEditId(null);
